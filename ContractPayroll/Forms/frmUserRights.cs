@@ -16,6 +16,7 @@ namespace ContractPayroll.Forms
         
         public frmUserRights()
         {
+            //piko
             InitializeComponent();
         }
 

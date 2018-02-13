@@ -38,7 +38,7 @@ namespace ContractPayroll
 
             if (string.IsNullOrEmpty(err))
             {
-                string sql = "Select * from Cont_MastUser Where UserID = '{0}' and Pass = '{1}' and Active = 'Y'" ;
+                string sql = "Select * from Cont_MastUser Where UserID = '{0}' and Pass = '{1}' and Active = 1" ;
                 DataSet ds = Utils.Helper.GetData(string.Format(sql, txtUserName.Text, txtPassword.Text), dbcon.ToString());
 
                 bool hasrows = ds.Tables.Cast<DataTable>().Any(table => table.Rows.Count != 0);

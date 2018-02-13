@@ -74,13 +74,13 @@ namespace ContractPayroll
            
             mnuMast.Enabled = true;        
            
-            mnuEmployee.Enabled = true;
+            
             mnuTranS.Enabled = true;
             mnuChangePass.Enabled = true;
             mnuLogOff.Enabled = true;
 
             DataSet ds = new DataSet();
-            string sql = "select menuname from  Cont_MastFrm where formid in (select FormId from userRights where UserId ='" + Utils.User.GUserID + "' and View1=1) order by seqid";
+            string sql = "select menuname from  Cont_MastFrm where formid in (select FormId from Cont_UserRights where UserId ='" + Utils.User.GUserID + "' and View1=1) order by seqid";
             ds = Utils.Helper.GetData(sql,cnstr);
             
             mnuUser.Enabled = true;
@@ -283,9 +283,9 @@ namespace ContractPayroll
 
         private void mnuAbout_Click(object sender, EventArgs e)
         {
-            string msg = "Attedance System" + Environment.NewLine +
+            string msg = "Contract Payroll System" + Environment.NewLine +
                 "Version 2.1 " + Environment.NewLine +
-                "Design & Devloped By : Anand Achraya " + Environment.NewLine;
+                "Design & Devloped By : Anand Acharya " + Environment.NewLine;
 
             MessageBox.Show(msg, "About", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
@@ -312,6 +312,34 @@ namespace ContractPayroll
             
             
             
+        }
+
+        private void mnuOtherConfig_Click(object sender, EventArgs e)
+        {
+            Form t = Application.OpenForms["frmOtherConfig"];
+
+            if (t == null)
+            {
+                ContractPayroll.Forms.frmOtherConfig m = new ContractPayroll.Forms.frmOtherConfig();
+                m.defSet = true;
+                m.MdiParent = this;
+                m.Show();
+            }
+        }
+
+        
+
+        private void mnuPayPeriod_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void mnuPayCyclePara_Click(object sender, EventArgs e)
+        {
+            ContractPayroll.Forms.frmOtherConfig m = new ContractPayroll.Forms.frmOtherConfig();
+            m.defSet = false;
+            m.MdiParent = this;
+            m.Show();
         }
         
 

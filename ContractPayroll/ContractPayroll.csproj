@@ -100,6 +100,18 @@
     <Compile Include="Forms\frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\frmOtherConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmOtherConfig.Designer.cs">
+      <DependentUpon>frmOtherConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmPayPeriod.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmPayPeriod.Designer.cs">
+      <DependentUpon>frmPayPeriod.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmUserRights.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -119,6 +131,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmOtherConfig.resx">
+      <DependentUpon>frmOtherConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmPayPeriod.resx">
+      <DependentUpon>frmPayPeriod.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmUserRights.resx">
       <DependentUpon>frmUserRights.cs</DependentUpon>

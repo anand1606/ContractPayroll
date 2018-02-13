@@ -38,7 +38,7 @@ namespace ContractPayroll.Forms
                     {
                         cn.Open();
                         cmd.Connection = cn;
-                        cmd.CommandText = "Update MastUser Set Pass = '" + txtPassword.Text.Trim().ToString() + "' where UserID ='" + Utils.User.GUserID + "'";
+                        cmd.CommandText = "Update Cont_MastUser Set Pass = '" + txtPassword.Text.Trim().ToString() + "' where UserID ='" + Utils.User.GUserID + "'";
                         cmd.ExecuteNonQuery();
                         MessageBox.Show("Password updated you need to relogin to application..", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         this.Hide();

@@ -30,7 +30,7 @@ namespace ContractPayroll.Forms
                 string sql = "";
 
 
-                sql = "Select UserID,UserName,Pass,Active From MastUser Where Active = 'Y'  ";
+                sql = "Select UserID,UserName,Pass,Active From Cont_MastUser Where Active = 'Y'  ";
                 if (e.KeyCode == Keys.F1)
                 {                   
 
@@ -88,7 +88,7 @@ namespace ContractPayroll.Forms
                 string sql = "";
 
 
-                sql = "Select FormID,FormName From MastFrm where 1 = 1  ";
+                sql = "Select FormID,FormName From Cont_MastFrm where 1 = 1  ";
                 if (e.KeyCode == Keys.F1)
                 {
 
@@ -144,11 +144,11 @@ namespace ContractPayroll.Forms
                     cn.Open();
                     string sql = string.Empty;
 
-                    SqlCommand cmd = new SqlCommand("Select Count(*) from MastUser Where UserID ='" + txtUserID.Text.Trim() + "'", cn);
+                    SqlCommand cmd = new SqlCommand("Select Count(*) from Cont_MastUser Where UserID ='" + txtUserID.Text.Trim() + "'", cn);
                     int cnt = (int)cmd.ExecuteScalar();
                     if (cnt > 0)
                     {
-                        sql = "Update MastUser Set UserName = '" + txtPersonName.Text.Trim() + "', " +
+                        sql = "Update Cont_MastUser Set UserName = '" + txtPersonName.Text.Trim() + "', " +
                             " Pass = '" + txtPassword.Text.Trim() + "', Active = '" + ((this.chkActive.Checked) ? "Y" : "N") + "', " +
                             " IsAdmin ='" + ((this.chkSuperUser.Checked) ? "1" :"0") + "'," +
                             " UpdDt = GetDate(), UpdID = '" + Utils.User.GUserID + "' " +
@@ -160,7 +160,7 @@ namespace ContractPayroll.Forms
                     }
                     else
                     {
-                        sql = "Insert into MastUser (UserID,UserName,Pass,Active,IsAdmin,AddDt,AddId) values (" +
+                        sql = "Insert into Cont_MastUser (UserID,UserName,Pass,Active,IsAdmin,AddDt,AddId) values (" +
                             " '" + txtUserID.Text.Trim() + "','" + txtPersonName.Text.Trim() + "','" + txtPassword.Text.Trim() + "'," +
                             " '" + ((this.chkActive.Checked) ? "Y" : "N") + "', '" + " IsAdmin ='" + ((this.chkSuperUser.Checked) ? "1" :"0") + "',GetDate() ,'" + Utils.User.GUserID + "') ";
                         
@@ -186,7 +186,7 @@ namespace ContractPayroll.Forms
                 {
                     cn.Open();
                     string sql = "Select a.FormID,b.FormName,a.Add1,a.Update1,a.Delete1,a.View1 " + 
-                        " from UserRights a, MastFrm b where a.FormID = b.FormID and UserID = '" + txtUserID.Text.Trim() + "'" ;
+                        " from Cont_UserRights a, Cont_MastFrm b where a.FormID = b.FormID and UserID = '" + txtUserID.Text.Trim() + "'" ;
 
                     DataSet ds = Utils.Helper.GetData(sql, Utils.Helper.constr);
                     GridRights.DataSource = ds;
@@ -244,11 +244,11 @@ namespace ContractPayroll.Forms
                     cn.Open();
                     string sql = string.Empty;
 
-                    SqlCommand cmd = new SqlCommand("Select Count(*) from UserRights Where UserID ='" + txtUserID.Text.Trim() + "' and FormID ='" + txtModID.Text.Trim() + "'", cn);
+                    SqlCommand cmd = new SqlCommand("Select Count(*) from Cont_UserRights Where UserID ='" + txtUserID.Text.Trim() + "' and FormID ='" + txtModID.Text.Trim() + "'", cn);
                     int cnt = (int)cmd.ExecuteScalar();
                     if (cnt > 0)
                     {
-                        sql = "Update UserRights Set Add1 = '" + ((this.chkAdd.Checked) ? "1" : "0") + "'," +
+                        sql = "Update Cont_UserRights Set Add1 = '" + ((this.chkAdd.Checked) ? "1" : "0") + "'," +
                             " Update1 = '" + ((this.chkUpdate.Checked) ? "1" : "0") + "'," +
                             " Delete1 = '" + ((this.chkDelete.Checked) ? "1" : "0") + "'," +
                             " View1 ='" + ((this.chkView.Checked) ? "1" : "0") + "'," +
@@ -260,7 +260,7 @@ namespace ContractPayroll.Forms
                     }
                     else
                     {
-                        sql = "Insert into UserRights (UserID,FormID,Add1,Update1,Delete1,View1,AddDt,AddId) values (" +     
+                        sql = "Insert into Cont_UserRights (UserID,FormID,Add1,Update1,Delete1,View1,AddDt,AddId) values (" +     
                             " '" + txtUserID.Text.Trim() + "','" + txtModID.Text.Trim() + "'," +
                             " '" + ((this.chkAdd.Checked) ? "1" : "0") + "','" + ((this.chkUpdate.Checked) ? "1" : "0") + "'," +
                             " '" + ((this.chkDelete.Checked) ? "1" : "0") + "','" + ((this.chkView.Checked) ? "1" : "0") + "'," +
@@ -296,11 +296,11 @@ namespace ContractPayroll.Forms
                     cn.Open();
                     string sql = string.Empty;
 
-                    SqlCommand cmd = new SqlCommand("Select Count(*) from UserRights Where UserID ='" + txtUserID.Text.Trim() + "' and FormID ='" + txtModID.Text.Trim() + "'", cn);
+                    SqlCommand cmd = new SqlCommand("Select Count(*) from Cont_UserRights Where UserID ='" + txtUserID.Text.Trim() + "' and FormID ='" + txtModID.Text.Trim() + "'", cn);
                     int cnt = (int)cmd.ExecuteScalar();
                     if (cnt > 0)
                     {
-                        sql = "Delete From UserRights Where UserID = '" + txtUserID.Text.Trim() + "' and FormID ='" + txtModID.Text.Trim() + "'";
+                        sql = "Delete From Cont_UserRights Where UserID = '" + txtUserID.Text.Trim() + "' and FormID ='" + txtModID.Text.Trim() + "'";
                         cmd = new SqlCommand(sql, cn);
                         cmd.ExecuteNonQuery();
                         LoadGrid();
@@ -320,7 +320,7 @@ namespace ContractPayroll.Forms
             if (string.IsNullOrEmpty(txtUserID.Text.Trim()))
                 return;
 
-            DataSet ds = Utils.Helper.GetData("Select * from MastUser Where UserID ='" + txtUserID.Text.Trim() + "'", Utils.Helper.constr);
+            DataSet ds = Utils.Helper.GetData("Select * from Cont_MastUser Where UserID ='" + txtUserID.Text.Trim() + "'", Utils.Helper.constr);
             if (ds.Tables.Count > 0)
             {
                 if (ds.Tables[0].Rows.Count > 0)
@@ -366,7 +366,7 @@ namespace ContractPayroll.Forms
                 return;
 
 
-            DataSet ds = Utils.Helper.GetData("Select * from UserRights Where UserID ='" + txtUserID.Text.Trim() + "' and FormID ='" + txtModID.Text.Trim() + "'", Utils.Helper.constr);
+            DataSet ds = Utils.Helper.GetData("Select * from Cont_UserRights Where UserID ='" + txtUserID.Text.Trim() + "' and FormID ='" + txtModID.Text.Trim() + "'", Utils.Helper.constr);
             if (ds.Tables.Count > 0)
             {
                 if (ds.Tables[0].Rows.Count > 0)

@@ -360,6 +360,28 @@ namespace ContractPayroll
                 m.Show();
             }
         }
+
+        private void mnuImportAttd_Click(object sender, EventArgs e)
+        {
+            Form t = Application.OpenForms["frmImportAttd"];
+            if (t == null)
+            {
+                frmImportAttd m = new frmImportAttd();
+                m.MdiParent = this;
+                m.Show();
+            }
+        }
+
+        private void mnuMastEmp_Click(object sender, EventArgs e)
+        {
+            Form t = Application.OpenForms["frmEmpMaster"];
+            if (t == null)
+            {
+                frmEmpMaster m = new frmEmpMaster();
+                m.MdiParent = this;
+                m.Show();
+            }
+        }
         
 
     }

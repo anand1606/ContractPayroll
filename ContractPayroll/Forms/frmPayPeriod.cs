@@ -376,8 +376,8 @@ namespace ContractPayroll.Forms
                     foreach (DataRow dr in ds.Tables[0].Rows)
                     {
                         txtParaDesc.Text = dr["PayDesc"].ToString();
-                        txtFromDt.EditValue = dr["FromDt"].ToString();
-                        txtToDt.EditValue = dr["ToDt"].ToString();
+                        txtFromDt.DateTime = Convert.ToDateTime(dr["FromDt"]).Date;
+                        txtToDt.DateTime = Convert.ToDateTime(dr["ToDt"]).Date;
                         chkLocked.Checked = ((Convert.ToBoolean(dr["IsLocked"])) ? true : false);
                         mode = "OLD";
                         

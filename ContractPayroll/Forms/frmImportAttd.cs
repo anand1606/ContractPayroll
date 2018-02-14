@@ -11,13 +11,13 @@ using System.Data.SqlClient;
 
 namespace ContractPayroll.Forms
 {
-    public partial class frmImportEmp : Form
+    public partial class frmImportAttd : Form
     {
         public string GRights = "XXXV";
         public string mode = "NEW";
         public bool IsLocked = false;
         
-        public frmImportEmp()
+        public frmImportAttd()
         {
             InitializeComponent();
         }

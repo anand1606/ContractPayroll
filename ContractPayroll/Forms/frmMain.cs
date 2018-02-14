@@ -17,6 +17,7 @@ using System.IO;
 using System.Net;
 using ConnectUNCWithCredentials;
 using System.Reflection;
+using ContractPayroll.Forms;
 
 namespace ContractPayroll
 {
@@ -42,7 +43,7 @@ namespace ContractPayroll
 
             if (t == null)
             {
-                ContractPayroll.Forms.frmUserRights m = new ContractPayroll.Forms.frmUserRights();
+                frmUserRights m = new frmUserRights();
                 m.MdiParent = this;
                 m.Show();
             }
@@ -242,7 +243,7 @@ namespace ContractPayroll
 
             if (t == null)
             {
-                ContractPayroll.Forms.frmChangePass m = new ContractPayroll.Forms.frmChangePass();
+                frmChangePass m = new frmChangePass();
                 m.MdiParent = this;
                 m.Show();
             }
@@ -275,7 +276,7 @@ namespace ContractPayroll
 
             if (t == null)
             {
-                ContractPayroll.Forms.frmUserRights m = new ContractPayroll.Forms.frmUserRights();
+                frmUserRights m = new frmUserRights();
                 m.MdiParent = this;
                 m.Show();
             }
@@ -320,7 +321,7 @@ namespace ContractPayroll
 
             if (t == null)
             {
-                ContractPayroll.Forms.frmOtherConfig m = new ContractPayroll.Forms.frmOtherConfig();
+                frmOtherConfig m = new frmOtherConfig();
                 m.defSet = true;
                 m.MdiParent = this;
                 m.Show();
@@ -335,7 +336,7 @@ namespace ContractPayroll
 
             if (t == null)
             {
-                ContractPayroll.Forms.frmPayPeriod m = new ContractPayroll.Forms.frmPayPeriod();
+                frmPayPeriod m = new frmPayPeriod();
                 m.MdiParent = this;
                 m.Show();
             }
@@ -343,10 +344,21 @@ namespace ContractPayroll
 
         private void mnuPayCyclePara_Click(object sender, EventArgs e)
         {
-            ContractPayroll.Forms.frmOtherConfig m = new ContractPayroll.Forms.frmOtherConfig();
+            frmOtherConfig m = new frmOtherConfig();
             m.defSet = false;
             m.MdiParent = this;
             m.Show();
+        }
+
+        private void mnuImportEmp_Click(object sender, EventArgs e)
+        {
+            Form t = Application.OpenForms["frmImportEmp"];
+            if (t == null)
+            {
+                frmImportEmp m = new frmImportEmp();
+                m.MdiParent = this;
+                m.Show();
+            }
         }
         
 

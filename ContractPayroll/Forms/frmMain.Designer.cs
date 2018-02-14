@@ -43,7 +43,6 @@
             this.mnuMastEmp = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuPayMaster = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuTranS = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuImportEmp = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuImportAttd = new System.Windows.Forms.ToolStripMenuItem();
             this.salaryCalculationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHelp = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,6 +53,7 @@
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.stsUserDesc = new System.Windows.Forms.ToolStripStatusLabel();
             this.stsExtra = new System.Windows.Forms.ToolStripStatusLabel();
+            this.mnuImportEmp = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -139,6 +139,7 @@
             this.mnuMast.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuPayPeriod,
             this.mnuPayCyclePara,
+            this.mnuImportEmp,
             this.mnuMastEmp,
             this.mnuPayMaster});
             this.mnuMast.Name = "mnuMast";
@@ -148,44 +149,37 @@
             // mnuPayPeriod
             // 
             this.mnuPayPeriod.Name = "mnuPayPeriod";
-            this.mnuPayPeriod.Size = new System.Drawing.Size(187, 22);
+            this.mnuPayPeriod.Size = new System.Drawing.Size(232, 22);
             this.mnuPayPeriod.Text = "Pay Cycle";
             this.mnuPayPeriod.Click += new System.EventHandler(this.mnuPayPeriod_Click);
             // 
             // mnuPayCyclePara
             // 
             this.mnuPayCyclePara.Name = "mnuPayCyclePara";
-            this.mnuPayCyclePara.Size = new System.Drawing.Size(187, 22);
+            this.mnuPayCyclePara.Size = new System.Drawing.Size(232, 22);
             this.mnuPayCyclePara.Text = "Pay CyclePara";
             this.mnuPayCyclePara.Click += new System.EventHandler(this.mnuPayCyclePara_Click);
             // 
             // mnuMastEmp
             // 
             this.mnuMastEmp.Name = "mnuMastEmp";
-            this.mnuMastEmp.Size = new System.Drawing.Size(187, 22);
+            this.mnuMastEmp.Size = new System.Drawing.Size(232, 22);
             this.mnuMastEmp.Text = "Employee Master";
             // 
             // mnuPayMaster
             // 
             this.mnuPayMaster.Name = "mnuPayMaster";
-            this.mnuPayMaster.Size = new System.Drawing.Size(187, 22);
+            this.mnuPayMaster.Size = new System.Drawing.Size(232, 22);
             this.mnuPayMaster.Text = "Employee Pay Master";
             // 
             // mnuTranS
             // 
             this.mnuTranS.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuImportEmp,
             this.mnuImportAttd,
             this.salaryCalculationToolStripMenuItem});
             this.mnuTranS.Name = "mnuTranS";
             this.mnuTranS.Size = new System.Drawing.Size(80, 20);
             this.mnuTranS.Text = "&Transaction";
-            // 
-            // mnuImportEmp
-            // 
-            this.mnuImportEmp.Name = "mnuImportEmp";
-            this.mnuImportEmp.Size = new System.Drawing.Size(174, 22);
-            this.mnuImportEmp.Text = "Import Employee";
             // 
             // mnuImportAttd
             // 
@@ -257,6 +251,13 @@
             this.stsExtra.Name = "stsExtra";
             this.stsExtra.Size = new System.Drawing.Size(0, 17);
             // 
+            // mnuImportEmp
+            // 
+            this.mnuImportEmp.Name = "mnuImportEmp";
+            this.mnuImportEmp.Size = new System.Drawing.Size(232, 22);
+            this.mnuImportEmp.Text = "Import Employee To PayCycle";
+            this.mnuImportEmp.Click += new System.EventHandler(this.mnuImportEmp_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -306,8 +307,8 @@
         private System.Windows.Forms.ToolStripMenuItem mnuPayCyclePara;
         private System.Windows.Forms.ToolStripMenuItem mnuMastEmp;
         private System.Windows.Forms.ToolStripMenuItem mnuPayMaster;
-        private System.Windows.Forms.ToolStripMenuItem mnuImportEmp;
         private System.Windows.Forms.ToolStripMenuItem salaryCalculationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuImportEmp;
 
 
     }

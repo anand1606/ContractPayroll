@@ -270,7 +270,7 @@ namespace ContractPayroll.Forms
                 string sql = "";
 
                
-                sql = "Select PayPeriod,FromDt,ToDt from Cont_MastPayPeriod Where 1 = 1  ";
+                sql = "Select PayPeriod,PayDesc,FromDt,ToDt from Cont_MastPayPeriod Where 1 = 1  ";
                 
 
                 if (e.KeyCode == Keys.F1)

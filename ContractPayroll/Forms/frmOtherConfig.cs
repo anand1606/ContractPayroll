@@ -28,6 +28,11 @@ namespace ContractPayroll.Forms
 
         private void LoadGrid()
         {
+            if (string.IsNullOrEmpty(txtPayPeriod.Text.Trim()))
+            {
+                txtPayPeriod.Text = "0";
+            }
+
             DataSet ds = new DataSet();
             string sql = "select * from Cont_ParaMast where PayPeriod = '" + txtPayPeriod.Text.Trim() + "' Order By ParaCode ";
 
@@ -133,7 +138,7 @@ namespace ContractPayroll.Forms
             else
             {
                 this.Text = "Pay Period Wise Configuration";
-                txtPayPeriod.Text = "0";
+                txtPayPeriod.Text = "";
                 txtPayPeriod.Properties.ReadOnly = true;
                 GRights = ContractPayroll.Classes.Globals.GetFormRights("frmPayCyclePara");
             }
@@ -391,7 +396,7 @@ namespace ContractPayroll.Forms
                 }
                 else
                 {
-                    sql = "Select PayPeriod,FromDt,ToDt from Cont_MastPayPeriod Where 1 = 1  ";
+                    sql = "Select PayPeriod,PayDesc,FromDt,ToDt from Cont_MastPayPeriod Where 1 = 1  ";
                 }
 
                 if (e.KeyCode == Keys.F1)
@@ -415,7 +420,7 @@ namespace ContractPayroll.Forms
                 else if (obj.ElementAt(0).ToString() == "")
                 {
                     txtPayPeriod.Text = "0";
-
+                    txtParaCode.Text = "";
                     return;
                 }
                 else
@@ -427,16 +432,9 @@ namespace ContractPayroll.Forms
                 }
             }
         }
-
-       
-
+        
         private void txtPayPeriod_Validated(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtPayPeriod.Text.Trim()))
-            {
-                txtPayPeriod.Text = "0";
-            }
-            
             LoadGrid();
         }
     }

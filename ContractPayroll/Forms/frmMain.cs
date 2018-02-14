@@ -331,7 +331,14 @@ namespace ContractPayroll
 
         private void mnuPayPeriod_Click(object sender, EventArgs e)
         {
+            Form t = Application.OpenForms["frmPayPeriod"];
 
+            if (t == null)
+            {
+                ContractPayroll.Forms.frmPayPeriod m = new ContractPayroll.Forms.frmPayPeriod();
+                m.MdiParent = this;
+                m.Show();
+            }
         }
 
         private void mnuPayCyclePara_Click(object sender, EventArgs e)

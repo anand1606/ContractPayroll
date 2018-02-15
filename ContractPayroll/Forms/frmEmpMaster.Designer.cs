@@ -46,7 +46,6 @@
             this.txtPFNum = new DevExpress.XtraEditors.TextEdit();
             this.label13 = new System.Windows.Forms.Label();
             this.txtLeftDt = new DevExpress.XtraEditors.DateEdit();
-            this.txtGender = new DevExpress.XtraEditors.ComboBoxEdit();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
@@ -75,6 +74,7 @@
             this.txtEmpName = new DevExpress.XtraEditors.TextEdit();
             this.label1 = new System.Windows.Forms.Label();
             this.txtEmpUnqID = new DevExpress.XtraEditors.TextEdit();
+            this.txtGender = new DevExpress.XtraEditors.TextEdit();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
             this.grpUserRights = new System.Windows.Forms.GroupBox();
@@ -111,7 +111,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtPFNum.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLeftDt.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLeftDt.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtGender.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBirthDt.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBirthDt.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtJoinDt.Properties.CalendarTimeProperties)).BeginInit();
@@ -131,6 +130,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtFatherName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtEmpName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtEmpUnqID.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtGender.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
             this.xtraTabPage1.SuspendLayout();
@@ -163,8 +163,10 @@
             this.txtPayPeriod.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPayPeriod.Properties.Appearance.Options.UseFont = true;
             this.txtPayPeriod.Properties.MaxLength = 10;
+            this.txtPayPeriod.Properties.ReadOnly = true;
             this.txtPayPeriod.Size = new System.Drawing.Size(60, 22);
             this.txtPayPeriod.TabIndex = 55;
+            this.txtPayPeriod.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPayPeriod_KeyDown);
             // 
             // txtParaDesc
             // 
@@ -195,7 +197,6 @@
             this.groupBox1.Controls.Add(this.txtPFNum);
             this.groupBox1.Controls.Add(this.label13);
             this.groupBox1.Controls.Add(this.txtLeftDt);
-            this.groupBox1.Controls.Add(this.txtGender);
             this.groupBox1.Controls.Add(this.label12);
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.label10);
@@ -227,6 +228,7 @@
             this.groupBox1.Controls.Add(this.txtParaDesc);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.txtPayPeriod);
+            this.groupBox1.Controls.Add(this.txtGender);
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(778, 363);
@@ -285,6 +287,7 @@
             this.txtContDesc.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtContDesc.Properties.Appearance.Options.UseFont = true;
             this.txtContDesc.Properties.MaxLength = 10;
+            this.txtContDesc.Properties.ReadOnly = true;
             this.txtContDesc.Size = new System.Drawing.Size(269, 22);
             this.txtContDesc.TabIndex = 96;
             // 
@@ -304,6 +307,7 @@
             this.txtContCode.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtContCode.Properties.Appearance.Options.UseFont = true;
             this.txtContCode.Properties.MaxLength = 10;
+            this.txtContCode.Properties.ReadOnly = true;
             this.txtContCode.Size = new System.Drawing.Size(60, 22);
             this.txtContCode.TabIndex = 94;
             // 
@@ -373,17 +377,6 @@
             this.txtLeftDt.Size = new System.Drawing.Size(100, 20);
             this.txtLeftDt.TabIndex = 88;
             // 
-            // txtGender
-            // 
-            this.txtGender.Location = new System.Drawing.Point(96, 326);
-            this.txtGender.Name = "txtGender";
-            this.txtGender.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtGender.Properties.Appearance.Options.UseFont = true;
-            this.txtGender.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.txtGender.Size = new System.Drawing.Size(100, 20);
-            this.txtGender.TabIndex = 87;
-            // 
             // label12
             // 
             this.label12.AutoSize = true;
@@ -427,6 +420,7 @@
             this.txtBirthDt.Properties.CalendarTimeProperties.PopupBorderStyle = DevExpress.XtraEditors.Controls.PopupBorderStyles.Default;
             this.txtBirthDt.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.DateTimeAdvancingCaret;
             this.txtBirthDt.Properties.Mask.UseMaskAsDisplayFormat = true;
+            this.txtBirthDt.Properties.ReadOnly = true;
             this.txtBirthDt.Size = new System.Drawing.Size(100, 20);
             this.txtBirthDt.TabIndex = 83;
             // 
@@ -446,6 +440,7 @@
             this.txtJoinDt.Properties.CalendarTimeProperties.PopupBorderStyle = DevExpress.XtraEditors.Controls.PopupBorderStyles.Default;
             this.txtJoinDt.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.DateTimeAdvancingCaret;
             this.txtJoinDt.Properties.Mask.UseMaskAsDisplayFormat = true;
+            this.txtJoinDt.Properties.ReadOnly = true;
             this.txtJoinDt.Size = new System.Drawing.Size(100, 20);
             this.txtJoinDt.TabIndex = 82;
             // 
@@ -456,6 +451,7 @@
             this.txtCatDesc.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCatDesc.Properties.Appearance.Options.UseFont = true;
             this.txtCatDesc.Properties.MaxLength = 10;
+            this.txtCatDesc.Properties.ReadOnly = true;
             this.txtCatDesc.Size = new System.Drawing.Size(269, 22);
             this.txtCatDesc.TabIndex = 81;
             // 
@@ -475,6 +471,7 @@
             this.txtCatCode.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCatCode.Properties.Appearance.Options.UseFont = true;
             this.txtCatCode.Properties.MaxLength = 10;
+            this.txtCatCode.Properties.ReadOnly = true;
             this.txtCatCode.Size = new System.Drawing.Size(60, 22);
             this.txtCatCode.TabIndex = 79;
             // 
@@ -485,6 +482,7 @@
             this.txtDesgDesc.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDesgDesc.Properties.Appearance.Options.UseFont = true;
             this.txtDesgDesc.Properties.MaxLength = 10;
+            this.txtDesgDesc.Properties.ReadOnly = true;
             this.txtDesgDesc.Size = new System.Drawing.Size(269, 22);
             this.txtDesgDesc.TabIndex = 78;
             // 
@@ -504,6 +502,7 @@
             this.txtDesgCode.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDesgCode.Properties.Appearance.Options.UseFont = true;
             this.txtDesgCode.Properties.MaxLength = 10;
+            this.txtDesgCode.Properties.ReadOnly = true;
             this.txtDesgCode.Size = new System.Drawing.Size(60, 22);
             this.txtDesgCode.TabIndex = 76;
             // 
@@ -514,6 +513,7 @@
             this.txtGradeDesc.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtGradeDesc.Properties.Appearance.Options.UseFont = true;
             this.txtGradeDesc.Properties.MaxLength = 10;
+            this.txtGradeDesc.Properties.ReadOnly = true;
             this.txtGradeDesc.Size = new System.Drawing.Size(269, 22);
             this.txtGradeDesc.TabIndex = 75;
             // 
@@ -533,6 +533,7 @@
             this.txtGradeCode.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtGradeCode.Properties.Appearance.Options.UseFont = true;
             this.txtGradeCode.Properties.MaxLength = 10;
+            this.txtGradeCode.Properties.ReadOnly = true;
             this.txtGradeCode.Size = new System.Drawing.Size(60, 22);
             this.txtGradeCode.TabIndex = 73;
             // 
@@ -543,6 +544,7 @@
             this.txtStatDesc.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtStatDesc.Properties.Appearance.Options.UseFont = true;
             this.txtStatDesc.Properties.MaxLength = 10;
+            this.txtStatDesc.Properties.ReadOnly = true;
             this.txtStatDesc.Size = new System.Drawing.Size(269, 22);
             this.txtStatDesc.TabIndex = 72;
             // 
@@ -562,6 +564,7 @@
             this.txtStatCode.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtStatCode.Properties.Appearance.Options.UseFont = true;
             this.txtStatCode.Properties.MaxLength = 10;
+            this.txtStatCode.Properties.ReadOnly = true;
             this.txtStatCode.Size = new System.Drawing.Size(60, 22);
             this.txtStatCode.TabIndex = 70;
             // 
@@ -572,6 +575,7 @@
             this.txtDeptDesc.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDeptDesc.Properties.Appearance.Options.UseFont = true;
             this.txtDeptDesc.Properties.MaxLength = 10;
+            this.txtDeptDesc.Properties.ReadOnly = true;
             this.txtDeptDesc.Size = new System.Drawing.Size(269, 22);
             this.txtDeptDesc.TabIndex = 69;
             // 
@@ -591,6 +595,7 @@
             this.txtDeptCode.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDeptCode.Properties.Appearance.Options.UseFont = true;
             this.txtDeptCode.Properties.MaxLength = 10;
+            this.txtDeptCode.Properties.ReadOnly = true;
             this.txtDeptCode.Size = new System.Drawing.Size(60, 22);
             this.txtDeptCode.TabIndex = 67;
             // 
@@ -601,6 +606,7 @@
             this.txtUnitDesc.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtUnitDesc.Properties.Appearance.Options.UseFont = true;
             this.txtUnitDesc.Properties.MaxLength = 10;
+            this.txtUnitDesc.Properties.ReadOnly = true;
             this.txtUnitDesc.Size = new System.Drawing.Size(269, 22);
             this.txtUnitDesc.TabIndex = 66;
             // 
@@ -620,6 +626,7 @@
             this.txtUnitCode.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtUnitCode.Properties.Appearance.Options.UseFont = true;
             this.txtUnitCode.Properties.MaxLength = 10;
+            this.txtUnitCode.Properties.ReadOnly = true;
             this.txtUnitCode.Size = new System.Drawing.Size(60, 22);
             this.txtUnitCode.TabIndex = 64;
             // 
@@ -639,6 +646,7 @@
             this.txtFatherName.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtFatherName.Properties.Appearance.Options.UseFont = true;
             this.txtFatherName.Properties.MaxLength = 10;
+            this.txtFatherName.Properties.ReadOnly = true;
             this.txtFatherName.Size = new System.Drawing.Size(335, 22);
             this.txtFatherName.TabIndex = 62;
             // 
@@ -649,6 +657,7 @@
             this.txtEmpName.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEmpName.Properties.Appearance.Options.UseFont = true;
             this.txtEmpName.Properties.MaxLength = 10;
+            this.txtEmpName.Properties.ReadOnly = true;
             this.txtEmpName.Size = new System.Drawing.Size(241, 22);
             this.txtEmpName.TabIndex = 60;
             // 
@@ -670,6 +679,18 @@
             this.txtEmpUnqID.Properties.MaxLength = 10;
             this.txtEmpUnqID.Size = new System.Drawing.Size(88, 22);
             this.txtEmpUnqID.TabIndex = 58;
+            this.txtEmpUnqID.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtEmpUnqID_KeyDown);
+            this.txtEmpUnqID.Validated += new System.EventHandler(this.txtEmpUnqID_Validated);
+            // 
+            // txtGender
+            // 
+            this.txtGender.Location = new System.Drawing.Point(96, 326);
+            this.txtGender.Name = "txtGender";
+            this.txtGender.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtGender.Properties.Appearance.Options.UseFont = true;
+            this.txtGender.Properties.ReadOnly = true;
+            this.txtGender.Size = new System.Drawing.Size(60, 20);
+            this.txtGender.TabIndex = 87;
             // 
             // xtraTabControl1
             // 
@@ -713,6 +734,7 @@
             this.btnClose.TabIndex = 5;
             this.btnClose.Text = "Clos&e";
             this.btnClose.UseVisualStyleBackColor = false;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // btnCancel
             // 
@@ -724,6 +746,7 @@
             this.btnCancel.TabIndex = 4;
             this.btnCancel.Text = "&Cancle";
             this.btnCancel.UseVisualStyleBackColor = false;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnDelete
             // 
@@ -734,6 +757,7 @@
             this.btnDelete.TabIndex = 3;
             this.btnDelete.Text = "&Delete";
             this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnUpdate
             // 
@@ -744,6 +768,7 @@
             this.btnUpdate.TabIndex = 2;
             this.btnUpdate.Text = "&Update";
             this.btnUpdate.UseVisualStyleBackColor = false;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // btnAdd
             // 
@@ -780,6 +805,7 @@
             this.btnDelDtl.TabIndex = 66;
             this.btnDelDtl.Text = "Delete";
             this.btnDelDtl.UseVisualStyleBackColor = true;
+            this.btnDelDtl.Click += new System.EventHandler(this.btnDelDtl_Click);
             // 
             // btnAddDtl
             // 
@@ -789,6 +815,7 @@
             this.btnAddDtl.TabIndex = 65;
             this.btnAddDtl.Text = "Add/UpDate";
             this.btnAddDtl.UseVisualStyleBackColor = true;
+            this.btnAddDtl.Click += new System.EventHandler(this.btnAddDtl_Click);
             // 
             // label20
             // 
@@ -809,7 +836,7 @@
             this.txtcBasic.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
             this.txtcBasic.Properties.MaxLength = 10;
             this.txtcBasic.Size = new System.Drawing.Size(84, 22);
-            this.txtcBasic.TabIndex = 63;
+            this.txtcBasic.TabIndex = 64;
             // 
             // label19
             // 
@@ -827,10 +854,11 @@
             this.txtSrNo.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSrNo.Properties.Appearance.Options.UseFont = true;
             this.txtSrNo.Properties.Mask.EditMask = "[0-9]+";
-            this.txtSrNo.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
+            this.txtSrNo.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
             this.txtSrNo.Properties.MaxLength = 10;
             this.txtSrNo.Size = new System.Drawing.Size(60, 22);
             this.txtSrNo.TabIndex = 61;
+            this.txtSrNo.Validated += new System.EventHandler(this.txtSrNo_Validated);
             // 
             // label17
             // 
@@ -862,12 +890,12 @@
             this.txtToDt.Properties.CalendarTimeProperties.CloseUpKey = new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.F4);
             this.txtToDt.Properties.CalendarTimeProperties.PopupBorderStyle = DevExpress.XtraEditors.Controls.PopupBorderStyles.Default;
             this.txtToDt.Size = new System.Drawing.Size(100, 20);
-            this.txtToDt.TabIndex = 58;
+            this.txtToDt.TabIndex = 63;
             // 
             // txtFromDt
             // 
             this.txtFromDt.EditValue = null;
-            this.txtFromDt.Location = new System.Drawing.Point(206, 23);
+            this.txtFromDt.Location = new System.Drawing.Point(206, 21);
             this.txtFromDt.Name = "txtFromDt";
             this.txtFromDt.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -876,7 +904,7 @@
             this.txtFromDt.Properties.CalendarTimeProperties.CloseUpKey = new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.F4);
             this.txtFromDt.Properties.CalendarTimeProperties.PopupBorderStyle = DevExpress.XtraEditors.Controls.PopupBorderStyles.Default;
             this.txtFromDt.Size = new System.Drawing.Size(100, 20);
-            this.txtFromDt.TabIndex = 57;
+            this.txtFromDt.TabIndex = 62;
             // 
             // Group2
             // 
@@ -927,6 +955,7 @@
             this.gridView1.OptionsView.ShowDetailButtons = false;
             this.gridView1.OptionsView.ShowGroupExpandCollapseButtons = false;
             this.gridView1.OptionsView.ShowGroupPanel = false;
+            this.gridView1.DoubleClick += new System.EventHandler(this.gridView1_DoubleClick);
             // 
             // frmEmpMaster
             // 
@@ -937,6 +966,7 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "frmEmpMaster";
             this.Text = "Employee Master";
+            this.Load += new System.EventHandler(this.frmEmpMaster_Load);
             ((System.ComponentModel.ISupportInitialize)(this.txtPayPeriod.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtParaDesc.Properties)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -952,7 +982,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtPFNum.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLeftDt.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtLeftDt.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtGender.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBirthDt.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtBirthDt.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtJoinDt.Properties.CalendarTimeProperties)).EndInit();
@@ -972,6 +1001,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtFatherName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtEmpName.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtEmpUnqID.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtGender.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
             this.xtraTabControl1.ResumeLayout(false);
             this.xtraTabPage1.ResumeLayout(false);
@@ -1006,7 +1036,6 @@
         private DevExpress.XtraEditors.TextEdit txtPFNum;
         private System.Windows.Forms.Label label13;
         private DevExpress.XtraEditors.DateEdit txtLeftDt;
-        private DevExpress.XtraEditors.ComboBoxEdit txtGender;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
@@ -1062,5 +1091,6 @@
         private DevExpress.XtraEditors.DateEdit txtFromDt;
         private System.Windows.Forms.Button btnDelDtl;
         private System.Windows.Forms.Button btnAddDtl;
+        private DevExpress.XtraEditors.TextEdit txtGender;
     }
 }

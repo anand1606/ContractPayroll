@@ -43,6 +43,7 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.btnUnLock = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.txtPayPeriod.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkLocked.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtParaDesc.Properties)).BeginInit();
@@ -140,7 +141,7 @@
             this.grpUserRights.Controls.Add(this.btnUpdate);
             this.grpUserRights.Controls.Add(this.btnAdd);
             this.grpUserRights.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.grpUserRights.Location = new System.Drawing.Point(0, 118);
+            this.grpUserRights.Location = new System.Drawing.Point(0, 142);
             this.grpUserRights.Name = "grpUserRights";
             this.grpUserRights.Size = new System.Drawing.Size(434, 52);
             this.grpUserRights.TabIndex = 6;
@@ -220,12 +221,24 @@
             this.label4.TabIndex = 56;
             this.label4.Text = "To Date :";
             // 
+            // btnUnLock
+            // 
+            this.btnUnLock.BackColor = System.Drawing.Color.Cornsilk;
+            this.btnUnLock.Location = new System.Drawing.Point(15, 104);
+            this.btnUnLock.Name = "btnUnLock";
+            this.btnUnLock.Size = new System.Drawing.Size(75, 32);
+            this.btnUnLock.TabIndex = 57;
+            this.btnUnLock.Text = "UnLock";
+            this.btnUnLock.UseVisualStyleBackColor = false;
+            this.btnUnLock.Click += new System.EventHandler(this.btnUnLock_Click);
+            // 
             // frmPayPeriod
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(434, 170);
+            this.ClientSize = new System.Drawing.Size(434, 194);
+            this.Controls.Add(this.btnUnLock);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.grpUserRights);
@@ -270,5 +283,6 @@
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btnUnLock;
     }
 }

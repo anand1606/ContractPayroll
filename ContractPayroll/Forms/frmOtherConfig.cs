@@ -20,7 +20,8 @@ namespace ContractPayroll.Forms
         public string GRights = "XXXV";
         public string oldCode = "";
         public bool defSet;
-        
+        public bool IsLocked;
+
         public frmOtherConfig()
         {
             InitializeComponent();
@@ -45,6 +46,7 @@ namespace ContractPayroll.Forms
             {
                 grid.DataSource = ds;
                 grid.DataMember = ds.Tables[0].TableName;
+
             }
             else
             {
@@ -138,7 +140,6 @@ namespace ContractPayroll.Forms
             else
             {
                 this.Text = "Pay Period Wise Configuration";
-                txtPayPeriod.Text = "";
                 txtPayPeriod.Properties.ReadOnly = true;
                 GRights = ContractPayroll.Classes.Globals.GetFormRights("frmPayCyclePara");
             }
@@ -194,6 +195,13 @@ namespace ContractPayroll.Forms
         {
             string err = string.Empty;
 
+
+            if (IsLocked)
+            {
+                err = err + "Does not allowed to change in locked period.." + Environment.NewLine;
+                return err;
+            }
+            
             if (string.IsNullOrEmpty(txtPayPeriod.Text))
             {
                 err = err + "Please select Pay Period " + Environment.NewLine;
@@ -231,6 +239,8 @@ namespace ContractPayroll.Forms
             {
                 err = err + "Does not allowed to change PayPeriod Para values.." + Environment.NewLine;
             }
+
+
 
             return err;
         }
@@ -435,6 +445,28 @@ namespace ContractPayroll.Forms
         
         private void txtPayPeriod_Validated(object sender, EventArgs e)
         {
+            DataSet ds = new DataSet();
+            string sql = "select * From Cont_MastPayPeriod where PayPeriod='" + txtPayPeriod.Text.Trim() + "'";
+
+            ds = Utils.Helper.GetData(sql, Utils.Helper.constr);
+            bool hasRows = ds.Tables.Cast<DataTable>().Any(table => table.Rows.Count != 0);
+
+            if (hasRows)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    txtPayPeriod.Text = dr["PayPeriod"].ToString();
+                    txtPayDesc.Text = dr["PayDesc"].ToString();
+                    IsLocked = ((Convert.ToBoolean(dr["IsLocked"])) ? true : false);                    
+                }
+            }
+            else
+            {
+                IsLocked = false;
+                txtPayPeriod.Text = "0";
+                txtPayDesc.Text = "Default Configuration";
+            }               
+            
             LoadGrid();
         }
     }

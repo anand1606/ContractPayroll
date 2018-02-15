@@ -32,6 +32,8 @@
             this.grid = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtPayPeriod = new DevExpress.XtraEditors.TextEdit();
             this.txtTSlab = new DevExpress.XtraEditors.TextEdit();
             this.label7 = new System.Windows.Forms.Label();
             this.txtFSlab = new DevExpress.XtraEditors.TextEdit();
@@ -50,12 +52,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtpValue = new DevExpress.XtraEditors.TextEdit();
             this.txtParaType = new DevExpress.XtraEditors.ComboBoxEdit();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtPayPeriod = new DevExpress.XtraEditors.TextEdit();
+            this.txtPayDesc = new DevExpress.XtraEditors.TextEdit();
             this.Group2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPayPeriod.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTSlab.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFSlab.Properties)).BeginInit();
             this.grpUserRights.SuspendLayout();
@@ -64,7 +66,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtParaCode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtpValue.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtParaType.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPayPeriod.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPayDesc.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // Group2
@@ -120,6 +122,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtPayDesc);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.txtPayPeriod);
             this.groupBox1.Controls.Add(this.txtTSlab);
@@ -137,13 +140,33 @@
             this.groupBox1.Controls.Add(this.txtParaType);
             this.groupBox1.Location = new System.Drawing.Point(4, 6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(865, 135);
+            this.groupBox1.Size = new System.Drawing.Size(865, 151);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 18);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(61, 13);
+            this.label3.TabIndex = 46;
+            this.label3.Text = "PayPeriod :";
+            // 
+            // txtPayPeriod
+            // 
+            this.txtPayPeriod.Location = new System.Drawing.Point(80, 16);
+            this.txtPayPeriod.Name = "txtPayPeriod";
+            this.txtPayPeriod.Properties.MaxLength = 10;
+            this.txtPayPeriod.Properties.ReadOnly = true;
+            this.txtPayPeriod.Size = new System.Drawing.Size(117, 20);
+            this.txtPayPeriod.TabIndex = 45;
+            this.txtPayPeriod.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPayPeriod_KeyDown);
+            this.txtPayPeriod.Validated += new System.EventHandler(this.txtPayPeriod_Validated);
+            // 
             // txtTSlab
             // 
-            this.txtTSlab.Location = new System.Drawing.Point(742, 15);
+            this.txtTSlab.Location = new System.Drawing.Point(267, 67);
             this.txtTSlab.Name = "txtTSlab";
             this.txtTSlab.Properties.Mask.BeepOnError = true;
             this.txtTSlab.Properties.Mask.EditMask = "[0-9.]+";
@@ -154,7 +177,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(680, 19);
+            this.label7.Location = new System.Drawing.Point(205, 71);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(56, 13);
             this.label7.TabIndex = 44;
@@ -162,7 +185,7 @@
             // 
             // txtFSlab
             // 
-            this.txtFSlab.Location = new System.Drawing.Point(540, 16);
+            this.txtFSlab.Location = new System.Drawing.Point(80, 67);
             this.txtFSlab.Name = "txtFSlab";
             this.txtFSlab.Properties.Mask.BeepOnError = true;
             this.txtFSlab.Properties.Mask.EditMask = "[0-9.]+";
@@ -173,7 +196,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(475, 44);
+            this.label2.Location = new System.Drawing.Point(390, 70);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(65, 13);
             this.label2.TabIndex = 42;
@@ -187,7 +210,7 @@
             this.grpUserRights.Controls.Add(this.btnUpdate);
             this.grpUserRights.Controls.Add(this.btnAdd);
             this.grpUserRights.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.grpUserRights.Location = new System.Drawing.Point(3, 80);
+            this.grpUserRights.Location = new System.Drawing.Point(3, 96);
             this.grpUserRights.Name = "grpUserRights";
             this.grpUserRights.Size = new System.Drawing.Size(859, 52);
             this.grpUserRights.TabIndex = 7;
@@ -251,7 +274,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(475, 19);
+            this.label5.Location = new System.Drawing.Point(15, 70);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(59, 13);
             this.label5.TabIndex = 14;
@@ -259,7 +282,7 @@
             // 
             // chkFixed
             // 
-            this.chkFixed.Location = new System.Drawing.Point(781, 41);
+            this.chkFixed.Location = new System.Drawing.Point(640, 67);
             this.chkFixed.Name = "chkFixed";
             this.chkFixed.Properties.Caption = "Is Fixed :";
             this.chkFixed.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Far;
@@ -268,19 +291,19 @@
             // 
             // txtParaDesc
             // 
-            this.txtParaDesc.Location = new System.Drawing.Point(11, 42);
+            this.txtParaDesc.Location = new System.Drawing.Point(200, 40);
             this.txtParaDesc.Name = "txtParaDesc";
             this.txtParaDesc.Properties.Mask.EditMask = "[A-Za-z 0-9]+";
             this.txtParaDesc.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
             this.txtParaDesc.Properties.MaxLength = 100;
-            this.txtParaDesc.Size = new System.Drawing.Size(323, 20);
+            this.txtParaDesc.Size = new System.Drawing.Size(398, 20);
             this.txtParaDesc.TabIndex = 1;
             this.txtParaDesc.TabStop = false;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(265, 18);
+            this.label4.Location = new System.Drawing.Point(12, 43);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(60, 13);
             this.label4.TabIndex = 8;
@@ -288,7 +311,7 @@
             // 
             // txtParaCode
             // 
-            this.txtParaCode.Location = new System.Drawing.Point(333, 16);
+            this.txtParaCode.Location = new System.Drawing.Point(80, 41);
             this.txtParaCode.Name = "txtParaCode";
             this.txtParaCode.Properties.MaxLength = 10;
             this.txtParaCode.Size = new System.Drawing.Size(117, 20);
@@ -297,7 +320,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(340, 45);
+            this.label1.Location = new System.Drawing.Point(608, 41);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(62, 13);
             this.label1.TabIndex = 4;
@@ -305,17 +328,17 @@
             // 
             // txtpValue
             // 
-            this.txtpValue.Location = new System.Drawing.Point(540, 42);
+            this.txtpValue.Location = new System.Drawing.Point(461, 67);
             this.txtpValue.Name = "txtpValue";
             this.txtpValue.Properties.Mask.BeepOnError = true;
             this.txtpValue.Properties.Mask.EditMask = "f";
             this.txtpValue.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
-            this.txtpValue.Size = new System.Drawing.Size(161, 20);
+            this.txtpValue.Size = new System.Drawing.Size(137, 20);
             this.txtpValue.TabIndex = 5;
             // 
             // txtParaType
             // 
-            this.txtParaType.Location = new System.Drawing.Point(408, 40);
+            this.txtParaType.Location = new System.Drawing.Point(676, 38);
             this.txtParaType.Name = "txtParaType";
             this.txtParaType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
@@ -326,24 +349,14 @@
             this.txtParaType.Size = new System.Drawing.Size(42, 20);
             this.txtParaType.TabIndex = 4;
             // 
-            // label3
+            // txtPayDesc
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 18);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(61, 13);
-            this.label3.TabIndex = 46;
-            this.label3.Text = "PayPeriod :";
-            // 
-            // txtPayPeriod
-            // 
-            this.txtPayPeriod.Location = new System.Drawing.Point(80, 16);
-            this.txtPayPeriod.Name = "txtPayPeriod";
-            this.txtPayPeriod.Properties.MaxLength = 10;
-            this.txtPayPeriod.Size = new System.Drawing.Size(117, 20);
-            this.txtPayPeriod.TabIndex = 45;
-            this.txtPayPeriod.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPayPeriod_KeyDown);
-            this.txtPayPeriod.Validated += new System.EventHandler(this.txtPayPeriod_Validated);
+            this.txtPayDesc.Location = new System.Drawing.Point(200, 16);
+            this.txtPayDesc.Name = "txtPayDesc";
+            this.txtPayDesc.Properties.MaxLength = 10;
+            this.txtPayDesc.Properties.ReadOnly = true;
+            this.txtPayDesc.Size = new System.Drawing.Size(398, 20);
+            this.txtPayDesc.TabIndex = 47;
             // 
             // frmOtherConfig
             // 
@@ -360,6 +373,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPayPeriod.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTSlab.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFSlab.Properties)).EndInit();
             this.grpUserRights.ResumeLayout(false);
@@ -368,7 +382,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtParaCode.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtpValue.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtParaType.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPayPeriod.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPayDesc.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -399,5 +413,6 @@
         private DevExpress.XtraEditors.ComboBoxEdit txtParaType;
         private System.Windows.Forms.Label label3;
         private DevExpress.XtraEditors.TextEdit txtPayPeriod;
+        private DevExpress.XtraEditors.TextEdit txtPayDesc;
     }
 }

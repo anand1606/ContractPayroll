@@ -188,7 +188,41 @@ namespace ContractPayroll.Forms
             }
             else
             {
-                MessageBox.Show("System does not allow to update, Transaction already made", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (chkLocked.Checked)
+                {
+                    using (SqlConnection cn = new SqlConnection(Utils.Helper.constr))
+                    {
+                        using (SqlCommand cmd = new SqlCommand())
+                        {
+                            try
+                            {
+
+                                cn.Open();
+                                cmd.Connection = cn;
+                                string sql = "Update Cont_MastPayPeriod Set isLocked = '1',UpdDt = GetDate()," +
+                                    " UpdID ='" + Utils.User.GUserID + "' where PayPeriod = '" + txtPayPeriod.Text.Trim() + "'";
+
+                                cmd.CommandText = sql;
+                                cmd.ExecuteNonQuery();
+                                ResetCtrl();
+
+                                MessageBox.Show("PayPeriod is Locked...", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("System does not allow to update, Transaction already made", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                
+                
+                
             }
 
         }
@@ -311,6 +345,7 @@ namespace ContractPayroll.Forms
             btnAdd.Enabled = false;
             btnUpdate.Enabled = false;
             btnDelete.Enabled = false;
+            btnUnLock.Visible = false;
 
             object s = new object();
             EventArgs e = new EventArgs();
@@ -380,14 +415,18 @@ namespace ContractPayroll.Forms
                         txtToDt.DateTime = Convert.ToDateTime(dr["ToDt"]).Date;
                         chkLocked.Checked = ((Convert.ToBoolean(dr["IsLocked"])) ? true : false);
                         mode = "OLD";
-                        
+
+                        if (chkLocked.Checked)
+                        {
+                            btnUnLock.Visible = true;
+                        }
                     }
                 }
                 else
                 {
                     txtPayPeriod.Text = Utils.Helper.GetDescription("SELECT isnull(Max(PayPeriod),0) + 1 FROM Cont_MastPayPeriod", Utils.Helper.constr);
                     mode = "NEW";
-                    
+                    btnUnLock.Visible = false;
                 }                
             }
 
@@ -398,6 +437,38 @@ namespace ContractPayroll.Forms
         {
             ResetCtrl();
             SetRights();
+        }
+
+        private void btnUnLock_Click(object sender, EventArgs e)
+        {
+            if (chkLocked.Checked)
+            {
+                using (SqlConnection cn = new SqlConnection(Utils.Helper.constr))
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        try
+                        {
+
+                            cn.Open();
+                            cmd.Connection = cn;
+                            string sql = "Update Cont_MastPayPeriod Set isLocked = '0',UpdDt = GetDate()," +
+                                " UpdID ='" + Utils.User.GUserID + "' where PayPeriod = '" + txtPayPeriod.Text.Trim() + "'";
+
+                            cmd.CommandText = sql;
+                            cmd.ExecuteNonQuery();
+                            ResetCtrl();
+
+                            MessageBox.Show("PayPeriod is unLocked...", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+            }
         }
 
 

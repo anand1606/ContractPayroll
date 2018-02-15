@@ -16,7 +16,7 @@ namespace ContractPayroll.Forms
         public string GRights = "XXXV";
         public string mode = "NEW";
         public bool IsLocked = false;
-        
+       
         public frmImportEmp()
         {
             InitializeComponent();
@@ -76,7 +76,12 @@ namespace ContractPayroll.Forms
         {
             string err = string.Empty;
 
-            
+            if (IsLocked)
+            {
+                err = err + "Does not allowed to change in locked period.." + Environment.NewLine;
+                return err;
+            }
+
             if (string.IsNullOrEmpty(txtPayPeriod.Text))
             {
                 err = err + "Please select Pay Period " + Environment.NewLine;

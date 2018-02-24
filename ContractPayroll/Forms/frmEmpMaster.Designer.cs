@@ -30,7 +30,7 @@
         {
             this.label3 = new System.Windows.Forms.Label();
             this.txtPayPeriod = new DevExpress.XtraEditors.TextEdit();
-            this.txtParaDesc = new DevExpress.XtraEditors.TextEdit();
+            this.txtPayDesc = new DevExpress.XtraEditors.TextEdit();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.chkESIFlg = new DevExpress.XtraEditors.CheckEdit();
             this.chkDeathFlg = new DevExpress.XtraEditors.CheckEdit();
@@ -98,7 +98,7 @@
             this.grid = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             ((System.ComponentModel.ISupportInitialize)(this.txtPayPeriod.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtParaDesc.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPayDesc.Properties)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chkESIFlg.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chkDeathFlg.Properties)).BeginInit();
@@ -168,18 +168,18 @@
             this.txtPayPeriod.TabIndex = 55;
             this.txtPayPeriod.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPayPeriod_KeyDown);
             // 
-            // txtParaDesc
+            // txtPayDesc
             // 
-            this.txtParaDesc.Location = new System.Drawing.Point(162, 20);
-            this.txtParaDesc.Name = "txtParaDesc";
-            this.txtParaDesc.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtParaDesc.Properties.Appearance.Options.UseFont = true;
-            this.txtParaDesc.Properties.Mask.EditMask = "[A-Za-z 0-9]+";
-            this.txtParaDesc.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
-            this.txtParaDesc.Properties.MaxLength = 100;
-            this.txtParaDesc.Properties.ReadOnly = true;
-            this.txtParaDesc.Size = new System.Drawing.Size(269, 22);
-            this.txtParaDesc.TabIndex = 56;
+            this.txtPayDesc.Location = new System.Drawing.Point(162, 20);
+            this.txtPayDesc.Name = "txtPayDesc";
+            this.txtPayDesc.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPayDesc.Properties.Appearance.Options.UseFont = true;
+            this.txtPayDesc.Properties.Mask.EditMask = "[A-Za-z 0-9]+";
+            this.txtPayDesc.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
+            this.txtPayDesc.Properties.MaxLength = 100;
+            this.txtPayDesc.Properties.ReadOnly = true;
+            this.txtPayDesc.Size = new System.Drawing.Size(269, 22);
+            this.txtPayDesc.TabIndex = 56;
             // 
             // groupBox1
             // 
@@ -225,7 +225,7 @@
             this.groupBox1.Controls.Add(this.txtEmpName);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.txtEmpUnqID);
-            this.groupBox1.Controls.Add(this.txtParaDesc);
+            this.groupBox1.Controls.Add(this.txtPayDesc);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.txtPayPeriod);
             this.groupBox1.Controls.Add(this.txtGender);
@@ -968,7 +968,7 @@
             this.Text = "Employee Master";
             this.Load += new System.EventHandler(this.frmEmpMaster_Load);
             ((System.ComponentModel.ISupportInitialize)(this.txtPayPeriod.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtParaDesc.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPayDesc.Properties)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chkESIFlg.Properties)).EndInit();
@@ -1025,7 +1025,7 @@
 
         private System.Windows.Forms.Label label3;
         private DevExpress.XtraEditors.TextEdit txtPayPeriod;
-        private DevExpress.XtraEditors.TextEdit txtParaDesc;
+        private DevExpress.XtraEditors.TextEdit txtPayDesc;
         private System.Windows.Forms.GroupBox groupBox1;
         private DevExpress.XtraEditors.TextEdit txtContDesc;
         private System.Windows.Forms.Label label16;

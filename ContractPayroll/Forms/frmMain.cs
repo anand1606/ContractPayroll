@@ -382,6 +382,64 @@ namespace ContractPayroll
                 m.Show();
             }
         }
+
+        private void mnuMthlyAttdProc_Click(object sender, EventArgs e)
+        {
+            Form t = Application.OpenForms["frmMthlyAttdProcess"];
+            if (t == null)
+            {
+                frmMthlyAttdProcess m = new frmMthlyAttdProcess();
+                m.MdiParent = this;
+                m.Show();
+            }
+        }
+
+        private void mnuMthlyAdj_Click(object sender, EventArgs e)
+        {
+            Form t = Application.OpenForms["frmMthlyAdj"];
+            if (t == null)
+            {
+                frmMthlyAdj m = new frmMthlyAdj();
+                m.MdiParent = this;
+                m.Show();
+            }
+        }
+
+        private void mnuMthlyDed_Click(object sender, EventArgs e)
+        {
+            Form t = Application.OpenForms["frmBulkDed"];
+            if (t == null)
+            {
+                frmBulkDed m = new frmBulkDed();
+                m.MdiParent = this;
+                m.Show();
+            }
+        }
+
+        private void mnuMthlyCalc_Click(object sender, EventArgs e)
+        {
+            Form t = Application.OpenForms["frmMthlyCalc"];
+            if (t == null)
+            {
+                frmMthlyCalc m = new frmMthlyCalc();
+                m.MdiParent = this;
+                m.Show();
+            }
+        }
+
+        private void mnuBulkBasicChng_Click(object sender, EventArgs e)
+        {
+            //mnuBulkBasicChng
+            Form t = Application.OpenForms["frmBulkBasicChng"];
+            if (t == null)
+            {
+                frmBulkBasicChng m = new frmBulkBasicChng();
+                m.MdiParent = this;
+                m.Show();
+            }
+        
+        
+        }
         
 
     }

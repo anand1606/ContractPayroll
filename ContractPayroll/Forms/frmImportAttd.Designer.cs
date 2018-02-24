@@ -30,11 +30,11 @@
         {
             this.label3 = new System.Windows.Forms.Label();
             this.txtPayPeriod = new DevExpress.XtraEditors.TextEdit();
-            this.txtParaDesc = new DevExpress.XtraEditors.TextEdit();
+            this.txtPayDesc = new DevExpress.XtraEditors.TextEdit();
             this.btnImport = new System.Windows.Forms.Button();
             this.pBar = new System.Windows.Forms.ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.txtPayPeriod.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtParaDesc.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPayDesc.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // label3
@@ -58,18 +58,18 @@
             this.txtPayPeriod.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPayPeriod_KeyDown);
             this.txtPayPeriod.Validated += new System.EventHandler(this.txtPayPeriod_Validated);
             // 
-            // txtParaDesc
+            // txtPayDesc
             // 
-            this.txtParaDesc.Location = new System.Drawing.Point(177, 16);
-            this.txtParaDesc.Name = "txtParaDesc";
-            this.txtParaDesc.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtParaDesc.Properties.Appearance.Options.UseFont = true;
-            this.txtParaDesc.Properties.Mask.EditMask = "[A-Za-z 0-9]+";
-            this.txtParaDesc.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
-            this.txtParaDesc.Properties.MaxLength = 100;
-            this.txtParaDesc.Properties.ReadOnly = true;
-            this.txtParaDesc.Size = new System.Drawing.Size(377, 22);
-            this.txtParaDesc.TabIndex = 1;
+            this.txtPayDesc.Location = new System.Drawing.Point(177, 16);
+            this.txtPayDesc.Name = "txtPayDesc";
+            this.txtPayDesc.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPayDesc.Properties.Appearance.Options.UseFont = true;
+            this.txtPayDesc.Properties.Mask.EditMask = "[A-Za-z 0-9]+";
+            this.txtPayDesc.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
+            this.txtPayDesc.Properties.MaxLength = 100;
+            this.txtPayDesc.Properties.ReadOnly = true;
+            this.txtPayDesc.Size = new System.Drawing.Size(377, 22);
+            this.txtPayDesc.TabIndex = 1;
             // 
             // btnImport
             // 
@@ -99,13 +99,13 @@
             this.Controls.Add(this.btnImport);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtPayPeriod);
-            this.Controls.Add(this.txtParaDesc);
+            this.Controls.Add(this.txtPayDesc);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "frmImportAttd";
             this.Text = "Import Attendance to Pay Cycle";
             this.Load += new System.EventHandler(this.frmImportEmp_Load);
             ((System.ComponentModel.ISupportInitialize)(this.txtPayPeriod.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtParaDesc.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPayDesc.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -115,7 +115,7 @@
 
         private System.Windows.Forms.Label label3;
         private DevExpress.XtraEditors.TextEdit txtPayPeriod;
-        private DevExpress.XtraEditors.TextEdit txtParaDesc;
+        private DevExpress.XtraEditors.TextEdit txtPayDesc;
         private System.Windows.Forms.Button btnImport;
         private System.Windows.Forms.ProgressBar pBar;
     }

@@ -32,6 +32,7 @@
             this.grid = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtPayDesc = new DevExpress.XtraEditors.TextEdit();
             this.label3 = new System.Windows.Forms.Label();
             this.txtPayPeriod = new DevExpress.XtraEditors.TextEdit();
             this.txtTSlab = new DevExpress.XtraEditors.TextEdit();
@@ -52,11 +53,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtpValue = new DevExpress.XtraEditors.TextEdit();
             this.txtParaType = new DevExpress.XtraEditors.ComboBoxEdit();
-            this.txtPayDesc = new DevExpress.XtraEditors.TextEdit();
+            this.chkAppFlg = new DevExpress.XtraEditors.CheckEdit();
             this.Group2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPayDesc.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPayPeriod.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTSlab.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFSlab.Properties)).BeginInit();
@@ -66,7 +68,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtParaCode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtpValue.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtParaType.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPayDesc.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkAppFlg.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // Group2
@@ -122,6 +124,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.chkAppFlg);
             this.groupBox1.Controls.Add(this.txtPayDesc);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.txtPayPeriod);
@@ -143,6 +146,16 @@
             this.groupBox1.Size = new System.Drawing.Size(865, 151);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // txtPayDesc
+            // 
+            this.txtPayDesc.Location = new System.Drawing.Point(200, 16);
+            this.txtPayDesc.Name = "txtPayDesc";
+            this.txtPayDesc.Properties.MaxLength = 10;
+            this.txtPayDesc.Properties.ReadOnly = true;
+            this.txtPayDesc.Size = new System.Drawing.Size(398, 20);
+            this.txtPayDesc.TabIndex = 47;
             // 
             // label3
             // 
@@ -284,7 +297,7 @@
             // 
             this.chkFixed.Location = new System.Drawing.Point(640, 67);
             this.chkFixed.Name = "chkFixed";
-            this.chkFixed.Properties.Caption = "Is Fixed :";
+            this.chkFixed.Properties.Caption = "Is Optional :";
             this.chkFixed.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Far;
             this.chkFixed.Size = new System.Drawing.Size(78, 19);
             this.chkFixed.TabIndex = 6;
@@ -296,6 +309,7 @@
             this.txtParaDesc.Properties.Mask.EditMask = "[A-Za-z 0-9]+";
             this.txtParaDesc.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
             this.txtParaDesc.Properties.MaxLength = 100;
+            this.txtParaDesc.Properties.ReadOnly = true;
             this.txtParaDesc.Size = new System.Drawing.Size(398, 20);
             this.txtParaDesc.TabIndex = 1;
             this.txtParaDesc.TabStop = false;
@@ -314,6 +328,7 @@
             this.txtParaCode.Location = new System.Drawing.Point(80, 41);
             this.txtParaCode.Name = "txtParaCode";
             this.txtParaCode.Properties.MaxLength = 10;
+            this.txtParaCode.Properties.ReadOnly = true;
             this.txtParaCode.Size = new System.Drawing.Size(117, 20);
             this.txtParaCode.TabIndex = 0;
             // 
@@ -349,14 +364,14 @@
             this.txtParaType.Size = new System.Drawing.Size(42, 20);
             this.txtParaType.TabIndex = 4;
             // 
-            // txtPayDesc
+            // chkAppFlg
             // 
-            this.txtPayDesc.Location = new System.Drawing.Point(200, 16);
-            this.txtPayDesc.Name = "txtPayDesc";
-            this.txtPayDesc.Properties.MaxLength = 10;
-            this.txtPayDesc.Properties.ReadOnly = true;
-            this.txtPayDesc.Size = new System.Drawing.Size(398, 20);
-            this.txtPayDesc.TabIndex = 47;
+            this.chkAppFlg.Location = new System.Drawing.Point(724, 67);
+            this.chkAppFlg.Name = "chkAppFlg";
+            this.chkAppFlg.Properties.Caption = "Is Applicable :";
+            this.chkAppFlg.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Far;
+            this.chkAppFlg.Size = new System.Drawing.Size(91, 19);
+            this.chkAppFlg.TabIndex = 48;
             // 
             // frmOtherConfig
             // 
@@ -373,6 +388,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPayDesc.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPayPeriod.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTSlab.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFSlab.Properties)).EndInit();
@@ -382,7 +398,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtParaCode.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtpValue.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtParaType.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtPayDesc.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chkAppFlg.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -414,5 +430,6 @@
         private System.Windows.Forms.Label label3;
         private DevExpress.XtraEditors.TextEdit txtPayPeriod;
         private DevExpress.XtraEditors.TextEdit txtPayDesc;
+        private DevExpress.XtraEditors.CheckEdit chkAppFlg;
     }
 }

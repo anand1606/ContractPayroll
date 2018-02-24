@@ -57,25 +57,25 @@ namespace ContractPayroll.Forms
                 if (obj.Count == 0)
                 {
                     txtPayPeriod.Text = "";
-                    txtParaDesc.Text = "";
+                    txtPayDesc.Text = "";
                     return;
                 }
                 else if (obj.ElementAt(0).ToString() == "0")
                 {
                     txtPayPeriod.Text = "";
-                    txtParaDesc.Text = "";
+                    txtPayDesc.Text = "";
                     return;
                 }
                 else if (obj.ElementAt(0).ToString() == "")
                 {
                     txtPayPeriod.Text = "";
-                    txtParaDesc.Text = "";
+                    txtPayDesc.Text = "";
                     return;
                 }
                 else
                 {
                     txtPayPeriod.Text = obj.ElementAt(0).ToString();
-                    txtParaDesc.Text = obj.ElementAt(1).ToString();
+                    txtPayDesc.Text = obj.ElementAt(1).ToString();
                 }
             }
         }
@@ -186,7 +186,7 @@ namespace ContractPayroll.Forms
                 {
                     foreach (DataRow dr in ds.Tables[0].Rows)
                     {
-                        txtParaDesc.Text = dr["PayDesc"].ToString();
+                        txtPayDesc.Text = dr["PayDesc"].ToString();
                         PFromDt = Convert.ToDateTime(dr["FromDt"]);
                         pToDt = Convert.ToDateTime(dr["ToDt"]);
 
@@ -218,7 +218,7 @@ namespace ContractPayroll.Forms
             
             }
             
-            if (string.IsNullOrEmpty(txtParaDesc.Text))
+            if (string.IsNullOrEmpty(txtPayDesc.Text))
             {
                 err = err + "Please Select Description.." + Environment.NewLine;
                 return err;
@@ -503,7 +503,7 @@ namespace ContractPayroll.Forms
                 }
                 else if(e.KeyCode == Keys.F2)
                 {
-                    obj = (List<string>)hlp.Show(sql, "EmpName", "EmpName", typeof(int), Utils.Helper.constr, "System.Data.SqlClient",
+                    obj = (List<string>)hlp.Show(sql, "EmpName", "EmpName", typeof(string), Utils.Helper.constr, "System.Data.SqlClient",
                    100, 300, 400, 600, 100, 100);
                 }
 
@@ -579,7 +579,7 @@ namespace ContractPayroll.Forms
 
             }
 
-            if (string.IsNullOrEmpty(txtParaDesc.Text))
+            if (string.IsNullOrEmpty(txtPayDesc.Text))
             {
                 err = err + "Please Select valid payperiod.." + Environment.NewLine;
             }

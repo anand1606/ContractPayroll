@@ -1,6 +1,6 @@
 ﻿namespace ContractPayroll.Forms
 {
-    partial class frmImportEmp
+    partial class frmMthlyAttdProcess
     {
         /// <summary>
         /// Required designer variable.
@@ -31,7 +31,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.txtPayPeriod = new DevExpress.XtraEditors.TextEdit();
             this.txtPayDesc = new DevExpress.XtraEditors.TextEdit();
-            this.btnImport = new System.Windows.Forms.Button();
+            this.btnProcess = new System.Windows.Forms.Button();
             this.pBar = new System.Windows.Forms.ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.txtPayPeriod.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPayDesc.Properties)).BeginInit();
@@ -71,16 +71,16 @@
             this.txtPayDesc.Size = new System.Drawing.Size(377, 22);
             this.txtPayDesc.TabIndex = 1;
             // 
-            // btnImport
+            // btnProcess
             // 
-            this.btnImport.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnImport.Location = new System.Drawing.Point(185, 44);
-            this.btnImport.Name = "btnImport";
-            this.btnImport.Size = new System.Drawing.Size(238, 42);
-            this.btnImport.TabIndex = 2;
-            this.btnImport.Text = "Import";
-            this.btnImport.UseVisualStyleBackColor = true;
-            this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
+            this.btnProcess.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnProcess.Location = new System.Drawing.Point(185, 44);
+            this.btnProcess.Name = "btnProcess";
+            this.btnProcess.Size = new System.Drawing.Size(238, 42);
+            this.btnProcess.TabIndex = 2;
+            this.btnProcess.Text = "Process";
+            this.btnProcess.UseVisualStyleBackColor = true;
+            this.btnProcess.Click += new System.EventHandler(this.btnProcess_Click);
             // 
             // pBar
             // 
@@ -90,19 +90,19 @@
             this.pBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.pBar.TabIndex = 56;
             // 
-            // frmImportEmp
+            // frmMthlyAttdProcess
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(624, 148);
             this.Controls.Add(this.pBar);
-            this.Controls.Add(this.btnImport);
+            this.Controls.Add(this.btnProcess);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtPayPeriod);
             this.Controls.Add(this.txtPayDesc);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Name = "frmImportEmp";
-            this.Text = "Import Employee to Pay Cycle";
+            this.Name = "frmMthlyAttdProcess";
+            this.Text = "Monthly Attendance Process";
             this.Load += new System.EventHandler(this.frmImportEmp_Load);
             ((System.ComponentModel.ISupportInitialize)(this.txtPayPeriod.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPayDesc.Properties)).EndInit();
@@ -116,7 +116,7 @@
         private System.Windows.Forms.Label label3;
         private DevExpress.XtraEditors.TextEdit txtPayPeriod;
         private DevExpress.XtraEditors.TextEdit txtPayDesc;
-        private System.Windows.Forms.Button btnImport;
+        private System.Windows.Forms.Button btnProcess;
         private System.Windows.Forms.ProgressBar pBar;
     }
 }

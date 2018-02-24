@@ -16,7 +16,9 @@ namespace ContractPayroll.Forms
         public string GRights = "XXXV";
         public string mode = "NEW";
         public bool IsLocked = false;
-        
+        public DateTime pFromDt;
+        public DateTime pToDt;
+
         public frmImportAttd()
         {
             InitializeComponent();
@@ -34,12 +36,14 @@ namespace ContractPayroll.Forms
             GRights = ContractPayroll.Classes.Globals.GetFormRights(this.Name);
 
             txtPayPeriod.Text = "";
-            txtParaDesc.Text = "";
+            txtPayDesc.Text = "";
             pBar.Minimum = 0;
             pBar.Value = 0;
             IsLocked = false;
             mode = "NEW";
-            
+            pFromDt = DateTime.MinValue;
+            pToDt = DateTime.MinValue;
+
         }
 
         private void SetRights()
@@ -84,7 +88,7 @@ namespace ContractPayroll.Forms
             }
             
             
-            if (string.IsNullOrEmpty(txtParaDesc.Text))
+            if (string.IsNullOrEmpty(txtPayDesc.Text))
             {
                 err = err + "Please Enter Description.." + Environment.NewLine;
                 return err;
@@ -107,8 +111,7 @@ namespace ContractPayroll.Forms
                 MessageBox.Show(err, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            DateTime pFromDt ;
-            DateTime pToDt;
+            int pPay = 0;
 
             DataSet payds = Utils.Helper.GetData("Select * from Cont_MastPayPeriod where PayPeriod ='" + txtPayPeriod.Text.Trim() + "'",Utils.Helper.constr);
             bool hasRows = payds.Tables.Cast<DataTable>().Any(table => table.Rows.Count != 0);
@@ -123,6 +126,7 @@ namespace ContractPayroll.Forms
             {
                 pFromDt = Convert.ToDateTime(payds.Tables[0].Rows[0]["FromDt"]);
                 pToDt = Convert.ToDateTime(payds.Tables[0].Rows[0]["ToDt"]);
+                pPay = Convert.ToInt32(payds.Tables[0].Rows[0]["PayPeriod"]);
 
                 if(pFromDt == DateTime.MinValue)
                 {
@@ -142,11 +146,11 @@ namespace ContractPayroll.Forms
                 return;
             }
             
-            string sql = "Select * From v_EmpMast where Active = 1 and CompCode = '01' and WrkGrp = 'Cont'";
+            string sql = "Select * From Cont_MastEmp where Active = 1 and PayPeriod ='" + txtPayPeriod.Text.Trim() + "'";
 
             DataSet emplistds = Utils.Helper.GetData(sql, Utils.Helper.constr);
             hasRows = emplistds.Tables.Cast<DataTable>().Any(table => table.Rows.Count != 0);
-
+            pBar.Value = 0;
             if (!hasRows)
             {
                 MessageBox.Show("No Employee Found...", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -174,155 +178,252 @@ namespace ContractPayroll.Forms
                     return;
                 }
 
+                //Load Pay Cycle wise Parameters
+                DataSet PayPara = Utils.Helper.GetData("Select * from Cont_ParaMast where PayPeriod='" + pPay + "'", Utils.Helper.constr);
+                hasRows = PayPara.Tables.Cast<DataTable>().Any(table => table.Rows.Count != 0);
+                var para = PayPara.Tables[0].Copy().AsEnumerable();
 
-                foreach (DataRow dr in emplistds.Tables[0].Rows)
-                {
-                    SqlTransaction tr = cn.BeginTransaction();
-                    Application.DoEvents();
-                    sql = "Select * from Cont_MastEmp Where EmpUnqID = '" + dr["EmpUnqID"].ToString() + "'";
-                    DataSet empds = Utils.Helper.GetData(sql, Utils.Helper.constr);
-                    hasRows = empds.Tables.Cast<DataTable>().Any(table => table.Rows.Count != 0);
-                    if (hasRows)
-                    {
-                        sql = "Update Cont_MastEmp set EmpName ='" + dr["EmpName"] + "', FatherName='" + dr["FatherName"].ToString() + "'," +
-                            " BirthDt ='" + Convert.ToDateTime(dr["BirthDt"]).ToString("yyyy-MM-dd") + "'," +
-                            " JoinDt ='" + Convert.ToDateTime(dr["JoinDt"]).ToString("yyyy-MM-dd") + "'," +
-                            " Gender ='" + (Convert.ToBoolean(dr["Sex"])?"M":"F") + "'," +
-                            " UnitCode='" + dr["UnitCode"].ToString() + "'," +
-                            " UnitDesc='" + dr["UnitName"].ToString() + "'," +
-                            " DeptCode='" + dr["DeptCode"].ToString() + "'," +
-                            " DeptDesc='" + dr["DeptDesc"].ToString() + "'," +
-                            " StatCode='" + dr["Statcode"].ToString() + "'," +
-                            " StatDesc='" + dr["StatDesc"].ToString() + "'," +
-                            " CatCode ='" + dr["CatCode"].ToString() + "'," + 
-                            " CatDesc='" + dr["CatDesc"].ToString() + "'," +
-                            " DesgCode ='" + dr["DesgCode"].ToString() + "'," +
-                            " DesgDesc='" + dr["DesgDesc"].ToString() + "'," +
-                            " GradeCode='" + dr["GradCode"].ToString() + "'," +
-                            " GradeDesc='" + dr["GradeDesc"].ToString() + "'," +
-                            " ContCode='" + dr["ContCode"].ToString() + "'," + 
-                            " ContDesc='" + dr["ContName"].ToString() + "'," +
-                            " ESINo ='" + dr["ESINo"].ToString() + "'," +
-                            " cBasic='" + dr["Basic"].ToString() + "'," + 
-                            " PFNo ='" + 0 + "'," +
-                            " PFFlg = 1," +
-                            " PTaxFlg = 1," + 
-                            " DeathFlg = 1, " +
-                            " LWFFlg = 1, " + 
-                            " Active = 1, " + 
-                            " ESIFlg = 1, " +
-                            " UpdDt=GetDate() ," +
-                            " UpdID ='" + Utils.User.GUserID + "' Where EmpUnqID ='" + dr["EmpUnqID"].ToString() + "' " +
-                            " and PayPeriod ='" + txtPayPeriod.Text.Trim() + "'";
 
-                        try
-                        {
-                            SqlCommand cmd = new SqlCommand(sql, cn, tr);
-                            cmd.ExecuteNonQuery();
+                //define para vars
+                double CoCommRate = 0;
+              
 
-                            try
-                            {
-                                tr.Commit();
-                            }
-                            catch (Exception ex)
-                            {
-                                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                tr.Rollback();
-                            }
-
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            continue;
-                        }
-
-                    }else
-                    {
-                        sql = "Insert into Cont_MastEmp (PayPeriod,EmpUnqID,EmpName,FatherName,BirthDt,JoinDt,Gender,UnitCode," +
-                        " UnitDesc,DeptCode,DeptDesc,Statcode,StatDesc,CatCode,CatDesc,DesgCode,DesgDesc," +
-                        " GradeCode,GradeDesc,ContCode,ContDesc,ESINo,cBasic,PFNo,PFFlg,PTaxFlg,DeathFlg," +
-                        " LWFFlg,Active,ESIFlg,AddDt,AddID ) values ('" + txtPayPeriod.Text.Trim() + "'," +
-                        " '" + dr["EmpUnqID"].ToString() + "'," +
-                        " '" + dr["EmpName"].ToString() + "'," +
-                        " '" + dr["FatherName"].ToString() + "'," +
-                        " '" + Convert.ToDateTime(dr["BirthDt"]).ToString("yyyy-MM-dd") + "'," +
-                        " '" + Convert.ToDateTime(dr["JoinDt"]).ToString("yyyy-MM-dd") + "'," +
-                        " '" + (Convert.ToBoolean(dr["Sex"]) ? "M" : "F") + "'," +
-                        " '" + dr["UnitCode"].ToString() + "'," +
-                        " '" + dr["UnitName"].ToString() + "'," +
-                        " '" + dr["DeptCode"].ToString() + "'," +
-                        " '" + dr["DeptDesc"].ToString() + "'," +
-                        " '" + dr["Statcode"].ToString() + "'," +
-                        " '" + dr["StatDesc"].ToString() + "'," +
-                        " '" + dr["CatCode"].ToString() + "'," +
-                        " '" + dr["CatDesc"].ToString() + "'," +
-                        " '" + dr["DesgCode"].ToString() + "'," +
-                        " '" + dr["DesgDesc"].ToString() + "'," +
-                        " '" + dr["GradCode"].ToString() + "'," +
-                        " '" + dr["GradeDesc"].ToString() + "'," +
-                        " '" + dr["ContCode"].ToString() + "'," +
-                        " '" + dr["ContName"].ToString() + "'," +
-                        " '" + dr["ESINo"].ToString() + "'," +
-                        " '" + dr["Basic"].ToString() + "'," +
-                        " '" + 0 + "'," +
-                        "  1," +
-                        "  1," +
-                        "  1, " +
-                        "  1, " +
-                        "  1, " +
-                        "  1, " +
-                        " GetDate() ," +
-                        " '" + Utils.User.GUserID + "')";
-                        try
-                        {
-                            SqlCommand cmd = new SqlCommand(sql, cn, tr);
-                            cmd.ExecuteNonQuery();
-
-                            //insert into Cont_MastBasic
-                            sql = "Delete From Cont_MastBasic where PayPeriod='" + txtPayPeriod.Text.Trim() + "' And EmpUnqID = '" + dr["EmpUnqID"].ToString() + "' ";
-                            SqlCommand cmd1 = new SqlCommand(sql, cn, tr);
-                            cmd1.ExecuteNonQuery();
-
-                            sql = "Insert into Cont_MastBasic (PayPeriod,EmpUnqID,SrNo,FromDt,ToDt,cBasic,AddDt,AddID) values (" +
-                                " '" + txtPayPeriod.Text.Trim() + "','" + dr["EmpUnqID"].ToString() + "',1," +
-                                " '" + pFromDt.ToString("yyyy-MM-dd") + "'," +
-                                " '" + pToDt.ToString("yyyy-MM-dd") + "'," +
-                                " '" + dr["Basic"].ToString() + "',GetDate(), '" + Utils.User.GUserID + "')";
-
-                            SqlCommand cmd2 = new SqlCommand(sql, cn, tr);
-                            cmd2.ExecuteNonQuery();
-
-                            try
-                            {
-                                tr.Commit();
-                            }
-                            catch (Exception ex)
-                            {
-                                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                tr.Rollback();
-                            }
-
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            continue;
-                        }                      
-
-                    }
-                    
-                    pBar.Value += 1;
-                    pBar.Update();
-
+                try{
+                   /*
+                    COCOMM
+                    COEDUTAX
+                    COPFRATE
+                    COSERVTAX                
+                    * */                    
+                    //CoCommRate = Convert.ToDouble(from q in para.AsEnumerable() where q.Field<string>("ParaCode") == "COCOMM" select q["PValue"]);
+                    CoCommRate = Convert.ToDouble(((from t in para where t.Field<string>("ParaCode") == "COCOMM" select t).First())["PValue"]);
+                
+                }catch(Exception ex){
 
                 }
-
-
                 
+                
+                foreach (DataRow dr in emplistds.Tables[0].Rows)
+                {
+                    
+                    Application.DoEvents();
+                    sql = "Select tDate,EmpUnqID,LeaveTyp,ConsWrkHrs,ConsOverTime,[Status],rptStatus,ActualStatus,CostCode from AttdData " + 
+                        " Where EmpUnqID = '" + dr["EmpUnqID"].ToString() + "' and CompCode = '01' and WrkGrp = 'CONT' " + 
+                        " and tdate between '" + pFromDt.ToString("yyyy-MM-dd") + "' and '" + pToDt.ToString("yyyy-MM-dd") + "' Order By tDate";
+                   
+                    DataSet attds = Utils.Helper.GetData(sql, Utils.Helper.constr);
+                    hasRows = attds.Tables.Cast<DataTable>().Any(table => table.Rows.Count != 0);
+                    if (hasRows)
+                    {
+                        foreach (DataRow adr in attds.Tables[0].Rows)
+                        {
+
+                            #region setingstatus
+
+                            DateTime tDate = Convert.ToDateTime(adr["tDate"]);
+                            int BasicSr = 1;
+                            double cBasic = 0;
+                            double CalBasic = 0;
+                            double WrkHrs = Convert.ToDouble(adr["ConsWrkHrs"]);
+                            double TpaHrs = Convert.ToDouble(adr["ConsOverTime"]);
+                            double TpaAmt = 0;
+                            int WoDays = 0;
+                            int DaysPay = 0;
+                            double CoCommAmt =0 ;
+                            double CoWoAmt = 0;
+
+                            string ABPR = adr["Status"].ToString();
+                            string LeaveTyp = adr["LeaveTyp"].ToString();                            
+                            string CostCode = adr["CostCode"].ToString();
+
+                            if (WrkHrs >= 8 && LeaveTyp.Contains("WO"))
+                            {
+                                WoDays = 1;
+                                DaysPay = 0;
+                                ABPR = "S";                               
+                            }
+                            else if (WrkHrs >= 6 && WrkHrs < 8 && LeaveTyp.Contains("WO"))
+                            {
+                                DaysPay = 0;
+                                WoDays = 0;
+                                ABPR = "S";                               
+                            }
+                            else if (LeaveTyp.Contains("AB"))
+                            {
+                                ABPR = "A";
+                                DaysPay = 0;
+                                WoDays = 0;
+                                TpaHrs = 0;                               
+                            }
+                            else if (LeaveTyp.Contains("OD"))
+                            {
+                                ABPR = "P";
+                                DaysPay = 1;
+                                WoDays = 0;                               
+                            }
+                            else if (LeaveTyp.Contains("AL"))
+                            {
+                                ABPR = "P";
+                                TpaHrs = 0;
+                                DaysPay = 1;
+                                WoDays = 0;
+                            }
+                            else if (adr["Status"].ToString() == "P" && WrkHrs < 6)
+                            {
+                                DaysPay = 0;
+                                WoDays = 0;
+                                ABPR = "A";
+                                TpaHrs = 0;
+                            }
+                            else if (adr["Status"].ToString() == "P")
+                            {
+                                DaysPay = 1;
+                                ABPR = "P";
+                                WoDays = 0;
+                            }
+                            else if(adr["Status"].ToString() == "A")
+                            {
+                                DaysPay = 0;
+                                WoDays = 0;
+                                ABPR = "A";
+                                TpaHrs = 0;
+                            }
+
+                            
+                            sql = "select srno,cBasic from [Cont_MastBasic] " +
+                                    " where PayPeriod = '" + pPay.ToString() + "' and EmpUnqID = '" + adr["EmpUnqID"].ToString() + "' " +
+                                    " and Convert(date,'" + Convert.ToDateTime(adr["tDate"]).ToString("yyyy-MM-dd") + "',121) " +
+                                    " between fromdt and ToDt ";
+
+                            DataSet BasicDs = Utils.Helper.GetData(sql, Utils.Helper.constr);
+                            hasRows = BasicDs.Tables.Cast<DataTable>().Any(table => table.Rows.Count != 0);
+                            if (hasRows)
+                            {
+                                BasicSr = Convert.ToInt32(BasicDs.Tables[0].Rows[0]["SrNo"]);
+                                cBasic = Convert.ToDouble(BasicDs.Tables[0].Rows[0]["cBasic"]);
+                            }
+                            //insert blank record into mthlyatn if not exist
+                            sql = "Select Count(*) from  Cont_MthlyAtn Where PayPeriod = '" + pPay.ToString() + "' and EmpUnqID = '" + adr["EmpUnqID"].ToString() + "' and SrNo = '" + BasicSr.ToString() + "'";
+                            int atncnt = Convert.ToInt32(Utils.Helper.GetDescription(sql, Utils.Helper.constr));
+                            
+
+                            if (TpaHrs > 0)
+                            {
+                                TpaAmt = TpaHrs * (cBasic / 8);
+                            }
+
+                            if (WoDays > 0)
+                            {
+                                CoWoAmt = CoCommRate;
+                                CalBasic = 0;
+                                CoCommAmt = 0;
+                                
+                            }else if (DaysPay > 0)
+                            {
+                                CalBasic = cBasic;
+                                CoCommAmt = CoCommRate;
+                                CoWoAmt = 0;
+                            }
+                            else
+                            {
+                                CalBasic = 0;
+                                CoCommAmt = 0;
+                                CoWoAmt = 0;
+                            }
+
+                            #endregion
+                            SqlTransaction tr = cn.BeginTransaction();
+                            try
+                            {
+                                sql = "Delete From Cont_DailyOth Where PayPeriod ='" + pPay.ToString() + "' " +
+                                        " And EmpUnqID ='" + adr["EmpUnqID"].ToString() + "' and tDate ='" + tDate.ToString("yyyy-MM-dd") + "'";
+                                 
+                                SqlCommand cmd = new SqlCommand(sql, cn, tr);
+                                cmd.ExecuteNonQuery();
+
+                                sql = "Insert into Cont_DailyOth (PayPeriod,EmpUnqID,tDate,SrNo,LeaveTyp,ABPR,WrkHrs,TpaHrs,CBasic," +
+                                      " Cal_Basic,WoDays,Dayspay,tpaAmt,CostCode,CoCommRate,CoCommAmt,CoCommWoRate,CoCommWOAmt,AddDt,AddId) Values " +
+                                      " ('" + pPay.ToString() + "','" + adr["EmpUnqID"].ToString() + "','" + tDate.ToString("yyyy-MM-dd") + "'," +
+                                      " '" + BasicSr.ToString() + "','" + LeaveTyp + "','" + ABPR + "','" + WrkHrs.ToString() + "','" + TpaHrs.ToString() + "'," +
+                                      " '" + cBasic.ToString() + "','" + CalBasic.ToString() + "','" + WoDays.ToString() + "','" + DaysPay.ToString() + "','" + TpaAmt.ToString() + "'," +
+                                      " '" + CostCode + "','" + CoCommRate.ToString() + "','" + CoCommAmt.ToString() + "','" + CoCommRate.ToString() + "','" + CoWoAmt.ToString() + "',GetDate(),'" + Utils.User.GUserID + "')";
+
+                                cmd = new SqlCommand(sql, cn, tr);
+                                cmd.ExecuteNonQuery();
+
+                                if (atncnt == 0)
+                                {
+                                    sql = "Insert into Cont_MthlyAtn (PayPeriod,EmpUnqID,SrNo,AddDt,Addid) Values ('" + pPay.ToString() + "','" + adr["EmpUnqID"].ToString() + "','" + BasicSr.ToString() + "',GetDate(),'" + Utils.User.GUserID + "')";
+                                    cmd = new SqlCommand(sql, cn, tr);
+                                    cmd.ExecuteNonQuery();
+                                }
+                                else
+                                {
+                                    sql = "Update Cont_MthlyAtn Set  " +
+                                        " ,Cal_Basic = 0 " +
+                                        " ,Cal_DaysPay = 0 " +
+                                        " ,Cal_WODays = 0 " +
+                                        " ,Cal_TpaHrs = 0 " +
+                                        " ,Cal_TpaAmt = 0 " +
+                                        " ,Tot_DaysPay = 0 " +
+                                        " ,Tot_EarnBasic = 0 " +
+                                        " ,Tot_TpaHrs = 0 " +
+                                        " ,Tot_TpaAmt = 0 " +
+                                        " ,Tot_Earnings = 0 " +
+                                        " ,Cal_PF = 0 " +
+                                        " ,Cal_EPF = 0 " +
+                                        " ,Cal_EPS = 0 " +
+                                        " ,CoCommRate = 0 " +
+                                        " ,Adj_CoCommDays = 0 " +
+                                        " ,Cal_CoCommDays = 0 " +
+                                        " ,Cal_CoWoCommDays = 0 " +
+                                        " ,Tot_CoCommDays = 0 " +
+                                        " ,Adj_CoCommAmt = 0 " +
+                                        " ,Cal_CoCommAmt = 0 " +
+                                        " ,Cal_CoCommWoAmt = 0 " +
+                                        " ,Tot_CoCommAmt = 0 " +
+                                        " ,Cal_CoCommPFAmt = 0 " +
+                                        " ,Cal_CoServTaxAmt = 0 " +
+                                        " ,Cal_CoEduTaxAmt = 0 " +
+                                        " Where PayPeriod ='" + pPay.ToString() + "' and EmpUnqID = '" + adr["EmpUnqID"].ToString() + "' and SrNo = '" + BasicSr.ToString() + "'";
+                                    
+                                    cmd = new SqlCommand(sql, cn, tr);
+                                    cmd.ExecuteNonQuery();
+                                }
+                               
+                                
+
+
+                                try
+                                {
+                                    tr.Commit();
+                                    tr.Dispose();
+                                }
+                                catch (Exception ex)
+                                {
+                                    MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    tr.Rollback();
+                                    tr.Dispose();
+                                }
+
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                tr.Dispose();
+                                continue;
+                            }
+
+                        } //foreach date
+
+                    }//if has attdrecs    
+
+                    pBar.Value += 1;
+                    pBar.Update();
+                    Application.DoEvents();
+                }
 
                 unLockCtrl();
-
                 
             }
 
@@ -335,14 +436,14 @@ namespace ContractPayroll.Forms
         private void LockCtrl()
         {
             txtPayPeriod.Enabled = false;
-            txtParaDesc.Enabled = false;
+            txtPayDesc.Enabled = false;
             btnImport.Enabled = false;
         }
 
         private void unLockCtrl()
         {
             txtPayPeriod.Enabled = true;
-            txtParaDesc.Enabled = true;
+            txtPayDesc.Enabled = true;
             btnImport.Enabled = true;
         }
 
@@ -368,26 +469,26 @@ namespace ContractPayroll.Forms
                 if (obj.Count == 0)
                 {
                     txtPayPeriod.Text = "";
-
+                    txtPayDesc.Text = "";
                     return;
                 }
                 else if (obj.ElementAt(0).ToString() == "0")
                 {
                     txtPayPeriod.Text = "";
+                    txtPayDesc.Text = "";
                     return;
                 }
                 else if (obj.ElementAt(0).ToString() == "")
                 {
-                    txtPayPeriod.Text = "0";
-
+                    txtPayPeriod.Text = "";
+                    txtPayDesc.Text = "";
                     return;
                 }
                 else
                 {
 
                     txtPayPeriod.Text = obj.ElementAt(0).ToString();
-
-
+                    txtPayDesc.Text = obj.ElementAt(1).ToString();
                 }
             }
         }
@@ -405,8 +506,10 @@ namespace ContractPayroll.Forms
             {
                 foreach (DataRow dr in ds.Tables[0].Rows)
                 {
-                    txtParaDesc.Text = dr["PayDesc"].ToString();                       
+                    txtPayDesc.Text = dr["PayDesc"].ToString();                       
                     IsLocked = ((Convert.ToBoolean(dr["IsLocked"])) ? true : false);
+                    pFromDt = Convert.ToDateTime(dr["FromDt"]);
+                    pToDt = Convert.ToDateTime(dr["ToDt"]);
                     btnImport.Enabled = true;
                     mode = "OLD";
                 }
@@ -415,6 +518,8 @@ namespace ContractPayroll.Forms
             {
                 btnImport.Enabled = false;
                 mode = "NEW";
+                pFromDt = DateTime.MinValue;
+                pToDt = DateTime.MinValue;
 
             }           
 

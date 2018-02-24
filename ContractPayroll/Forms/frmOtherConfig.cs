@@ -89,7 +89,7 @@ namespace ContractPayroll.Forms
             }
 
             DataSet ds = new DataSet();
-            string sql = "select * From  Cont_ParaMast where PayPeriod = '" + txtPayPeriod.Text.Trim() + "' and ParaCode ='" + txtParaCode.Text.Trim() + "'";
+            string sql = "select * From  Cont_ParaMast where PayPeriod = '" + txtPayPeriod.Text.Trim() + "' and ParaCode ='" + txtParaCode.Text.Trim() + "' and ParaDesc = '" + txtParaDesc.Text.Trim() + "'";
 
             ds = Utils.Helper.GetData(sql, Utils.Helper.constr);
             bool hasRows = ds.Tables.Cast<DataTable>()
@@ -107,7 +107,7 @@ namespace ContractPayroll.Forms
                     txtFSlab.Text = dr["FSlab"].ToString();
                     txtTSlab.Text = dr["TSlab"].ToString();
                     chkFixed.CheckState = (Convert.ToBoolean(dr["BCFlg"])) ? CheckState.Checked : CheckState.Unchecked;
-
+                    chkAppFlg.CheckState = (Convert.ToBoolean(dr["AppFlg"])) ? CheckState.Checked : CheckState.Unchecked;
                     mode = "OLD";
                     oldCode = dr["ParaCode"].ToString();
                 }
@@ -155,6 +155,7 @@ namespace ContractPayroll.Forms
 
             oldCode = "";
             mode = "NEW";
+            LoadGrid();
         }
 
         private void SetRights()
@@ -267,11 +268,12 @@ namespace ContractPayroll.Forms
                         cn.Open();
                         cmd.Connection = cn;
                         string sql = "Insert into Cont_ParaMast " +
-                            "(ParaCode,ParaDesc,RsPer,PValue,FSlab,TSlab,BCFlg," +
-                            " AddDt,AddID,PayPeriod) Values ('{0}','{1}','{2}','{3}','{4}','{5}',GetDate(),'{6}','{7}') ";                            
+                            "(ParaCode,ParaDesc,RsPer,PValue,FSlab,TSlab,BCFlg,AppFlg" +
+                            " AddDt,AddID,PayPeriod) Values ('{0}','{1}','{2}','{3}','{4}','{5}','{6}',GetDate(),'{7}','{8}') ";                            
                           
                         sql = string.Format(sql,  txtParaCode.Text.Trim().ToString(), txtParaDesc.Text.Trim().ToString(),
                             txtParaType.Text.Trim().ToString(), txtFSlab.Text.Trim().ToString(), txtTSlab.Text.Trim().ToString(), ((chkFixed.Checked) ? "1" : "0"),
+                            ((chkAppFlg.Checked) ? "1" : "0"),
                             Utils.User.GUserID,
                             txtPayPeriod.Text.Trim()
 
@@ -312,12 +314,12 @@ namespace ContractPayroll.Forms
                         cmd.Connection = cn;
                         string sql = "Update Cont_ParaMast Set ParaDesc = '" + txtParaDesc.Text.Trim() + "', RsPer ='" + txtParaType.Text.Trim() + "', " +
                             " PValue = " + ((string.IsNullOrEmpty(txtpValue.Text.ToString())) ? "null" : "'" + txtpValue.Text.ToString() + "'") + " ,FSlab =" + ((string.IsNullOrEmpty(txtFSlab.Text.ToString())) ? "null" : "'" + txtFSlab.Text.ToString() + "'") + ", TSlab =" + ((string.IsNullOrEmpty(txtTSlab.Text.ToString())) ? "null" : "'" + txtTSlab.Text.ToString() + "'") + "," +
-                            " BCFlg ='" + (chkFixed.Checked ? 1 : 0) + "',UpdDt = GetDate() , UpdID ='" + Utils.User.GUserID + "' where ParaCode ='" + txtParaCode.Text.Trim() + "' And PayPeriod = '" + txtPayPeriod.Text.Trim() + "'";
+                            " BCFlg ='" + (chkFixed.Checked ? 1 : 0) + "',AppFlg = '" + (chkAppFlg.Checked ? 1 : 0) + "',UpdDt = GetDate() , UpdID ='" + Utils.User.GUserID + "' where ParaCode ='" + txtParaCode.Text.Trim() + "' And PayPeriod = '" + txtPayPeriod.Text.Trim() + "' and ParaDesc ='" + txtParaDesc.Text.Trim() + "'";
 
                         cmd.CommandText = sql;
                         cmd.ExecuteNonQuery();
                         ResetCtrl();
-                        LoadGrid();
+                        
                         MessageBox.Show("Record Updated...", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     }
@@ -402,7 +404,7 @@ namespace ContractPayroll.Forms
 
                 if (defSet)
                 {
-                    sql = "Select distinct PayPeriod from Cont_ParaMast Where  PayPeriod = 0 ";
+                    sql = "Select distinct PayPeriod,'Default Settings' as PayDesc from Cont_ParaMast Where  PayPeriod = 0 ";
                 }
                 else
                 {
@@ -417,27 +419,27 @@ namespace ContractPayroll.Forms
                 
                 if (obj.Count == 0)
                 {
-                    txtPayPeriod.Text = "0";
-                    txtParaCode.Text = "";
+                    txtPayPeriod.Text = "";
+                    txtPayDesc.Text = "";
                     return;
                 }
                 else if (obj.ElementAt(0).ToString() == "0")
                 {
-                    txtPayPeriod.Text = "0";
-                    txtParaCode.Text = "";
+                    txtPayPeriod.Text = obj.ElementAt(0).ToString();
+                    txtPayDesc.Text = obj.ElementAt(1).ToString();
                     return;
                 }
                 else if (obj.ElementAt(0).ToString() == "")
                 {
-                    txtPayPeriod.Text = "0";
-                    txtParaCode.Text = "";
+                    txtPayPeriod.Text = "";
+                    txtPayDesc.Text = "";
                     return;
                 }
                 else
                 {
 
                     txtPayPeriod.Text = obj.ElementAt(0).ToString();
-
+                    txtPayDesc.Text = obj.ElementAt(1).ToString();
                    
                 }
             }
@@ -468,6 +470,11 @@ namespace ContractPayroll.Forms
             }               
             
             LoadGrid();
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

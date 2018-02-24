@@ -58,7 +58,8 @@
     <Reference Include="DevExpress.XtraEditors.v13.1, Version=13.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraGrid.v13.1, Version=13.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraLayout.v13.1, Version=13.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
-    <Reference Include="Help_F1F2">
+    <Reference Include="Help_F1F2, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Attendance\Help_F1F2.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -76,6 +77,18 @@
     <Compile Include="Classes\ClassGlobals.cs" />
     <Compile Include="Classes\Helper.cs" />
     <Compile Include="Classes\UNCAccessWithCredentials.cs" />
+    <Compile Include="Forms\frmBulkBasicChng.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmBulkBasicChng.designer.cs">
+      <DependentUpon>frmBulkBasicChng.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmBulkDed.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmBulkDed.designer.cs">
+      <DependentUpon>frmBulkDed.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmChangePass.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -93,6 +106,24 @@
     </Compile>
     <Compile Include="Forms\frmEmpMaster.Designer.cs">
       <DependentUpon>frmEmpMaster.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmMthlyCalc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmMthlyCalc.Designer.cs">
+      <DependentUpon>frmMthlyCalc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmMthlyAdj.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmMthlyAdj.Designer.cs">
+      <DependentUpon>frmMthlyAdj.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmMthlyAttdProcess.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmMthlyAttdProcess.Designer.cs">
+      <DependentUpon>frmMthlyAttdProcess.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmImportAttd.cs">
       <SubType>Form</SubType>
@@ -138,6 +169,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\frmBulkBasicChng.resx">
+      <DependentUpon>frmBulkBasicChng.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmBulkDed.resx">
+      <DependentUpon>frmBulkDed.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmChangePass.resx">
       <DependentUpon>frmChangePass.cs</DependentUpon>
     </EmbeddedResource>
@@ -146,6 +183,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmEmpMaster.resx">
       <DependentUpon>frmEmpMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmMthlyCalc.resx">
+      <DependentUpon>frmMthlyCalc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmMthlyAdj.resx">
+      <DependentUpon>frmMthlyAdj.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmMthlyAttdProcess.resx">
+      <DependentUpon>frmMthlyAttdProcess.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmImportAttd.resx">
       <DependentUpon>frmImportAttd.cs</DependentUpon>

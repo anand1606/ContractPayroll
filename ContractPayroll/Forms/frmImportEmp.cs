@@ -34,7 +34,7 @@ namespace ContractPayroll.Forms
             GRights = ContractPayroll.Classes.Globals.GetFormRights(this.Name);
 
             txtPayPeriod.Text = "";
-            txtParaDesc.Text = "";
+            txtPayDesc.Text = "";
             pBar.Minimum = 0;
             pBar.Value = 0;
             IsLocked = false;
@@ -89,7 +89,7 @@ namespace ContractPayroll.Forms
             }
             
             
-            if (string.IsNullOrEmpty(txtParaDesc.Text))
+            if (string.IsNullOrEmpty(txtPayDesc.Text))
             {
                 err = err + "Please Enter Description.." + Environment.NewLine;
                 return err;
@@ -120,7 +120,7 @@ namespace ContractPayroll.Forms
 
             if (!hasRows)
             {
-                MessageBox.Show("did not found payperiod...", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("payperiod is not created...", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -151,7 +151,7 @@ namespace ContractPayroll.Forms
 
             DataSet emplistds = Utils.Helper.GetData(sql, Utils.Helper.constr);
             hasRows = emplistds.Tables.Cast<DataTable>().Any(table => table.Rows.Count != 0);
-
+            pBar.Value = 0;
             if (!hasRows)
             {
                 MessageBox.Show("No Employee Found...", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -179,6 +179,53 @@ namespace ContractPayroll.Forms
                     return;
                 }
 
+                #region set_DefFlgs
+
+                string PFFlg = "0";
+                sql = "select isnull(Max(Convert(int,AppFlg)),0) FROM [Cont_ParaMast] " +
+                  " where ParaCode = 'PF' " +
+                  " and PayPeriod = '" + txtPayPeriod.Text.Trim() + "'" +
+                  " and AppFlg = 1";
+                
+                PFFlg = Utils.Helper.GetDescription(sql,Utils.Helper.constr);
+
+                string PTaxFlg = "0"; 
+                sql = "select isnull(Max(Convert(int,AppFlg)),0) FROM [Cont_ParaMast] " +
+                  " where ParaCode = 'PTAX' " +
+                  " and PayPeriod = '" + txtPayPeriod.Text.Trim() + "'" +
+                  " and AppFlg = 1";
+
+                PTaxFlg = Utils.Helper.GetDescription(sql, Utils.Helper.constr); 
+                
+                
+                string ESIFlg = "0";
+                sql = "select isnull(Max(Convert(int,AppFlg)),0) FROM [Cont_ParaMast] " +
+                  " where ParaCode = 'ESI' " +
+                  " and PayPeriod = '" + txtPayPeriod.Text.Trim() + "'" +
+                  " and AppFlg = 1";
+
+                ESIFlg = Utils.Helper.GetDescription(sql, Utils.Helper.constr); 
+
+
+                string LWFFlg = "0";
+                sql = "select isnull(Max(Convert(int,AppFlg)),0) FROM [Cont_ParaMast] " +
+                  " where ParaCode = 'LWF' " +
+                  " and PayPeriod = '" + txtPayPeriod.Text.Trim() + "'" +
+                  " and AppFlg = 1";
+
+                LWFFlg = Utils.Helper.GetDescription(sql, Utils.Helper.constr); 
+
+
+                string DeathFlg = "0";
+                sql = "select isnull(Max(Convert(int,AppFlg)),0) FROM [Cont_ParaMast] " +
+                  " where ParaCode = 'DEATH' " +
+                  " and PayPeriod = '" + txtPayPeriod.Text.Trim() + "'" +
+                  " and AppFlg = 1";
+
+                DeathFlg = Utils.Helper.GetDescription(sql, Utils.Helper.constr);
+
+
+                #endregion
 
                 foreach (DataRow dr in emplistds.Tables[0].Rows)
                 {
@@ -210,12 +257,12 @@ namespace ContractPayroll.Forms
                             " ESINo ='" + dr["ESINo"].ToString() + "'," +
                             " cBasic='" + dr["Basic"].ToString() + "'," + 
                             " PFNo ='" + 0 + "'," +
-                            " PFFlg = 1," +
-                            " PTaxFlg = 1," + 
-                            " DeathFlg = 1, " +
-                            " LWFFlg = 1, " + 
+                            " PFFlg = '" + PFFlg + "'," +
+                            " PTaxFlg = '" + PTaxFlg + "'," + 
+                            " DeathFlg = '" + DeathFlg + "', " +
+                            " LWFFlg = '" + LWFFlg + "', " + 
                             " Active = 1, " + 
-                            " ESIFlg = 1, " +
+                            " ESIFlg = '" + ESIFlg + "', " +
                             " UpdDt=GetDate() ," +
                             " UpdID ='" + Utils.User.GUserID + "' Where EmpUnqID ='" + dr["EmpUnqID"].ToString() + "' " +
                             " and PayPeriod ='" + txtPayPeriod.Text.Trim() + "'";
@@ -228,11 +275,13 @@ namespace ContractPayroll.Forms
                             try
                             {
                                 tr.Commit();
+                                tr.Dispose();
                             }
                             catch (Exception ex)
                             {
                                 MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 tr.Rollback();
+                                tr.Dispose();
                             }
 
                         }
@@ -247,7 +296,7 @@ namespace ContractPayroll.Forms
                         sql = "Insert into Cont_MastEmp (PayPeriod,EmpUnqID,EmpName,FatherName,BirthDt,JoinDt,Gender,UnitCode," +
                         " UnitDesc,DeptCode,DeptDesc,Statcode,StatDesc,CatCode,CatDesc,DesgCode,DesgDesc," +
                         " GradeCode,GradeDesc,ContCode,ContDesc,ESINo,cBasic,PFNo,PFFlg,PTaxFlg,DeathFlg," +
-                        " LWFFlg,Active,ESIFlg,AddDt,AddID ) values ('" + txtPayPeriod.Text.Trim() + "'," +
+                        " LWFFlg,ESIFlg,Active,AddDt,AddID ) values ('" + txtPayPeriod.Text.Trim() + "'," +
                         " '" + dr["EmpUnqID"].ToString() + "'," +
                         " '" + dr["EmpName"].ToString() + "'," +
                         " '" + dr["FatherName"].ToString() + "'," +
@@ -271,11 +320,11 @@ namespace ContractPayroll.Forms
                         " '" + dr["ESINo"].ToString() + "'," +
                         " '" + dr["Basic"].ToString() + "'," +
                         " '" + 0 + "'," +
-                        "  1," +
-                        "  1," +
-                        "  1, " +
-                        "  1, " +
-                        "  1, " +
+                        " '" + PFFlg + "'," +
+                        " '" + PTaxFlg + "'," +
+                        " '" + DeathFlg + "', " +
+                        " '" + LWFFlg + "', " +
+                        " '" + ESIFlg + "', " +
                         "  1, " +
                         " GetDate() ," +
                         " '" + Utils.User.GUserID + "')";
@@ -301,11 +350,13 @@ namespace ContractPayroll.Forms
                             try
                             {
                                 tr.Commit();
+                                tr.Dispose();
                             }
                             catch (Exception ex)
                             {
                                 MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 tr.Rollback();
+                                tr.Dispose();
                             }
 
                         }
@@ -340,14 +391,14 @@ namespace ContractPayroll.Forms
         private void LockCtrl()
         {
             txtPayPeriod.Enabled = false;
-            txtParaDesc.Enabled = false;
+            txtPayDesc.Enabled = false;
             btnImport.Enabled = false;
         }
 
         private void unLockCtrl()
         {
             txtPayPeriod.Enabled = true;
-            txtParaDesc.Enabled = true;
+            txtPayDesc.Enabled = true;
             btnImport.Enabled = true;
         }
 
@@ -373,25 +424,26 @@ namespace ContractPayroll.Forms
                 if (obj.Count == 0)
                 {
                     txtPayPeriod.Text = "";
-
+                    txtPayDesc.Text = "";
                     return;
                 }
                 else if (obj.ElementAt(0).ToString() == "0")
                 {
                     txtPayPeriod.Text = "";
+                    txtPayDesc.Text = "";
                     return;
                 }
                 else if (obj.ElementAt(0).ToString() == "")
                 {
-                    txtPayPeriod.Text = "0";
-
+                    txtPayPeriod.Text = "";
+                    txtPayDesc.Text = "";
                     return;
                 }
                 else
                 {
 
                     txtPayPeriod.Text = obj.ElementAt(0).ToString();
-
+                    txtPayDesc.Text = obj.ElementAt(1).ToString();
 
                 }
             }
@@ -410,7 +462,7 @@ namespace ContractPayroll.Forms
             {
                 foreach (DataRow dr in ds.Tables[0].Rows)
                 {
-                    txtParaDesc.Text = dr["PayDesc"].ToString();                       
+                    txtPayDesc.Text = dr["PayDesc"].ToString();                       
                     IsLocked = ((Convert.ToBoolean(dr["IsLocked"])) ? true : false);
                     btnImport.Enabled = true;
                     mode = "OLD";

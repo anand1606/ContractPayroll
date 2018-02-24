@@ -36,7 +36,7 @@ namespace ContractPayroll.Forms
                 return err;
             }
 
-            if (string.IsNullOrEmpty(txtParaDesc.Text))
+            if (string.IsNullOrEmpty(txtPayDesc.Text))
             {
                 err = err + "Please Enter Description.." + Environment.NewLine;
                 return err;
@@ -91,7 +91,7 @@ namespace ContractPayroll.Forms
                             "(PayPeriod,PayDesc,FromDt,ToDt,isLocked," +
                             " AddDt,AddID) Values ('{0}','{1}','{2:yyyy-MM-dd}','{3:yyyy-MM-dd}','{4}',GetDate(),'{5}') ";
 
-                        sql = string.Format(sql, txtPayPeriod.Text.Trim().ToString(), txtParaDesc.Text.Trim().ToString(),
+                        sql = string.Format(sql, txtPayPeriod.Text.Trim().ToString(), txtPayDesc.Text.Trim().ToString(),
                             txtFromDt.DateTime.Date, txtToDt.DateTime.Date,((chkLocked.Checked) ? "1" : "0"),
                             Utils.User.GUserID
                             );
@@ -101,8 +101,8 @@ namespace ContractPayroll.Forms
 
                         //insert default paraval records for payperiod
 
-                        sql = "Insert into Cont_ParaMast ([PayPeriod],[ParaCode],[ParaDesc],[RsPer],[PValue],[FSlab],[TSlab],[BCFLG],[AddDt],[AddID] ) " +
-                            " Select '" + txtPayPeriod.Text.Trim().ToString() + "',[ParaCode],[ParaDesc],[RsPer],[PValue],[FSlab],[TSlab],[BCFLG],GetDate()," +
+                        sql = "Insert into Cont_ParaMast ([PayPeriod],[ParaCode],[ParaDesc],[RsPer],[PValue],[FSlab],[TSlab],[BCFLG],[AppFlg],[AddDt],[AddID] ) " +
+                            " Select '" + txtPayPeriod.Text.Trim().ToString() + "',[ParaCode],[ParaDesc],[RsPer],[PValue],[FSlab],[TSlab],[BCFLG],[AppFlg],GetDate()," +
                             " '" + Utils.User.GUserID + "' From Cont_ParaMast where PayPeriod = 0 ";
                         cmd.CommandText = sql;
                         cmd.ExecuteNonQuery();
@@ -168,7 +168,7 @@ namespace ContractPayroll.Forms
 
                             cn.Open();
                             cmd.Connection = cn;
-                            string sql = "Update Cont_MastPayPeriod Set PayDesc = '" + txtParaDesc.Text.Trim() + "', FromDt ='" + txtFromDt.DateTime.Date.ToString("yyyy-MM-dd") + "', " +
+                            string sql = "Update Cont_MastPayPeriod Set PayDesc = '" + txtPayDesc.Text.Trim() + "', FromDt ='" + txtFromDt.DateTime.Date.ToString("yyyy-MM-dd") + "', " +
                                 " ToDate = '" + txtToDt.DateTime.Date.ToString("yyyy-MM-dd") + "', isLocked = '" + (chkLocked.Checked ? 1 : 0) + "',UpdDt = GetDate()," +
                                 " UpdID ='" + Utils.User.GUserID + "' where PayPeriod = '" + txtPayPeriod.Text.Trim() + "'";
 
@@ -354,7 +354,7 @@ namespace ContractPayroll.Forms
             GRights = ContractPayroll.Classes.Globals.GetFormRights(this.Name);
 
             txtPayPeriod.Text = "";
-            txtParaDesc.Text = "";
+            txtPayDesc.Text = "";
             txtFromDt.EditValue = null;
             txtToDt.EditValue = null;
             
@@ -410,7 +410,7 @@ namespace ContractPayroll.Forms
                 {
                     foreach (DataRow dr in ds.Tables[0].Rows)
                     {
-                        txtParaDesc.Text = dr["PayDesc"].ToString();
+                        txtPayDesc.Text = dr["PayDesc"].ToString();
                         txtFromDt.DateTime = Convert.ToDateTime(dr["FromDt"]).Date;
                         txtToDt.DateTime = Convert.ToDateTime(dr["ToDt"]).Date;
                         chkLocked.Checked = ((Convert.ToBoolean(dr["IsLocked"])) ? true : false);

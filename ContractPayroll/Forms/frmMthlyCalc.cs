@@ -332,7 +332,7 @@ namespace ContractPayroll.Forms
                                 " EmpUnqID = '" + dr["EmpUnqID"].ToString() + "' and PayPeriod = '" + dr["PayPeriod"].ToString() + "' and DedCode = 'MISC'";
                             OtherDed = Convert.ToDouble(Utils.Helper.GetDescription(sql, Utils.Helper.constr));
 
-                            Tot_Ded = LWF + PTax + Death + OtherDed + MessDed + ESI;
+                            Tot_Ded = PF + LWF + PTax + Death + OtherDed + MessDed + ESI;
                             NetPay = Tot_Earnning - Tot_Ded;
                             
                             #endregion

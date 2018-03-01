@@ -440,6 +440,20 @@ namespace ContractPayroll
         
         
         }
+
+        private void mnuRptMthlySalReg_Click(object sender, EventArgs e)
+        {
+
+            Form t = Application.OpenForms["frmReportsTemp"];
+            if (t == null)
+            {
+                frmReportsTemp m = new frmReportsTemp();
+                m.RptType = "SALREGDEF";
+                m.MdiParent = this;
+                m.Show();
+            }
+           
+        }
         
 
     }

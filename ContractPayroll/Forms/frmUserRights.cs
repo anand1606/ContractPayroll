@@ -30,7 +30,7 @@ namespace ContractPayroll.Forms
                 string sql = "";
 
 
-                sql = "Select UserID,UserName,Pass,Active From Cont_MastUser Where Active = 'Y'  ";
+                sql = "Select UserID,UserName,Pass,Active From Cont_MastUser Where Active = 1  ";
                 if (e.KeyCode == Keys.F1)
                 {                   
 
@@ -66,7 +66,7 @@ namespace ContractPayroll.Forms
                     txtUserID.Text = obj.ElementAt(0).ToString();
                     txtPersonName.Text = obj.ElementAt(1).ToString();
                     txtPassword.Text = obj.ElementAt(2).ToString();
-                    if (obj.ElementAt(3).ToString().Trim() == "Y")
+                    if (obj.ElementAt(3).ToString().Trim() == "1")
                     {
                         chkActive.Checked = true;
                     }else
@@ -149,7 +149,7 @@ namespace ContractPayroll.Forms
                     if (cnt > 0)
                     {
                         sql = "Update Cont_MastUser Set UserName = '" + txtPersonName.Text.Trim() + "', " +
-                            " Pass = '" + txtPassword.Text.Trim() + "', Active = '" + ((this.chkActive.Checked) ? "Y" : "N") + "', " +
+                            " Pass = '" + txtPassword.Text.Trim() + "', Active = '" + ((this.chkActive.Checked) ? 1 : 0) + "', " +
                             " IsAdmin ='" + ((this.chkSuperUser.Checked) ? "1" :"0") + "'," +
                             " UpdDt = GetDate(), UpdID = '" + Utils.User.GUserID + "' " +
                             " Where UserID = '" + txtUserID.Text.Trim() + "'";
@@ -162,7 +162,7 @@ namespace ContractPayroll.Forms
                     {
                         sql = "Insert into Cont_MastUser (UserID,UserName,Pass,Active,IsAdmin,AddDt,AddId) values (" +
                             " '" + txtUserID.Text.Trim() + "','" + txtPersonName.Text.Trim() + "','" + txtPassword.Text.Trim() + "'," +
-                            " '" + ((this.chkActive.Checked) ? "Y" : "N") + "', '" + " IsAdmin ='" + ((this.chkSuperUser.Checked) ? "1" :"0") + "',GetDate() ,'" + Utils.User.GUserID + "') ";
+                            " '" + ((this.chkActive.Checked) ? "1" : "0") + "', '" + " IsAdmin ='" + ((this.chkSuperUser.Checked) ? "1" :"0") + "',GetDate() ,'" + Utils.User.GUserID + "') ";
                         
                         cmd = new SqlCommand(sql, cn);
                         cmd.ExecuteNonQuery();
@@ -329,7 +329,7 @@ namespace ContractPayroll.Forms
                     txtUserID.Text = dr["UserID"].ToString();
                     txtPersonName.Text = dr["UserName"].ToString();
                     txtPassword.Text = dr["Pass"].ToString();
-                    if (dr["Active"].ToString() == "Y")
+                    if (Convert.ToBoolean(dr["Active"]))
                     {
                         chkActive.CheckState = CheckState.Checked;
                         

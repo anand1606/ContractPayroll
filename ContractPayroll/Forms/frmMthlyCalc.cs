@@ -35,7 +35,7 @@ namespace ContractPayroll.Forms
 
             txtPayPeriod.Properties.ReadOnly = true;
             GRights = ContractPayroll.Classes.Globals.GetFormRights(this.Name);
-
+            txtEmpUnqID.Text = "";
             txtPayPeriod.Text = "";
             txtPayDesc.Text = "";
             pBar.Minimum = 0;
@@ -150,8 +150,20 @@ namespace ContractPayroll.Forms
                 return;
             }
             
-            string sql = "Select a.*,b.LWFFlg,b.DeathFlg,b.PTaxFlg,b.ESIFlg From Cont_MthlyAtn a,Cont_MastEmp b where a.PayPeriod = b.PayPeriod and a.EmpUnqID = b.EmpUnqID and a.PayPeriod ='" + txtPayPeriod.Text.Trim() + "'";
+            string sql = string.Empty;
 
+            if(string.IsNullOrEmpty(txtEmpUnqID.Text.Trim()))
+            {
+                sql = "Select a.*,b.LWFFlg,b.DeathFlg,b.PTaxFlg,b.ESIFlg From Cont_MthlyAtn a,Cont_MastEmp b where a.PayPeriod = b.PayPeriod and a.EmpUnqID = b.EmpUnqID and a.PayPeriod ='" + txtPayPeriod.Text.Trim() + "'";
+
+            }
+            else
+            {
+                 sql = "Select a.*,b.LWFFlg,b.DeathFlg,b.PTaxFlg,b.ESIFlg From Cont_MthlyAtn a,Cont_MastEmp b where a.PayPeriod = b.PayPeriod and a.EmpUnqID = b.EmpUnqID and a.PayPeriod ='" + txtPayPeriod.Text.Trim() + "' and a.EmpUnqID = '" + txtEmpUnqID.Text.Trim() + "'";
+
+            }
+                
+               
             DataSet emplistds = Utils.Helper.GetData(sql, Utils.Helper.constr);
             hasRows = emplistds.Tables.Cast<DataTable>().Any(table => table.Rows.Count != 0);
             pBar.Value = 0;
@@ -215,6 +227,7 @@ namespace ContractPayroll.Forms
 
                     sql = " SELECT [PayPeriod] " +
                           " ,[EmpUnqID] " +
+                          " ,Max([CostCode]) as CostCode " +
                           " ,sum([Adj_TpaHrs]) as Adj_TpaHrs " +
                           " ,sum([Adj_TpaAmt]) as Adj_TpaAmt " +
                           " ,sum([Adj_DaysPay]) as Adj_DaysPay " +
@@ -239,6 +252,8 @@ namespace ContractPayroll.Forms
                           " ,sum([Tot_CoCommAmt]) as Tot_CoComm " +
                           " ,sum([Cal_CoServTaxAmt]) as Tot_CoServTax " +
                           " ,sum([Cal_CoEduTaxAmt]) as Tot_CoEduTax " + 
+                          " ,Sum([Cal_CoServTax25Amt]) as Tot_CoServTax25 " +
+                          " ,Sum([Cal_CoEduTax25Amt]) as Tot_CoEduTax25 " +
                           " FROM [Cont_MthlyAtn]  " +
                           " group by PayPeriod,EmpUnqID " +
                           " having PayPeriod = '" + dr["PayPeriod"].ToString() + "' " +
@@ -259,21 +274,54 @@ namespace ContractPayroll.Forms
                             double OtherDed = 0;
                             double MessDed = 0;
                             double PTax = 0;
-                            double Tot_Earnning = 0;
-                            double Tot_EarnedBasic = 0;
-                            double PF = 0;
-                            double NetPay = 0;
                             double Tot_Ded = 0;
 
-                            PF = Convert.ToDouble(mdr["Ded_PF"]);
-                            Tot_EarnedBasic = Convert.ToDouble(mdr["Tot_EarnBasic"]);
-                            Tot_Earnning = Convert.ToDouble(mdr["Tot_Earnings"]);
-                           
+                            double Tot_EarnedBasic = 0;
+                            double actTot_EarnedBasic = 0;
+                            double RoundoffTot_EarnedBasic = 0;
+
+                            double NetPay = 0;
+                            double actNetPay = 0;
+                            double roundoffNetPay = 0;                            
+
+                            double PF = 0;
+                            double actPF = 0;
+                            double roundoffPF = 0;                            
                             
+                            double OTAmt = 0;
+                            double actOTAmt = 0;
+                            double roundoffOTAmt = 0;
+
+                            double Tot_Earnning = 0;
+                            double actTot_Earnings = 0;
+                            double RoundoffTot_Earnings = 0;
+
+
+                            actTot_EarnedBasic =  Convert.ToDouble(mdr["Tot_EarnBasic"]);
+                            Tot_EarnedBasic = Math.Round(actTot_EarnedBasic, MidpointRounding.AwayFromZero);
+                            RoundoffTot_EarnedBasic = Tot_EarnedBasic - actTot_EarnedBasic ;
+
+
+                            actOTAmt = Convert.ToDouble(mdr["Tot_TpaAmt"]);
+                            OTAmt = Math.Round(actOTAmt, MidpointRounding.AwayFromZero);
+                            roundoffOTAmt =  OTAmt - actOTAmt;
+
+
+                            actPF = Convert.ToDouble(mdr["Ded_PF"]);
+                            PF = Math.Round(actPF, MidpointRounding.AwayFromZero);
+                            roundoffPF =  PF - actPF ;
+
+                            
+                            //Tot_Earnning = Convert.ToDouble(mdr["Tot_Earnings"]);
+                            actTot_Earnings = Tot_EarnedBasic + OTAmt;
+                            Tot_Earnning = Math.Round(actTot_Earnings, MidpointRounding.AwayFromZero);
+                            RoundoffTot_Earnings = Tot_Earnning - actTot_Earnings;
+
+
                             if (Tot_EarnedBasic > 0 )
                             {
                                 sql = "select isnull(Max(PValue),0) FROM [Cont_ParaMast] " +
-                                     " where '" + Tot_Earnning + "' between FSlab and TSlab " +
+                                     " where '" + Tot_EarnedBasic + "' between FSlab and TSlab " +
                                      " and ParaCode = 'PTAX'" +
                                      " and PayPeriod = '" + dr["PayPeriod"].ToString() + "'" +
                                      " and AppFlg = 1";
@@ -333,22 +381,27 @@ namespace ContractPayroll.Forms
                             OtherDed = Convert.ToDouble(Utils.Helper.GetDescription(sql, Utils.Helper.constr));
 
                             Tot_Ded = PF + LWF + PTax + Death + OtherDed + MessDed + ESI;
-                            NetPay = Tot_Earnning - Tot_Ded;
                             
+                            actNetPay = Tot_EarnedBasic - Tot_Ded;
+                            NetPay = Math.Round(actNetPay, MidpointRounding.AwayFromZero);
+                            roundoffNetPay = NetPay - actNetPay;
+
+
                             #endregion
 
                             string delsql = "Delete from Cont_MthlyPay Where PayPeriod = '" + dr["PayPeriod"].ToString() + "' And EmpUnqID = '" + dr["EmpUnqID"].ToString() + "'";
                             SqlCommand cmd = new SqlCommand(delsql, cn, tr);
                             cmd.ExecuteNonQuery();
 
-                            sql = "Insert into Cont_MthlyPay (PayPeriod,EmpUnqID," +
+                            sql = "Insert into Cont_MthlyPay (PayPeriod,EmpUnqID,CostCode," +
                                 " Adj_TPAHrs,Adj_TPAAmt,Adj_DaysPay,Adj_DaysPayAmt,Adj_Amt, " +
                                 " Cal_Basic,Cal_DaysPay,Cal_WODays,Cal_TpaHrs,Cal_TpaAmt,Tot_DaysPay, " +
-                                " Tot_EarnBasic,Tot_TpaHrs,Tot_TpaAmt,Tot_Earnings,Ded_PF,Cal_EPF,Cal_EPS," +
-                                " Ded_ESI,Ded_LWF,Ded_DeathFund,Ded_Other,Ded_Mess,Ded_PTax,Tot_Ded,NetPay," +
-                                " Tot_CoCommDays,Tot_CoCommAmt,Tot_CoCommPFAmt,Tot_CoComm,Tot_CoServTax,Tot_CoEduTax,AddDt,AddID) Values (" +
+                                " Tot_EarnBasic,Tot_EarnBasicRoundOff,Tot_TpaHrs,Tot_TpaAmt,Tot_TpaRoundoff,Tot_Earnings,Tot_EarningsRoundoff,Ded_PF,Ded_PF_Roundoff,Cal_EPF,Cal_EPS," +
+                                " Ded_ESI,Ded_LWF,Ded_DeathFund,Ded_Other,Ded_Mess,Ded_PTax,Tot_Ded,NetPay,NetPay_RoundOff," +
+                                " Tot_CoCommDays,Tot_CoCommAmt,Tot_CoCommPFAmt,Tot_CoComm,Tot_CoServTax,Tot_CoEduTax,Tot_CoServTax25,Tot_CoEduTax25,AddDt,AddID) Values (" +
                                 "'" + mdr["PayPeriod"].ToString() + "'," +
                                 "'" + mdr["EmpUnqID"].ToString() + "'," +
+                                "'" + mdr["CostCode"].ToString() + "'," +
                                 "'" + mdr["Adj_TPAHrs"].ToString() + "'," +
                                 "'" + mdr["Adj_TPAAmt"].ToString() + "'," +
                                 "'" + mdr["Adj_DaysPay"].ToString() + "'," +
@@ -360,11 +413,15 @@ namespace ContractPayroll.Forms
                                 "'" + mdr["Cal_TpaHrs"].ToString() + "'," +
                                 "'" + mdr["Cal_TpaAmt"].ToString() + "'," +
                                 "'" + mdr["Tot_DaysPay"].ToString() + "'," +
-                                "'" + mdr["Tot_EarnBasic"].ToString() + "'," +
+                                "'" + Tot_EarnedBasic.ToString() + "'," +
+                                "'" + RoundoffTot_EarnedBasic.ToString() + "'," +
                                 "'" + mdr["Tot_TpaHrs"].ToString() + "'," +
-                                "'" + mdr["Tot_TpaAmt"].ToString() + "'," +
-                                "'" + mdr["Tot_Earnings"].ToString() + "'," +
-                                "'" + mdr["Ded_PF"].ToString() + "'," +
+                                "'" + OTAmt.ToString() + "'," +
+                                "'" + roundoffOTAmt.ToString() + "'," +
+                                "'" + Tot_Earnning.ToString() + "'," +
+                                "'" + RoundoffTot_Earnings.ToString() + "'," +
+                                "'" + PF.ToString() + "'," +
+                                "'" + roundoffPF.ToString() + "'," +
                                 "'" + mdr["Cal_EPF"].ToString() + "'," +
                                 "'" + mdr["Cal_EPS"].ToString() + "'," +
                                 "'" + ESI.ToString() + "'," +
@@ -375,12 +432,15 @@ namespace ContractPayroll.Forms
                                 "'" + PTax.ToString() + "'," +
                                 "'" + Tot_Ded.ToString() + "'," +
                                 "'" + NetPay.ToString() + "'," +
+                                "'" + roundoffNetPay.ToString() + "'," +
                                 "'" + mdr["Tot_CoCommDays"].ToString() + "'," +
                                 "'" + mdr["Tot_CoCommAmt"].ToString() + "'," +
                                 "'" + mdr["Tot_CoCommPFAmt"].ToString() + "'," +
                                 "'" + mdr["Tot_CoComm"].ToString() + "'," +
                                 "'" + mdr["Tot_CoServTax"].ToString() + "'," +
-                                "'" + mdr["Tot_CoEduTax"].ToString() + "',GetDate(),'" + Utils.User.GUserID + "')";
+                                "'" + mdr["Tot_CoEduTax"].ToString() + "', " +
+                                "'" + mdr["Tot_CoServTax25"].ToString() + "', " +
+                                "'" + mdr["Tot_CoEduTax25"].ToString() + "', GetDate(),'" + Utils.User.GUserID + "')";
 
                             cmd = new SqlCommand(sql, cn, tr);
                             cmd.ExecuteNonQuery();
@@ -429,6 +489,8 @@ namespace ContractPayroll.Forms
             txtPayDesc.Enabled = false;
             btnProcess.Enabled = false;
             grd_view.Enabled = false;
+            txtEmpUnqID.Enabled = false;
+
         }
 
         private void unLockCtrl()
@@ -437,6 +499,7 @@ namespace ContractPayroll.Forms
             txtPayDesc.Enabled = true;
             btnProcess.Enabled = true;
             grd_view.Enabled = true;
+            txtEmpUnqID.Enabled = true;
         }
 
         private void txtPayPeriod_KeyDown(object sender, KeyEventArgs e)

@@ -49,7 +49,7 @@
             // 
             this.btnRun.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRun.Location = new System.Drawing.Point(111, 136);
-            this.btnRun.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnRun.Margin = new System.Windows.Forms.Padding(4);
             this.btnRun.Name = "btnRun";
             this.btnRun.Size = new System.Drawing.Size(317, 52);
             this.btnRun.TabIndex = 4;
@@ -70,7 +70,7 @@
             // txtPayPeriod
             // 
             this.txtPayPeriod.Location = new System.Drawing.Point(109, 15);
-            this.txtPayPeriod.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPayPeriod.Margin = new System.Windows.Forms.Padding(4);
             this.txtPayPeriod.Name = "txtPayPeriod";
             this.txtPayPeriod.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPayPeriod.Properties.Appearance.Options.UseFont = true;
@@ -83,7 +83,7 @@
             // txtPayDesc
             // 
             this.txtPayDesc.Location = new System.Drawing.Point(109, 49);
-            this.txtPayDesc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtPayDesc.Margin = new System.Windows.Forms.Padding(4);
             this.txtPayDesc.Name = "txtPayDesc";
             this.txtPayDesc.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPayDesc.Properties.Appearance.Options.UseFont = true;
@@ -93,7 +93,6 @@
             this.txtPayDesc.Properties.ReadOnly = true;
             this.txtPayDesc.Size = new System.Drawing.Size(379, 22);
             this.txtPayDesc.TabIndex = 1;
-            this.txtPayDesc.TabStop = false;
             // 
             // label1
             // 
@@ -129,7 +128,7 @@
             // 
             this.txtToDt.EditValue = null;
             this.txtToDt.Location = new System.Drawing.Point(355, 86);
-            this.txtToDt.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtToDt.Margin = new System.Windows.Forms.Padding(4);
             this.txtToDt.Name = "txtToDt";
             this.txtToDt.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 10F);
             this.txtToDt.Properties.Appearance.Options.UseFont = true;
@@ -148,7 +147,7 @@
             // 
             this.txtFromDt.EditValue = null;
             this.txtFromDt.Location = new System.Drawing.Point(111, 86);
-            this.txtFromDt.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtFromDt.Margin = new System.Windows.Forms.Padding(4);
             this.txtFromDt.Name = "txtFromDt";
             this.txtFromDt.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 10F);
             this.txtFromDt.Properties.Appearance.Options.UseFont = true;
@@ -178,7 +177,7 @@
             this.Controls.Add(this.txtPayPeriod);
             this.Controls.Add(this.txtPayDesc);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmReportsTemp";
             this.Text = "Report Viewer";
             this.Load += new System.EventHandler(this.frmReportsTemp_Load);

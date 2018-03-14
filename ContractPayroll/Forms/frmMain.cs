@@ -454,6 +454,29 @@ namespace ContractPayroll
             }
            
         }
+
+        private void mnuRptOthers_Click(object sender, EventArgs e)
+        {
+            Form t = Application.OpenForms["frmReports"];
+            if (t == null)
+            {
+                frmReports m = new frmReports();
+                m.MdiParent = this;
+                m.Show();
+            }
+        }
+
+        private void mnuRptMthlyTPAReg_Click(object sender, EventArgs e)
+        {
+            Form t = Application.OpenForms["frmReportsTemp"];
+            if (t == null)
+            {
+                frmReportsTemp m = new frmReportsTemp();
+                m.RptType = "TPAREGDEF";
+                m.MdiParent = this;
+                m.Show();
+            }
+        }
         
 
     }

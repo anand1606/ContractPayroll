@@ -38,6 +38,7 @@ namespace ContractPayroll.Forms
 
             txtPayPeriod.Text = "";
             txtPayDesc.Text = "";
+            txtEmpUnqID.Text = "";
             pBar.Minimum = 0;
             pBar.Value = 0;
             IsLocked = false;
@@ -146,10 +147,22 @@ namespace ContractPayroll.Forms
                 MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            
-            string sql = "Select *,b.PFFlg From Cont_MthlyAtn a, Cont_MastEmp b " +
-                " where a.PayPeriod = b.PayPeriod and a.EmpUnqID = b.EmpUnqID " +
-                " And a.PayPeriod ='" + txtPayPeriod.Text.Trim() + "'";
+
+            string sql = string.Empty;
+
+            if (string.IsNullOrEmpty(txtEmpUnqID.Text.Trim()))
+            {
+
+                 sql = "Select *,b.PFFlg From Cont_MthlyAtn a, Cont_MastEmp b " +
+                        " where a.PayPeriod = b.PayPeriod and a.EmpUnqID = b.EmpUnqID " +
+                        " And a.PayPeriod ='" + txtPayPeriod.Text.Trim() + "'";
+            }
+            else
+            {
+                sql = "Select *,b.PFFlg From Cont_MthlyAtn a, Cont_MastEmp b " +
+                        " where a.PayPeriod = b.PayPeriod and a.EmpUnqID = b.EmpUnqID " +
+                        " And a.PayPeriod ='" + txtPayPeriod.Text.Trim() + "' and a.EmpUnqID ='" + txtEmpUnqID.Text.Trim() + "'";
+            }
 
             DataSet emplistds = Utils.Helper.GetData(sql, Utils.Helper.constr);
             hasRows = emplistds.Tables.Cast<DataTable>().Any(table => table.Rows.Count != 0);
@@ -194,7 +207,8 @@ namespace ContractPayroll.Forms
                 double CoPFRate = 0;
                 double CoEduRate = 0;
                 double CoServTaxRate = 0;
-
+                double CoServAddTaxRate = 0;
+                double CoEduAddRate = 0;
                 try{
                     /*
                      EPF       
@@ -209,7 +223,8 @@ namespace ContractPayroll.Forms
                     CoPFRate = Convert.ToDouble(((from t in para where (t.Field<string>("ParaCode") == "COPFRATE" && t.Field<bool>("AppFlg") == true) select t).First())["PValue"]);
                     CoEduRate = Convert.ToDouble(((from t in para where (t.Field<string>("ParaCode") == "COEDUTAX" && t.Field<bool>("AppFlg") == true)  select t).First())["PValue"]);
                     CoServTaxRate = Convert.ToDouble(((from t in para where (t.Field<string>("ParaCode") == "COSERVTAX" && t.Field<bool>("AppFlg") == true) select t).First())["PValue"]);
-
+                    CoServAddTaxRate = Convert.ToDouble(((from t in para where (t.Field<string>("ParaCode") == "COSERV25TAX" && t.Field<bool>("AppFlg") == true) select t).First())["PValue"]);
+                    CoEduAddRate = Convert.ToDouble(((from t in para where (t.Field<string>("ParaCode") == "COEDU25TAX" && t.Field<bool>("AppFlg") == true) select t).First())["PValue"]);
 
 
                 }catch(Exception ex){
@@ -224,6 +239,7 @@ namespace ContractPayroll.Forms
                     sql = " SELECT [PayPeriod] " +
                           " ,[EmpUnqID] " +
                           " ,[SrNo] " +
+                          " , Max(CostCode) as CostCode" +
                           " ,sum([TpaHrs]) as Cal_TpaHrs " +
                           " ,sum([TpaAmt]) as Cal_TpaAmt " +
                           " ,sum([DaysPay]) as Cal_DaysPay " +
@@ -275,7 +291,7 @@ namespace ContractPayroll.Forms
                                 double Tot_DaysPay = Cal_DaysPay + Adj_AdjDays ;
                                 double Tot_CoCommDays = Cal_CoCommDays + Adj_CoCommDays + Cal_CoWoCommDays;
                                 double Cal_CoCommPFAmt = ((Tot_EarnBasic) * CoPFRate/100);
-                                double Tot_CoCommAmt = Cal_CoCommAmt + Cal_CoCommWoAmt + Adj_CoCommAmt + Cal_CoCommPFAmt;
+                                double Tot_CoCommAmt = Cal_CoCommAmt + Cal_CoCommWoAmt + Adj_CoCommAmt + Cal_CoCommPFAmt + Tot_EarnBasic + Tot_TpaAmt;
 
                                 double Tot_Earning = Tot_EarnBasic  + Tot_TpaAmt;
                                 double Cal_PF =0;
@@ -289,6 +305,8 @@ namespace ContractPayroll.Forms
                                     Cal_EPF = ((Tot_EarnBasic) * EPFRate / 100);
                                     Cal_EPS = ((Tot_EarnBasic) * EPSRate / 100);
 
+
+
                                     if (Cal_EPS > 541)
                                     {
                                         Cal_EPF = Cal_EPF + (Cal_EPS - 541);
@@ -298,12 +316,15 @@ namespace ContractPayroll.Forms
                                 
                                 
                                 double Cal_CoServTaxAmt = ((Tot_CoCommAmt) * CoServTaxRate/100) ;
-                                double Cal_CoEduTaxAmt =  ((Tot_CoCommAmt) * CoEduRate/100) ;
-
+                                double Cal_CoEduTaxAmt = ((Cal_CoServTaxAmt) * CoEduRate / 100);
+                                double Cal_CoServAddTaxAmt = ((Cal_CoServTaxAmt) * CoServAddTaxRate / 100);
+                                double Cal_CoEduAddTaxAmt = ((Cal_CoEduTaxAmt) * CoEduAddRate / 100);
+                                
                                 
 
                                 sql = "Update Cont_MthlyAtn Set " +
-                                    " Cal_Basic = '" + Cal_Basic.ToString() + "'" +
+                                    " CostCode = '" + adr["CostCode"].ToString() + "'" +
+                                    " ,Cal_Basic = '" + Cal_Basic.ToString() + "'" +
                                     " ,Cal_DaysPay = '" + Cal_DaysPay.ToString() + "'" +
                                     " ,Cal_WODays = '" + Cal_WoDays.ToString() + "'" +
                                     " ,Cal_TpaHrs = '" + Cal_TpaHrs.ToString() + "'" +
@@ -328,6 +349,8 @@ namespace ContractPayroll.Forms
                                     " ,Cal_CoCommPFAmt = '" + Cal_CoCommPFAmt.ToString() + "'" +
                                     " ,Cal_CoServTaxAmt = '" + Cal_CoServTaxAmt.ToString() + "'" +
                                     " ,Cal_CoEduTaxAmt = '" + Cal_CoEduTaxAmt.ToString() + "'" +
+                                    " ,Cal_CoServTax25Amt ='" + Cal_CoServAddTaxAmt.ToString() + "'" +
+                                    " ,Cal_CoEduTax25Amt = '" + Cal_CoEduAddTaxAmt.ToString() + "'" +
                                     " ,UpdDT = GetDate() " +
                                     " ,UpdID = '" + Utils.User.GUserID + "' " +
                                     " Where PayPeriod ='" + dr["PayPeriod"].ToString() + "' " +
@@ -370,6 +393,7 @@ namespace ContractPayroll.Forms
             txtPayPeriod.Enabled = false;
             txtPayDesc.Enabled = false;
             btnProcess.Enabled = false;
+            txtEmpUnqID.Enabled = false;
         }
 
         private void unLockCtrl()
@@ -377,6 +401,7 @@ namespace ContractPayroll.Forms
             txtPayPeriod.Enabled = true;
             txtPayDesc.Enabled = true;
             btnProcess.Enabled = true;
+            txtEmpUnqID.Enabled = true;
         }
 
         private void txtPayPeriod_KeyDown(object sender, KeyEventArgs e)

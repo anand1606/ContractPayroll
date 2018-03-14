@@ -145,8 +145,21 @@ namespace ContractPayroll.Forms
                 MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            
-            string sql = "Select * From Cont_MastEmp where Active = 1 and PayPeriod ='" + txtPayPeriod.Text.Trim() + "'";
+
+            string sql = string.Empty;
+
+            if (string.IsNullOrEmpty(txtEmpUnqID.Text.Trim()))
+            {
+                sql = "Select * From Cont_MastEmp where Active = 1 and PayPeriod ='" + txtPayPeriod.Text.Trim() + "'";
+            }
+            else
+            {
+                sql = "Select * From Cont_MastEmp where Active = 1 and PayPeriod ='" + txtPayPeriod.Text.Trim() + "' and EmpUnqID = '" + txtEmpUnqID.Text.Trim() + "'";
+               
+            }
+
+
+          
 
             DataSet emplistds = Utils.Helper.GetData(sql, Utils.Helper.constr);
             hasRows = emplistds.Tables.Cast<DataTable>().Any(table => table.Rows.Count != 0);
@@ -289,6 +302,8 @@ namespace ContractPayroll.Forms
                                 TpaHrs = 0;
                             }
 
+                            if (TpaHrs > 0)
+                                TpaHrs = Math.Truncate(TpaHrs);
                             
                             sql = "select srno,cBasic from [Cont_MastBasic] " +
                                     " where PayPeriod = '" + pPay.ToString() + "' and EmpUnqID = '" + adr["EmpUnqID"].ToString() + "' " +
@@ -360,7 +375,7 @@ namespace ContractPayroll.Forms
                                 else
                                 {
                                     sql = "Update Cont_MthlyAtn Set  " +
-                                        " ,Cal_Basic = 0 " +
+                                        " Cal_Basic = 0 " +
                                         " ,Cal_DaysPay = 0 " +
                                         " ,Cal_WODays = 0 " +
                                         " ,Cal_TpaHrs = 0 " +

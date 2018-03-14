@@ -40,18 +40,21 @@
             this.DedCode = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Amount = new DevExpress.XtraGrid.Columns.GridColumn();
             this.OptionalDed = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtEmpUnqID = new DevExpress.XtraEditors.TextEdit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPayPeriod.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPayDesc.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
             this.groupControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grd_view)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grd_view1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtEmpUnqID.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(5, 13);
+            this.label3.Location = new System.Drawing.Point(10, 15);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(69, 15);
             this.label3.TabIndex = 54;
@@ -106,9 +109,9 @@
             this.groupControl2.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupControl2.Appearance.Options.UseFont = true;
             this.groupControl2.Controls.Add(this.grd_view);
-            this.groupControl2.Location = new System.Drawing.Point(8, 40);
+            this.groupControl2.Location = new System.Drawing.Point(8, 74);
             this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(595, 191);
+            this.groupControl2.Size = new System.Drawing.Size(595, 157);
             this.groupControl2.TabIndex = 57;
             this.groupControl2.Text = "Other Deduction Options";
             // 
@@ -118,7 +121,7 @@
             this.grd_view.Location = new System.Drawing.Point(2, 21);
             this.grd_view.MainView = this.grd_view1;
             this.grd_view.Name = "grd_view";
-            this.grd_view.Size = new System.Drawing.Size(591, 168);
+            this.grd_view.Size = new System.Drawing.Size(591, 134);
             this.grd_view.TabIndex = 2;
             this.grd_view.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grd_view1});
@@ -197,11 +200,32 @@
             this.OptionalDed.VisibleIndex = 3;
             this.OptionalDed.Width = 392;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(5, 43);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(74, 15);
+            this.label1.TabIndex = 67;
+            this.label1.Text = "EmpUnqID :";
+            // 
+            // txtEmpUnqID
+            // 
+            this.txtEmpUnqID.Location = new System.Drawing.Point(80, 40);
+            this.txtEmpUnqID.Name = "txtEmpUnqID";
+            this.txtEmpUnqID.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtEmpUnqID.Properties.Appearance.Options.UseFont = true;
+            this.txtEmpUnqID.Properties.MaxLength = 10;
+            this.txtEmpUnqID.Size = new System.Drawing.Size(88, 22);
+            this.txtEmpUnqID.TabIndex = 66;
+            // 
             // frmMthlyCalc
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(624, 332);
+            this.ClientSize = new System.Drawing.Size(624, 389);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.txtEmpUnqID);
             this.Controls.Add(this.groupControl2);
             this.Controls.Add(this.pBar);
             this.Controls.Add(this.btnProcess);
@@ -218,6 +242,7 @@
             this.groupControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grd_view)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grd_view1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtEmpUnqID.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -237,5 +262,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn DedCode;
         private DevExpress.XtraGrid.Columns.GridColumn Amount;
         private DevExpress.XtraGrid.Columns.GridColumn OptionalDed;
+        private System.Windows.Forms.Label label1;
+        private DevExpress.XtraEditors.TextEdit txtEmpUnqID;
     }
 }

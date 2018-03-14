@@ -32,7 +32,7 @@ namespace ContractPayroll.Forms
 
             txtPayPeriod.Properties.ReadOnly = true;
             GRights = ContractPayroll.Classes.Globals.GetFormRights(this.Name);
-
+            txtEmpUnqID.Text = "";
             txtPayPeriod.Text = "";
             txtPayDesc.Text = "";
             pBar.Minimum = 0;
@@ -115,6 +115,7 @@ namespace ContractPayroll.Forms
             DateTime pFromDt ;
             DateTime pToDt;
 
+
             DataSet payds = Utils.Helper.GetData("Select * from Cont_MastPayPeriod where PayPeriod ='" + txtPayPeriod.Text.Trim() + "'",Utils.Helper.constr);
             bool hasRows = payds.Tables.Cast<DataTable>().Any(table => table.Rows.Count != 0);
 
@@ -146,8 +147,16 @@ namespace ContractPayroll.Forms
                 MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            string sql = string.Empty;
+
+            if(string.IsNullOrEmpty(txtEmpUnqID.Text.Trim()))
+            {
+                sql = "Select * From v_EmpMast where Active = 1 and CompCode = '01' and WrkGrp = 'Cont' and Basic > 0 ";
+            }else{
+                sql = "Select * from v_EmpMast Where EmpUnqID ='" + txtEmpUnqID.Text.Trim() + "' and WrkGrp = 'Cont' and CompCode = '01'";
+            }
+
             
-            string sql = "Select * From v_EmpMast where Active = 1 and CompCode = '01' and WrkGrp = 'Cont'";
 
             DataSet emplistds = Utils.Helper.GetData(sql, Utils.Helper.constr);
             hasRows = emplistds.Tables.Cast<DataTable>().Any(table => table.Rows.Count != 0);
@@ -393,6 +402,7 @@ namespace ContractPayroll.Forms
             txtPayPeriod.Enabled = false;
             txtPayDesc.Enabled = false;
             btnImport.Enabled = false;
+            txtEmpUnqID.Enabled = false;
         }
 
         private void unLockCtrl()
@@ -400,6 +410,7 @@ namespace ContractPayroll.Forms
             txtPayPeriod.Enabled = true;
             txtPayDesc.Enabled = true;
             btnImport.Enabled = true;
+            txtEmpUnqID.Enabled = true;
         }
 
         private void txtPayPeriod_KeyDown(object sender, KeyEventArgs e)

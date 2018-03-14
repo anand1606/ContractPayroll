@@ -60,7 +60,38 @@ namespace ContractPayroll.Forms
                     report.ShowPreviewDialog();
                 }
             }
-            
+            else if  (RptType == "TPAREGDEF")
+            {
+                int tPay = 0;
+
+                if (!int.TryParse(txtPayPeriod.Text.Trim(), out tPay))
+                {
+                    return;
+                }
+                else
+                {
+                    if (tPay <= 0)
+                    {
+                        return;
+                    }
+                }
+
+                var HeaderTBL = new Reports.DS_rptMthlySalReg.DtMthlySalDataTable();
+                var HeaderTa = new Reports.DS_rptMthlySalRegTableAdapters.DtMthlySalTableAdapter();
+                HeaderTa.Connection.ConnectionString = Utils.Helper.constr;
+                HeaderTBL = HeaderTa.GetData(tPay);
+
+                DataSet Ds = new DataSet();
+                Ds.Tables.Add(HeaderTBL);
+
+                bool hasRows = Ds.Tables.Cast<DataTable>().Any(table => table.Rows.Count != 0);
+                if (hasRows)
+                {
+                    DevExpress.XtraReports.UI.XtraReport report = new Reports.rptMthlyTPAReg();
+                    report.DataSource = Ds;
+                    report.ShowPreviewDialog();
+                }
+            }
             
         }
 
@@ -73,7 +104,15 @@ namespace ContractPayroll.Forms
             EventArgs e = new EventArgs();
 
             txtPayPeriod.Properties.ReadOnly = true;
-            GRights = ContractPayroll.Classes.Globals.GetFormRights(this.Name);
+
+            if (RptType == "SALREGDEF")
+            {
+                GRights = ContractPayroll.Classes.Globals.GetFormRights("frmReportsSalReg");
+            }
+            else if (RptType == "TPAREGDEF")
+            {
+                GRights = ContractPayroll.Classes.Globals.GetFormRights("frmReportsTpaReg");
+            }
             mode = "NEW";
 
             txtPayPeriod.Text = "";

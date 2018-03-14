@@ -509,8 +509,8 @@ namespace ContractPayroll.Forms
                     cmd.ExecuteNonQuery();
 
                     sql = "Update Cont_MthlyPay Set " +
-                        "  Adj_Basic = 0 " +
-                        " ,Adj_TPAHrs = 0 " +
+                        //"  Adj_Basic = 0 " +
+                        " Adj_TPAHrs = 0 " +
                         " ,Adj_TPAAmt = 0 " +
                         " ,Adj_DaysPay = 0 " +
                         " ,Adj_DaysPayAmt = 0 " +
@@ -536,7 +536,7 @@ namespace ContractPayroll.Forms
                         " ,Tot_Ded = 0 " +
                         " ,NetPay = 0 " +
                         " ,Tot_CoCommAmt = 0 " +
-                        " ,Tot_CoCommWoAmt = 0 " +
+                       // " ,Tot_CoCommWoAmt = 0 " +
                         " ,Tot_CoCommPFAmt = 0 " +
                         " ,Tot_CoComm = 0 " +
                         " ,Tot_CoServTax = 0 " +

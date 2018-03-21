@@ -267,6 +267,25 @@ namespace ContractPayroll.Forms
                             cmd.ExecuteNonQuery();
 
 
+                            ///Bug Fixed: 101
+                            
+                            sql = "Delete From Cont_ParaMast where PayPeriod = '" + txtPayPeriod.Text.Trim() + "'";
+                            cmd.CommandText = sql;
+                            cmd.Connection = cn;
+                            cmd.ExecuteNonQuery();
+
+                            sql = "Delete From Cont_MthlyAtn where PayPeriod = '" + txtPayPeriod.Text.Trim() + "'";
+                            cmd.CommandText = sql;
+                            cmd.Connection = cn;
+                            cmd.ExecuteNonQuery();
+
+                            sql = "Delete From Cont_MthlyPay where PayPeriod = '" + txtPayPeriod.Text.Trim() + "'";
+                            cmd.CommandText = sql;
+                            cmd.Connection = cn;
+                            cmd.ExecuteNonQuery();
+                            
+                            /// Bug Fixed : 101
+                            
                             MessageBox.Show("Record Deleted...", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             ResetCtrl();
                             return;

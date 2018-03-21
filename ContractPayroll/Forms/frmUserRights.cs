@@ -162,7 +162,7 @@ namespace ContractPayroll.Forms
                     {
                         sql = "Insert into Cont_MastUser (UserID,UserName,Pass,Active,IsAdmin,AddDt,AddId) values (" +
                             " '" + txtUserID.Text.Trim() + "','" + txtPersonName.Text.Trim() + "','" + txtPassword.Text.Trim() + "'," +
-                            " '" + ((this.chkActive.Checked) ? "1" : "0") + "', '" + " IsAdmin ='" + ((this.chkSuperUser.Checked) ? "1" :"0") + "',GetDate() ,'" + Utils.User.GUserID + "') ";
+                            " '" + ((this.chkActive.Checked) ? "1" : "0") + "', '" + ((this.chkSuperUser.Checked) ? "1" :"0") + "',GetDate() ,'" + Utils.User.GUserID + "') ";
                         
                         cmd = new SqlCommand(sql, cn);
                         cmd.ExecuteNonQuery();

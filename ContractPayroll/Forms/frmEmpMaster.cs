@@ -462,6 +462,7 @@ namespace ContractPayroll.Forms
             if(string.IsNullOrEmpty(txtEmpUnqID.Text.Trim()) || string.IsNullOrEmpty(txtPayPeriod.Text.Trim()))
             {
                 grid.DataSource = null;
+                gridAttd.DataSource = null;
                 return;
             }
 
@@ -481,6 +482,25 @@ namespace ContractPayroll.Forms
             {
                 grid.DataSource = null;
             }
+
+
+            ds = new DataSet();
+            sql = "select [tDate],[LeaveTyp],[ABPR],[WrkHrs],[TpaHrs],[CBasic],[DaysPay],[Cal_Basic],[TpaAmt],[CostCode],[AddDt],[AddId],[UpdDt],[UpdId] from Cont_DailyOth where PayPeriod = '" + txtPayPeriod.Text.Trim() + "' and EmpUnqID = '" + txtEmpUnqID.Text.Trim() + "' Order By tDate";
+
+            ds = Utils.Helper.GetData(sql, Utils.Helper.constr);
+
+            hasRows = ds.Tables.Cast<DataTable>().Any(table => table.Rows.Count != 0);
+
+            if (hasRows)
+            {
+                gridAttd.DataSource = ds;
+                gridAttd.DataMember = ds.Tables[0].TableName;
+            }
+            else
+            {
+                gridAttd.DataSource = null;
+            }
+
         }
 
         private void txtEmpUnqID_KeyDown(object sender, KeyEventArgs e)
@@ -811,6 +831,11 @@ namespace ContractPayroll.Forms
             }
 
             
+
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
 
         }
     }

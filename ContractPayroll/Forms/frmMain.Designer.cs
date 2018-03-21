@@ -42,12 +42,17 @@
             this.mnuPayCyclePara = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuImportEmp = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuMastEmp = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuBulkBasicChng = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuTranS = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuImportAttd = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuMthlyAdj = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuMthlyDed = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuMthlyAttdProc = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuMthlyCalc = new System.Windows.Forms.ToolStripMenuItem();
+            this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuRptMthlySalReg = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuRptMthlyTPAReg = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuRptOthers = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -56,7 +61,6 @@
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.stsUserDesc = new System.Windows.Forms.ToolStripStatusLabel();
             this.stsExtra = new System.Windows.Forms.ToolStripStatusLabel();
-            this.mnuBulkBasicChng = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -68,6 +72,7 @@
             this.mnuUser,
             this.mnuMast,
             this.mnuTranS,
+            this.reportsToolStripMenuItem,
             this.mnuHelp});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -177,6 +182,13 @@
             this.mnuMastEmp.Text = "Employee Master";
             this.mnuMastEmp.Click += new System.EventHandler(this.mnuMastEmp_Click);
             // 
+            // mnuBulkBasicChng
+            // 
+            this.mnuBulkBasicChng.Name = "mnuBulkBasicChng";
+            this.mnuBulkBasicChng.Size = new System.Drawing.Size(232, 22);
+            this.mnuBulkBasicChng.Text = "Bulk Wages Change";
+            this.mnuBulkBasicChng.Click += new System.EventHandler(this.mnuBulkBasicChng_Click);
+            // 
             // mnuTranS
             // 
             this.mnuTranS.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -223,6 +235,37 @@
             this.mnuMthlyCalc.Size = new System.Drawing.Size(232, 22);
             this.mnuMthlyCalc.Text = "Salary Calculation";
             this.mnuMthlyCalc.Click += new System.EventHandler(this.mnuMthlyCalc_Click);
+            // 
+            // reportsToolStripMenuItem
+            // 
+            this.reportsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuRptMthlySalReg,
+            this.mnuRptMthlyTPAReg,
+            this.mnuRptOthers});
+            this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
+            this.reportsToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
+            this.reportsToolStripMenuItem.Text = "Reports";
+            // 
+            // mnuRptMthlySalReg
+            // 
+            this.mnuRptMthlySalReg.Name = "mnuRptMthlySalReg";
+            this.mnuRptMthlySalReg.Size = new System.Drawing.Size(198, 22);
+            this.mnuRptMthlySalReg.Text = "Monthly Salary Register";
+            this.mnuRptMthlySalReg.Click += new System.EventHandler(this.mnuRptMthlySalReg_Click);
+            // 
+            // mnuRptMthlyTPAReg
+            // 
+            this.mnuRptMthlyTPAReg.Name = "mnuRptMthlyTPAReg";
+            this.mnuRptMthlyTPAReg.Size = new System.Drawing.Size(198, 22);
+            this.mnuRptMthlyTPAReg.Text = "Monthly TPA Register";
+            this.mnuRptMthlyTPAReg.Click += new System.EventHandler(this.mnuRptMthlyTPAReg_Click);
+            // 
+            // mnuRptOthers
+            // 
+            this.mnuRptOthers.Name = "mnuRptOthers";
+            this.mnuRptOthers.Size = new System.Drawing.Size(198, 22);
+            this.mnuRptOthers.Text = "Other Reports";
+            this.mnuRptOthers.Click += new System.EventHandler(this.mnuRptOthers_Click);
             // 
             // mnuHelp
             // 
@@ -282,13 +325,6 @@
             this.stsExtra.Name = "stsExtra";
             this.stsExtra.Size = new System.Drawing.Size(0, 17);
             // 
-            // mnuBulkBasicChng
-            // 
-            this.mnuBulkBasicChng.Name = "mnuBulkBasicChng";
-            this.mnuBulkBasicChng.Size = new System.Drawing.Size(232, 22);
-            this.mnuBulkBasicChng.Text = "Bulk Wages Change";
-            this.mnuBulkBasicChng.Click += new System.EventHandler(this.mnuBulkBasicChng_Click);
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -343,6 +379,10 @@
         private System.Windows.Forms.ToolStripMenuItem mnuMthlyAttdProc;
         private System.Windows.Forms.ToolStripMenuItem mnuMthlyDed;
         private System.Windows.Forms.ToolStripMenuItem mnuBulkBasicChng;
+        private System.Windows.Forms.ToolStripMenuItem reportsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuRptMthlySalReg;
+        private System.Windows.Forms.ToolStripMenuItem mnuRptMthlyTPAReg;
+        private System.Windows.Forms.ToolStripMenuItem mnuRptOthers;
 
 
     }

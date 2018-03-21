@@ -97,6 +97,9 @@
             this.Group2 = new System.Windows.Forms.GroupBox();
             this.grid = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.xtraTabPage3 = new DevExpress.XtraTab.XtraTabPage();
+            this.gridAttd = new DevExpress.XtraGrid.GridControl();
+            this.gvAttd = new DevExpress.XtraGrid.Views.Grid.GridView();
             ((System.ComponentModel.ISupportInitialize)(this.txtPayPeriod.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPayDesc.Properties)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -145,6 +148,9 @@
             this.Group2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            this.xtraTabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridAttd)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvAttd)).BeginInit();
             this.SuspendLayout();
             // 
             // label3
@@ -694,21 +700,23 @@
             // 
             // xtraTabControl1
             // 
-            this.xtraTabControl1.Location = new System.Drawing.Point(12, 12);
+            this.xtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.xtraTabControl1.Location = new System.Drawing.Point(0, 0);
             this.xtraTabControl1.Name = "xtraTabControl1";
             this.xtraTabControl1.SelectedTabPage = this.xtraTabPage1;
-            this.xtraTabControl1.Size = new System.Drawing.Size(790, 475);
+            this.xtraTabControl1.Size = new System.Drawing.Size(814, 499);
             this.xtraTabControl1.TabIndex = 59;
             this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPage1,
-            this.xtraTabPage2});
+            this.xtraTabPage2,
+            this.xtraTabPage3});
             // 
             // xtraTabPage1
             // 
             this.xtraTabPage1.Controls.Add(this.grpUserRights);
             this.xtraTabPage1.Controls.Add(this.groupBox1);
             this.xtraTabPage1.Name = "xtraTabPage1";
-            this.xtraTabPage1.Size = new System.Drawing.Size(784, 447);
+            this.xtraTabPage1.Size = new System.Drawing.Size(808, 471);
             this.xtraTabPage1.Text = "EmpInformation";
             // 
             // grpUserRights
@@ -719,9 +727,9 @@
             this.grpUserRights.Controls.Add(this.btnUpdate);
             this.grpUserRights.Controls.Add(this.btnAdd);
             this.grpUserRights.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.grpUserRights.Location = new System.Drawing.Point(0, 395);
+            this.grpUserRights.Location = new System.Drawing.Point(0, 419);
             this.grpUserRights.Name = "grpUserRights";
-            this.grpUserRights.Size = new System.Drawing.Size(784, 52);
+            this.grpUserRights.Size = new System.Drawing.Size(808, 52);
             this.grpUserRights.TabIndex = 59;
             this.grpUserRights.TabStop = false;
             // 
@@ -779,6 +787,7 @@
             this.btnAdd.TabIndex = 1;
             this.btnAdd.Text = "&Add";
             this.btnAdd.UseVisualStyleBackColor = false;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // xtraTabPage2
             // 
@@ -794,7 +803,7 @@
             this.xtraTabPage2.Controls.Add(this.txtFromDt);
             this.xtraTabPage2.Controls.Add(this.Group2);
             this.xtraTabPage2.Name = "xtraTabPage2";
-            this.xtraTabPage2.Size = new System.Drawing.Size(784, 447);
+            this.xtraTabPage2.Size = new System.Drawing.Size(808, 471);
             this.xtraTabPage2.Text = "Wages Information";
             // 
             // btnDelDtl
@@ -957,6 +966,54 @@
             this.gridView1.OptionsView.ShowGroupPanel = false;
             this.gridView1.DoubleClick += new System.EventHandler(this.gridView1_DoubleClick);
             // 
+            // xtraTabPage3
+            // 
+            this.xtraTabPage3.Controls.Add(this.gridAttd);
+            this.xtraTabPage3.Name = "xtraTabPage3";
+            this.xtraTabPage3.Size = new System.Drawing.Size(808, 471);
+            this.xtraTabPage3.Text = "Attendance Details";
+            // 
+            // gridAttd
+            // 
+            this.gridAttd.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridAttd.Location = new System.Drawing.Point(0, 0);
+            this.gridAttd.MainView = this.gvAttd;
+            this.gridAttd.Name = "gridAttd";
+            this.gridAttd.Size = new System.Drawing.Size(808, 471);
+            this.gridAttd.TabIndex = 1;
+            this.gridAttd.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gvAttd});
+            // 
+            // gvAttd
+            // 
+            this.gvAttd.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.gvAttd.Appearance.EvenRow.Options.UseBackColor = true;
+            this.gvAttd.GridControl = this.gridAttd;
+            this.gvAttd.Name = "gvAttd";
+            this.gvAttd.OptionsBehavior.Editable = false;
+            this.gvAttd.OptionsCustomization.AllowColumnMoving = false;
+            this.gvAttd.OptionsCustomization.AllowFilter = false;
+            this.gvAttd.OptionsCustomization.AllowGroup = false;
+            this.gvAttd.OptionsCustomization.AllowQuickHideColumns = false;
+            this.gvAttd.OptionsCustomization.AllowSort = false;
+            this.gvAttd.OptionsFilter.AllowColumnMRUFilterList = false;
+            this.gvAttd.OptionsFilter.AllowFilterEditor = false;
+            this.gvAttd.OptionsFilter.AllowFilterIncrementalSearch = false;
+            this.gvAttd.OptionsFilter.AllowMRUFilterList = false;
+            this.gvAttd.OptionsFilter.FilterEditorUseMenuForOperandsAndOperators = false;
+            this.gvAttd.OptionsFind.AllowFindPanel = false;
+            this.gvAttd.OptionsMenu.EnableColumnMenu = false;
+            this.gvAttd.OptionsMenu.EnableFooterMenu = false;
+            this.gvAttd.OptionsMenu.EnableGroupPanelMenu = false;
+            this.gvAttd.OptionsMenu.ShowAddNewSummaryItem = DevExpress.Utils.DefaultBoolean.False;
+            this.gvAttd.OptionsMenu.ShowAutoFilterRowItem = false;
+            this.gvAttd.OptionsMenu.ShowDateTimeGroupIntervalItems = false;
+            this.gvAttd.OptionsMenu.ShowGroupSortSummaryItems = false;
+            this.gvAttd.OptionsMenu.ShowSplitItem = false;
+            this.gvAttd.OptionsView.ShowDetailButtons = false;
+            this.gvAttd.OptionsView.ShowGroupExpandCollapseButtons = false;
+            this.gvAttd.OptionsView.ShowGroupPanel = false;
+            // 
             // frmEmpMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1017,6 +1074,9 @@
             this.Group2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            this.xtraTabPage3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridAttd)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvAttd)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1092,5 +1152,8 @@
         private System.Windows.Forms.Button btnDelDtl;
         private System.Windows.Forms.Button btnAddDtl;
         private DevExpress.XtraEditors.TextEdit txtGender;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPage3;
+        private DevExpress.XtraGrid.GridControl gridAttd;
+        private DevExpress.XtraGrid.Views.Grid.GridView gvAttd;
     }
 }

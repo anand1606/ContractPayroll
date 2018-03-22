@@ -220,7 +220,7 @@ namespace ContractPayroll.Forms
                 {
                     
                     Application.DoEvents();
-                    sql = "Select tDate,EmpUnqID,LeaveTyp,ConsWrkHrs,ConsOverTime,[Status],rptStatus,ActualStatus,CostCode from AttdData " + 
+                    sql = "Select tDate,EmpUnqID,LeaveTyp,ConsWrkHrs,ConsOverTime,[Status],rptStatus,ActualStatus,CostCode,[HalfDay] from AttdData " + 
                         " Where EmpUnqID = '" + dr["EmpUnqID"].ToString() + "' and CompCode = '01' and WrkGrp = 'CONT' " + 
                         " and tdate between '" + pFromDt.ToString("yyyy-MM-dd") + "' and '" + pToDt.ToString("yyyy-MM-dd") + "' Order By tDate";
                    
@@ -280,8 +280,15 @@ namespace ContractPayroll.Forms
                                 TpaHrs = 0;
                                 DaysPay = 1;
                                 WoDays = 0;
+                            }                            
+                            else if(Convert.ToBoolean(adr["HalfDay"]))
+                            {
+                                DaysPay = 0;
+                                WoDays = 0;
+                                ABPR = "A";
+                                TpaHrs = 0;
                             }
-                            else if (adr["Status"].ToString() == "P" && WrkHrs < 6)
+                            else if (adr["Status"].ToString() == "P" && WrkHrs <= 6)
                             {
                                 DaysPay = 0;
                                 WoDays = 0;

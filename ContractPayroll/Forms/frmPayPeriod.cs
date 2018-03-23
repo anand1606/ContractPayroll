@@ -254,40 +254,65 @@ namespace ContractPayroll.Forms
 
                 using (SqlConnection cn = new SqlConnection(Utils.Helper.constr))
                 {
-                    using (SqlCommand cmd = new SqlCommand())
-                    {
+                    
                         try
                         {
                             
                             
                             cn.Open();
-                            string sql = "Delete From Cont_MastPayPeriod where PayPeriod = '" + txtPayPeriod.Text.Trim() + "'";
-                            cmd.CommandText = sql;
-                            cmd.Connection = cn;
-                            cmd.ExecuteNonQuery();
 
+                            SqlTransaction tr = cn.BeginTransaction();
+
+                            string sql = "Delete From Cont_MastPayPeriod where PayPeriod = '" + txtPayPeriod.Text.Trim() + "'";
+
+                            SqlCommand cmd1 = new SqlCommand(sql, cn, tr);
+                            cmd1.ExecuteNonQuery();
 
                             ///Bug Fixed: 101
                             
                             sql = "Delete From Cont_ParaMast where PayPeriod = '" + txtPayPeriod.Text.Trim() + "'";
-                            cmd.CommandText = sql;
-                            cmd.Connection = cn;
-                            cmd.ExecuteNonQuery();
+                            SqlCommand cmd2 = new SqlCommand(sql, cn, tr);
+                            cmd2.ExecuteNonQuery();
 
                             sql = "Delete From Cont_MthlyAtn where PayPeriod = '" + txtPayPeriod.Text.Trim() + "'";
-                            cmd.CommandText = sql;
-                            cmd.Connection = cn;
-                            cmd.ExecuteNonQuery();
+                            SqlCommand cmd3 = new SqlCommand(sql, cn, tr);
+                            cmd3.ExecuteNonQuery();
+
 
                             sql = "Delete From Cont_MthlyPay where PayPeriod = '" + txtPayPeriod.Text.Trim() + "'";
-                            cmd.CommandText = sql;
-                            cmd.Connection = cn;
-                            cmd.ExecuteNonQuery();
+                            SqlCommand cmd4 = new SqlCommand(sql, cn, tr);
+                            cmd4.ExecuteNonQuery();
+
+
+                            sql = "Delete From Cont_DailyOth where PayPeriod = '" + txtPayPeriod.Text.Trim() + "'";
+                            SqlCommand cmd5 = new SqlCommand(sql, cn, tr);
+                            cmd5.ExecuteNonQuery();
+
+
+                            sql = "Delete From Cont_MthlyDed where PayPeriod = '" + txtPayPeriod.Text.Trim() + "'";
+                            SqlCommand cmd6 = new SqlCommand(sql, cn, tr);
+                            cmd6.ExecuteNonQuery();
+
+
+                            sql = "Delete From Cont_MastEmp where PayPeriod = '" + txtPayPeriod.Text.Trim() + "'";
+                            SqlCommand cmd7 = new SqlCommand(sql, cn, tr);
+                            cmd7.ExecuteNonQuery();
+
+
+                            try
+                            {
+                                tr.Commit();
+                                MessageBox.Show("Record Deleted...", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                ResetCtrl();
+                            }
+                            catch (Exception ex)
+                            {
+                                tr.Rollback();
+                                MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
+                            /// Bug Fixed : 101                            
                             
-                            /// Bug Fixed : 101
-                            
-                            MessageBox.Show("Record Deleted...", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            ResetCtrl();
                             return;
                         }
                         catch (Exception ex)
@@ -295,7 +320,7 @@ namespace ContractPayroll.Forms
                             MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
                         }
-                    }
+                    
                 }
             }
 

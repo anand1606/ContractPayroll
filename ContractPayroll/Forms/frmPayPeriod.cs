@@ -87,30 +87,41 @@ namespace ContractPayroll.Forms
 
                         cn.Open();
                         cmd.Connection = cn;
-                        string sql = "Insert into Cont_MastPayPeriod " +
+                        
+
+                        
+                        try
+                        {
+                            string sql = "Insert into Cont_MastPayPeriod " +
                             "(PayPeriod,PayDesc,FromDt,ToDt,isLocked," +
                             " AddDt,AddID) Values ('{0}','{1}','{2:yyyy-MM-dd}','{3:yyyy-MM-dd}','{4}',GetDate(),'{5}') ";
 
-                        sql = string.Format(sql, txtPayPeriod.Text.Trim().ToString(), txtPayDesc.Text.Trim().ToString(),
-                            txtFromDt.DateTime.Date, txtToDt.DateTime.Date,((chkLocked.Checked) ? "1" : "0"),
-                            Utils.User.GUserID
-                            );
+                            sql = string.Format(sql, txtPayPeriod.Text.Trim().ToString(), txtPayDesc.Text.Trim().ToString(),
+                                txtFromDt.DateTime.Date, txtToDt.DateTime.Date, ((chkLocked.Checked) ? "1" : "0"),
+                                Utils.User.GUserID
+                                );
 
-                        cmd.CommandText = sql;
-                        cmd.ExecuteNonQuery();
+                            cmd.CommandText = sql;
+                            cmd.ExecuteNonQuery();
 
-                        //insert default paraval records for payperiod
+                            //insert default paraval records for payperiod
 
-                        sql = "Insert into Cont_ParaMast ([PayPeriod],[ParaCode],[ParaDesc],[RsPer],[PValue],[FSlab],[TSlab],[BCFLG],[AppFlg],[AddDt],[AddID] ) " +
-                            " Select '" + txtPayPeriod.Text.Trim().ToString() + "',[ParaCode],[ParaDesc],[RsPer],[PValue],[FSlab],[TSlab],[BCFLG],[AppFlg],GetDate()," +
-                            " '" + Utils.User.GUserID + "' From Cont_ParaMast where PayPeriod = 0 ";
-                        cmd.CommandText = sql;
-                        cmd.ExecuteNonQuery();
+                            sql = "Insert into Cont_ParaMast ([PayPeriod],[ParaCode],[ParaDesc],[RsPer],[PValue],[FSlab],[TSlab],[BCFLG],[AppFlg],[AddDt],[AddID] ) " +
+                           " Select '" + txtPayPeriod.Text.Trim().ToString() + "',[ParaCode],[ParaDesc],[RsPer],[PValue],[FSlab],[TSlab],[BCFLG],[AppFlg],GetDate()," +
+                           " '" + Utils.User.GUserID + "' From Cont_ParaMast where PayPeriod = 0 ";
+                            cmd.CommandText = sql;
+                            cmd.ExecuteNonQuery();
 
+                            MessageBox.Show("Record saved...", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            ResetCtrl();
 
-                        MessageBox.Show("Record saved...", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        ResetCtrl();
-                       
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                        }
+                                              
                     }
                     catch (Exception ex)
                     {

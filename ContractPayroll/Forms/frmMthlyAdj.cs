@@ -850,5 +850,50 @@ namespace ContractPayroll.Forms
                 }
             }//using sql connection
         }
+
+        private void txtDedCode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F1 || e.KeyCode == Keys.F2)
+            {
+                List<string> obj = new List<string>();
+
+                Help_F1F2.ClsHelp hlp = new Help_F1F2.ClsHelp();
+                string sql = "";
+
+
+                sql = "Select 'MESS' as DedCode Union Select 'MISC' as DedCode ";
+
+
+                if (e.KeyCode == Keys.F1)
+                {
+                    obj = (List<string>)hlp.Show(sql, "DedCode", "DedCode", typeof(string), Utils.Helper.constr, "System.Data.SqlClient",
+                   100, 300, 400, 600, 100, 100);
+                }
+
+                if (obj.Count == 0)
+                {
+                    txtDedCode.Text = "";
+
+                    return;
+                }
+                else if (obj.ElementAt(0).ToString() == "0")
+                {
+                    txtDedCode.Text = "";
+                    return;
+                }
+                else if (obj.ElementAt(0).ToString() == "")
+                {
+                    txtDedCode.Text = "";
+                    return;
+                }
+                else
+                {
+
+                    txtDedCode.Text = obj.ElementAt(0).ToString();
+                    
+                    txtDedCode_Validated(sender, e);
+                }
+            }
+        }
     }
 }

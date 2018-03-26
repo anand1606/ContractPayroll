@@ -154,12 +154,12 @@ namespace ContractPayroll.Forms
 
             if(string.IsNullOrEmpty(txtEmpUnqID.Text.Trim()))
             {
-                sql = "Select a.*,b.LWFFlg,b.DeathFlg,b.PTaxFlg,b.ESIFlg From Cont_MthlyAtn a,Cont_MastEmp b where a.PayPeriod = b.PayPeriod and a.EmpUnqID = b.EmpUnqID and a.PayPeriod ='" + txtPayPeriod.Text.Trim() + "'";
+                sql = "Select a.*,b.LWFFlg,b.DeathFlg,b.PTaxFlg,b.ESIFlg,b.Active From Cont_MthlyAtn a,Cont_MastEmp b where a.PayPeriod = b.PayPeriod and a.EmpUnqID = b.EmpUnqID and a.PayPeriod ='" + txtPayPeriod.Text.Trim() + "'";
 
             }
             else
             {
-                 sql = "Select a.*,b.LWFFlg,b.DeathFlg,b.PTaxFlg,b.ESIFlg From Cont_MthlyAtn a,Cont_MastEmp b where a.PayPeriod = b.PayPeriod and a.EmpUnqID = b.EmpUnqID and a.PayPeriod ='" + txtPayPeriod.Text.Trim() + "' and a.EmpUnqID = '" + txtEmpUnqID.Text.Trim() + "'";
+                 sql = "Select a.*,b.LWFFlg,b.DeathFlg,b.PTaxFlg,b.ESIFlg,b.Active From Cont_MthlyAtn a,Cont_MastEmp b where a.PayPeriod = b.PayPeriod and a.EmpUnqID = b.EmpUnqID and a.PayPeriod ='" + txtPayPeriod.Text.Trim() + "' and a.EmpUnqID = '" + txtEmpUnqID.Text.Trim() + "'";
 
             }
                 
@@ -222,6 +222,19 @@ namespace ContractPayroll.Forms
 
                 foreach (DataRow dr in emplistds.Tables[0].Rows)
                 {
+                    if (!Convert.ToBoolean(dr["Active"]))
+                    {
+                        sql = "Delete From Cont_MthlyAtn Where PayPeriod ='" + txtPayPeriod.Text.Trim() + "' And EmpUnqID = '" + dr["EmpUnqID"].ToString() + "'";
+                        SqlCommand cmd = new SqlCommand(sql, cn);
+                        cmd.ExecuteNonQuery();
+
+                        sql = "Delete From Cont_MthlyPay Where PayPeriod ='" + txtPayPeriod.Text.Trim() + "' And EmpUnqID = '" + dr["EmpUnqID"].ToString() + "'";
+                        cmd = new SqlCommand(sql, cn);
+                        cmd.ExecuteNonQuery();
+                        continue;
+                    } 
+                    
+                    
                     SqlTransaction tr = cn.BeginTransaction();
                     Application.DoEvents();
 
@@ -512,7 +525,7 @@ namespace ContractPayroll.Forms
                 string sql = "";
 
 
-                sql = "Select PayPeriod,PayDesc,FromDt,ToDt from Cont_MastPayPeriod Where 1 = 1  ";
+                sql = "Select PayPeriod,PayDesc,FromDt,ToDt from Cont_MastPayPeriod Where 1 = 1  Order by PayPeriod desc";
 
 
                 if (e.KeyCode == Keys.F1)

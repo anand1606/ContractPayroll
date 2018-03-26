@@ -73,8 +73,9 @@
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
             this.ReportHeader = new DevExpress.XtraReports.UI.ReportHeaderBand();
             this.dS_rptMthlySalReg1 = new ContractPayroll.Reports.DS_rptMthlySalReg();
-            this.dtMthlySalTableAdapter = new ContractPayroll.Reports.DS_rptMthlySalRegTableAdapters.DtMthlySalTableAdapter();
+            this.dtMthlySalTableAdapter = new ContractPayroll.Reports.DS_rptMthlySalRegTableAdapters.sp_Cont_MthlySalTPARegisterTableAdapter();
             this.GroupHeader2 = new DevExpress.XtraReports.UI.GroupHeaderBand();
+            this.xrPageInfo2 = new DevExpress.XtraReports.UI.XRPageInfo();
             this.xrLabel124 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel123 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLine13 = new DevExpress.XtraReports.UI.XRLine();
@@ -475,6 +476,7 @@
             // GroupHeader2
             // 
             this.GroupHeader2.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.xrPageInfo2,
             this.xrLabel124,
             this.xrLabel123,
             this.xrLine13,
@@ -514,6 +516,16 @@
             this.GroupHeader2.Name = "GroupHeader2";
             this.GroupHeader2.RepeatEveryPage = true;
             this.GroupHeader2.StylePriority.UseFont = false;
+            // 
+            // xrPageInfo2
+            // 
+            this.xrPageInfo2.LocationFloat = new DevExpress.Utils.PointFloat(647.9167F, 32.12501F);
+            this.xrPageInfo2.Name = "xrPageInfo2";
+            this.xrPageInfo2.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrPageInfo2.RunningBand = this.GroupHeader2;
+            this.xrPageInfo2.SizeF = new System.Drawing.SizeF(100F, 16.75F);
+            this.xrPageInfo2.StylePriority.UseTextAlignment = false;
+            this.xrPageInfo2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight;
             // 
             // xrLabel124
             // 
@@ -1124,13 +1136,13 @@
             // 
             // CalGrpHeader
             // 
-            this.CalGrpHeader.DataMember = "DtMthlySal";
-            this.CalGrpHeader.Expression = "\'Extra Wages Register of \' + [ContDesc] + \' For the Month of  \' + [PayDesc]";
+            this.CalGrpHeader.DataMember = "sp_Cont_MthlySalTPARegister";
+            this.CalGrpHeader.Expression = "\'Extra Wages Register of \' + [ContCode] + \' For the Month of  \' + [PayDesc]";
             this.CalGrpHeader.Name = "CalGrpHeader";
             // 
             // xrPageInfo1
             // 
-            this.xrPageInfo1.Format = "Page {0} of {1}";
+            this.xrPageInfo1.Format = "Page {0} of Total {1}";
             this.xrPageInfo1.LocationFloat = new DevExpress.Utils.PointFloat(649.6527F, 0F);
             this.xrPageInfo1.Name = "xrPageInfo1";
             this.xrPageInfo1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
@@ -1470,19 +1482,19 @@
             // 
             // calExtraHrs
             // 
-            this.calExtraHrs.DataMember = "DtMthlySal";
+            this.calExtraHrs.DataMember = "sp_Cont_MthlySalTPARegister";
             this.calExtraHrs.Expression = "[Cal_TpaHrs] / 2";
             this.calExtraHrs.Name = "calExtraHrs";
             // 
             // calAdjExtraHrs
             // 
-            this.calAdjExtraHrs.DataMember = "DtMthlySal";
+            this.calAdjExtraHrs.DataMember = "sp_Cont_MthlySalTPARegister";
             this.calAdjExtraHrs.Expression = "[Adj_TPAHrs]/2";
             this.calAdjExtraHrs.Name = "calAdjExtraHrs";
             // 
             // calTotExtHrs
             // 
-            this.calTotExtHrs.DataMember = "DtMthlySal";
+            this.calTotExtHrs.DataMember = "sp_Cont_MthlySalTPARegister";
             this.calTotExtHrs.Expression = "[calAdjExtraHrs] + [calExtraHrs]";
             this.calTotExtHrs.Name = "calTotExtHrs";
             // 
@@ -1526,7 +1538,7 @@
         private DevExpress.XtraReports.UI.BottomMarginBand BottomMargin;
         private DevExpress.XtraReports.UI.ReportHeaderBand ReportHeader;
         private DS_rptMthlySalReg dS_rptMthlySalReg1;
-        private DS_rptMthlySalRegTableAdapters.DtMthlySalTableAdapter dtMthlySalTableAdapter;
+        private DS_rptMthlySalRegTableAdapters.sp_Cont_MthlySalTPARegisterTableAdapter  dtMthlySalTableAdapter;
         private DevExpress.XtraReports.UI.GroupHeaderBand GroupHeader2;
         private DevExpress.XtraReports.UI.GroupFooterBand GroupFooter1;
         private DevExpress.XtraReports.UI.XRLine xrLine1;
@@ -1639,5 +1651,6 @@
         private DevExpress.XtraReports.UI.CalculatedField calExtraHrs;
         private DevExpress.XtraReports.UI.CalculatedField calAdjExtraHrs;
         private DevExpress.XtraReports.UI.CalculatedField calTotExtHrs;
+        private DevExpress.XtraReports.UI.XRPageInfo xrPageInfo2;
     }
 }

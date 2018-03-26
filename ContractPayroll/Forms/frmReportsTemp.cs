@@ -44,10 +44,22 @@ namespace ContractPayroll.Forms
                     }
                 }
 
-                var HeaderTBL = new Reports.DS_rptMthlySalReg.DtMthlySalDataTable();
-                var HeaderTa = new Reports.DS_rptMthlySalRegTableAdapters.DtMthlySalTableAdapter();
+                string tContCode = " ";
+                if(txtContCode.Text.Trim() != "")
+                {
+                    tContCode = txtContCode.Text.Trim();
+                }
+
+                //var HeaderTBL = new Reports.DS_rptMthlySalReg.DtMthlySalDataTable();
+                //var HeaderTa = new Reports.DS_rptMthlySalRegTableAdapters.DtMthlySalTableAdapter();
+                //HeaderTa.Connection.ConnectionString = Utils.Helper.constr;
+                //HeaderTBL = HeaderTa.GetData(tPay);
+
+                var HeaderTBL = new Reports.DS_rptMthlySalReg.sp_Cont_MthlySalTPARegisterDataTable();
+                var HeaderTa = new Reports.DS_rptMthlySalRegTableAdapters.sp_Cont_MthlySalTPARegisterTableAdapter();
                 HeaderTa.Connection.ConnectionString = Utils.Helper.constr;
-                HeaderTBL = HeaderTa.GetData(tPay);
+                HeaderTBL = HeaderTa.GetData(tPay,tContCode);
+
 
                 DataSet Ds = new DataSet();
                 Ds.Tables.Add(HeaderTBL);
@@ -76,10 +88,22 @@ namespace ContractPayroll.Forms
                     }
                 }
 
-                var HeaderTBL = new Reports.DS_rptMthlySalReg.DtMthlySalDataTable();
-                var HeaderTa = new Reports.DS_rptMthlySalRegTableAdapters.DtMthlySalTableAdapter();
+                string tContCode = " ";
+                if (txtContCode.Text.Trim() != "")
+                {
+                    tContCode = txtContCode.Text.Trim();
+                }
+
+                //var HeaderTBL = new Reports.DS_rptMthlySalReg.DS_rptMthlySalRegTableAdapters.DtMthlySalTableAdapter();
+                //var HeaderTa = new Reports.DS_rptMthlySalRegTableAdapters.DtMthlySalTableAdapter();
+                //HeaderTa.Connection.ConnectionString = Utils.Helper.constr;
+                //HeaderTBL = HeaderTa.GetData(tPay);
+
+                var HeaderTBL = new Reports.DS_rptMthlySalReg.sp_Cont_MthlySalTPARegisterDataTable();
+                var HeaderTa = new Reports.DS_rptMthlySalRegTableAdapters.sp_Cont_MthlySalTPARegisterTableAdapter();
                 HeaderTa.Connection.ConnectionString = Utils.Helper.constr;
-                HeaderTBL = HeaderTa.GetData(tPay);
+                HeaderTBL = HeaderTa.GetData(tPay, tContCode);
+
 
                 DataSet Ds = new DataSet();
                 Ds.Tables.Add(HeaderTBL);
@@ -119,7 +143,7 @@ namespace ContractPayroll.Forms
             txtPayDesc.Text = "";
             txtFromDt.EditValue = null;
             txtToDt.EditValue = null;
-
+            txtContCode.Text = "";
             
 
         }
@@ -195,7 +219,7 @@ namespace ContractPayroll.Forms
                 string sql = "";
 
 
-                sql = "Select PayPeriod,PayDesc,FromDt,ToDt from Cont_MastPayPeriod Where 1 = 1  ";
+                sql = "Select PayPeriod,PayDesc,FromDt,ToDt from Cont_MastPayPeriod Where 1 = 1 Order by PayPeriod Desc ";
 
 
                 if (e.KeyCode == Keys.F1)
@@ -241,6 +265,49 @@ namespace ContractPayroll.Forms
         {
             ResetCtrl();
             SetRights();
+        }
+
+        private void txtContCode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F1 || e.KeyCode == Keys.F2)
+            {
+                List<string> obj = new List<string>();
+
+                Help_F1F2.ClsHelp hlp = new Help_F1F2.ClsHelp();
+                string sql = "";
+
+
+                sql = "Select Distinct ContCode,ContDesc from Cont_MastEmp Where PayPeriod = '" + txtPayPeriod.Text.Trim() + "' Order by ContCode Asc ";
+
+
+                if (e.KeyCode == Keys.F1)
+                {
+                    obj = (List<string>)hlp.Show(sql, "ContCode", "ContCode", typeof(int), Utils.Helper.constr, "System.Data.SqlClient",
+                   100, 300, 400, 600, 100, 100);
+                }
+
+                if (obj.Count == 0)
+                {
+                    txtContCode.Text = "";                    
+                    return;
+                }
+                else if (obj.ElementAt(0).ToString() == "0")
+                {
+                    txtContCode.Text = "";    
+                    return;
+                }
+                else if (obj.ElementAt(0).ToString() == "")
+                {
+                    txtContCode.Text = "";    
+                    return;
+                }
+                else
+                {
+
+                   txtContCode.Text = obj.ElementAt(0).ToString();
+                  
+                }
+            }
         }
     }
 }

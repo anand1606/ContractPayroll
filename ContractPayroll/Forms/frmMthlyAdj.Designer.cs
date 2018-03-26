@@ -63,16 +63,16 @@
             this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
             this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.btnODedDel = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txtDedCode = new DevExpress.XtraEditors.TextEdit();
+            this.txtDedDesc = new DevExpress.XtraEditors.TextEdit();
             this.btnODedAdd = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.txtDedAmt = new DevExpress.XtraEditors.CalcEdit();
-            this.label9 = new System.Windows.Forms.Label();
-            this.txtDedCode = new DevExpress.XtraEditors.TextEdit();
-            this.txtDedDesc = new DevExpress.XtraEditors.TextEdit();
-            this.btnODedDel = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtEmpName.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtEmpUnqID.Properties)).BeginInit();
@@ -94,12 +94,12 @@
             this.xtraTabPage1.SuspendLayout();
             this.xtraTabPage2.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDedCode.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDedDesc.Properties)).BeginInit();
             this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDedAmt.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDedCode.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDedDesc.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -458,6 +458,57 @@
             this.groupBox4.TabIndex = 2;
             this.groupBox4.TabStop = false;
             // 
+            // btnODedDel
+            // 
+            this.btnODedDel.BackColor = System.Drawing.Color.Cornsilk;
+            this.btnODedDel.Location = new System.Drawing.Point(464, 50);
+            this.btnODedDel.Name = "btnODedDel";
+            this.btnODedDel.Size = new System.Drawing.Size(93, 28);
+            this.btnODedDel.TabIndex = 75;
+            this.btnODedDel.Text = "&Delete";
+            this.btnODedDel.UseVisualStyleBackColor = false;
+            this.btnODedDel.Click += new System.EventHandler(this.btnODedDel_Click);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(38, 23);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(68, 15);
+            this.label9.TabIndex = 74;
+            this.label9.Text = "Ded.Code :";
+            // 
+            // txtDedCode
+            // 
+            this.txtDedCode.Location = new System.Drawing.Point(113, 20);
+            this.txtDedCode.Name = "txtDedCode";
+            this.txtDedCode.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.txtDedCode.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDedCode.Properties.Appearance.Options.UseBackColor = true;
+            this.txtDedCode.Properties.Appearance.Options.UseFont = true;
+            this.txtDedCode.Properties.AppearanceReadOnly.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.txtDedCode.Properties.AppearanceReadOnly.Options.UseBackColor = true;
+            this.txtDedCode.Properties.MaxLength = 10;
+            this.txtDedCode.Properties.ReadOnly = true;
+            this.txtDedCode.Size = new System.Drawing.Size(88, 22);
+            this.txtDedCode.TabIndex = 72;
+            this.txtDedCode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtDedCode_KeyDown);
+            this.txtDedCode.Validated += new System.EventHandler(this.txtDedCode_Validated);
+            // 
+            // txtDedDesc
+            // 
+            this.txtDedDesc.Location = new System.Drawing.Point(207, 20);
+            this.txtDedDesc.Name = "txtDedDesc";
+            this.txtDedDesc.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDedDesc.Properties.Appearance.Options.UseFont = true;
+            this.txtDedDesc.Properties.Mask.EditMask = "[A-Za-z 0-9]+";
+            this.txtDedDesc.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
+            this.txtDedDesc.Properties.MaxLength = 100;
+            this.txtDedDesc.Properties.ReadOnly = true;
+            this.txtDedDesc.Size = new System.Drawing.Size(241, 22);
+            this.txtDedDesc.TabIndex = 73;
+            this.txtDedDesc.TabStop = false;
+            // 
             // btnODedAdd
             // 
             this.btnODedAdd.BackColor = System.Drawing.Color.Cornsilk;
@@ -472,11 +523,11 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(31, 51);
+            this.label11.Location = new System.Drawing.Point(38, 50);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(78, 15);
+            this.label11.Size = new System.Drawing.Size(55, 15);
             this.label11.TabIndex = 71;
-            this.label11.Text = "Adj. Amount :";
+            this.label11.Text = "Amount :";
             // 
             // groupBox5
             // 
@@ -542,56 +593,6 @@
             this.txtDedAmt.Size = new System.Drawing.Size(88, 22);
             this.txtDedAmt.TabIndex = 8;
             // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(38, 23);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(68, 15);
-            this.label9.TabIndex = 74;
-            this.label9.Text = "Ded.Code :";
-            // 
-            // txtDedCode
-            // 
-            this.txtDedCode.Location = new System.Drawing.Point(113, 20);
-            this.txtDedCode.Name = "txtDedCode";
-            this.txtDedCode.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
-            this.txtDedCode.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDedCode.Properties.Appearance.Options.UseBackColor = true;
-            this.txtDedCode.Properties.Appearance.Options.UseFont = true;
-            this.txtDedCode.Properties.AppearanceReadOnly.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.txtDedCode.Properties.AppearanceReadOnly.Options.UseBackColor = true;
-            this.txtDedCode.Properties.MaxLength = 10;
-            this.txtDedCode.Properties.ReadOnly = true;
-            this.txtDedCode.Size = new System.Drawing.Size(88, 22);
-            this.txtDedCode.TabIndex = 72;
-            this.txtDedCode.Validated += new System.EventHandler(this.txtDedCode_Validated);
-            // 
-            // txtDedDesc
-            // 
-            this.txtDedDesc.Location = new System.Drawing.Point(207, 20);
-            this.txtDedDesc.Name = "txtDedDesc";
-            this.txtDedDesc.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDedDesc.Properties.Appearance.Options.UseFont = true;
-            this.txtDedDesc.Properties.Mask.EditMask = "[A-Za-z 0-9]+";
-            this.txtDedDesc.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
-            this.txtDedDesc.Properties.MaxLength = 100;
-            this.txtDedDesc.Properties.ReadOnly = true;
-            this.txtDedDesc.Size = new System.Drawing.Size(241, 22);
-            this.txtDedDesc.TabIndex = 73;
-            this.txtDedDesc.TabStop = false;
-            // 
-            // btnODedDel
-            // 
-            this.btnODedDel.BackColor = System.Drawing.Color.Cornsilk;
-            this.btnODedDel.Location = new System.Drawing.Point(464, 50);
-            this.btnODedDel.Name = "btnODedDel";
-            this.btnODedDel.Size = new System.Drawing.Size(93, 28);
-            this.btnODedDel.TabIndex = 75;
-            this.btnODedDel.Text = "&Delete";
-            this.btnODedDel.UseVisualStyleBackColor = false;
-            this.btnODedDel.Click += new System.EventHandler(this.btnODedDel_Click);
-            // 
             // frmMthlyAdj
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -627,12 +628,12 @@
             this.xtraTabPage2.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDedCode.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtDedDesc.Properties)).EndInit();
             this.groupBox5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtDedAmt.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDedCode.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtDedDesc.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }

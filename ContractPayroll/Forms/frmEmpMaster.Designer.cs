@@ -100,6 +100,7 @@
             this.xtraTabPage3 = new DevExpress.XtraTab.XtraTabPage();
             this.gridAttd = new DevExpress.XtraGrid.GridControl();
             this.gvAttd = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.lblLeft = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.txtPayPeriod.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPayDesc.Properties)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -189,6 +190,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lblLeft);
             this.groupBox1.Controls.Add(this.chkESIFlg);
             this.groupBox1.Controls.Add(this.chkDeathFlg);
             this.groupBox1.Controls.Add(this.chkLWFFlg);
@@ -1014,6 +1016,17 @@
             this.gvAttd.OptionsView.ShowGroupExpandCollapseButtons = false;
             this.gvAttd.OptionsView.ShowGroupPanel = false;
             // 
+            // lblLeft
+            // 
+            this.lblLeft.AutoSize = true;
+            this.lblLeft.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLeft.ForeColor = System.Drawing.Color.Red;
+            this.lblLeft.Location = new System.Drawing.Point(456, 251);
+            this.lblLeft.Name = "lblLeft";
+            this.lblLeft.Size = new System.Drawing.Size(144, 25);
+            this.lblLeft.TabIndex = 102;
+            this.lblLeft.Text = "Left Employee";
+            // 
             // frmEmpMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1155,5 +1168,6 @@
         private DevExpress.XtraTab.XtraTabPage xtraTabPage3;
         private DevExpress.XtraGrid.GridControl gridAttd;
         private DevExpress.XtraGrid.Views.Grid.GridView gvAttd;
+        private System.Windows.Forms.Label lblLeft;
     }
 }

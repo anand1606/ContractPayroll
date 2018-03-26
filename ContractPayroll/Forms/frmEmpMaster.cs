@@ -128,7 +128,7 @@ namespace ContractPayroll.Forms
             chkLWFFlg.Checked = false;
             chkPFLG.Checked = false;
             chkPTaxFlg.Checked = false;
-
+            lblLeft.Visible = false;
             LoadGrid();
             PFromDt = DateTime.MinValue;
             pToDt = DateTime.MinValue;
@@ -440,6 +440,18 @@ namespace ContractPayroll.Forms
                     chkDeathFlg.Checked = (Convert.ToBoolean(dr["DeathFlg"])) ;
                     chkLWFFlg.Checked = (Convert.ToBoolean(dr["LWFFlg"]));
                     chkESIFlg.Checked = (Convert.ToBoolean(dr["ESIFLG"]));
+
+                    if (!Convert.ToBoolean(dr["Active"]))
+                    {
+                        //if left
+                        lblLeft.Visible = true;
+
+                    } else {
+
+                        //if active
+                        lblLeft.Visible = false;
+                    }
+
                     mode = "OLD";
 
                     txtPayPeriod_Validated(sender, e);

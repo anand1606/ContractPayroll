@@ -115,7 +115,7 @@ namespace ContractPayroll.Forms
             }
             int pPay = 0;
 
-            DataSet payds = Utils.Helper.GetData("Select * from Cont_MastPayPeriod where PayPeriod ='" + txtPayPeriod.Text.Trim() + "'",Utils.Helper.constr);
+            DataSet payds = Utils.Helper.GetData("Select * from Cont_MastPayPeriod where PayPeriod ='" + txtPayPeriod.Text.Trim() + "'  ",Utils.Helper.constr);
             bool hasRows = payds.Tables.Cast<DataTable>().Any(table => table.Rows.Count != 0);
 
             if (!hasRows)
@@ -153,13 +153,13 @@ namespace ContractPayroll.Forms
             if (string.IsNullOrEmpty(txtEmpUnqID.Text.Trim()))
             {
 
-                 sql = "Select *,b.PFFlg From Cont_MthlyAtn a, Cont_MastEmp b " +
+                 sql = "Select *,b.PFFlg,b.active From Cont_MthlyAtn a, Cont_MastEmp b " +
                         " where a.PayPeriod = b.PayPeriod and a.EmpUnqID = b.EmpUnqID " +
                         " And a.PayPeriod ='" + txtPayPeriod.Text.Trim() + "'";
             }
             else
             {
-                sql = "Select *,b.PFFlg From Cont_MthlyAtn a, Cont_MastEmp b " +
+                sql = "Select *,b.PFFlg , b.active From Cont_MthlyAtn a, Cont_MastEmp b " +
                         " where a.PayPeriod = b.PayPeriod and a.EmpUnqID = b.EmpUnqID " +
                         " And a.PayPeriod ='" + txtPayPeriod.Text.Trim() + "' and a.EmpUnqID ='" + txtEmpUnqID.Text.Trim() + "'";
             }
@@ -236,6 +236,20 @@ namespace ContractPayroll.Forms
                 {
                     
                     Application.DoEvents();
+
+
+                    if (!Convert.ToBoolean(dr["Active"]))
+                    {
+                        sql = "Delete From Cont_MthlyAtn Where PayPeriod ='" + txtPayPeriod.Text.Trim() + "' And EmpUnqID = '" + dr["EmpUnqID"].ToString() + "'";
+                        SqlCommand cmd = new SqlCommand(sql, cn);
+                        cmd.ExecuteNonQuery();
+
+                        sql = "Delete From Cont_MthlyPay Where PayPeriod ='" + txtPayPeriod.Text.Trim() + "' And EmpUnqID = '" + dr["EmpUnqID"].ToString() + "'";
+                        cmd = new SqlCommand(sql, cn);
+                        cmd.ExecuteNonQuery();
+                        continue;
+                    } 
+
                     sql = " SELECT [PayPeriod] " +
                           " ,[EmpUnqID] " +
                           " ,[SrNo] " +
@@ -414,7 +428,7 @@ namespace ContractPayroll.Forms
                 string sql = "";
 
 
-                sql = "Select PayPeriod,PayDesc,FromDt,ToDt from Cont_MastPayPeriod Where 1 = 1  ";
+                sql = "Select PayPeriod,PayDesc,FromDt,ToDt from Cont_MastPayPeriod Where 1 = 1  Order by PayPeriod desc";
 
 
                 if (e.KeyCode == Keys.F1)

@@ -240,7 +240,7 @@ namespace ContractPayroll.Forms
                 {
                     SqlTransaction tr = cn.BeginTransaction();
                     Application.DoEvents();
-                    sql = "Select * from Cont_MastEmp Where EmpUnqID = '" + dr["EmpUnqID"].ToString() + "'";
+                    sql = "Select * from Cont_MastEmp Where EmpUnqID = '" + dr["EmpUnqID"].ToString() + "' and PayPeriod ='" + txtPayPeriod.Text.Trim() + "'";
                     DataSet empds = Utils.Helper.GetData(sql, Utils.Helper.constr);
                     hasRows = empds.Tables.Cast<DataTable>().Any(table => table.Rows.Count != 0);
                     if (hasRows)
@@ -269,8 +269,7 @@ namespace ContractPayroll.Forms
                             " PFFlg = '" + PFFlg + "'," +
                             " PTaxFlg = '" + PTaxFlg + "'," + 
                             " DeathFlg = '" + DeathFlg + "', " +
-                            " LWFFlg = '" + LWFFlg + "', " + 
-                            " Active = 1, " + 
+                            " LWFFlg = '" + LWFFlg + "', " +                             
                             " ESIFlg = '" + ESIFlg + "', " +
                             " UpdDt=GetDate() ," +
                             " UpdID ='" + Utils.User.GUserID + "' Where EmpUnqID ='" + dr["EmpUnqID"].ToString() + "' " +
@@ -423,7 +422,7 @@ namespace ContractPayroll.Forms
                 string sql = "";
 
 
-                sql = "Select PayPeriod,PayDesc,FromDt,ToDt from Cont_MastPayPeriod Where 1 = 1  ";
+                sql = "Select PayPeriod,PayDesc,FromDt,ToDt from Cont_MastPayPeriod Where 1 = 1  Order by PayPeriod Desc";
 
 
                 if (e.KeyCode == Keys.F1)

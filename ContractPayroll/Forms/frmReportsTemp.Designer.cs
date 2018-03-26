@@ -37,22 +37,25 @@
             this.label18 = new System.Windows.Forms.Label();
             this.txtToDt = new DevExpress.XtraEditors.DateEdit();
             this.txtFromDt = new DevExpress.XtraEditors.DateEdit();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtContCode = new DevExpress.XtraEditors.TextEdit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPayPeriod.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPayDesc.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtToDt.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtToDt.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFromDt.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFromDt.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtContCode.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // btnRun
             // 
             this.btnRun.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRun.Location = new System.Drawing.Point(111, 136);
+            this.btnRun.Location = new System.Drawing.Point(109, 181);
             this.btnRun.Margin = new System.Windows.Forms.Padding(4);
             this.btnRun.Name = "btnRun";
             this.btnRun.Size = new System.Drawing.Size(317, 52);
-            this.btnRun.TabIndex = 4;
+            this.btnRun.TabIndex = 5;
             this.btnRun.Text = "Run";
             this.btnRun.UseVisualStyleBackColor = true;
             this.btnRun.Click += new System.EventHandler(this.btnRun_Click);
@@ -69,20 +72,20 @@
             // 
             // txtPayPeriod
             // 
-            this.txtPayPeriod.Location = new System.Drawing.Point(109, 15);
+            this.txtPayPeriod.Location = new System.Drawing.Point(111, 15);
             this.txtPayPeriod.Margin = new System.Windows.Forms.Padding(4);
             this.txtPayPeriod.Name = "txtPayPeriod";
             this.txtPayPeriod.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPayPeriod.Properties.Appearance.Options.UseFont = true;
             this.txtPayPeriod.Properties.MaxLength = 10;
-            this.txtPayPeriod.Size = new System.Drawing.Size(117, 22);
+            this.txtPayPeriod.Size = new System.Drawing.Size(115, 22);
             this.txtPayPeriod.TabIndex = 0;
             this.txtPayPeriod.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPayPeriod_KeyDown);
             this.txtPayPeriod.Validated += new System.EventHandler(this.txtPayPeriod_Validated);
             // 
             // txtPayDesc
             // 
-            this.txtPayDesc.Location = new System.Drawing.Point(109, 49);
+            this.txtPayDesc.Location = new System.Drawing.Point(111, 45);
             this.txtPayDesc.Margin = new System.Windows.Forms.Padding(4);
             this.txtPayDesc.Name = "txtPayDesc";
             this.txtPayDesc.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -91,13 +94,13 @@
             this.txtPayDesc.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
             this.txtPayDesc.Properties.MaxLength = 100;
             this.txtPayDesc.Properties.ReadOnly = true;
-            this.txtPayDesc.Size = new System.Drawing.Size(379, 22);
+            this.txtPayDesc.Size = new System.Drawing.Size(377, 22);
             this.txtPayDesc.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(8, 52);
+            this.label1.Location = new System.Drawing.Point(8, 48);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(93, 17);
@@ -107,7 +110,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(264, 90);
+            this.label17.Location = new System.Drawing.Point(264, 79);
             this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(67, 17);
@@ -117,7 +120,7 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(9, 87);
+            this.label18.Location = new System.Drawing.Point(9, 76);
             this.label18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(82, 17);
@@ -127,7 +130,7 @@
             // txtToDt
             // 
             this.txtToDt.EditValue = null;
-            this.txtToDt.Location = new System.Drawing.Point(355, 86);
+            this.txtToDt.Location = new System.Drawing.Point(355, 75);
             this.txtToDt.Margin = new System.Windows.Forms.Padding(4);
             this.txtToDt.Name = "txtToDt";
             this.txtToDt.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 10F);
@@ -146,7 +149,7 @@
             // txtFromDt
             // 
             this.txtFromDt.EditValue = null;
-            this.txtFromDt.Location = new System.Drawing.Point(111, 86);
+            this.txtFromDt.Location = new System.Drawing.Point(111, 75);
             this.txtFromDt.Margin = new System.Windows.Forms.Padding(4);
             this.txtFromDt.Name = "txtFromDt";
             this.txtFromDt.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 10F);
@@ -162,11 +165,36 @@
             this.txtFromDt.TabIndex = 2;
             this.txtFromDt.TabStop = false;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(11, 106);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(78, 17);
+            this.label2.TabIndex = 67;
+            this.label2.Text = "ContCode :";
+            // 
+            // txtContCode
+            // 
+            this.txtContCode.Location = new System.Drawing.Point(111, 105);
+            this.txtContCode.Margin = new System.Windows.Forms.Padding(4);
+            this.txtContCode.Name = "txtContCode";
+            this.txtContCode.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtContCode.Properties.Appearance.Options.UseFont = true;
+            this.txtContCode.Properties.MaxLength = 10;
+            this.txtContCode.Properties.ReadOnly = true;
+            this.txtContCode.Size = new System.Drawing.Size(117, 22);
+            this.txtContCode.TabIndex = 4;
+            this.txtContCode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtContCode_KeyDown);
+            // 
             // frmReportsTemp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(510, 204);
+            this.ClientSize = new System.Drawing.Size(510, 246);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.txtContCode);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.label18);
             this.Controls.Add(this.txtToDt);
@@ -187,6 +215,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtToDt.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFromDt.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFromDt.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtContCode.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -203,5 +232,7 @@
         private System.Windows.Forms.Label label18;
         private DevExpress.XtraEditors.DateEdit txtToDt;
         private DevExpress.XtraEditors.DateEdit txtFromDt;
+        private System.Windows.Forms.Label label2;
+        private DevExpress.XtraEditors.TextEdit txtContCode;
     }
 }

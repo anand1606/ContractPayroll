@@ -24,7 +24,7 @@ namespace ContractPayroll.Reports {
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
     public partial class DS_rptMthlySalReg : global::System.Data.DataSet {
         
-        private DtMthlySalDataTable tableDtMthlySal;
+        private sp_Cont_MthlySalTPARegisterDataTable tablesp_Cont_MthlySalTPARegister;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -54,8 +54,8 @@ namespace ContractPayroll.Reports {
             if ((this.DetermineSchemaSerializationMode(info, context) == global::System.Data.SchemaSerializationMode.IncludeSchema)) {
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXmlSchema(new global::System.Xml.XmlTextReader(new global::System.IO.StringReader(strSchema)));
-                if ((ds.Tables["DtMthlySal"] != null)) {
-                    base.Tables.Add(new DtMthlySalDataTable(ds.Tables["DtMthlySal"]));
+                if ((ds.Tables["sp_Cont_MthlySalTPARegister"] != null)) {
+                    base.Tables.Add(new sp_Cont_MthlySalTPARegisterDataTable(ds.Tables["sp_Cont_MthlySalTPARegister"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -79,9 +79,9 @@ namespace ContractPayroll.Reports {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public DtMthlySalDataTable DtMthlySal {
+        public sp_Cont_MthlySalTPARegisterDataTable sp_Cont_MthlySalTPARegister {
             get {
-                return this.tableDtMthlySal;
+                return this.tablesp_Cont_MthlySalTPARegister;
             }
         }
         
@@ -152,8 +152,8 @@ namespace ContractPayroll.Reports {
                 this.Reset();
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXml(reader);
-                if ((ds.Tables["DtMthlySal"] != null)) {
-                    base.Tables.Add(new DtMthlySalDataTable(ds.Tables["DtMthlySal"]));
+                if ((ds.Tables["sp_Cont_MthlySalTPARegister"] != null)) {
+                    base.Tables.Add(new sp_Cont_MthlySalTPARegisterDataTable(ds.Tables["sp_Cont_MthlySalTPARegister"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -188,10 +188,10 @@ namespace ContractPayroll.Reports {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         internal void InitVars(bool initTable) {
-            this.tableDtMthlySal = ((DtMthlySalDataTable)(base.Tables["DtMthlySal"]));
+            this.tablesp_Cont_MthlySalTPARegister = ((sp_Cont_MthlySalTPARegisterDataTable)(base.Tables["sp_Cont_MthlySalTPARegister"]));
             if ((initTable == true)) {
-                if ((this.tableDtMthlySal != null)) {
-                    this.tableDtMthlySal.InitVars();
+                if ((this.tablesp_Cont_MthlySalTPARegister != null)) {
+                    this.tablesp_Cont_MthlySalTPARegister.InitVars();
                 }
             }
         }
@@ -204,13 +204,13 @@ namespace ContractPayroll.Reports {
             this.Namespace = "http://tempuri.org/DS_rptMthlySalReg.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
-            this.tableDtMthlySal = new DtMthlySalDataTable();
-            base.Tables.Add(this.tableDtMthlySal);
+            this.tablesp_Cont_MthlySalTPARegister = new sp_Cont_MthlySalTPARegisterDataTable();
+            base.Tables.Add(this.tablesp_Cont_MthlySalTPARegister);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private bool ShouldSerializeDtMthlySal() {
+        private bool ShouldSerializesp_Cont_MthlySalTPARegister() {
             return false;
         }
         
@@ -270,14 +270,14 @@ namespace ContractPayroll.Reports {
         }
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public delegate void DtMthlySalRowChangeEventHandler(object sender, DtMthlySalRowChangeEvent e);
+        public delegate void sp_Cont_MthlySalTPARegisterRowChangeEventHandler(object sender, sp_Cont_MthlySalTPARegisterRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class DtMthlySalDataTable : global::System.Data.TypedTableBase<DtMthlySalRow> {
+        public partial class sp_Cont_MthlySalTPARegisterDataTable : global::System.Data.TypedTableBase<sp_Cont_MthlySalTPARegisterRow> {
             
             private global::System.Data.DataColumn columnPayPeriod;
             
@@ -307,13 +307,21 @@ namespace ContractPayroll.Reports {
             
             private global::System.Data.DataColumn columnTot_EarnBasic;
             
+            private global::System.Data.DataColumn columnTot_EarnBasicRoundOff;
+            
             private global::System.Data.DataColumn columnTot_TpaHrs;
             
             private global::System.Data.DataColumn columnTot_TpaAmt;
             
+            private global::System.Data.DataColumn columnTot_TpaRoundoff;
+            
             private global::System.Data.DataColumn columnTot_Earnings;
             
+            private global::System.Data.DataColumn columnTot_EarningsRoundoff;
+            
             private global::System.Data.DataColumn columnDed_PF;
+            
+            private global::System.Data.DataColumn columnDed_PF_Roundoff;
             
             private global::System.Data.DataColumn columnCal_EPF;
             
@@ -333,6 +341,8 @@ namespace ContractPayroll.Reports {
             
             private global::System.Data.DataColumn columnTot_Ded;
             
+            private global::System.Data.DataColumn columnNetPay_RoundOff;
+            
             private global::System.Data.DataColumn columnNetPay;
             
             private global::System.Data.DataColumn columnTot_CoCommDays;
@@ -346,6 +356,8 @@ namespace ContractPayroll.Reports {
             private global::System.Data.DataColumn columnTot_CoServTax;
             
             private global::System.Data.DataColumn columnTot_CoEduTax;
+            
+            private global::System.Data.DataColumn columnCBasic;
             
             private global::System.Data.DataColumn columnContCode;
             
@@ -389,22 +401,10 @@ namespace ContractPayroll.Reports {
             
             private global::System.Data.DataColumn columnPayDesc;
             
-            private global::System.Data.DataColumn columnTot_EarnBasicRoundOff;
-            
-            private global::System.Data.DataColumn columnTot_TpaRoundoff;
-            
-            private global::System.Data.DataColumn columnTot_EarningsRoundoff;
-            
-            private global::System.Data.DataColumn columnDed_PF_Roundoff;
-            
-            private global::System.Data.DataColumn columnNetPay_RoundOff;
-            
-            private global::System.Data.DataColumn columnCBasic;
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DtMthlySalDataTable() {
-                this.TableName = "DtMthlySal";
+            public sp_Cont_MthlySalTPARegisterDataTable() {
+                this.TableName = "sp_Cont_MthlySalTPARegister";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
@@ -412,7 +412,7 @@ namespace ContractPayroll.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal DtMthlySalDataTable(global::System.Data.DataTable table) {
+            internal sp_Cont_MthlySalTPARegisterDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -429,7 +429,7 @@ namespace ContractPayroll.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected DtMthlySalDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+            protected sp_Cont_MthlySalTPARegisterDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
             }
@@ -548,6 +548,14 @@ namespace ContractPayroll.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn Tot_EarnBasicRoundOffColumn {
+                get {
+                    return this.columnTot_EarnBasicRoundOff;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public global::System.Data.DataColumn Tot_TpaHrsColumn {
                 get {
                     return this.columnTot_TpaHrs;
@@ -564,6 +572,14 @@ namespace ContractPayroll.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn Tot_TpaRoundoffColumn {
+                get {
+                    return this.columnTot_TpaRoundoff;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public global::System.Data.DataColumn Tot_EarningsColumn {
                 get {
                     return this.columnTot_Earnings;
@@ -572,9 +588,25 @@ namespace ContractPayroll.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn Tot_EarningsRoundoffColumn {
+                get {
+                    return this.columnTot_EarningsRoundoff;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public global::System.Data.DataColumn Ded_PFColumn {
                 get {
                     return this.columnDed_PF;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn Ded_PF_RoundoffColumn {
+                get {
+                    return this.columnDed_PF_Roundoff;
                 }
             }
             
@@ -652,6 +684,14 @@ namespace ContractPayroll.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn NetPay_RoundOffColumn {
+                get {
+                    return this.columnNetPay_RoundOff;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public global::System.Data.DataColumn NetPayColumn {
                 get {
                     return this.columnNetPay;
@@ -703,6 +743,14 @@ namespace ContractPayroll.Reports {
             public global::System.Data.DataColumn Tot_CoEduTaxColumn {
                 get {
                     return this.columnTot_CoEduTax;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CBasicColumn {
+                get {
+                    return this.columnCBasic;
                 }
             }
             
@@ -876,54 +924,6 @@ namespace ContractPayroll.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn Tot_EarnBasicRoundOffColumn {
-                get {
-                    return this.columnTot_EarnBasicRoundOff;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn Tot_TpaRoundoffColumn {
-                get {
-                    return this.columnTot_TpaRoundoff;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn Tot_EarningsRoundoffColumn {
-                get {
-                    return this.columnTot_EarningsRoundoff;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn Ded_PF_RoundoffColumn {
-                get {
-                    return this.columnDed_PF_Roundoff;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn NetPay_RoundOffColumn {
-                get {
-                    return this.columnNetPay_RoundOff;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn CBasicColumn {
-                get {
-                    return this.columnCBasic;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -933,33 +933,33 @@ namespace ContractPayroll.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DtMthlySalRow this[int index] {
+            public sp_Cont_MthlySalTPARegisterRow this[int index] {
                 get {
-                    return ((DtMthlySalRow)(this.Rows[index]));
+                    return ((sp_Cont_MthlySalTPARegisterRow)(this.Rows[index]));
                 }
             }
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event DtMthlySalRowChangeEventHandler DtMthlySalRowChanging;
+            public event sp_Cont_MthlySalTPARegisterRowChangeEventHandler sp_Cont_MthlySalTPARegisterRowChanging;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event DtMthlySalRowChangeEventHandler DtMthlySalRowChanged;
+            public event sp_Cont_MthlySalTPARegisterRowChangeEventHandler sp_Cont_MthlySalTPARegisterRowChanged;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event DtMthlySalRowChangeEventHandler DtMthlySalRowDeleting;
+            public event sp_Cont_MthlySalTPARegisterRowChangeEventHandler sp_Cont_MthlySalTPARegisterRowDeleting;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event DtMthlySalRowChangeEventHandler DtMthlySalRowDeleted;
+            public event sp_Cont_MthlySalTPARegisterRowChangeEventHandler sp_Cont_MthlySalTPARegisterRowDeleted;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void AddDtMthlySalRow(DtMthlySalRow row) {
+            public void Addsp_Cont_MthlySalTPARegisterRow(sp_Cont_MthlySalTPARegisterRow row) {
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DtMthlySalRow AddDtMthlySalRow(
+            public sp_Cont_MthlySalTPARegisterRow Addsp_Cont_MthlySalTPARegisterRow(
                         int PayPeriod, 
                         string EmpUnqID, 
                         double Adj_TPAHrs, 
@@ -974,10 +974,14 @@ namespace ContractPayroll.Reports {
                         double Cal_TpaAmt, 
                         double Tot_DaysPay, 
                         double Tot_EarnBasic, 
+                        double Tot_EarnBasicRoundOff, 
                         double Tot_TpaHrs, 
                         double Tot_TpaAmt, 
+                        double Tot_TpaRoundoff, 
                         double Tot_Earnings, 
+                        double Tot_EarningsRoundoff, 
                         double Ded_PF, 
+                        double Ded_PF_Roundoff, 
                         double Cal_EPF, 
                         double Cal_EPS, 
                         double Ded_ESI, 
@@ -987,6 +991,7 @@ namespace ContractPayroll.Reports {
                         double Ded_Mess, 
                         double Ded_PTax, 
                         double Tot_Ded, 
+                        double NetPay_RoundOff, 
                         double NetPay, 
                         double Tot_CoCommDays, 
                         double Tot_CoCommAmt, 
@@ -994,6 +999,7 @@ namespace ContractPayroll.Reports {
                         double Tot_CoComm, 
                         double Tot_CoServTax, 
                         double Tot_CoEduTax, 
+                        double CBasic, 
                         string ContCode, 
                         string DeptCode, 
                         string DeptDesc, 
@@ -1014,14 +1020,8 @@ namespace ContractPayroll.Reports {
                         System.DateTime BirthDt, 
                         System.DateTime FromDt, 
                         System.DateTime ToDt, 
-                        string PayDesc, 
-                        double Tot_EarnBasicRoundOff, 
-                        double Tot_TpaRoundoff, 
-                        double Tot_EarningsRoundoff, 
-                        double Ded_PF_Roundoff, 
-                        double NetPay_RoundOff, 
-                        double CBasic) {
-                DtMthlySalRow rowDtMthlySalRow = ((DtMthlySalRow)(this.NewRow()));
+                        string PayDesc) {
+                sp_Cont_MthlySalTPARegisterRow rowsp_Cont_MthlySalTPARegisterRow = ((sp_Cont_MthlySalTPARegisterRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         PayPeriod,
                         EmpUnqID,
@@ -1037,10 +1037,14 @@ namespace ContractPayroll.Reports {
                         Cal_TpaAmt,
                         Tot_DaysPay,
                         Tot_EarnBasic,
+                        Tot_EarnBasicRoundOff,
                         Tot_TpaHrs,
                         Tot_TpaAmt,
+                        Tot_TpaRoundoff,
                         Tot_Earnings,
+                        Tot_EarningsRoundoff,
                         Ded_PF,
+                        Ded_PF_Roundoff,
                         Cal_EPF,
                         Cal_EPS,
                         Ded_ESI,
@@ -1050,6 +1054,7 @@ namespace ContractPayroll.Reports {
                         Ded_Mess,
                         Ded_PTax,
                         Tot_Ded,
+                        NetPay_RoundOff,
                         NetPay,
                         Tot_CoCommDays,
                         Tot_CoCommAmt,
@@ -1057,6 +1062,7 @@ namespace ContractPayroll.Reports {
                         Tot_CoComm,
                         Tot_CoServTax,
                         Tot_CoEduTax,
+                        CBasic,
                         ContCode,
                         DeptCode,
                         DeptDesc,
@@ -1077,22 +1083,16 @@ namespace ContractPayroll.Reports {
                         BirthDt,
                         FromDt,
                         ToDt,
-                        PayDesc,
-                        Tot_EarnBasicRoundOff,
-                        Tot_TpaRoundoff,
-                        Tot_EarningsRoundoff,
-                        Ded_PF_Roundoff,
-                        NetPay_RoundOff,
-                        CBasic};
-                rowDtMthlySalRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowDtMthlySalRow);
-                return rowDtMthlySalRow;
+                        PayDesc};
+                rowsp_Cont_MthlySalTPARegisterRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowsp_Cont_MthlySalTPARegisterRow);
+                return rowsp_Cont_MthlySalTPARegisterRow;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DtMthlySalRow FindByPayPeriodEmpUnqID(int PayPeriod, string EmpUnqID) {
-                return ((DtMthlySalRow)(this.Rows.Find(new object[] {
+            public sp_Cont_MthlySalTPARegisterRow FindByPayPeriodEmpUnqID(int PayPeriod, string EmpUnqID) {
+                return ((sp_Cont_MthlySalTPARegisterRow)(this.Rows.Find(new object[] {
                             PayPeriod,
                             EmpUnqID})));
             }
@@ -1100,7 +1100,7 @@ namespace ContractPayroll.Reports {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public override global::System.Data.DataTable Clone() {
-                DtMthlySalDataTable cln = ((DtMthlySalDataTable)(base.Clone()));
+                sp_Cont_MthlySalTPARegisterDataTable cln = ((sp_Cont_MthlySalTPARegisterDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
@@ -1108,7 +1108,7 @@ namespace ContractPayroll.Reports {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Data.DataTable CreateInstance() {
-                return new DtMthlySalDataTable();
+                return new sp_Cont_MthlySalTPARegisterDataTable();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1128,10 +1128,14 @@ namespace ContractPayroll.Reports {
                 this.columnCal_TpaAmt = base.Columns["Cal_TpaAmt"];
                 this.columnTot_DaysPay = base.Columns["Tot_DaysPay"];
                 this.columnTot_EarnBasic = base.Columns["Tot_EarnBasic"];
+                this.columnTot_EarnBasicRoundOff = base.Columns["Tot_EarnBasicRoundOff"];
                 this.columnTot_TpaHrs = base.Columns["Tot_TpaHrs"];
                 this.columnTot_TpaAmt = base.Columns["Tot_TpaAmt"];
+                this.columnTot_TpaRoundoff = base.Columns["Tot_TpaRoundoff"];
                 this.columnTot_Earnings = base.Columns["Tot_Earnings"];
+                this.columnTot_EarningsRoundoff = base.Columns["Tot_EarningsRoundoff"];
                 this.columnDed_PF = base.Columns["Ded_PF"];
+                this.columnDed_PF_Roundoff = base.Columns["Ded_PF_Roundoff"];
                 this.columnCal_EPF = base.Columns["Cal_EPF"];
                 this.columnCal_EPS = base.Columns["Cal_EPS"];
                 this.columnDed_ESI = base.Columns["Ded_ESI"];
@@ -1141,6 +1145,7 @@ namespace ContractPayroll.Reports {
                 this.columnDed_Mess = base.Columns["Ded_Mess"];
                 this.columnDed_PTax = base.Columns["Ded_PTax"];
                 this.columnTot_Ded = base.Columns["Tot_Ded"];
+                this.columnNetPay_RoundOff = base.Columns["NetPay_RoundOff"];
                 this.columnNetPay = base.Columns["NetPay"];
                 this.columnTot_CoCommDays = base.Columns["Tot_CoCommDays"];
                 this.columnTot_CoCommAmt = base.Columns["Tot_CoCommAmt"];
@@ -1148,6 +1153,7 @@ namespace ContractPayroll.Reports {
                 this.columnTot_CoComm = base.Columns["Tot_CoComm"];
                 this.columnTot_CoServTax = base.Columns["Tot_CoServTax"];
                 this.columnTot_CoEduTax = base.Columns["Tot_CoEduTax"];
+                this.columnCBasic = base.Columns["CBasic"];
                 this.columnContCode = base.Columns["ContCode"];
                 this.columnDeptCode = base.Columns["DeptCode"];
                 this.columnDeptDesc = base.Columns["DeptDesc"];
@@ -1169,12 +1175,6 @@ namespace ContractPayroll.Reports {
                 this.columnFromDt = base.Columns["FromDt"];
                 this.columnToDt = base.Columns["ToDt"];
                 this.columnPayDesc = base.Columns["PayDesc"];
-                this.columnTot_EarnBasicRoundOff = base.Columns["Tot_EarnBasicRoundOff"];
-                this.columnTot_TpaRoundoff = base.Columns["Tot_TpaRoundoff"];
-                this.columnTot_EarningsRoundoff = base.Columns["Tot_EarningsRoundoff"];
-                this.columnDed_PF_Roundoff = base.Columns["Ded_PF_Roundoff"];
-                this.columnNetPay_RoundOff = base.Columns["NetPay_RoundOff"];
-                this.columnCBasic = base.Columns["CBasic"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1208,14 +1208,22 @@ namespace ContractPayroll.Reports {
                 base.Columns.Add(this.columnTot_DaysPay);
                 this.columnTot_EarnBasic = new global::System.Data.DataColumn("Tot_EarnBasic", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTot_EarnBasic);
+                this.columnTot_EarnBasicRoundOff = new global::System.Data.DataColumn("Tot_EarnBasicRoundOff", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTot_EarnBasicRoundOff);
                 this.columnTot_TpaHrs = new global::System.Data.DataColumn("Tot_TpaHrs", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTot_TpaHrs);
                 this.columnTot_TpaAmt = new global::System.Data.DataColumn("Tot_TpaAmt", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTot_TpaAmt);
+                this.columnTot_TpaRoundoff = new global::System.Data.DataColumn("Tot_TpaRoundoff", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTot_TpaRoundoff);
                 this.columnTot_Earnings = new global::System.Data.DataColumn("Tot_Earnings", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTot_Earnings);
+                this.columnTot_EarningsRoundoff = new global::System.Data.DataColumn("Tot_EarningsRoundoff", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTot_EarningsRoundoff);
                 this.columnDed_PF = new global::System.Data.DataColumn("Ded_PF", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDed_PF);
+                this.columnDed_PF_Roundoff = new global::System.Data.DataColumn("Ded_PF_Roundoff", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDed_PF_Roundoff);
                 this.columnCal_EPF = new global::System.Data.DataColumn("Cal_EPF", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCal_EPF);
                 this.columnCal_EPS = new global::System.Data.DataColumn("Cal_EPS", typeof(double), null, global::System.Data.MappingType.Element);
@@ -1234,6 +1242,8 @@ namespace ContractPayroll.Reports {
                 base.Columns.Add(this.columnDed_PTax);
                 this.columnTot_Ded = new global::System.Data.DataColumn("Tot_Ded", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTot_Ded);
+                this.columnNetPay_RoundOff = new global::System.Data.DataColumn("NetPay_RoundOff", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNetPay_RoundOff);
                 this.columnNetPay = new global::System.Data.DataColumn("NetPay", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnNetPay);
                 this.columnTot_CoCommDays = new global::System.Data.DataColumn("Tot_CoCommDays", typeof(double), null, global::System.Data.MappingType.Element);
@@ -1248,6 +1258,8 @@ namespace ContractPayroll.Reports {
                 base.Columns.Add(this.columnTot_CoServTax);
                 this.columnTot_CoEduTax = new global::System.Data.DataColumn("Tot_CoEduTax", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTot_CoEduTax);
+                this.columnCBasic = new global::System.Data.DataColumn("CBasic", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCBasic);
                 this.columnContCode = new global::System.Data.DataColumn("ContCode", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnContCode);
                 this.columnDeptCode = new global::System.Data.DataColumn("DeptCode", typeof(string), null, global::System.Data.MappingType.Element);
@@ -1290,18 +1302,6 @@ namespace ContractPayroll.Reports {
                 base.Columns.Add(this.columnToDt);
                 this.columnPayDesc = new global::System.Data.DataColumn("PayDesc", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnPayDesc);
-                this.columnTot_EarnBasicRoundOff = new global::System.Data.DataColumn("Tot_EarnBasicRoundOff", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnTot_EarnBasicRoundOff);
-                this.columnTot_TpaRoundoff = new global::System.Data.DataColumn("Tot_TpaRoundoff", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnTot_TpaRoundoff);
-                this.columnTot_EarningsRoundoff = new global::System.Data.DataColumn("Tot_EarningsRoundoff", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnTot_EarningsRoundoff);
-                this.columnDed_PF_Roundoff = new global::System.Data.DataColumn("Ded_PF_Roundoff", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnDed_PF_Roundoff);
-                this.columnNetPay_RoundOff = new global::System.Data.DataColumn("NetPay_RoundOff", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnNetPay_RoundOff);
-                this.columnCBasic = new global::System.Data.DataColumn("CBasic", typeof(double), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCBasic);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnPayPeriod,
                                 this.columnEmpUnqID}, true));
@@ -1320,10 +1320,14 @@ namespace ContractPayroll.Reports {
                 this.columnCal_TpaAmt.AllowDBNull = false;
                 this.columnTot_DaysPay.AllowDBNull = false;
                 this.columnTot_EarnBasic.AllowDBNull = false;
+                this.columnTot_EarnBasicRoundOff.AllowDBNull = false;
                 this.columnTot_TpaHrs.AllowDBNull = false;
                 this.columnTot_TpaAmt.AllowDBNull = false;
+                this.columnTot_TpaRoundoff.AllowDBNull = false;
                 this.columnTot_Earnings.AllowDBNull = false;
+                this.columnTot_EarningsRoundoff.AllowDBNull = false;
                 this.columnDed_PF.AllowDBNull = false;
+                this.columnDed_PF_Roundoff.AllowDBNull = false;
                 this.columnCal_EPF.AllowDBNull = false;
                 this.columnCal_EPS.AllowDBNull = false;
                 this.columnDed_ESI.AllowDBNull = false;
@@ -1333,6 +1337,7 @@ namespace ContractPayroll.Reports {
                 this.columnDed_Mess.AllowDBNull = false;
                 this.columnDed_PTax.AllowDBNull = false;
                 this.columnTot_Ded.AllowDBNull = false;
+                this.columnNetPay_RoundOff.AllowDBNull = false;
                 this.columnNetPay.AllowDBNull = false;
                 this.columnTot_CoCommDays.AllowDBNull = false;
                 this.columnTot_CoCommAmt.AllowDBNull = false;
@@ -1340,6 +1345,7 @@ namespace ContractPayroll.Reports {
                 this.columnTot_CoComm.AllowDBNull = false;
                 this.columnTot_CoServTax.AllowDBNull = false;
                 this.columnTot_CoEduTax.AllowDBNull = false;
+                this.columnCBasic.AllowDBNull = false;
                 this.columnContCode.MaxLength = 3;
                 this.columnDeptCode.MaxLength = 3;
                 this.columnDeptDesc.MaxLength = 100;
@@ -1360,38 +1366,32 @@ namespace ContractPayroll.Reports {
                 this.columnToDt.AllowDBNull = false;
                 this.columnPayDesc.AllowDBNull = false;
                 this.columnPayDesc.MaxLength = 100;
-                this.columnTot_EarnBasicRoundOff.AllowDBNull = false;
-                this.columnTot_TpaRoundoff.AllowDBNull = false;
-                this.columnTot_EarningsRoundoff.AllowDBNull = false;
-                this.columnDed_PF_Roundoff.AllowDBNull = false;
-                this.columnNetPay_RoundOff.AllowDBNull = false;
-                this.columnCBasic.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DtMthlySalRow NewDtMthlySalRow() {
-                return ((DtMthlySalRow)(this.NewRow()));
+            public sp_Cont_MthlySalTPARegisterRow Newsp_Cont_MthlySalTPARegisterRow() {
+                return ((sp_Cont_MthlySalTPARegisterRow)(this.NewRow()));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new DtMthlySalRow(builder);
+                return new sp_Cont_MthlySalTPARegisterRow(builder);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Type GetRowType() {
-                return typeof(DtMthlySalRow);
+                return typeof(sp_Cont_MthlySalTPARegisterRow);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.DtMthlySalRowChanged != null)) {
-                    this.DtMthlySalRowChanged(this, new DtMthlySalRowChangeEvent(((DtMthlySalRow)(e.Row)), e.Action));
+                if ((this.sp_Cont_MthlySalTPARegisterRowChanged != null)) {
+                    this.sp_Cont_MthlySalTPARegisterRowChanged(this, new sp_Cont_MthlySalTPARegisterRowChangeEvent(((sp_Cont_MthlySalTPARegisterRow)(e.Row)), e.Action));
                 }
             }
             
@@ -1399,8 +1399,8 @@ namespace ContractPayroll.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.DtMthlySalRowChanging != null)) {
-                    this.DtMthlySalRowChanging(this, new DtMthlySalRowChangeEvent(((DtMthlySalRow)(e.Row)), e.Action));
+                if ((this.sp_Cont_MthlySalTPARegisterRowChanging != null)) {
+                    this.sp_Cont_MthlySalTPARegisterRowChanging(this, new sp_Cont_MthlySalTPARegisterRowChangeEvent(((sp_Cont_MthlySalTPARegisterRow)(e.Row)), e.Action));
                 }
             }
             
@@ -1408,8 +1408,8 @@ namespace ContractPayroll.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.DtMthlySalRowDeleted != null)) {
-                    this.DtMthlySalRowDeleted(this, new DtMthlySalRowChangeEvent(((DtMthlySalRow)(e.Row)), e.Action));
+                if ((this.sp_Cont_MthlySalTPARegisterRowDeleted != null)) {
+                    this.sp_Cont_MthlySalTPARegisterRowDeleted(this, new sp_Cont_MthlySalTPARegisterRowChangeEvent(((sp_Cont_MthlySalTPARegisterRow)(e.Row)), e.Action));
                 }
             }
             
@@ -1417,14 +1417,14 @@ namespace ContractPayroll.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.DtMthlySalRowDeleting != null)) {
-                    this.DtMthlySalRowDeleting(this, new DtMthlySalRowChangeEvent(((DtMthlySalRow)(e.Row)), e.Action));
+                if ((this.sp_Cont_MthlySalTPARegisterRowDeleting != null)) {
+                    this.sp_Cont_MthlySalTPARegisterRowDeleting(this, new sp_Cont_MthlySalTPARegisterRowChangeEvent(((sp_Cont_MthlySalTPARegisterRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void RemoveDtMthlySalRow(DtMthlySalRow row) {
+            public void Removesp_Cont_MthlySalTPARegisterRow(sp_Cont_MthlySalTPARegisterRow row) {
                 this.Rows.Remove(row);
             }
             
@@ -1451,7 +1451,7 @@ namespace ContractPayroll.Reports {
                 type.Attributes.Add(attribute1);
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "DtMthlySalDataTable";
+                attribute2.FixedValue = "sp_Cont_MthlySalTPARegisterDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -1495,25 +1495,25 @@ namespace ContractPayroll.Reports {
         /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
-        public partial class DtMthlySalRow : global::System.Data.DataRow {
+        public partial class sp_Cont_MthlySalTPARegisterRow : global::System.Data.DataRow {
             
-            private DtMthlySalDataTable tableDtMthlySal;
+            private sp_Cont_MthlySalTPARegisterDataTable tablesp_Cont_MthlySalTPARegister;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal DtMthlySalRow(global::System.Data.DataRowBuilder rb) : 
+            internal sp_Cont_MthlySalTPARegisterRow(global::System.Data.DataRowBuilder rb) : 
                     base(rb) {
-                this.tableDtMthlySal = ((DtMthlySalDataTable)(this.Table));
+                this.tablesp_Cont_MthlySalTPARegister = ((sp_Cont_MthlySalTPARegisterDataTable)(this.Table));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public int PayPeriod {
                 get {
-                    return ((int)(this[this.tableDtMthlySal.PayPeriodColumn]));
+                    return ((int)(this[this.tablesp_Cont_MthlySalTPARegister.PayPeriodColumn]));
                 }
                 set {
-                    this[this.tableDtMthlySal.PayPeriodColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.PayPeriodColumn] = value;
                 }
             }
             
@@ -1521,10 +1521,10 @@ namespace ContractPayroll.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string EmpUnqID {
                 get {
-                    return ((string)(this[this.tableDtMthlySal.EmpUnqIDColumn]));
+                    return ((string)(this[this.tablesp_Cont_MthlySalTPARegister.EmpUnqIDColumn]));
                 }
                 set {
-                    this[this.tableDtMthlySal.EmpUnqIDColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.EmpUnqIDColumn] = value;
                 }
             }
             
@@ -1532,10 +1532,10 @@ namespace ContractPayroll.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public double Adj_TPAHrs {
                 get {
-                    return ((double)(this[this.tableDtMthlySal.Adj_TPAHrsColumn]));
+                    return ((double)(this[this.tablesp_Cont_MthlySalTPARegister.Adj_TPAHrsColumn]));
                 }
                 set {
-                    this[this.tableDtMthlySal.Adj_TPAHrsColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.Adj_TPAHrsColumn] = value;
                 }
             }
             
@@ -1543,10 +1543,10 @@ namespace ContractPayroll.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public double Adj_TPAAmt {
                 get {
-                    return ((double)(this[this.tableDtMthlySal.Adj_TPAAmtColumn]));
+                    return ((double)(this[this.tablesp_Cont_MthlySalTPARegister.Adj_TPAAmtColumn]));
                 }
                 set {
-                    this[this.tableDtMthlySal.Adj_TPAAmtColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.Adj_TPAAmtColumn] = value;
                 }
             }
             
@@ -1554,10 +1554,10 @@ namespace ContractPayroll.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public double Adj_DaysPay {
                 get {
-                    return ((double)(this[this.tableDtMthlySal.Adj_DaysPayColumn]));
+                    return ((double)(this[this.tablesp_Cont_MthlySalTPARegister.Adj_DaysPayColumn]));
                 }
                 set {
-                    this[this.tableDtMthlySal.Adj_DaysPayColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.Adj_DaysPayColumn] = value;
                 }
             }
             
@@ -1565,10 +1565,10 @@ namespace ContractPayroll.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public double Adj_DaysPayAmt {
                 get {
-                    return ((double)(this[this.tableDtMthlySal.Adj_DaysPayAmtColumn]));
+                    return ((double)(this[this.tablesp_Cont_MthlySalTPARegister.Adj_DaysPayAmtColumn]));
                 }
                 set {
-                    this[this.tableDtMthlySal.Adj_DaysPayAmtColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.Adj_DaysPayAmtColumn] = value;
                 }
             }
             
@@ -1576,10 +1576,10 @@ namespace ContractPayroll.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public double Adj_Amt {
                 get {
-                    return ((double)(this[this.tableDtMthlySal.Adj_AmtColumn]));
+                    return ((double)(this[this.tablesp_Cont_MthlySalTPARegister.Adj_AmtColumn]));
                 }
                 set {
-                    this[this.tableDtMthlySal.Adj_AmtColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.Adj_AmtColumn] = value;
                 }
             }
             
@@ -1587,10 +1587,10 @@ namespace ContractPayroll.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public double Cal_Basic {
                 get {
-                    return ((double)(this[this.tableDtMthlySal.Cal_BasicColumn]));
+                    return ((double)(this[this.tablesp_Cont_MthlySalTPARegister.Cal_BasicColumn]));
                 }
                 set {
-                    this[this.tableDtMthlySal.Cal_BasicColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.Cal_BasicColumn] = value;
                 }
             }
             
@@ -1598,10 +1598,10 @@ namespace ContractPayroll.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public double Cal_DaysPay {
                 get {
-                    return ((double)(this[this.tableDtMthlySal.Cal_DaysPayColumn]));
+                    return ((double)(this[this.tablesp_Cont_MthlySalTPARegister.Cal_DaysPayColumn]));
                 }
                 set {
-                    this[this.tableDtMthlySal.Cal_DaysPayColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.Cal_DaysPayColumn] = value;
                 }
             }
             
@@ -1609,10 +1609,10 @@ namespace ContractPayroll.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public double Cal_WODays {
                 get {
-                    return ((double)(this[this.tableDtMthlySal.Cal_WODaysColumn]));
+                    return ((double)(this[this.tablesp_Cont_MthlySalTPARegister.Cal_WODaysColumn]));
                 }
                 set {
-                    this[this.tableDtMthlySal.Cal_WODaysColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.Cal_WODaysColumn] = value;
                 }
             }
             
@@ -1620,10 +1620,10 @@ namespace ContractPayroll.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public double Cal_TpaHrs {
                 get {
-                    return ((double)(this[this.tableDtMthlySal.Cal_TpaHrsColumn]));
+                    return ((double)(this[this.tablesp_Cont_MthlySalTPARegister.Cal_TpaHrsColumn]));
                 }
                 set {
-                    this[this.tableDtMthlySal.Cal_TpaHrsColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.Cal_TpaHrsColumn] = value;
                 }
             }
             
@@ -1631,10 +1631,10 @@ namespace ContractPayroll.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public double Cal_TpaAmt {
                 get {
-                    return ((double)(this[this.tableDtMthlySal.Cal_TpaAmtColumn]));
+                    return ((double)(this[this.tablesp_Cont_MthlySalTPARegister.Cal_TpaAmtColumn]));
                 }
                 set {
-                    this[this.tableDtMthlySal.Cal_TpaAmtColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.Cal_TpaAmtColumn] = value;
                 }
             }
             
@@ -1642,10 +1642,10 @@ namespace ContractPayroll.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public double Tot_DaysPay {
                 get {
-                    return ((double)(this[this.tableDtMthlySal.Tot_DaysPayColumn]));
+                    return ((double)(this[this.tablesp_Cont_MthlySalTPARegister.Tot_DaysPayColumn]));
                 }
                 set {
-                    this[this.tableDtMthlySal.Tot_DaysPayColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.Tot_DaysPayColumn] = value;
                 }
             }
             
@@ -1653,10 +1653,21 @@ namespace ContractPayroll.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public double Tot_EarnBasic {
                 get {
-                    return ((double)(this[this.tableDtMthlySal.Tot_EarnBasicColumn]));
+                    return ((double)(this[this.tablesp_Cont_MthlySalTPARegister.Tot_EarnBasicColumn]));
                 }
                 set {
-                    this[this.tableDtMthlySal.Tot_EarnBasicColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.Tot_EarnBasicColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double Tot_EarnBasicRoundOff {
+                get {
+                    return ((double)(this[this.tablesp_Cont_MthlySalTPARegister.Tot_EarnBasicRoundOffColumn]));
+                }
+                set {
+                    this[this.tablesp_Cont_MthlySalTPARegister.Tot_EarnBasicRoundOffColumn] = value;
                 }
             }
             
@@ -1664,10 +1675,10 @@ namespace ContractPayroll.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public double Tot_TpaHrs {
                 get {
-                    return ((double)(this[this.tableDtMthlySal.Tot_TpaHrsColumn]));
+                    return ((double)(this[this.tablesp_Cont_MthlySalTPARegister.Tot_TpaHrsColumn]));
                 }
                 set {
-                    this[this.tableDtMthlySal.Tot_TpaHrsColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.Tot_TpaHrsColumn] = value;
                 }
             }
             
@@ -1675,10 +1686,21 @@ namespace ContractPayroll.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public double Tot_TpaAmt {
                 get {
-                    return ((double)(this[this.tableDtMthlySal.Tot_TpaAmtColumn]));
+                    return ((double)(this[this.tablesp_Cont_MthlySalTPARegister.Tot_TpaAmtColumn]));
                 }
                 set {
-                    this[this.tableDtMthlySal.Tot_TpaAmtColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.Tot_TpaAmtColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double Tot_TpaRoundoff {
+                get {
+                    return ((double)(this[this.tablesp_Cont_MthlySalTPARegister.Tot_TpaRoundoffColumn]));
+                }
+                set {
+                    this[this.tablesp_Cont_MthlySalTPARegister.Tot_TpaRoundoffColumn] = value;
                 }
             }
             
@@ -1686,10 +1708,21 @@ namespace ContractPayroll.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public double Tot_Earnings {
                 get {
-                    return ((double)(this[this.tableDtMthlySal.Tot_EarningsColumn]));
+                    return ((double)(this[this.tablesp_Cont_MthlySalTPARegister.Tot_EarningsColumn]));
                 }
                 set {
-                    this[this.tableDtMthlySal.Tot_EarningsColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.Tot_EarningsColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double Tot_EarningsRoundoff {
+                get {
+                    return ((double)(this[this.tablesp_Cont_MthlySalTPARegister.Tot_EarningsRoundoffColumn]));
+                }
+                set {
+                    this[this.tablesp_Cont_MthlySalTPARegister.Tot_EarningsRoundoffColumn] = value;
                 }
             }
             
@@ -1697,10 +1730,21 @@ namespace ContractPayroll.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public double Ded_PF {
                 get {
-                    return ((double)(this[this.tableDtMthlySal.Ded_PFColumn]));
+                    return ((double)(this[this.tablesp_Cont_MthlySalTPARegister.Ded_PFColumn]));
                 }
                 set {
-                    this[this.tableDtMthlySal.Ded_PFColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.Ded_PFColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double Ded_PF_Roundoff {
+                get {
+                    return ((double)(this[this.tablesp_Cont_MthlySalTPARegister.Ded_PF_RoundoffColumn]));
+                }
+                set {
+                    this[this.tablesp_Cont_MthlySalTPARegister.Ded_PF_RoundoffColumn] = value;
                 }
             }
             
@@ -1708,10 +1752,10 @@ namespace ContractPayroll.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public double Cal_EPF {
                 get {
-                    return ((double)(this[this.tableDtMthlySal.Cal_EPFColumn]));
+                    return ((double)(this[this.tablesp_Cont_MthlySalTPARegister.Cal_EPFColumn]));
                 }
                 set {
-                    this[this.tableDtMthlySal.Cal_EPFColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.Cal_EPFColumn] = value;
                 }
             }
             
@@ -1719,10 +1763,10 @@ namespace ContractPayroll.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public double Cal_EPS {
                 get {
-                    return ((double)(this[this.tableDtMthlySal.Cal_EPSColumn]));
+                    return ((double)(this[this.tablesp_Cont_MthlySalTPARegister.Cal_EPSColumn]));
                 }
                 set {
-                    this[this.tableDtMthlySal.Cal_EPSColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.Cal_EPSColumn] = value;
                 }
             }
             
@@ -1730,10 +1774,10 @@ namespace ContractPayroll.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public double Ded_ESI {
                 get {
-                    return ((double)(this[this.tableDtMthlySal.Ded_ESIColumn]));
+                    return ((double)(this[this.tablesp_Cont_MthlySalTPARegister.Ded_ESIColumn]));
                 }
                 set {
-                    this[this.tableDtMthlySal.Ded_ESIColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.Ded_ESIColumn] = value;
                 }
             }
             
@@ -1741,10 +1785,10 @@ namespace ContractPayroll.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public double Ded_LWF {
                 get {
-                    return ((double)(this[this.tableDtMthlySal.Ded_LWFColumn]));
+                    return ((double)(this[this.tablesp_Cont_MthlySalTPARegister.Ded_LWFColumn]));
                 }
                 set {
-                    this[this.tableDtMthlySal.Ded_LWFColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.Ded_LWFColumn] = value;
                 }
             }
             
@@ -1752,10 +1796,10 @@ namespace ContractPayroll.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public double Ded_DeathFund {
                 get {
-                    return ((double)(this[this.tableDtMthlySal.Ded_DeathFundColumn]));
+                    return ((double)(this[this.tablesp_Cont_MthlySalTPARegister.Ded_DeathFundColumn]));
                 }
                 set {
-                    this[this.tableDtMthlySal.Ded_DeathFundColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.Ded_DeathFundColumn] = value;
                 }
             }
             
@@ -1763,10 +1807,10 @@ namespace ContractPayroll.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public double Ded_Other {
                 get {
-                    return ((double)(this[this.tableDtMthlySal.Ded_OtherColumn]));
+                    return ((double)(this[this.tablesp_Cont_MthlySalTPARegister.Ded_OtherColumn]));
                 }
                 set {
-                    this[this.tableDtMthlySal.Ded_OtherColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.Ded_OtherColumn] = value;
                 }
             }
             
@@ -1774,10 +1818,10 @@ namespace ContractPayroll.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public double Ded_Mess {
                 get {
-                    return ((double)(this[this.tableDtMthlySal.Ded_MessColumn]));
+                    return ((double)(this[this.tablesp_Cont_MthlySalTPARegister.Ded_MessColumn]));
                 }
                 set {
-                    this[this.tableDtMthlySal.Ded_MessColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.Ded_MessColumn] = value;
                 }
             }
             
@@ -1785,10 +1829,10 @@ namespace ContractPayroll.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public double Ded_PTax {
                 get {
-                    return ((double)(this[this.tableDtMthlySal.Ded_PTaxColumn]));
+                    return ((double)(this[this.tablesp_Cont_MthlySalTPARegister.Ded_PTaxColumn]));
                 }
                 set {
-                    this[this.tableDtMthlySal.Ded_PTaxColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.Ded_PTaxColumn] = value;
                 }
             }
             
@@ -1796,10 +1840,21 @@ namespace ContractPayroll.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public double Tot_Ded {
                 get {
-                    return ((double)(this[this.tableDtMthlySal.Tot_DedColumn]));
+                    return ((double)(this[this.tablesp_Cont_MthlySalTPARegister.Tot_DedColumn]));
                 }
                 set {
-                    this[this.tableDtMthlySal.Tot_DedColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.Tot_DedColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double NetPay_RoundOff {
+                get {
+                    return ((double)(this[this.tablesp_Cont_MthlySalTPARegister.NetPay_RoundOffColumn]));
+                }
+                set {
+                    this[this.tablesp_Cont_MthlySalTPARegister.NetPay_RoundOffColumn] = value;
                 }
             }
             
@@ -1807,10 +1862,10 @@ namespace ContractPayroll.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public double NetPay {
                 get {
-                    return ((double)(this[this.tableDtMthlySal.NetPayColumn]));
+                    return ((double)(this[this.tablesp_Cont_MthlySalTPARegister.NetPayColumn]));
                 }
                 set {
-                    this[this.tableDtMthlySal.NetPayColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.NetPayColumn] = value;
                 }
             }
             
@@ -1818,10 +1873,10 @@ namespace ContractPayroll.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public double Tot_CoCommDays {
                 get {
-                    return ((double)(this[this.tableDtMthlySal.Tot_CoCommDaysColumn]));
+                    return ((double)(this[this.tablesp_Cont_MthlySalTPARegister.Tot_CoCommDaysColumn]));
                 }
                 set {
-                    this[this.tableDtMthlySal.Tot_CoCommDaysColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.Tot_CoCommDaysColumn] = value;
                 }
             }
             
@@ -1829,10 +1884,10 @@ namespace ContractPayroll.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public double Tot_CoCommAmt {
                 get {
-                    return ((double)(this[this.tableDtMthlySal.Tot_CoCommAmtColumn]));
+                    return ((double)(this[this.tablesp_Cont_MthlySalTPARegister.Tot_CoCommAmtColumn]));
                 }
                 set {
-                    this[this.tableDtMthlySal.Tot_CoCommAmtColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.Tot_CoCommAmtColumn] = value;
                 }
             }
             
@@ -1840,10 +1895,10 @@ namespace ContractPayroll.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public double Tot_CoCommPFAmt {
                 get {
-                    return ((double)(this[this.tableDtMthlySal.Tot_CoCommPFAmtColumn]));
+                    return ((double)(this[this.tablesp_Cont_MthlySalTPARegister.Tot_CoCommPFAmtColumn]));
                 }
                 set {
-                    this[this.tableDtMthlySal.Tot_CoCommPFAmtColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.Tot_CoCommPFAmtColumn] = value;
                 }
             }
             
@@ -1851,10 +1906,10 @@ namespace ContractPayroll.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public double Tot_CoComm {
                 get {
-                    return ((double)(this[this.tableDtMthlySal.Tot_CoCommColumn]));
+                    return ((double)(this[this.tablesp_Cont_MthlySalTPARegister.Tot_CoCommColumn]));
                 }
                 set {
-                    this[this.tableDtMthlySal.Tot_CoCommColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.Tot_CoCommColumn] = value;
                 }
             }
             
@@ -1862,10 +1917,10 @@ namespace ContractPayroll.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public double Tot_CoServTax {
                 get {
-                    return ((double)(this[this.tableDtMthlySal.Tot_CoServTaxColumn]));
+                    return ((double)(this[this.tablesp_Cont_MthlySalTPARegister.Tot_CoServTaxColumn]));
                 }
                 set {
-                    this[this.tableDtMthlySal.Tot_CoServTaxColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.Tot_CoServTaxColumn] = value;
                 }
             }
             
@@ -1873,10 +1928,21 @@ namespace ContractPayroll.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public double Tot_CoEduTax {
                 get {
-                    return ((double)(this[this.tableDtMthlySal.Tot_CoEduTaxColumn]));
+                    return ((double)(this[this.tablesp_Cont_MthlySalTPARegister.Tot_CoEduTaxColumn]));
                 }
                 set {
-                    this[this.tableDtMthlySal.Tot_CoEduTaxColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.Tot_CoEduTaxColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double CBasic {
+                get {
+                    return ((double)(this[this.tablesp_Cont_MthlySalTPARegister.CBasicColumn]));
+                }
+                set {
+                    this[this.tablesp_Cont_MthlySalTPARegister.CBasicColumn] = value;
                 }
             }
             
@@ -1885,14 +1951,15 @@ namespace ContractPayroll.Reports {
             public string ContCode {
                 get {
                     try {
-                        return ((string)(this[this.tableDtMthlySal.ContCodeColumn]));
+                        return ((string)(this[this.tablesp_Cont_MthlySalTPARegister.ContCodeColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ContCode\' in table \'DtMthlySal\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'ContCode\' in table \'sp_Cont_MthlySalTPARegister\' is DBNull." +
+                                "", e);
                     }
                 }
                 set {
-                    this[this.tableDtMthlySal.ContCodeColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.ContCodeColumn] = value;
                 }
             }
             
@@ -1901,14 +1968,15 @@ namespace ContractPayroll.Reports {
             public string DeptCode {
                 get {
                     try {
-                        return ((string)(this[this.tableDtMthlySal.DeptCodeColumn]));
+                        return ((string)(this[this.tablesp_Cont_MthlySalTPARegister.DeptCodeColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'DeptCode\' in table \'DtMthlySal\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'DeptCode\' in table \'sp_Cont_MthlySalTPARegister\' is DBNull." +
+                                "", e);
                     }
                 }
                 set {
-                    this[this.tableDtMthlySal.DeptCodeColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.DeptCodeColumn] = value;
                 }
             }
             
@@ -1917,14 +1985,15 @@ namespace ContractPayroll.Reports {
             public string DeptDesc {
                 get {
                     try {
-                        return ((string)(this[this.tableDtMthlySal.DeptDescColumn]));
+                        return ((string)(this[this.tablesp_Cont_MthlySalTPARegister.DeptDescColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'DeptDesc\' in table \'DtMthlySal\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'DeptDesc\' in table \'sp_Cont_MthlySalTPARegister\' is DBNull." +
+                                "", e);
                     }
                 }
                 set {
-                    this[this.tableDtMthlySal.DeptDescColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.DeptDescColumn] = value;
                 }
             }
             
@@ -1933,14 +2002,15 @@ namespace ContractPayroll.Reports {
             public string StatCode {
                 get {
                     try {
-                        return ((string)(this[this.tableDtMthlySal.StatCodeColumn]));
+                        return ((string)(this[this.tablesp_Cont_MthlySalTPARegister.StatCodeColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'StatCode\' in table \'DtMthlySal\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'StatCode\' in table \'sp_Cont_MthlySalTPARegister\' is DBNull." +
+                                "", e);
                     }
                 }
                 set {
-                    this[this.tableDtMthlySal.StatCodeColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.StatCodeColumn] = value;
                 }
             }
             
@@ -1949,14 +2019,15 @@ namespace ContractPayroll.Reports {
             public string StatDesc {
                 get {
                     try {
-                        return ((string)(this[this.tableDtMthlySal.StatDescColumn]));
+                        return ((string)(this[this.tablesp_Cont_MthlySalTPARegister.StatDescColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'StatDesc\' in table \'DtMthlySal\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'StatDesc\' in table \'sp_Cont_MthlySalTPARegister\' is DBNull." +
+                                "", e);
                     }
                 }
                 set {
-                    this[this.tableDtMthlySal.StatDescColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.StatDescColumn] = value;
                 }
             }
             
@@ -1965,14 +2036,15 @@ namespace ContractPayroll.Reports {
             public string DesgCode {
                 get {
                     try {
-                        return ((string)(this[this.tableDtMthlySal.DesgCodeColumn]));
+                        return ((string)(this[this.tablesp_Cont_MthlySalTPARegister.DesgCodeColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'DesgCode\' in table \'DtMthlySal\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'DesgCode\' in table \'sp_Cont_MthlySalTPARegister\' is DBNull." +
+                                "", e);
                     }
                 }
                 set {
-                    this[this.tableDtMthlySal.DesgCodeColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.DesgCodeColumn] = value;
                 }
             }
             
@@ -1981,14 +2053,15 @@ namespace ContractPayroll.Reports {
             public string DesgDesc {
                 get {
                     try {
-                        return ((string)(this[this.tableDtMthlySal.DesgDescColumn]));
+                        return ((string)(this[this.tablesp_Cont_MthlySalTPARegister.DesgDescColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'DesgDesc\' in table \'DtMthlySal\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'DesgDesc\' in table \'sp_Cont_MthlySalTPARegister\' is DBNull." +
+                                "", e);
                     }
                 }
                 set {
-                    this[this.tableDtMthlySal.DesgDescColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.DesgDescColumn] = value;
                 }
             }
             
@@ -1997,14 +2070,15 @@ namespace ContractPayroll.Reports {
             public string GradeCode {
                 get {
                     try {
-                        return ((string)(this[this.tableDtMthlySal.GradeCodeColumn]));
+                        return ((string)(this[this.tablesp_Cont_MthlySalTPARegister.GradeCodeColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'GradeCode\' in table \'DtMthlySal\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'GradeCode\' in table \'sp_Cont_MthlySalTPARegister\' is DBNull" +
+                                ".", e);
                     }
                 }
                 set {
-                    this[this.tableDtMthlySal.GradeCodeColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.GradeCodeColumn] = value;
                 }
             }
             
@@ -2013,14 +2087,15 @@ namespace ContractPayroll.Reports {
             public string GradeDesc {
                 get {
                     try {
-                        return ((string)(this[this.tableDtMthlySal.GradeDescColumn]));
+                        return ((string)(this[this.tablesp_Cont_MthlySalTPARegister.GradeDescColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'GradeDesc\' in table \'DtMthlySal\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'GradeDesc\' in table \'sp_Cont_MthlySalTPARegister\' is DBNull" +
+                                ".", e);
                     }
                 }
                 set {
-                    this[this.tableDtMthlySal.GradeDescColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.GradeDescColumn] = value;
                 }
             }
             
@@ -2029,14 +2104,14 @@ namespace ContractPayroll.Reports {
             public string CatCode {
                 get {
                     try {
-                        return ((string)(this[this.tableDtMthlySal.CatCodeColumn]));
+                        return ((string)(this[this.tablesp_Cont_MthlySalTPARegister.CatCodeColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'CatCode\' in table \'DtMthlySal\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'CatCode\' in table \'sp_Cont_MthlySalTPARegister\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableDtMthlySal.CatCodeColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.CatCodeColumn] = value;
                 }
             }
             
@@ -2045,14 +2120,14 @@ namespace ContractPayroll.Reports {
             public string CatDesc {
                 get {
                     try {
-                        return ((string)(this[this.tableDtMthlySal.CatDescColumn]));
+                        return ((string)(this[this.tablesp_Cont_MthlySalTPARegister.CatDescColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'CatDesc\' in table \'DtMthlySal\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'CatDesc\' in table \'sp_Cont_MthlySalTPARegister\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableDtMthlySal.CatDescColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.CatDescColumn] = value;
                 }
             }
             
@@ -2061,14 +2136,15 @@ namespace ContractPayroll.Reports {
             public string UnitCode {
                 get {
                     try {
-                        return ((string)(this[this.tableDtMthlySal.UnitCodeColumn]));
+                        return ((string)(this[this.tablesp_Cont_MthlySalTPARegister.UnitCodeColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'UnitCode\' in table \'DtMthlySal\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'UnitCode\' in table \'sp_Cont_MthlySalTPARegister\' is DBNull." +
+                                "", e);
                     }
                 }
                 set {
-                    this[this.tableDtMthlySal.UnitCodeColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.UnitCodeColumn] = value;
                 }
             }
             
@@ -2077,14 +2153,15 @@ namespace ContractPayroll.Reports {
             public string UnitDesc {
                 get {
                     try {
-                        return ((string)(this[this.tableDtMthlySal.UnitDescColumn]));
+                        return ((string)(this[this.tablesp_Cont_MthlySalTPARegister.UnitDescColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'UnitDesc\' in table \'DtMthlySal\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'UnitDesc\' in table \'sp_Cont_MthlySalTPARegister\' is DBNull." +
+                                "", e);
                     }
                 }
                 set {
-                    this[this.tableDtMthlySal.UnitDescColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.UnitDescColumn] = value;
                 }
             }
             
@@ -2093,14 +2170,15 @@ namespace ContractPayroll.Reports {
             public string ContDesc {
                 get {
                     try {
-                        return ((string)(this[this.tableDtMthlySal.ContDescColumn]));
+                        return ((string)(this[this.tablesp_Cont_MthlySalTPARegister.ContDescColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'ContDesc\' in table \'DtMthlySal\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'ContDesc\' in table \'sp_Cont_MthlySalTPARegister\' is DBNull." +
+                                "", e);
                     }
                 }
                 set {
-                    this[this.tableDtMthlySal.ContDescColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.ContDescColumn] = value;
                 }
             }
             
@@ -2109,14 +2187,14 @@ namespace ContractPayroll.Reports {
             public string EmpName {
                 get {
                     try {
-                        return ((string)(this[this.tableDtMthlySal.EmpNameColumn]));
+                        return ((string)(this[this.tablesp_Cont_MthlySalTPARegister.EmpNameColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'EmpName\' in table \'DtMthlySal\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'EmpName\' in table \'sp_Cont_MthlySalTPARegister\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableDtMthlySal.EmpNameColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.EmpNameColumn] = value;
                 }
             }
             
@@ -2125,14 +2203,15 @@ namespace ContractPayroll.Reports {
             public string FatherName {
                 get {
                     try {
-                        return ((string)(this[this.tableDtMthlySal.FatherNameColumn]));
+                        return ((string)(this[this.tablesp_Cont_MthlySalTPARegister.FatherNameColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'FatherName\' in table \'DtMthlySal\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'FatherName\' in table \'sp_Cont_MthlySalTPARegister\' is DBNul" +
+                                "l.", e);
                     }
                 }
                 set {
-                    this[this.tableDtMthlySal.FatherNameColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.FatherNameColumn] = value;
                 }
             }
             
@@ -2141,14 +2220,14 @@ namespace ContractPayroll.Reports {
             public System.DateTime JoinDt {
                 get {
                     try {
-                        return ((global::System.DateTime)(this[this.tableDtMthlySal.JoinDtColumn]));
+                        return ((global::System.DateTime)(this[this.tablesp_Cont_MthlySalTPARegister.JoinDtColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'JoinDt\' in table \'DtMthlySal\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'JoinDt\' in table \'sp_Cont_MthlySalTPARegister\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableDtMthlySal.JoinDtColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.JoinDtColumn] = value;
                 }
             }
             
@@ -2157,14 +2236,14 @@ namespace ContractPayroll.Reports {
             public System.DateTime BirthDt {
                 get {
                     try {
-                        return ((global::System.DateTime)(this[this.tableDtMthlySal.BirthDtColumn]));
+                        return ((global::System.DateTime)(this[this.tablesp_Cont_MthlySalTPARegister.BirthDtColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'BirthDt\' in table \'DtMthlySal\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'BirthDt\' in table \'sp_Cont_MthlySalTPARegister\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableDtMthlySal.BirthDtColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.BirthDtColumn] = value;
                 }
             }
             
@@ -2172,10 +2251,10 @@ namespace ContractPayroll.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public System.DateTime FromDt {
                 get {
-                    return ((global::System.DateTime)(this[this.tableDtMthlySal.FromDtColumn]));
+                    return ((global::System.DateTime)(this[this.tablesp_Cont_MthlySalTPARegister.FromDtColumn]));
                 }
                 set {
-                    this[this.tableDtMthlySal.FromDtColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.FromDtColumn] = value;
                 }
             }
             
@@ -2183,10 +2262,10 @@ namespace ContractPayroll.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public System.DateTime ToDt {
                 get {
-                    return ((global::System.DateTime)(this[this.tableDtMthlySal.ToDtColumn]));
+                    return ((global::System.DateTime)(this[this.tablesp_Cont_MthlySalTPARegister.ToDtColumn]));
                 }
                 set {
-                    this[this.tableDtMthlySal.ToDtColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.ToDtColumn] = value;
                 }
             }
             
@@ -2194,293 +2273,227 @@ namespace ContractPayroll.Reports {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public string PayDesc {
                 get {
-                    return ((string)(this[this.tableDtMthlySal.PayDescColumn]));
+                    return ((string)(this[this.tablesp_Cont_MthlySalTPARegister.PayDescColumn]));
                 }
                 set {
-                    this[this.tableDtMthlySal.PayDescColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public double Tot_EarnBasicRoundOff {
-                get {
-                    return ((double)(this[this.tableDtMthlySal.Tot_EarnBasicRoundOffColumn]));
-                }
-                set {
-                    this[this.tableDtMthlySal.Tot_EarnBasicRoundOffColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public double Tot_TpaRoundoff {
-                get {
-                    return ((double)(this[this.tableDtMthlySal.Tot_TpaRoundoffColumn]));
-                }
-                set {
-                    this[this.tableDtMthlySal.Tot_TpaRoundoffColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public double Tot_EarningsRoundoff {
-                get {
-                    return ((double)(this[this.tableDtMthlySal.Tot_EarningsRoundoffColumn]));
-                }
-                set {
-                    this[this.tableDtMthlySal.Tot_EarningsRoundoffColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public double Ded_PF_Roundoff {
-                get {
-                    return ((double)(this[this.tableDtMthlySal.Ded_PF_RoundoffColumn]));
-                }
-                set {
-                    this[this.tableDtMthlySal.Ded_PF_RoundoffColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public double NetPay_RoundOff {
-                get {
-                    return ((double)(this[this.tableDtMthlySal.NetPay_RoundOffColumn]));
-                }
-                set {
-                    this[this.tableDtMthlySal.NetPay_RoundOffColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public double CBasic {
-                get {
-                    return ((double)(this[this.tableDtMthlySal.CBasicColumn]));
-                }
-                set {
-                    this[this.tableDtMthlySal.CBasicColumn] = value;
+                    this[this.tablesp_Cont_MthlySalTPARegister.PayDescColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsContCodeNull() {
-                return this.IsNull(this.tableDtMthlySal.ContCodeColumn);
+                return this.IsNull(this.tablesp_Cont_MthlySalTPARegister.ContCodeColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetContCodeNull() {
-                this[this.tableDtMthlySal.ContCodeColumn] = global::System.Convert.DBNull;
+                this[this.tablesp_Cont_MthlySalTPARegister.ContCodeColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsDeptCodeNull() {
-                return this.IsNull(this.tableDtMthlySal.DeptCodeColumn);
+                return this.IsNull(this.tablesp_Cont_MthlySalTPARegister.DeptCodeColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetDeptCodeNull() {
-                this[this.tableDtMthlySal.DeptCodeColumn] = global::System.Convert.DBNull;
+                this[this.tablesp_Cont_MthlySalTPARegister.DeptCodeColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsDeptDescNull() {
-                return this.IsNull(this.tableDtMthlySal.DeptDescColumn);
+                return this.IsNull(this.tablesp_Cont_MthlySalTPARegister.DeptDescColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetDeptDescNull() {
-                this[this.tableDtMthlySal.DeptDescColumn] = global::System.Convert.DBNull;
+                this[this.tablesp_Cont_MthlySalTPARegister.DeptDescColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsStatCodeNull() {
-                return this.IsNull(this.tableDtMthlySal.StatCodeColumn);
+                return this.IsNull(this.tablesp_Cont_MthlySalTPARegister.StatCodeColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetStatCodeNull() {
-                this[this.tableDtMthlySal.StatCodeColumn] = global::System.Convert.DBNull;
+                this[this.tablesp_Cont_MthlySalTPARegister.StatCodeColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsStatDescNull() {
-                return this.IsNull(this.tableDtMthlySal.StatDescColumn);
+                return this.IsNull(this.tablesp_Cont_MthlySalTPARegister.StatDescColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetStatDescNull() {
-                this[this.tableDtMthlySal.StatDescColumn] = global::System.Convert.DBNull;
+                this[this.tablesp_Cont_MthlySalTPARegister.StatDescColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsDesgCodeNull() {
-                return this.IsNull(this.tableDtMthlySal.DesgCodeColumn);
+                return this.IsNull(this.tablesp_Cont_MthlySalTPARegister.DesgCodeColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetDesgCodeNull() {
-                this[this.tableDtMthlySal.DesgCodeColumn] = global::System.Convert.DBNull;
+                this[this.tablesp_Cont_MthlySalTPARegister.DesgCodeColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsDesgDescNull() {
-                return this.IsNull(this.tableDtMthlySal.DesgDescColumn);
+                return this.IsNull(this.tablesp_Cont_MthlySalTPARegister.DesgDescColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetDesgDescNull() {
-                this[this.tableDtMthlySal.DesgDescColumn] = global::System.Convert.DBNull;
+                this[this.tablesp_Cont_MthlySalTPARegister.DesgDescColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsGradeCodeNull() {
-                return this.IsNull(this.tableDtMthlySal.GradeCodeColumn);
+                return this.IsNull(this.tablesp_Cont_MthlySalTPARegister.GradeCodeColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetGradeCodeNull() {
-                this[this.tableDtMthlySal.GradeCodeColumn] = global::System.Convert.DBNull;
+                this[this.tablesp_Cont_MthlySalTPARegister.GradeCodeColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsGradeDescNull() {
-                return this.IsNull(this.tableDtMthlySal.GradeDescColumn);
+                return this.IsNull(this.tablesp_Cont_MthlySalTPARegister.GradeDescColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetGradeDescNull() {
-                this[this.tableDtMthlySal.GradeDescColumn] = global::System.Convert.DBNull;
+                this[this.tablesp_Cont_MthlySalTPARegister.GradeDescColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsCatCodeNull() {
-                return this.IsNull(this.tableDtMthlySal.CatCodeColumn);
+                return this.IsNull(this.tablesp_Cont_MthlySalTPARegister.CatCodeColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetCatCodeNull() {
-                this[this.tableDtMthlySal.CatCodeColumn] = global::System.Convert.DBNull;
+                this[this.tablesp_Cont_MthlySalTPARegister.CatCodeColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsCatDescNull() {
-                return this.IsNull(this.tableDtMthlySal.CatDescColumn);
+                return this.IsNull(this.tablesp_Cont_MthlySalTPARegister.CatDescColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetCatDescNull() {
-                this[this.tableDtMthlySal.CatDescColumn] = global::System.Convert.DBNull;
+                this[this.tablesp_Cont_MthlySalTPARegister.CatDescColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsUnitCodeNull() {
-                return this.IsNull(this.tableDtMthlySal.UnitCodeColumn);
+                return this.IsNull(this.tablesp_Cont_MthlySalTPARegister.UnitCodeColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetUnitCodeNull() {
-                this[this.tableDtMthlySal.UnitCodeColumn] = global::System.Convert.DBNull;
+                this[this.tablesp_Cont_MthlySalTPARegister.UnitCodeColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsUnitDescNull() {
-                return this.IsNull(this.tableDtMthlySal.UnitDescColumn);
+                return this.IsNull(this.tablesp_Cont_MthlySalTPARegister.UnitDescColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetUnitDescNull() {
-                this[this.tableDtMthlySal.UnitDescColumn] = global::System.Convert.DBNull;
+                this[this.tablesp_Cont_MthlySalTPARegister.UnitDescColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsContDescNull() {
-                return this.IsNull(this.tableDtMthlySal.ContDescColumn);
+                return this.IsNull(this.tablesp_Cont_MthlySalTPARegister.ContDescColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetContDescNull() {
-                this[this.tableDtMthlySal.ContDescColumn] = global::System.Convert.DBNull;
+                this[this.tablesp_Cont_MthlySalTPARegister.ContDescColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsEmpNameNull() {
-                return this.IsNull(this.tableDtMthlySal.EmpNameColumn);
+                return this.IsNull(this.tablesp_Cont_MthlySalTPARegister.EmpNameColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetEmpNameNull() {
-                this[this.tableDtMthlySal.EmpNameColumn] = global::System.Convert.DBNull;
+                this[this.tablesp_Cont_MthlySalTPARegister.EmpNameColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsFatherNameNull() {
-                return this.IsNull(this.tableDtMthlySal.FatherNameColumn);
+                return this.IsNull(this.tablesp_Cont_MthlySalTPARegister.FatherNameColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetFatherNameNull() {
-                this[this.tableDtMthlySal.FatherNameColumn] = global::System.Convert.DBNull;
+                this[this.tablesp_Cont_MthlySalTPARegister.FatherNameColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsJoinDtNull() {
-                return this.IsNull(this.tableDtMthlySal.JoinDtColumn);
+                return this.IsNull(this.tablesp_Cont_MthlySalTPARegister.JoinDtColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetJoinDtNull() {
-                this[this.tableDtMthlySal.JoinDtColumn] = global::System.Convert.DBNull;
+                this[this.tablesp_Cont_MthlySalTPARegister.JoinDtColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsBirthDtNull() {
-                return this.IsNull(this.tableDtMthlySal.BirthDtColumn);
+                return this.IsNull(this.tablesp_Cont_MthlySalTPARegister.BirthDtColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SetBirthDtNull() {
-                this[this.tableDtMthlySal.BirthDtColumn] = global::System.Convert.DBNull;
+                this[this.tablesp_Cont_MthlySalTPARegister.BirthDtColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -2488,22 +2501,22 @@ namespace ContractPayroll.Reports {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public class DtMthlySalRowChangeEvent : global::System.EventArgs {
+        public class sp_Cont_MthlySalTPARegisterRowChangeEvent : global::System.EventArgs {
             
-            private DtMthlySalRow eventRow;
+            private sp_Cont_MthlySalTPARegisterRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DtMthlySalRowChangeEvent(DtMthlySalRow row, global::System.Data.DataRowAction action) {
+            public sp_Cont_MthlySalTPARegisterRowChangeEvent(sp_Cont_MthlySalTPARegisterRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DtMthlySalRow Row {
+            public sp_Cont_MthlySalTPARegisterRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -2531,7 +2544,7 @@ namespace ContractPayroll.Reports.DS_rptMthlySalRegTableAdapters {
     [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
         ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class DtMthlySalTableAdapter : global::System.ComponentModel.Component {
+    public partial class sp_Cont_MthlySalTPARegisterTableAdapter : global::System.ComponentModel.Component {
         
         private global::System.Data.SqlClient.SqlDataAdapter _adapter;
         
@@ -2545,7 +2558,7 @@ namespace ContractPayroll.Reports.DS_rptMthlySalRegTableAdapters {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public DtMthlySalTableAdapter() {
+        public sp_Cont_MthlySalTPARegisterTableAdapter() {
             this.ClearBeforeFill = true;
         }
         
@@ -2642,7 +2655,7 @@ namespace ContractPayroll.Reports.DS_rptMthlySalRegTableAdapters {
             this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
             global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
             tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "DtMthlySal";
+            tableMapping.DataSetTable = "sp_Cont_MthlySalTPARegister";
             tableMapping.ColumnMappings.Add("PayPeriod", "PayPeriod");
             tableMapping.ColumnMappings.Add("EmpUnqID", "EmpUnqID");
             tableMapping.ColumnMappings.Add("Adj_TPAHrs", "Adj_TPAHrs");
@@ -2657,10 +2670,14 @@ namespace ContractPayroll.Reports.DS_rptMthlySalRegTableAdapters {
             tableMapping.ColumnMappings.Add("Cal_TpaAmt", "Cal_TpaAmt");
             tableMapping.ColumnMappings.Add("Tot_DaysPay", "Tot_DaysPay");
             tableMapping.ColumnMappings.Add("Tot_EarnBasic", "Tot_EarnBasic");
+            tableMapping.ColumnMappings.Add("Tot_EarnBasicRoundOff", "Tot_EarnBasicRoundOff");
             tableMapping.ColumnMappings.Add("Tot_TpaHrs", "Tot_TpaHrs");
             tableMapping.ColumnMappings.Add("Tot_TpaAmt", "Tot_TpaAmt");
+            tableMapping.ColumnMappings.Add("Tot_TpaRoundoff", "Tot_TpaRoundoff");
             tableMapping.ColumnMappings.Add("Tot_Earnings", "Tot_Earnings");
+            tableMapping.ColumnMappings.Add("Tot_EarningsRoundoff", "Tot_EarningsRoundoff");
             tableMapping.ColumnMappings.Add("Ded_PF", "Ded_PF");
+            tableMapping.ColumnMappings.Add("Ded_PF_Roundoff", "Ded_PF_Roundoff");
             tableMapping.ColumnMappings.Add("Cal_EPF", "Cal_EPF");
             tableMapping.ColumnMappings.Add("Cal_EPS", "Cal_EPS");
             tableMapping.ColumnMappings.Add("Ded_ESI", "Ded_ESI");
@@ -2670,6 +2687,7 @@ namespace ContractPayroll.Reports.DS_rptMthlySalRegTableAdapters {
             tableMapping.ColumnMappings.Add("Ded_Mess", "Ded_Mess");
             tableMapping.ColumnMappings.Add("Ded_PTax", "Ded_PTax");
             tableMapping.ColumnMappings.Add("Tot_Ded", "Tot_Ded");
+            tableMapping.ColumnMappings.Add("NetPay_RoundOff", "NetPay_RoundOff");
             tableMapping.ColumnMappings.Add("NetPay", "NetPay");
             tableMapping.ColumnMappings.Add("Tot_CoCommDays", "Tot_CoCommDays");
             tableMapping.ColumnMappings.Add("Tot_CoCommAmt", "Tot_CoCommAmt");
@@ -2677,6 +2695,7 @@ namespace ContractPayroll.Reports.DS_rptMthlySalRegTableAdapters {
             tableMapping.ColumnMappings.Add("Tot_CoComm", "Tot_CoComm");
             tableMapping.ColumnMappings.Add("Tot_CoServTax", "Tot_CoServTax");
             tableMapping.ColumnMappings.Add("Tot_CoEduTax", "Tot_CoEduTax");
+            tableMapping.ColumnMappings.Add("CBasic", "CBasic");
             tableMapping.ColumnMappings.Add("ContCode", "ContCode");
             tableMapping.ColumnMappings.Add("DeptCode", "DeptCode");
             tableMapping.ColumnMappings.Add("DeptDesc", "DeptDesc");
@@ -2698,12 +2717,6 @@ namespace ContractPayroll.Reports.DS_rptMthlySalRegTableAdapters {
             tableMapping.ColumnMappings.Add("FromDt", "FromDt");
             tableMapping.ColumnMappings.Add("ToDt", "ToDt");
             tableMapping.ColumnMappings.Add("PayDesc", "PayDesc");
-            tableMapping.ColumnMappings.Add("Tot_EarnBasicRoundOff", "Tot_EarnBasicRoundOff");
-            tableMapping.ColumnMappings.Add("Tot_TpaRoundoff", "Tot_TpaRoundoff");
-            tableMapping.ColumnMappings.Add("Tot_EarningsRoundoff", "Tot_EarningsRoundoff");
-            tableMapping.ColumnMappings.Add("Ded_PF_Roundoff", "Ded_PF_Roundoff");
-            tableMapping.ColumnMappings.Add("NetPay_RoundOff", "NetPay_RoundOff");
-            tableMapping.ColumnMappings.Add("CBasic", "CBasic");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -2720,32 +2733,31 @@ namespace ContractPayroll.Reports.DS_rptMthlySalRegTableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT       
-a.PayPeriod, a.EmpUnqID, a.Adj_TPAHrs, a.Adj_TPAAmt, a.Adj_DaysPay, a.Adj_DaysPayAmt, a.Adj_Amt, a.Cal_Basic, 
-a.Cal_DaysPay, a.Cal_WODays, a.Cal_TpaHrs, a.Cal_TpaAmt, a.Tot_DaysPay, a.Tot_EarnBasic, 
-a.Tot_EarnBasicRoundOff, a.Tot_TpaHrs, a.Tot_TpaAmt, a.Tot_TpaRoundoff, a.Tot_Earnings, a.Tot_EarningsRoundoff, 
-a.Ded_PF, a.Ded_PF_Roundoff, a.Cal_EPF, a.Cal_EPS, a.Ded_ESI, a.Ded_LWF, a.Ded_DeathFund, a.Ded_Other, a.Ded_Mess, 
-a.Ded_PTax, a.Tot_Ded, a.NetPay_RoundOff, a.NetPay, a.Tot_CoCommDays, a.Tot_CoCommAmt, a.Tot_CoCommPFAmt, 
-a.Tot_CoComm, a.Tot_CoServTax, a.Tot_CoEduTax,
-b.CBasic,b.ContCode, b.DeptCode, b.DeptDesc, b.StatCode, b.StatDesc, b.DesgCode, b.DesgDesc, b.GradeCode, b.GradeDesc, 
-b.CatCode, b.CatDesc,b.UnitCode, b.UnitDesc, b.ContDesc, b.EmpName, b.FatherName, b.JoinDt, b.BirthDt,
-c.FromDt, c.ToDt, c.PayDesc
-FROM            Cont_MthlyPay AS a INNER JOIN
-                         Cont_MastEmp AS b ON a.PayPeriod = b.PayPeriod AND a.EmpUnqID = b.EmpUnqID INNER JOIN
-                         Cont_MastPayPeriod AS c ON a.PayPeriod = c.PayPeriod
-WHERE        (a.PayPeriod = @PayPeriod)
-Order by a.EmpUnqID";
-            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PayPeriod", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "PayPeriod", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[0].CommandText = "dbo.sp_Cont_MthlySalTPARegister";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.StoredProcedure;
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RETURN_VALUE", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.ReturnValue, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@PayPeriod", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ContCode", global::System.Data.SqlDbType.VarChar, 200, global::System.Data.ParameterDirection.Input, 0, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DS_rptMthlySalReg.DtMthlySalDataTable dataTable, int PayPeriod) {
+        public virtual int Fill(DS_rptMthlySalReg.sp_Cont_MthlySalTPARegisterDataTable dataTable, global::System.Nullable<int> PayPeriod, string ContCode) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(PayPeriod));
+            if ((PayPeriod.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((int)(PayPeriod.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            if ((ContCode == null)) {
+                this.Adapter.SelectCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[2].Value = ((string)(ContCode));
+            }
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
             }
@@ -2757,10 +2769,21 @@ Order by a.EmpUnqID";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DS_rptMthlySalReg.DtMthlySalDataTable GetData(int PayPeriod) {
+        public virtual DS_rptMthlySalReg.sp_Cont_MthlySalTPARegisterDataTable GetData(global::System.Nullable<int> PayPeriod, string ContCode) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(PayPeriod));
-            DS_rptMthlySalReg.DtMthlySalDataTable dataTable = new DS_rptMthlySalReg.DtMthlySalDataTable();
+            if ((PayPeriod.HasValue == true)) {
+                this.Adapter.SelectCommand.Parameters[1].Value = ((int)(PayPeriod.Value));
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            if ((ContCode == null)) {
+                this.Adapter.SelectCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[2].Value = ((string)(ContCode));
+            }
+            DS_rptMthlySalReg.sp_Cont_MthlySalTPARegisterDataTable dataTable = new DS_rptMthlySalReg.sp_Cont_MthlySalTPARegisterDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }

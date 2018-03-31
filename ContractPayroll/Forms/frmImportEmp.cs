@@ -451,7 +451,6 @@ namespace ContractPayroll.Forms
                 }
                 else
                 {
-
                     txtPayPeriod.Text = obj.ElementAt(0).ToString();
                     txtPayDesc.Text = obj.ElementAt(1).ToString();
 

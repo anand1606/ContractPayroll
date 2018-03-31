@@ -861,7 +861,7 @@ namespace ContractPayroll.Forms
                 string sql = "";
 
 
-                sql = "Select 'MESS' as DedCode Union Select 'MISC' as DedCode ";
+                sql = "Select 'MESS' as DedCode , '*'  Union Select 'MISC' as DedCode, '*' ";
 
 
                 if (e.KeyCode == Keys.F1)

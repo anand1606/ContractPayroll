@@ -345,8 +345,7 @@ namespace ContractPayroll.Forms
                             {
                                 double EsiRate = 0;
                                 sql = "select isnull(Max(PValue),0) FROM [Cont_ParaMast] " +
-                                     " where '" + Tot_Earnning + "' between FSlab and TSlab " +
-                                     " and ParaCode = 'ESI'" +
+                                     " where ParaCode = 'ESI'" +
                                      " and PayPeriod = '" + dr["PayPeriod"].ToString() + "'" +
                                      " and AppFlg = 1";
 

@@ -15,8 +15,11 @@ namespace ContractPayroll.Forms
 {
     public partial class frmEmpMaster : Form
     {
-        public string mode = "NEW";
+        public string mode = "NEW";        
         public string dtlmode = "NEW";
+
+        public string bamode = "NEW";
+        public string splmode = "NEW";
 
         public string GRights = "XXXV";
         public string oldCode = "";
@@ -495,6 +498,37 @@ namespace ContractPayroll.Forms
                 grid.DataSource = null;
             }
 
+            #region SPLALL_BAALL_ADDED
+            sql = "select * from Cont_MastSPLALL where PayPeriod = '" + txtPayPeriod.Text.Trim() + "' and EmpUnqID = '" + txtEmpUnqID.Text.Trim() + "' Order By SrNo";
+            ds = Utils.Helper.GetData(sql, Utils.Helper.constr);
+            hasRows = ds.Tables.Cast<DataTable>().Any(table => table.Rows.Count != 0);
+            if (hasRows)
+            {
+                gridSPL.DataSource = ds;
+                gridSPL.DataMember = ds.Tables[0].TableName;
+            }
+            else
+            {
+                gridSPL.DataSource = null;
+            }
+
+
+            sql = "select * from Cont_MastBAALL where PayPeriod = '" + txtPayPeriod.Text.Trim() + "' and EmpUnqID = '" + txtEmpUnqID.Text.Trim() + "' Order By SrNo";
+            ds = Utils.Helper.GetData(sql, Utils.Helper.constr);
+            hasRows = ds.Tables.Cast<DataTable>().Any(table => table.Rows.Count != 0);
+            if (hasRows)
+            {
+                gridBA.DataSource = ds;
+                gridBA.DataMember = ds.Tables[0].TableName;
+            }
+            else
+            {
+                gridBA.DataSource = null;
+            }
+
+            #endregion
+
+
 
             ds = new DataSet();
             sql = "select [tDate],[LeaveTyp],[ABPR],[WrkHrs],[TpaHrs],[CBasic],[DaysPay],[Cal_Basic],[TpaAmt],[CostCode],[AddDt],[AddId],[UpdDt],[UpdId] from Cont_DailyOth where PayPeriod = '" + txtPayPeriod.Text.Trim() + "' and EmpUnqID = '" + txtEmpUnqID.Text.Trim() + "' Order By tDate";
@@ -573,24 +607,61 @@ namespace ContractPayroll.Forms
         {
             GridView view = (GridView)sender;
             Point pt = view.GridControl.PointToClient(Control.MousePosition);
-            DoRowDoubleClick(view, pt);
+            DoRowDoubleClick(view, pt,"BASIC");
         }
 
-        private void DoRowDoubleClick(GridView view, Point pt)
+        private void DoRowDoubleClick(GridView view, Point pt, string wType)
         {
             GridHitInfo info = view.CalcHitInfo(pt);
             if (info.InRow || info.InRowCell)
             {
-                txtSrNo.Text = gridView1.GetRowCellValue(info.RowHandle, "SrNo").ToString();
-                txtFromDt.DateTime = Convert.ToDateTime(gridView1.GetRowCellValue(info.RowHandle, "FromDt"));
-                txtToDt.DateTime = Convert.ToDateTime(gridView1.GetRowCellValue(info.RowHandle, "ToDt"));
-                txtcBasic.Text = gridView1.GetRowCellValue(info.RowHandle, "cBasic").ToString();
-                
                 object o = new object();
                 EventArgs e = new EventArgs();
-                dtlmode = "OLD";
-                oldCode = txtSrNo.Text.ToString();
-                txtSrNo_Validated(o, e);
+
+                switch (wType)
+                {
+                    case "BASIC":
+                        txtSrNo.Text = gridView1.GetRowCellValue(info.RowHandle, "SrNo").ToString();
+                        txtFromDt.DateTime = Convert.ToDateTime(gridView1.GetRowCellValue(info.RowHandle, "FromDt"));
+                        txtToDt.DateTime = Convert.ToDateTime(gridView1.GetRowCellValue(info.RowHandle, "ToDt"));
+                        txtcBasic.Text = gridView1.GetRowCellValue(info.RowHandle, "cBasic").ToString();
+                       
+                        dtlmode = "OLD";
+                        oldCode = txtSrNo.Text.ToString();
+                        txtSrNo_Validated(o, e);
+                        break;
+                    case "SPLALL":
+                        txtSPLSrNo.Text = gv_SPL.GetRowCellValue(info.RowHandle, "SrNo").ToString();
+                        txtSPLFromDt.DateTime = Convert.ToDateTime(gv_SPL.GetRowCellValue(info.RowHandle, "FromDt"));
+                        txtSPLToDt.DateTime = Convert.ToDateTime(gv_SPL.GetRowCellValue(info.RowHandle, "ToDt"));
+                        txtSPLAmount.Text = gv_SPL.GetRowCellValue(info.RowHandle, "cSPLALL").ToString();
+                
+                        o = new object();
+                        e = new EventArgs();
+                        splmode = "OLD";
+                        oldCode = txtSPLSrNo.Text.ToString();
+                        txtSPLSrNo_Validated(o, e);
+                        break;
+                
+                    case "BAALL":
+
+                        txtBASrNo.Text = gv_BA.GetRowCellValue(info.RowHandle, "SrNo").ToString();
+                        txtBAFromDt.DateTime = Convert.ToDateTime(gv_BA.GetRowCellValue(info.RowHandle, "FromDt"));
+                        txtBAToDt.DateTime = Convert.ToDateTime(gv_BA.GetRowCellValue(info.RowHandle, "ToDt"));
+                        txtBAAmount.Text = gv_BA.GetRowCellValue(info.RowHandle, "cSPLALL").ToString();
+                
+                        o = new object();
+                        e = new EventArgs();
+                        bamode = "OLD";
+                        oldCode = txtBASrNo.Text.ToString();
+                        txtBASrNo_Validated(o, e);
+                        break;
+
+                    default:
+                        break;
+                }
+ 
+                
             }
         }
         
@@ -680,7 +751,7 @@ namespace ContractPayroll.Forms
 
             return err;
         }
-
+                
         private void btnAddDtl_Click(object sender, EventArgs e)
         {
             string err = DataValidateDTL();
@@ -846,10 +917,518 @@ namespace ContractPayroll.Forms
 
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        #region SPLALL_BAALL_Addition
+
+        private string DataValidateSPLDTL()
         {
+            string err = string.Empty;
+
+            if (isLocked)
+            {
+                err = err + "Does not allowed to change in locked period.." + Environment.NewLine;
+                return err;
+            }
+
+            if (string.IsNullOrEmpty(txtPayPeriod.Text))
+            {
+                err = err + "Please select Pay Period " + Environment.NewLine;
+                return err;
+
+            }
+
+            if (string.IsNullOrEmpty(txtPayDesc.Text))
+            {
+                err = err + "Please Select valid payperiod.." + Environment.NewLine;
+            }
+
+            if (string.IsNullOrEmpty(txtEmpUnqID.Text))
+            {
+                err = err + "Please Select Employee Code.." + Environment.NewLine;
+            }
+
+            if (string.IsNullOrEmpty(txtEmpName.Text))
+            {
+                err = err + "Please Select Employee Code.." + Environment.NewLine;
+            }
+
+
+
+            double cSPL = 0;
+
+            if (double.TryParse(txtSPLAmount.Text.Trim(), out cSPL))
+            {
+
+            }
+
+            if (txtSPLFromDt.EditValue == null || txtSPLFromDt.DateTime == DateTime.MinValue)
+            {
+                err = err + "Please Enter From Date.." + Environment.NewLine;
+                return err;
+            }
+
+            if (txtSPLToDt.EditValue == null || txtSPLToDt.DateTime == DateTime.MinValue)
+            {
+                err = err + "Please Enter To Date.." + Environment.NewLine;
+                return err;
+            }
+
+            DateTime FrmDt = txtSPLFromDt.DateTime.Date;
+            DateTime Todt = txtSPLToDt.DateTime.Date;
+
+            if (Todt < FrmDt)
+            {
+                err = err + "Invalid Date Range.." + Environment.NewLine;
+                return err;
+            }
+
+            if (txtLeftDt.DateTime != DateTime.MinValue)
+            {
+                err = err + "Employee is left alredy, Updation is not allowed" + Environment.NewLine;
+                return err;
+            }
+
+            if (FrmDt < PFromDt || Todt < PFromDt)
+            {
+                err = err + "FromDate/ToDate should not be less than PayPeriod" + Environment.NewLine;
+                return err;
+            }
+
+            if (Todt > pToDt || FrmDt > pToDt)
+            {
+                err = err + "FromDate/ToDate should not be grater than PayPeriod" + Environment.NewLine;
+                return err;
+            }
+
+            return err;
+        }
+
+        private string DataValidateBADTL()
+        {
+            string err = string.Empty;
+
+            if (isLocked)
+            {
+                err = err + "Does not allowed to change in locked period.." + Environment.NewLine;
+                return err;
+            }
+
+            if (string.IsNullOrEmpty(txtPayPeriod.Text))
+            {
+                err = err + "Please select Pay Period " + Environment.NewLine;
+                return err;
+
+            }
+
+            if (string.IsNullOrEmpty(txtPayDesc.Text))
+            {
+                err = err + "Please Select valid payperiod.." + Environment.NewLine;
+            }
+
+            if (string.IsNullOrEmpty(txtEmpUnqID.Text))
+            {
+                err = err + "Please Select Employee Code.." + Environment.NewLine;
+            }
+
+            if (string.IsNullOrEmpty(txtEmpName.Text))
+            {
+                err = err + "Please Select Employee Code.." + Environment.NewLine;
+            }
+
+
+
+            double cBA = 0;
+
+            if (double.TryParse(txtBAAmount.Text.Trim(), out cBA))
+            {
+
+            }
+
+            if (txtBAFromDt.EditValue == null || txtBAFromDt.DateTime == DateTime.MinValue)
+            {
+                err = err + "Please Enter From Date.." + Environment.NewLine;
+                return err;
+            }
+
+            if (txtBAToDt.EditValue == null || txtBAToDt.DateTime == DateTime.MinValue)
+            {
+                err = err + "Please Enter To Date.." + Environment.NewLine;
+                return err;
+            }
+
+            DateTime FrmDt = txtBAFromDt.DateTime.Date;
+            DateTime Todt = txtBAToDt.DateTime.Date;
+
+            if (Todt < FrmDt)
+            {
+                err = err + "Invalid Date Range.." + Environment.NewLine;
+                return err;
+            }
+
+            if (txtLeftDt.DateTime != DateTime.MinValue)
+            {
+                err = err + "Employee is left alredy, Updation is not allowed" + Environment.NewLine;
+                return err;
+            }
+
+            if (FrmDt < PFromDt || Todt < PFromDt)
+            {
+                err = err + "FromDate/ToDate should not be less than PayPeriod" + Environment.NewLine;
+                return err;
+            }
+
+            if (Todt > pToDt || FrmDt > pToDt)
+            {
+                err = err + "FromDate/ToDate should not be grater than PayPeriod" + Environment.NewLine;
+                return err;
+            }
+
+            return err;
+        }
+
+
+        private void txtSPLSrNo_Validated(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtEmpUnqID.Text.Trim()) ||
+                string.IsNullOrEmpty(txtPayPeriod.Text.Trim()))
+            {
+
+                return;
+            }
+            string sql = string.Empty;
+
+            if (string.IsNullOrEmpty(txtSPLSrNo.Text.Trim()))
+            {
+                sql = "Select Isnull(Max(Srno),0) + 1 from Cont_MastSPLALL where PayPeriod = '" + txtPayPeriod.Text.Trim() + "' and EmpUnqID = '" + txtEmpUnqID.Text.Trim() + "'";
+                txtSPLSrNo.Text = Utils.Helper.GetDescription(sql, Utils.Helper.constr);
+                oldCode = "";
+                splmode = "NEW";
+                btnSPLAddDtl.Enabled = true;
+                btnSPLDelDtl.Enabled = false;
+                return;
+            }
+
+            sql = "Select * from Cont_MastSPLALL where PayPeriod = '" + txtPayPeriod.Text.Trim() + "' and EmpUnqID = '" + txtEmpUnqID.Text.Trim() + "' and Srno = '" + txtSPLSrNo.Text.Trim() + "'";
+
+            DataSet empds = Utils.Helper.GetData(sql, Utils.Helper.constr);
+            Boolean hasRows = empds.Tables.Cast<DataTable>().Any(table => table.Rows.Count != 0);
+
+            if (hasRows)
+            {
+                foreach (DataRow dr in empds.Tables[0].Rows)
+                {
+                    oldCode = dr["SrNo"].ToString();
+                    txtSPLSrNo.Text = dr["SrNo"].ToString();
+                    txtSPLFromDt.DateTime = Convert.ToDateTime(dr["FromDt"]);
+                    txtSPLToDt.DateTime = Convert.ToDateTime(dr["ToDt"]);
+                    txtSPLAmount.Text = dr["cSPLALL"].ToString();
+                    splmode = "OLD";
+                    btnSPLAddDtl.Enabled = true;
+                    btnSPLDelDtl.Enabled = true;
+                }
+            }
+            else
+            {
+                splmode = "NEW";
+                oldCode = "";
+                btnSPLAddDtl.Enabled = true;
+                btnSPLDelDtl.Enabled = false;
+                sql = "Select Isnull(Max(Srno),0) + 1 from Cont_MastSPLALL where PayPeriod = '" + txtPayPeriod.Text.Trim() + "' and EmpUnqID = '" + txtEmpUnqID.Text.Trim() + "'";
+                txtSPLSrNo.Text = Utils.Helper.GetDescription(sql, Utils.Helper.constr);
+                txtSPLFromDt.EditValue = null;
+                txtSPLToDt.EditValue = null;
+                txtSPLAmount.Text = "0";
+            }
+
+
 
         }
+
+        private void btnSPLAddDtl_Click(object sender, EventArgs e)
+        {
+            string err = DataValidateSPLDTL();
+            if (!string.IsNullOrEmpty(err))
+            {
+                MessageBox.Show(err, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+
+            using (SqlConnection cn = new SqlConnection(Utils.Helper.constr))
+            {
+                string sql = "";
+
+                try
+                {
+                    cn.Open();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                SqlTransaction tr = cn.BeginTransaction();
+                SqlCommand cmd = new SqlCommand();
+
+                if (splmode == "OLD")
+                {
+                    sql = "Delete from  Cont_MastSPLALL where PayPeriod = '" + txtPayPeriod.Text.Trim() + "' and EmpUnqID = '" + txtEmpUnqID.Text.Trim() + "' and Srno = '" + txtSPLSrNo.Text.Trim() + "'";
+                    cmd = new SqlCommand(sql, cn, tr);
+                    cmd.ExecuteNonQuery();
+                }
+
+                sql = "Insert into Cont_MastSPLALL (PayPeriod,EmpUnqID,Srno,FromDt,ToDt,cSPLALL,AddDt,Addid) values (" +
+                    " '" + txtPayPeriod.Text.Trim() + "','" + txtEmpUnqID.Text.Trim() + "','" + txtSPLSrNo.Text.Trim() + "'," +
+                    " '" + txtSPLFromDt.DateTime.Date.ToString("yyyy-MM-dd") + "','" + txtSPLToDt.DateTime.Date.ToString("yyyy-MM-dd") + "'," +
+                    " '" + txtSPLAmount.Text.Trim() + "',GetDate(),'" + Utils.User.GUserID + "')";
+
+                cmd = new SqlCommand(sql, cn, tr);
+                cmd.ExecuteNonQuery();
+
+                try
+                {
+                    tr.Commit();
+                    MessageBox.Show("Record Updated", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    tr.Rollback();
+                    MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                LoadGrid();
+            }
+
+        }
+
+        private void btnBAAddDtl_Click(object sender, EventArgs e)
+        {
+            string err = DataValidateBADTL();
+            if (!string.IsNullOrEmpty(err))
+            {
+                MessageBox.Show(err, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+
+            using (SqlConnection cn = new SqlConnection(Utils.Helper.constr))
+            {
+                string sql = "";
+
+                try
+                {
+                    cn.Open();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                SqlTransaction tr = cn.BeginTransaction();
+                SqlCommand cmd = new SqlCommand();
+
+                if (splmode == "OLD")
+                {
+                    sql = "Delete from  Cont_MastBAALL where PayPeriod = '" + txtPayPeriod.Text.Trim() + "' and EmpUnqID = '" + txtEmpUnqID.Text.Trim() + "' and Srno = '" + txtBASrNo.Text.Trim() + "'";
+                    cmd = new SqlCommand(sql, cn, tr);
+                    cmd.ExecuteNonQuery();
+                }
+
+                sql = "Insert into Cont_MastBAALL (PayPeriod,EmpUnqID,Srno,FromDt,ToDt,cBAALL,AddDt,Addid) values (" +
+                    " '" + txtPayPeriod.Text.Trim() + "','" + txtEmpUnqID.Text.Trim() + "','" + txtBASrNo.Text.Trim() + "'," +
+                    " '" + txtBAFromDt.DateTime.Date.ToString("yyyy-MM-dd") + "','" + txtBAToDt.DateTime.Date.ToString("yyyy-MM-dd") + "'," +
+                    " '" + txtBAAmount.Text.Trim() + "',GetDate(),'" + Utils.User.GUserID + "')";
+
+                cmd = new SqlCommand(sql, cn, tr);
+                cmd.ExecuteNonQuery();
+
+                try
+                {
+                    tr.Commit();
+                    MessageBox.Show("Record Updated", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    tr.Rollback();
+                    MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                LoadGrid();
+            }
+        }
+
+        private void txtBASrNo_Validated(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtEmpUnqID.Text.Trim()) ||
+                string.IsNullOrEmpty(txtPayPeriod.Text.Trim()))
+            {
+
+                return;
+            }
+            string sql = string.Empty;
+
+            if (string.IsNullOrEmpty(txtBASrNo.Text.Trim()))
+            {
+                sql = "Select Isnull(Max(Srno),0) + 1 from Cont_MastBAALL where PayPeriod = '" + txtPayPeriod.Text.Trim() + "' and EmpUnqID = '" + txtEmpUnqID.Text.Trim() + "'";
+                txtBASrNo.Text = Utils.Helper.GetDescription(sql, Utils.Helper.constr);
+                oldCode = "";
+                splmode = "NEW";
+                btnBAAddDtl.Enabled = true;
+                btnBADelDtl.Enabled = false;
+                return;
+            }
+
+            sql = "Select * from Cont_MastBAALL where PayPeriod = '" + txtPayPeriod.Text.Trim() + "' and EmpUnqID = '" + txtEmpUnqID.Text.Trim() + "' and Srno = '" + txtBASrNo.Text.Trim() + "'";
+
+            DataSet empds = Utils.Helper.GetData(sql, Utils.Helper.constr);
+            Boolean hasRows = empds.Tables.Cast<DataTable>().Any(table => table.Rows.Count != 0);
+
+            if (hasRows)
+            {
+                foreach (DataRow dr in empds.Tables[0].Rows)
+                {
+                    oldCode = dr["SrNo"].ToString();
+                    txtBASrNo.Text = dr["SrNo"].ToString();
+                    txtBAFromDt.DateTime = Convert.ToDateTime(dr["FromDt"]);
+                    txtBAToDt.DateTime = Convert.ToDateTime(dr["ToDt"]);
+                    txtBAAmount.Text = dr["cBAALL"].ToString();
+                    bamode = "OLD";
+                    btnBAAddDtl.Enabled = true;
+                    btnBADelDtl.Enabled = true;
+                }
+            }
+            else
+            {
+                bamode = "NEW";
+                oldCode = "";
+                btnBAAddDtl.Enabled = true;
+                btnBADelDtl.Enabled = false;
+                sql = "Select Isnull(Max(Srno),0) + 1 from Cont_MastBAALL where PayPeriod = '" + txtPayPeriod.Text.Trim() + "' and EmpUnqID = '" + txtEmpUnqID.Text.Trim() + "'";
+                txtBASrNo.Text = Utils.Helper.GetDescription(sql, Utils.Helper.constr);
+                txtBAFromDt.EditValue = null;
+                txtBAToDt.EditValue = null;
+                txtBAAmount.Text = "0";
+            }
+        }
+
+        private void btnBADelDtl_Click(object sender, EventArgs e)
+        {
+            string err = DataValidateBADTL();
+            if (!string.IsNullOrEmpty(err))
+            {
+                MessageBox.Show(err, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            using (SqlConnection cn = new SqlConnection(Utils.Helper.constr))
+            {
+                string sql = "";
+
+                try
+                {
+                    cn.Open();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                SqlTransaction tr = cn.BeginTransaction();
+                SqlCommand cmd = new SqlCommand();
+
+                if (dtlmode == "OLD")
+                {
+                    sql = "Delete from  Cont_MastBAALL where PayPeriod = '" + txtPayPeriod.Text.Trim() + "' and EmpUnqID = '" + txtEmpUnqID.Text.Trim() + "' and Srno = '" + txtBASrNo.Text.Trim() + "'";
+                    cmd = new SqlCommand(sql, cn, tr);
+                    cmd.ExecuteNonQuery();
+                }
+
+                try
+                {
+                    tr.Commit();
+                    MessageBox.Show("Record Deleted", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    tr.Rollback();
+                    MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                LoadGrid();
+            }
+
+        }
+        
+        private void btnSPLDelDtl_Click(object sender, EventArgs e)
+        {
+            string err = DataValidateSPLDTL();
+            if (!string.IsNullOrEmpty(err))
+            {
+                MessageBox.Show(err, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            using (SqlConnection cn = new SqlConnection(Utils.Helper.constr))
+            {
+                string sql = "";
+
+                try
+                {
+                    cn.Open();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                SqlTransaction tr = cn.BeginTransaction();
+                SqlCommand cmd = new SqlCommand();
+
+                if (dtlmode == "OLD")
+                {
+                    sql = "Delete from  Cont_MastSPLALL where PayPeriod = '" + txtPayPeriod.Text.Trim() + "' and EmpUnqID = '" + txtEmpUnqID.Text.Trim() + "' and Srno = '" + txtSPLSrNo.Text.Trim() + "'";
+                    cmd = new SqlCommand(sql, cn, tr);
+                    cmd.ExecuteNonQuery();
+                }
+
+                try
+                {
+                    tr.Commit();
+                    MessageBox.Show("Record Deleted", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    tr.Rollback();
+                    MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                LoadGrid();
+            }
+
+        }
+        
+        private void gv_SPL_DoubleClick(object sender, EventArgs e)
+        {
+            GridView view = (GridView)sender;
+            Point pt = view.GridControl.PointToClient(Control.MousePosition);
+            DoRowDoubleClick(view, pt, "SPLALL");
+        }
+
+        private void gv_BA_DoubleClick(object sender, EventArgs e)
+        {
+            GridView view = (GridView)sender;
+            Point pt = view.GridControl.PointToClient(Control.MousePosition);
+            DoRowDoubleClick(view, pt, "BAALL");
+        }
+
+        #endregion
+
+        
+
+        
     }
 
 

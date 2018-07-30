@@ -477,6 +477,29 @@ namespace ContractPayroll
                 m.Show();
             }
         }
+
+        private void mnuBulkSPLChng_Click(object sender, EventArgs e)
+        {
+            Form t = Application.OpenForms["frmBulkSPLAllChng"];
+            if (t == null)
+            {
+                frmBulkSPLAllChng m = new frmBulkSPLAllChng();
+                m.MdiParent = this;
+                m.Show();
+            }
+        }
+
+        private void mnuBulkBAChng_Click(object sender, EventArgs e)
+        {
+            //frmBulkBAAllChng
+            Form t = Application.OpenForms["frmBulkBAAllChng"];
+            if (t == null)
+            {
+                frmBulkBAAllChng m = new frmBulkBAAllChng();
+                m.MdiParent = this;
+                m.Show();
+            }
+        }
         
 
     }

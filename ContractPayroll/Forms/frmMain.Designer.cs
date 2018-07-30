@@ -61,6 +61,8 @@
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.stsUserDesc = new System.Windows.Forms.ToolStripStatusLabel();
             this.stsExtra = new System.Windows.Forms.ToolStripStatusLabel();
+            this.mnuBulkSPLChng = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuBulkBAChng = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -149,7 +151,9 @@
             this.mnuPayCyclePara,
             this.mnuImportEmp,
             this.mnuMastEmp,
-            this.mnuBulkBasicChng});
+            this.mnuBulkBasicChng,
+            this.mnuBulkSPLChng,
+            this.mnuBulkBAChng});
             this.mnuMast.Name = "mnuMast";
             this.mnuMast.Size = new System.Drawing.Size(60, 20);
             this.mnuMast.Text = "&Masters";
@@ -325,6 +329,20 @@
             this.stsExtra.Name = "stsExtra";
             this.stsExtra.Size = new System.Drawing.Size(0, 17);
             // 
+            // mnuBulkSPLChng
+            // 
+            this.mnuBulkSPLChng.Name = "mnuBulkSPLChng";
+            this.mnuBulkSPLChng.Size = new System.Drawing.Size(232, 22);
+            this.mnuBulkSPLChng.Text = "Bulk Special All Change";
+            this.mnuBulkSPLChng.Click += new System.EventHandler(this.mnuBulkSPLChng_Click);
+            // 
+            // mnuBulkBAChng
+            // 
+            this.mnuBulkBAChng.Name = "mnuBulkBAChng";
+            this.mnuBulkBAChng.Size = new System.Drawing.Size(232, 22);
+            this.mnuBulkBAChng.Text = "Bulk BA All Change";
+            this.mnuBulkBAChng.Click += new System.EventHandler(this.mnuBulkBAChng_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -383,6 +401,8 @@
         private System.Windows.Forms.ToolStripMenuItem mnuRptMthlySalReg;
         private System.Windows.Forms.ToolStripMenuItem mnuRptMthlyTPAReg;
         private System.Windows.Forms.ToolStripMenuItem mnuRptOthers;
+        private System.Windows.Forms.ToolStripMenuItem mnuBulkSPLChng;
+        private System.Windows.Forms.ToolStripMenuItem mnuBulkBAChng;
 
 
     }

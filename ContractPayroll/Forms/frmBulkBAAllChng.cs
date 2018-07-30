@@ -16,13 +16,13 @@ using ContractPayroll.Classes;
 
 namespace ContractPayroll.Forms
 {
-    public partial class frmBulkBasicChng : DevExpress.XtraEditors.XtraForm
+    public partial class frmBulkBAAllChng : DevExpress.XtraEditors.XtraForm
     {
         public string GRights = "XXXV";
         
         DataTable dt = new DataTable();
 
-        public frmBulkBasicChng()
+        public frmBulkBAAllChng()
         {
             InitializeComponent();
             
@@ -74,7 +74,7 @@ namespace ContractPayroll.Forms
             return;
         }
 
-        private string DataValidate(string tEmpUnqID,string tPayPeriod,DateTime tFromDt,DateTime tToDt,double tBasic)
+        private string DataValidate(string tEmpUnqID,string tPayPeriod,DateTime tFromDt,DateTime tToDt,double tBAAll)
         {
             string err = string.Empty;
 
@@ -83,9 +83,9 @@ namespace ContractPayroll.Forms
                 err = err + "Invalid EmpUnqID..." + Environment.NewLine;
             }
 
-            if (tBasic <= 0)
+            if (tBAAll <= 0)
             {
-                err = err + "Invalid Employee Basic Amount..." + Environment.NewLine;
+                err = err + "Invalid Employee BA Allownce Amount..." + Environment.NewLine;
             }
 
             if (string.IsNullOrEmpty(tPayPeriod))
@@ -235,16 +235,16 @@ namespace ContractPayroll.Forms
                             }
                         }
                         
-                        double tBasic = 0;
+                        double tBAAll = 0;
 
-                        if (!double.TryParse(dr["cBasic"].ToString(), out tBasic))
+                        if (!double.TryParse(dr["cBAAll"].ToString(), out tBAAll))
                         {
                             dr["Remarks"] = "invalid Amount";
                             continue;
                         }
                         DateTime tFromDt = Convert.ToDateTime(dr["FromDt"]);
                         DateTime tToDt = Convert.ToDateTime(dr["ToDT"]);
-                        string err = DataValidate(tEmpUnqID, tPayPeriod, tFromDt, tToDt, tBasic);
+                        string err = DataValidate(tEmpUnqID, tPayPeriod, tFromDt, tToDt, tBAAll);
 
                         if (!string.IsNullOrEmpty(err))
                         {
@@ -254,7 +254,7 @@ namespace ContractPayroll.Forms
                         
                         try
                         {
-                            string sql = "Delete From Cont_MastBasic Where PayPeriod = '" + tPayPeriod.ToString() + "' And EmpUnqID = '" + tEmpUnqID.ToString() + "'";
+                            string sql = "Delete From Cont_MastBAALL Where PayPeriod = '" + tPayPeriod.ToString() + "' And EmpUnqID = '" + tEmpUnqID.ToString() + "'";
                             SqlCommand cmd = new SqlCommand(sql, con);
                             cmd.ExecuteNonQuery();
                         }
@@ -302,16 +302,16 @@ namespace ContractPayroll.Forms
                         DateTime tFromDt = Convert.ToDateTime(dr["FromDt"]);
                         DateTime tToDt = Convert.ToDateTime(dr["ToDT"]);
 
-                        double tBasic = 0 ;
-                        
-                        if(!double.TryParse(dr["cBasic"].ToString(),out tBasic))
+                        double tBAAll = 0 ;
+
+                        if (!double.TryParse(dr["cBAAll"].ToString(), out tBAAll))
                         {
                             dr["Remarks"] = "invalid Amount";
                             continue;
                         }
-                        
-                        
-                        string err = DataValidate(tEmpUnqID, tPayPeriod,tFromDt,tToDt,tBasic);
+
+
+                        string err = DataValidate(tEmpUnqID, tPayPeriod, tFromDt, tToDt, tBAAll);
 
                         if (!string.IsNullOrEmpty(err))
                         {
@@ -324,10 +324,10 @@ namespace ContractPayroll.Forms
                     
                         try
                         {
-                        
-                            string sql = "Insert into Cont_MastBasic (PayPeriod,EmpUnqID,SrNo,FromDt,ToDt,cBasic,AddDt,AddID) Values" +
+
+                            string sql = "Insert into Cont_MastBAALL (PayPeriod,EmpUnqID,SrNo,FromDt,ToDt,cSPLAll,AddDt,AddID) Values" +
                                 " ('{0}','{1}','{2}','{3:yyyy-MM-dd}','{4:yyyy-MM-dd}','{5}',GetDate(),'{6}')";
-                            sql = string.Format(sql, tPayPeriod, tEmpUnqID, tSrno.ToString(), tFromDt,tToDt,tBasic.ToString(),Utils.User.GUserID);
+                            sql = string.Format(sql, tPayPeriod, tEmpUnqID, tSrno.ToString(), tFromDt,tToDt,tBAAll.ToString(),Utils.User.GUserID);
 
                             SqlCommand cmd = new SqlCommand(sql, con, tr);
                             cmd.ExecuteNonQuery();
@@ -405,7 +405,7 @@ namespace ContractPayroll.Forms
             string sheetname = "[" + sheets[0].sheetName.Replace("'", "") + "]";
             try
             {
-                string myexceldataquery = "select PayPeriod,EmpUnqID,SrNo,FromDt,ToDt,cBasic,'' as Remarks from " + sheetname;
+                string myexceldataquery = "select PayPeriod,EmpUnqID,SrNo,FromDt,ToDt,cBAAll,'' as Remarks from " + sheetname;
                 OleDbDataAdapter oledbda = new OleDbDataAdapter(myexceldataquery, oledbconn);
                 dt.Clear();
                 oledbda.Fill(dt);
@@ -504,7 +504,7 @@ namespace ContractPayroll.Forms
             }
         }
 
-        private void frmBulkBasicChng_Load(object sender, EventArgs e)
+        private void frmBulkBAAllChng_Load(object sender, EventArgs e)
         {
             GRights = ContractPayroll.Classes.Globals.GetFormRights(this.Name);
             grd_view.DataSource = null;

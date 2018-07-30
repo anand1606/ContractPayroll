@@ -265,12 +265,17 @@ namespace ContractPayroll.Forms
                             " ContDesc='" + dr["ContName"].ToString() + "'," +
                             " ESINo ='" + dr["ESINo"].ToString() + "'," +
                             " cBasic='" + dr["Basic"].ToString() + "'," + 
+                            " SPLALL ='" + dr["SPLALL"].ToString() + "'," +
+                            " BAALL ='" + dr["BAALL"].ToString() + "'," + 
                             " PFNo ='" + 0 + "'," +
                             " PFFlg = '" + PFFlg + "'," +
                             " PTaxFlg = '" + PTaxFlg + "'," + 
                             " DeathFlg = '" + DeathFlg + "', " +
                             " LWFFlg = '" + LWFFlg + "', " +                             
                             " ESIFlg = '" + ESIFlg + "', " +
+                            " BankAcNo ='" + dr["BankAcNo"].ToString() + "'," +
+                            " BankName ='" + dr["BankName"].ToString() + "'," +
+                            " BankIFSCCode ='" + dr["BankIFSCCode"].ToString() + "'," +
                             " UpdDt=GetDate() ," +
                             " UpdID ='" + Utils.User.GUserID + "' Where EmpUnqID ='" + dr["EmpUnqID"].ToString() + "' " +
                             " and PayPeriod ='" + txtPayPeriod.Text.Trim() + "'";
@@ -303,8 +308,8 @@ namespace ContractPayroll.Forms
                     {
                         sql = "Insert into Cont_MastEmp (PayPeriod,EmpUnqID,EmpName,FatherName,BirthDt,JoinDt,Gender,UnitCode," +
                         " UnitDesc,DeptCode,DeptDesc,Statcode,StatDesc,CatCode,CatDesc,DesgCode,DesgDesc," +
-                        " GradeCode,GradeDesc,ContCode,ContDesc,ESINo,cBasic,PFNo,PFFlg,PTaxFlg,DeathFlg," +
-                        " LWFFlg,ESIFlg,Active,AddDt,AddID ) values ('" + txtPayPeriod.Text.Trim() + "'," +
+                        " GradeCode,GradeDesc,ContCode,ContDesc,ESINo,cBasic,SPLALL,BAALL,PFNo,PFFlg,PTaxFlg,DeathFlg," +
+                        " LWFFlg,ESIFlg,Active,AddDt,AddID ,BankAcNo,BankName,BankIFSCCode) values ('" + txtPayPeriod.Text.Trim() + "'," +
                         " '" + dr["EmpUnqID"].ToString() + "'," +
                         " '" + dr["EmpName"].ToString() + "'," +
                         " '" + dr["FatherName"].ToString() + "'," +
@@ -327,6 +332,8 @@ namespace ContractPayroll.Forms
                         " '" + dr["ContName"].ToString() + "'," +
                         " '" + dr["ESINo"].ToString() + "'," +
                         " '" + dr["Basic"].ToString() + "'," +
+                        " '" + dr["SPLALL"].ToString() + "'," +
+                        " '" + dr["BAALL"].ToString() + "'," +
                         " '" + 0 + "'," +
                         " '" + PFFlg + "'," +
                         " '" + PTaxFlg + "'," +
@@ -335,7 +342,11 @@ namespace ContractPayroll.Forms
                         " '" + ESIFlg + "', " +
                         "  1, " +
                         " GetDate() ," +
-                        " '" + Utils.User.GUserID + "')";
+                        " '" + Utils.User.GUserID + "'," +
+                        " '" + dr["BankAcNo"].ToString() + "'," +
+                        " '" + dr["BankName"].ToString() + "'," +
+                        " '" + dr["BankIFSCCode"].ToString() + "'" + 
+                        " )";
                         try
                         {
                             SqlCommand cmd = new SqlCommand(sql, cn, tr);
@@ -354,6 +365,37 @@ namespace ContractPayroll.Forms
 
                             SqlCommand cmd2 = new SqlCommand(sql, cn, tr);
                             cmd2.ExecuteNonQuery();
+
+                            #region Special_And_BA_All
+
+                            //insert into Cont_MastBasic
+                            sql = "Delete From Cont_MastBAAll where PayPeriod='" + txtPayPeriod.Text.Trim() + "' And EmpUnqID = '" + dr["EmpUnqID"].ToString() + "' ";
+                            SqlCommand cmd3 = new SqlCommand(sql, cn, tr);
+                            cmd3.ExecuteNonQuery();
+
+                            sql = "Insert into Cont_MastBAAll (PayPeriod,EmpUnqID,SrNo,FromDt,ToDt,cBAALL,AddDt,AddID) values (" +
+                                " '" + txtPayPeriod.Text.Trim() + "','" + dr["EmpUnqID"].ToString() + "',1," +
+                                " '" + pFromDt.ToString("yyyy-MM-dd") + "'," +
+                                " '" + pToDt.ToString("yyyy-MM-dd") + "'," +
+                                " '" + dr["BAALL"].ToString() + "',GetDate(), '" + Utils.User.GUserID + "')";
+
+                            SqlCommand cmd4 = new SqlCommand(sql, cn, tr);
+                            cmd4.ExecuteNonQuery();
+
+                            sql = "Delete From Cont_MastSPLAll where PayPeriod='" + txtPayPeriod.Text.Trim() + "' And EmpUnqID = '" + dr["EmpUnqID"].ToString() + "' ";
+                            SqlCommand cmd5 = new SqlCommand(sql, cn, tr);
+                            cmd5.ExecuteNonQuery();
+
+                            sql = "Insert into Cont_MastSPLAll (PayPeriod,EmpUnqID,SrNo,FromDt,ToDt,cSPLALL,AddDt,AddID) values (" +
+                                " '" + txtPayPeriod.Text.Trim() + "','" + dr["EmpUnqID"].ToString() + "',1," +
+                                " '" + pFromDt.ToString("yyyy-MM-dd") + "'," +
+                                " '" + pToDt.ToString("yyyy-MM-dd") + "'," +
+                                " '" + dr["SPLALL"].ToString() + "',GetDate(), '" + Utils.User.GUserID + "')";
+
+                            SqlCommand cmd6 = new SqlCommand(sql, cn, tr);
+                            cmd6.ExecuteNonQuery();
+
+                            #endregion
 
                             try
                             {
@@ -381,9 +423,6 @@ namespace ContractPayroll.Forms
 
 
                 }
-
-
-                
 
                 unLockCtrl();
 

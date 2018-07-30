@@ -126,6 +126,18 @@
     <Compile Include="Classes\ClassGlobals.cs" />
     <Compile Include="Classes\Helper.cs" />
     <Compile Include="Classes\UNCAccessWithCredentials.cs" />
+    <Compile Include="Forms\frmBulkBAAllChng.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmBulkBAAllChng.designer.cs">
+      <DependentUpon>frmBulkBAAllChng.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmBulkSPLAllChng.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmBulkSPLAllChng.designer.cs">
+      <DependentUpon>frmBulkSPLAllChng.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\frmBulkBasicChng.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -252,6 +264,12 @@
     <Compile Include="Reports\rptMthlySalReg.Designer.cs">
       <DependentUpon>rptMthlySalReg.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Forms\frmBulkBAAllChng.resx">
+      <DependentUpon>frmBulkBAAllChng.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmBulkSPLAllChng.resx">
+      <DependentUpon>frmBulkSPLAllChng.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmBulkBasicChng.resx">
       <DependentUpon>frmBulkBasicChng.cs</DependentUpon>
     </EmbeddedResource>

@@ -86,9 +86,8 @@ namespace ContractPayroll.Forms
 
 
                         cn.Open();
+                        SqlTransaction tr = cn.BeginTransaction();
                         cmd.Connection = cn;
-                        
-
                         
                         try
                         {
@@ -102,6 +101,7 @@ namespace ContractPayroll.Forms
                                 );
 
                             cmd.CommandText = sql;
+                            cmd.Transaction = tr;
                             cmd.ExecuteNonQuery();
 
                             //insert default paraval records for payperiod
@@ -111,22 +111,28 @@ namespace ContractPayroll.Forms
                            " '" + Utils.User.GUserID + "' From Cont_ParaMast where PayPeriod = 0 ";
                             cmd.CommandText = sql;
                             cmd.ExecuteNonQuery();
+                            cmd.Transaction = tr;
 
+                            tr.Commit();
                             MessageBox.Show("Record saved...", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             ResetCtrl();
 
                         }
                         catch (Exception ex)
                         {
+                            tr.Rollback();
                             MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                         }
-                                              
+
+                       tr.Dispose();                    
                     }
                     catch (Exception ex)
                     {
                         MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
+
+                    
                 }
             }
 

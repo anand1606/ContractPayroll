@@ -634,7 +634,7 @@ namespace ContractPayroll.Forms
                         txtSPLSrNo.Text = gv_SPL.GetRowCellValue(info.RowHandle, "SrNo").ToString();
                         txtSPLFromDt.DateTime = Convert.ToDateTime(gv_SPL.GetRowCellValue(info.RowHandle, "FromDt"));
                         txtSPLToDt.DateTime = Convert.ToDateTime(gv_SPL.GetRowCellValue(info.RowHandle, "ToDt"));
-                        txtSPLAmount.Text = gv_SPL.GetRowCellValue(info.RowHandle, "cSPLALL").ToString();
+                        txtSPLAmount.Text = gv_SPL.GetRowCellValue(info.RowHandle, "cSPLAmt").ToString();
                 
                         o = new object();
                         e = new EventArgs();
@@ -648,7 +648,7 @@ namespace ContractPayroll.Forms
                         txtBASrNo.Text = gv_BA.GetRowCellValue(info.RowHandle, "SrNo").ToString();
                         txtBAFromDt.DateTime = Convert.ToDateTime(gv_BA.GetRowCellValue(info.RowHandle, "FromDt"));
                         txtBAToDt.DateTime = Convert.ToDateTime(gv_BA.GetRowCellValue(info.RowHandle, "ToDt"));
-                        txtBAAmount.Text = gv_BA.GetRowCellValue(info.RowHandle, "cSPLALL").ToString();
+                        txtBAAmount.Text = gv_BA.GetRowCellValue(info.RowHandle, "cBAAmt").ToString();
                 
                         o = new object();
                         e = new EventArgs();
@@ -1120,7 +1120,7 @@ namespace ContractPayroll.Forms
                     txtSPLSrNo.Text = dr["SrNo"].ToString();
                     txtSPLFromDt.DateTime = Convert.ToDateTime(dr["FromDt"]);
                     txtSPLToDt.DateTime = Convert.ToDateTime(dr["ToDt"]);
-                    txtSPLAmount.Text = dr["cSPLALL"].ToString();
+                    txtSPLAmount.Text = dr["cSPLAmt"].ToString();
                     splmode = "OLD";
                     btnSPLAddDtl.Enabled = true;
                     btnSPLDelDtl.Enabled = true;
@@ -1292,7 +1292,7 @@ namespace ContractPayroll.Forms
                     txtBASrNo.Text = dr["SrNo"].ToString();
                     txtBAFromDt.DateTime = Convert.ToDateTime(dr["FromDt"]);
                     txtBAToDt.DateTime = Convert.ToDateTime(dr["ToDt"]);
-                    txtBAAmount.Text = dr["cBAALL"].ToString();
+                    txtBAAmount.Text = dr["cBAAmt"].ToString();
                     bamode = "OLD";
                     btnBAAddDtl.Enabled = true;
                     btnBADelDtl.Enabled = true;

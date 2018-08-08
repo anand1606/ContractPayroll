@@ -192,7 +192,7 @@
             // 
             // OptionalDed
             // 
-            this.OptionalDed.Caption = "Optional Dedection ( Uncheck if not required )";
+            this.OptionalDed.Caption = "Optional Dedection ( Check if required )";
             this.OptionalDed.FieldName = "BCFlg";
             this.OptionalDed.Name = "OptionalDed";
             this.OptionalDed.UnboundType = DevExpress.Data.UnboundColumnType.Boolean;

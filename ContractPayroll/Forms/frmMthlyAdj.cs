@@ -193,6 +193,10 @@ namespace ContractPayroll.Forms
             txtDedDesc.Text = "";
             txtDedAmt.Value = 0;
 
+            txtBAAdjDays.Value = 0;
+            txtSPLAdjDays.Value = 0;
+            txtAdjSPLRate.Value = 0;
+            txtAdjBARate.Value = 0;
 
             LoadGrid();
             PFromDt = DateTime.MinValue;
@@ -326,6 +330,20 @@ namespace ContractPayroll.Forms
                 return err;
             }
 
+            if (txtSPLAdjDays.Value > 0 && txtAdjSPLRate.Value <= 0)
+            {
+                err = err + "Please Enter Adj. SPL Rate.." + Environment.NewLine;
+                return err;
+            }
+
+
+            if (txtBAAdjDays.Value > 0 && txtAdjBARate.Value <= 0)
+            {
+                err = err + "Please Enter Adj. BA Rate.." + Environment.NewLine;
+                return err;
+            }
+
+
 
             return err;
         }
@@ -363,7 +381,8 @@ namespace ContractPayroll.Forms
         private void txtSrNo_Validated(object sender, EventArgs e)
         {
             DataSet ds = new DataSet();
-            string sql = "select SrNo,Adj_Basic,Adj_TPAHrs,Adj_TpaAmt,Adj_DaysPay,Adj_DaysPayAmt,Adj_Amt,Adj_Remarks from Cont_MthlyAtn" + 
+            string sql = "select SrNo,Adj_Basic,Adj_TPAHrs,Adj_TpaAmt,Adj_DaysPay,Adj_DaysPayAmt,Adj_Amt,Adj_Remarks," +
+                " Adj_SPLRate,Adj_SPLDaysPay,Adj_BARate,Adj_BADaysPay from Cont_MthlyAtn" + 
                 " where PayPeriod = '" + txtPayPeriod.Text.Trim() + "' and EmpUnqID = '" + txtEmpUnqID.Text.Trim() + "' " + 
                 " And SrNo ='" + txtSrNo.Text.Trim() + "' Order By SrNo";
 
@@ -383,6 +402,11 @@ namespace ContractPayroll.Forms
                     txtAdjTpaHrs.Value = Convert.ToDecimal(dr["Adj_TpaHrs"]);
                     txtAdjDays.Value = Convert.ToDecimal(dr["Adj_DaysPay"]);
 
+                    txtAdjBARate.Value = Convert.ToDecimal(dr["Adj_BARate"]);
+                    txtAdjSPLRate.Value = Convert.ToDecimal(dr["Adj_SPLRate"]);
+                    txtSPLAdjDays.Value = Convert.ToDecimal(dr["Adj_SPLDaysPay"]);
+                    txtBAAdjDays.Value = Convert.ToDecimal(dr["Adj_BADaysPay"]);
+
                 }
             }
             else
@@ -394,6 +418,11 @@ namespace ContractPayroll.Forms
                 txtAdjBasic.Value = 0;
                 txtAdjTpaHrs.Value = 0;
                 txtAdjDays.Value = 0;
+
+                txtAdjBARate.Value = 0;
+                txtAdjSPLRate.Value = 0;
+                txtSPLAdjDays.Value = 0;
+                txtBAAdjDays.Value = 0;
             }
             SetRights();
         }
@@ -483,8 +512,14 @@ namespace ContractPayroll.Forms
                     " Adj_TpaHrs ='" + txtAdjTpaHrs.Value.ToString() + "', " +
                     " Adj_DaysPay ='" + txtAdjDays.Value.ToString() + "', " +
                     " Adj_Amt ='" + txtAdjAmt.Value.ToString() + "', " +
-                    " Adj_Remarks ='" + txtRemarks.Text.Trim() + "', " +
-                    " [Cal_Basic] = 0 " +
+                    " Adj_SPLRate ='" + txtAdjSPLRate.Value.ToString() + "'," +
+                    " Adj_SPLDaysPay ='" + txtSPLAdjDays.Value.ToString() + "'," +
+                    " Adj_BARate = '" + txtAdjBARate.Value.ToString() + "'," +
+                    " Adj_BADaysPay ='" + txtBAAdjDays.Value.ToString() + "'," +
+                    " Adj_Remarks ='" + txtRemarks.Text.Trim() + "' " +
+                    "  ,[Cal_SPLAmt] = 0 " +
+                    "  ,[Cal_BAAmt] = 0 " +                    
+                    "  ,[Cal_Basic] = 0 " +
                     "  ,[Cal_DaysPay] = 0 " +
                     "  ,[Cal_WODays] = 0 " +
                     "  ,[Cal_TpaHrs] = 0 " +
@@ -494,6 +529,8 @@ namespace ContractPayroll.Forms
                     "  ,[Tot_TpaHrs]= 0 " +
                     "  ,[Tot_TpaAmt]= 0 " +
                     "  ,[Tot_Earnings]= 0 " +
+                    "  ,[Tot_SPLAmt]= 0 " +
+                    "  ,[Tot_BAAmt]= 0 " +
                     "  ,[Cal_PF]= 0 " +
                     "  ,[Cal_EPF]= 0 " +
                     "  ,[Cal_EPS]= 0 " +
@@ -503,18 +540,23 @@ namespace ContractPayroll.Forms
                     "  ,[Cal_CoServTaxAmt] = 0 " +
                     "  ,[Cal_CoEduTaxAmt] = 0 " +
                     " ,UpdDt = GetDate(), UpdID ='" + Utils.User.GUserID + "'" +
-                    " Where PayPeriod = '" + txtPayPeriod.Text.Trim() + "' And EmpUnqID = '" + txtEmpUnqID.Text.Trim() + "'";
+                    " Where PayPeriod = '" + txtPayPeriod.Text.Trim() + "' And EmpUnqID = '" + txtEmpUnqID.Text.Trim() + "' and SrNo = '" + txtSrNo.Text.Trim().ToString() + "'";
 
                     SqlCommand cmd = new SqlCommand(sql, cn, tr);
                     cmd.ExecuteNonQuery();
 
-                    sql = "Update Cont_MthlyPay Set " +
-                        //"  Adj_Basic = 0 " +
+                    sql = "Update Cont_MthlyPay Set " +                      
                         " Adj_TPAHrs = 0 " +
                         " ,Adj_TPAAmt = 0 " +
                         " ,Adj_DaysPay = 0 " +
                         " ,Adj_DaysPayAmt = 0 " +
                         " ,Adj_Amt = 0 " +
+                        " ,Adj_SPLAmt = 0 " +
+                        " ,Adj_BAAmt = 0 " +
+                        " ,CAL_SPLAmt = 0 " +
+                        " ,CAL_BAAmt = 0 " +
+                        " ,Tot_SPLAmt = 0 " +
+                        " ,Tot_BAAmt = 0 " +
                         " ,Cal_Basic = 0 " +
                         " ,Cal_DaysPay = 0 " +
                         " ,Cal_WODays = 0 " +
@@ -523,7 +565,7 @@ namespace ContractPayroll.Forms
                         " ,Tot_DaysPay = 0 " +
                         " ,Tot_EarnBasic = 0 " +
                         " ,Tot_TpaHrs = 0 " +
-                        " ,Tot_TpaAmt = 0 " +
+                        " ,Tot_TpaAmt = 0 " +                       
                         " ,Tot_Earnings = 0 " +
                         " ,Ded_PF = 0 " +
                         " ,Cal_EPF = 0 " +
@@ -566,6 +608,11 @@ namespace ContractPayroll.Forms
                     txtAdjBasic.Value = 0;
                     txtAdjTpaHrs.Value = 0;
                     txtAdjDays.Value = 0;
+                    
+                    txtAdjBARate.Value = 0;
+                    txtAdjSPLRate.Value = 0;
+                    txtSPLAdjDays.Value = 0;
+                    txtBAAdjDays.Value = 0;
 
                     LoadGrid();
                     MessageBox.Show("Record Updated...", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -895,5 +942,7 @@ namespace ContractPayroll.Forms
                 }
             }
         }
+
+       
     }
 }

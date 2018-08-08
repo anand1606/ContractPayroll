@@ -268,7 +268,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "frmBulkSPLAllChng";
-            this.Text = "Bulk Upload : Employee Basic Change";
+            this.Text = "Bulk Upload : Employee SPL Allow. Change";
             this.Load += new System.EventHandler(this.frmBulkSPLAllChng_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();

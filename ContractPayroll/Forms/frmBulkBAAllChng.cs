@@ -83,9 +83,9 @@ namespace ContractPayroll.Forms
                 err = err + "Invalid EmpUnqID..." + Environment.NewLine;
             }
 
-            if (tBAAll <= 0)
+            if (tBAAll < 0)
             {
-                err = err + "Invalid Employee BA Allownce Amount..." + Environment.NewLine;
+                err = err + "Invalid BA Allownce Amount..." + Environment.NewLine;
             }
 
             if (string.IsNullOrEmpty(tPayPeriod))
@@ -275,6 +275,9 @@ namespace ContractPayroll.Forms
 
                         try
                         {
+                            if (con.State == ConnectionState.Open)
+                                con.Close();
+                            
                             con.Open();
                         }
                         catch (Exception ex)
@@ -325,7 +328,7 @@ namespace ContractPayroll.Forms
                         try
                         {
 
-                            string sql = "Insert into Cont_MastBAALL (PayPeriod,EmpUnqID,SrNo,FromDt,ToDt,cSPLAll,AddDt,AddID) Values" +
+                            string sql = "Insert into Cont_MastBAALL (PayPeriod,EmpUnqID,SrNo,FromDt,ToDt,cBAAmt,AddDt,AddID) Values" +
                                 " ('{0}','{1}','{2}','{3:yyyy-MM-dd}','{4:yyyy-MM-dd}','{5}',GetDate(),'{6}')";
                             sql = string.Format(sql, tPayPeriod, tEmpUnqID, tSrno.ToString(), tFromDt,tToDt,tBAAll.ToString(),Utils.User.GUserID);
 

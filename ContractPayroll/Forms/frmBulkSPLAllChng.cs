@@ -83,9 +83,9 @@ namespace ContractPayroll.Forms
                 err = err + "Invalid EmpUnqID..." + Environment.NewLine;
             }
 
-            if (tSplAll <= 0)
+            if (tSplAll < 0)
             {
-                err = err + "Invalid Employee Special Allownce Amount..." + Environment.NewLine;
+                err = err + "invalid Special Allownce Amount..." + Environment.NewLine;
             }
 
             if (string.IsNullOrEmpty(tPayPeriod))
@@ -275,6 +275,9 @@ namespace ContractPayroll.Forms
 
                         try
                         {
+                            if (con.State == ConnectionState.Open)
+                                con.Close();
+                            
                             con.Open();
                         }
                         catch (Exception ex)
@@ -325,7 +328,7 @@ namespace ContractPayroll.Forms
                         try
                         {
 
-                            string sql = "Insert into Cont_MastSPLALL (PayPeriod,EmpUnqID,SrNo,FromDt,ToDt,cSPLAll,AddDt,AddID) Values" +
+                            string sql = "Insert into Cont_MastSPLALL (PayPeriod,EmpUnqID,SrNo,FromDt,ToDt,cSPLAmt,AddDt,AddID) Values" +
                                 " ('{0}','{1}','{2}','{3:yyyy-MM-dd}','{4:yyyy-MM-dd}','{5}',GetDate(),'{6}')";
                             sql = string.Format(sql, tPayPeriod, tEmpUnqID, tSrno.ToString(), tFromDt,tToDt,tSplAll.ToString(),Utils.User.GUserID);
 
@@ -339,6 +342,7 @@ namespace ContractPayroll.Forms
                         {
                             tr.Rollback();
                             tr.Dispose();
+
                             MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             continue;
                         }

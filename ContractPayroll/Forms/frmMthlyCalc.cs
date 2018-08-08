@@ -219,6 +219,24 @@ namespace ContractPayroll.Forms
                     }
                 }
 
+                //Get Daily Co-commision Rate
+                sql = "Select PValue from Cont_ParaMast Where PayPeriod = '" + txtPayPeriod.Text.Trim() + "' And ParaCode = 'COCOMM'";
+
+                string strCoCommRate = Utils.Helper.GetDescription(sql, Utils.Helper.constr);
+                double CoCommRate = 0;
+                if (!string.IsNullOrEmpty(strCoCommRate))
+                {
+                    double.TryParse(strCoCommRate, out CoCommRate);
+                }
+
+                //Get Co-PF Rate
+                sql = "Select PValue from Cont_ParaMast Where PayPeriod = '" + txtPayPeriod.Text.Trim() + "' and ParaCode = 'COPFRATE'";
+                string strCoPFRate = Utils.Helper.GetDescription(sql, Utils.Helper.constr);
+                double CoPFRate = 0;
+                if (!string.IsNullOrEmpty(strCoPFRate))
+                {
+                    double.TryParse(strCoPFRate, out CoPFRate);
+                }
 
                 foreach (DataRow dr in emplistds.Tables[0].Rows)
                 {
@@ -246,21 +264,32 @@ namespace ContractPayroll.Forms
                           " ,sum([Adj_DaysPay]) as Adj_DaysPay " +
                           " ,sum([Adj_DaysPayAmt]) as Adj_DaysPayAmt " +
                           " ,sum([Adj_Amt]) as Adj_Amt " +
+                          " ,sum([Adj_SPLAmt]) as Adj_SPLAmt " +
+                          " ,sum([Adj_BAAmt]) as Adj_BAAmt " +
                           " ,sum([Cal_Basic]) as Cal_Basic " +
                           " ,sum([Cal_DaysPay]) as Cal_DaysPay " +
                           " ,sum([Cal_WODays]) as Cal_WoDays " +
                           " ,sum([Cal_TpaHrs]) as Cal_TpaHrs " +
                           " ,sum([Cal_TpaAmt]) as Cal_TpaAmt " +
+                          
+                          " ,sum([Adj_SPLDaysPay]) as Adj_SPLDaysPay " +
+                          " ,sum([Adj_BADaysPay]) as Adj_BADaysPay " +                          
+                          " ,sum([Cal_SPLAmt]) as Cal_SPLAmt " +
+                          " ,sum([Cal_BAAmt]) as Cal_BAAmt " +
+                          " ,sum([Adj_SPLAmt]) as Adj_SPLAmt " +
+                          " ,sum([Adj_BAAmt]) as Adj_BAAmt " +
+                          " ,sum([Tot_SPLAmt]) as Tot_SPLAmt " +
+                          " ,sum([Tot_BAAmt]) as Tot_BAAmt " +                          
                           " ,(sum([Cal_DaysPay]) + sum([Adj_DaysPay])) as Tot_DaysPay " +
                           " ,(sum([Adj_DaysPayAmt]) + sum([Cal_Basic]) + sum([Adj_Amt])) as Tot_EarnBasic " +
                           " ,(sum([Adj_TpaHrs]) + sum([Cal_TpaHrs])) as Tot_TpaHrs " +
                           " ,(sum([Adj_TpaAmt]) + sum([Cal_TpaAmt])) as Tot_TpaAmt " +
-                          " ,(sum([Adj_DaysPayAmt]) + sum([Cal_Basic]) + sum([Adj_TpaAmt]) + sum([Cal_TpaAmt]) + sum([Adj_Amt])  ) as Tot_Earnings " +
+                          " ,(sum([Adj_DaysPayAmt]) + sum([Cal_Basic])  + sum([Adj_Amt]) + sum([Tot_SPLAmt]) + sum([Tot_BAAmt]) ) as Tot_Earnings " +
                           " ,sum([Cal_PF]) as Ded_PF " +
                           " ,sum([Cal_EPF]) as Cal_EPF " +
                           " ,sum([Cal_EPS]) as Cal_EPS " +
                           " ,sum([Cal_CoCommDays])  as Tot_CoCommDays " +
-                          " ,sum([Cal_CoCommAmt]) + sum([Cal_CoCommWoAmt]) + sum([Adj_CoCommAmt]) as Tot_CoCommAmt " +
+                          " ,sum([Cal_CoCommAmt]) + sum([Adj_CoCommAmt]) as Tot_CoCommAmt " +
                           " ,sum([Cal_CoCommPFAmt]) as Tot_CoCommPFAmt " +
                           " ,sum([Tot_CoCommAmt]) as Tot_CoComm " +
                           " ,sum([Cal_CoServTaxAmt]) as Tot_CoServTax " +
@@ -288,6 +317,16 @@ namespace ContractPayroll.Forms
                             double MessDed = 0;
                             double PTax = 0;
                             double Tot_Ded = 0;
+                            double Adj_DaysPay = Convert.ToDouble(mdr["Adj_DaysPay"]);
+                            double Adj_SPLDaysPay = Convert.ToDouble(mdr["Adj_SPLDaysPay"]);
+                            double Adj_BADaysPay = Convert.ToDouble(mdr["Adj_BADaysPay"]);
+                            double Adj_SPLAmt = Convert.ToDouble(mdr["Adj_SPLAmt"]);
+                            double Adj_BAAmt = Convert.ToDouble(mdr["Adj_BAAmt"]);
+                            double CAL_SPLAmt = Convert.ToDouble(mdr["Cal_SPLAmt"]);
+                            double CAL_BAAmt = Convert.ToDouble(mdr["Cal_BAAmt"]);
+                            double Tot_SPLAmt = Math.Round(Convert.ToDouble(mdr["Tot_SPLAmt"]),2);
+                            double Tot_BAAmt = Math.Round(Convert.ToDouble(mdr["Tot_BAAmt"]),2);
+                            
 
                             double Tot_EarnedBasic = 0;
                             double actTot_EarnedBasic = 0;
@@ -299,8 +338,12 @@ namespace ContractPayroll.Forms
 
                             double PF = 0;
                             double actPF = 0;
-                            double roundoffPF = 0;                            
-                            
+                            double roundoffPF = 0;
+
+                            //double Cal_OTAmt = Convert.ToDouble(mdr["Cal_TpaAmt"]);
+                            double Adj_OTAmt = Math.Round(Convert.ToDouble(mdr["Adj_TpaAmt"]),0);
+
+
                             double OTAmt = 0;
                             double actOTAmt = 0;
                             double roundoffOTAmt = 0;
@@ -309,11 +352,17 @@ namespace ContractPayroll.Forms
                             double actTot_Earnings = 0;
                             double RoundoffTot_Earnings = 0;
 
+                            double Tot_CoCommDays = Convert.ToDouble(mdr["Cal_DaysPay"]);
+                            double Tot_CoWoCommDays = Convert.ToDouble(mdr["Cal_WODays"]);
+                            double Tot_CoCommAmt = (Tot_CoCommDays + Adj_DaysPay) * CoCommRate;
+                            double Tot_CoWoCommAmt = Tot_CoWoCommDays * CoCommRate;
+                            double Tot_CoComm = Tot_CoCommAmt + Tot_CoWoCommAmt;
+                           
 
                             actTot_EarnedBasic =  Convert.ToDouble(mdr["Tot_EarnBasic"]);
-                            Tot_EarnedBasic = Math.Round(actTot_EarnedBasic, MidpointRounding.AwayFromZero);
-                            RoundoffTot_EarnedBasic = Tot_EarnedBasic - actTot_EarnedBasic ;
-
+                            Tot_EarnedBasic = Math.Round(actTot_EarnedBasic, 2);
+                            //RoundoffTot_EarnedBasic = Tot_EarnedBasic - actTot_EarnedBasic ;
+                            double Tot_CoCommPF =  Math.Round((Tot_EarnedBasic * CoPFRate / 100),MidpointRounding.AwayFromZero);
 
                             actOTAmt = Convert.ToDouble(mdr["Tot_TpaAmt"]);
                             OTAmt = Math.Round(actOTAmt, MidpointRounding.AwayFromZero);
@@ -321,20 +370,21 @@ namespace ContractPayroll.Forms
 
 
                             actPF = Convert.ToDouble(mdr["Ded_PF"]);
-                            PF = Math.Round(actPF, MidpointRounding.AwayFromZero);
-                            roundoffPF =  PF - actPF ;
-
+                            //PF = Math.Round(actPF, MidpointRounding.AwayFromZero);
+                            PF = Math.Round(actPF, 0);
+                            roundoffPF = PF - actPF;
+                            
                             
                             //Tot_Earnning = Convert.ToDouble(mdr["Tot_Earnings"]);
-                            actTot_Earnings = Tot_EarnedBasic + OTAmt;
-                            Tot_Earnning = Math.Round(actTot_Earnings, MidpointRounding.AwayFromZero);
-                            RoundoffTot_Earnings = Tot_Earnning - actTot_Earnings;
+                            actTot_Earnings = Tot_EarnedBasic +  Tot_SPLAmt + Tot_BAAmt;
+                            //Tot_Earnning = Math.Round(actTot_Earnings, MidpointRounding.AwayFromZero);
+                            //RoundoffTot_Earnings = Tot_Earnning - actTot_Earnings;
+                            Tot_Earnning = actTot_Earnings;
 
-
-                            if (Tot_EarnedBasic > 0 )
+                            if (Tot_Earnning > 0)
                             {
                                 sql = "select isnull(Max(PValue),0) FROM [Cont_ParaMast] " +
-                                     " where '" + Tot_EarnedBasic + "' between FSlab and TSlab " +
+                                     " where '" + Tot_Earnning + "' between FSlab and TSlab " +
                                      " and ParaCode = 'PTAX'" +
                                      " and PayPeriod = '" + dr["PayPeriod"].ToString() + "'" +
                                      " and AppFlg = 1";
@@ -352,7 +402,7 @@ namespace ContractPayroll.Forms
                                 EsiRate = Convert.ToDouble(Utils.Helper.GetDescription(sql, Utils.Helper.constr));
                                 if(EsiRate > 0)
                                 {
-                                    ESI = (Tot_Earnning * EsiRate / 100);
+                                    ESI = (Tot_EarnedBasic * EsiRate / 100);
                                 }
                             }
                             else
@@ -394,9 +444,11 @@ namespace ContractPayroll.Forms
 
                             Tot_Ded = PF + LWF + PTax + Death + OtherDed + MessDed + ESI;
                             
-                            actNetPay = Tot_EarnedBasic - Tot_Ded;
+                            actNetPay = (Tot_EarnedBasic + Tot_SPLAmt + Tot_BAAmt) - Tot_Ded;
                             NetPay = Math.Round(actNetPay, MidpointRounding.AwayFromZero);
-                            roundoffNetPay = NetPay - actNetPay;
+                            roundoffNetPay = Math.Round((Tot_EarnedBasic + Tot_SPLAmt + Tot_BAAmt) - (Tot_Ded + NetPay),2);
+
+
 
 
                             #endregion
@@ -410,12 +462,13 @@ namespace ContractPayroll.Forms
                                 " Cal_Basic,Cal_DaysPay,Cal_WODays,Cal_TpaHrs,Cal_TpaAmt,Tot_DaysPay, " +
                                 " Tot_EarnBasic,Tot_EarnBasicRoundOff,Tot_TpaHrs,Tot_TpaAmt,Tot_TpaRoundoff,Tot_Earnings,Tot_EarningsRoundoff,Ded_PF,Ded_PF_Roundoff,Cal_EPF,Cal_EPS," +
                                 " Ded_ESI,Ded_LWF,Ded_DeathFund,Ded_Other,Ded_Mess,Ded_PTax,Tot_Ded,NetPay,NetPay_RoundOff," +
-                                " Tot_CoCommDays,Tot_CoCommAmt,Tot_CoCommPFAmt,Tot_CoComm,Tot_CoServTax,Tot_CoEduTax,Tot_CoServTax25,Tot_CoEduTax25,AddDt,AddID) Values (" +
+                                " Tot_CoCommDays,Tot_CoCommAmt, Tot_CoWoCommDays,Tot_CoWoCommAmt,Tot_CoCommPFAmt,Tot_CoComm,Tot_CoServTax,Tot_CoEduTax,Tot_CoServTax25,Tot_CoEduTax25,AddDt,AddID," +
+                                " Adj_SPLDaysPay,Adj_SPLAmt,Adj_BADaysPay,Adj_BAAmt,Cal_SplAmt,Cal_BAAmt,Tot_SPLAmt,Tot_BAAmt,ContCode) Values (" +
                                 "'" + mdr["PayPeriod"].ToString() + "'," +
                                 "'" + mdr["EmpUnqID"].ToString() + "'," +
                                 "'" + mdr["CostCode"].ToString() + "'," +
                                 "'" + mdr["Adj_TPAHrs"].ToString() + "'," +
-                                "'" + mdr["Adj_TPAAmt"].ToString() + "'," +
+                                "'" + Adj_OTAmt.ToString() + "'," +
                                 "'" + mdr["Adj_DaysPay"].ToString() + "'," +
                                 "'" + mdr["Adj_DaysPayAmt"].ToString() + "'," +
                                 "'" + mdr["Adj_Amt"].ToString() + "'," +
@@ -445,14 +498,26 @@ namespace ContractPayroll.Forms
                                 "'" + Tot_Ded.ToString() + "'," +
                                 "'" + NetPay.ToString() + "'," +
                                 "'" + roundoffNetPay.ToString() + "'," +
-                                "'" + mdr["Tot_CoCommDays"].ToString() + "'," +
-                                "'" + mdr["Tot_CoCommAmt"].ToString() + "'," +
-                                "'" + mdr["Tot_CoCommPFAmt"].ToString() + "'," +
-                                "'" + mdr["Tot_CoComm"].ToString() + "'," +
+                                "'" + Tot_CoCommDays.ToString() + "'," +
+                                "'" + Tot_CoCommAmt.ToString() + "'," +
+                                "'" + Tot_CoWoCommDays.ToString() + "'," +
+                                "'" + Tot_CoWoCommAmt.ToString() + "'," +
+                                "'" + Tot_CoCommPF.ToString() + "'," +
+                                "'" + Tot_CoComm.ToString() + "'," +
                                 "'" + mdr["Tot_CoServTax"].ToString() + "'," +
                                 "'" + mdr["Tot_CoEduTax"].ToString() + "', " +
                                 "'" + mdr["Tot_CoServTax25"].ToString() + "', " +
-                                "'" + mdr["Tot_CoEduTax25"].ToString() + "', GetDate(),'" + Utils.User.GUserID + "')";
+                                "'" + mdr["Tot_CoEduTax25"].ToString() + "', GetDate(),'" + Utils.User.GUserID + "'," +
+                                "'" + Adj_SPLDaysPay.ToString() + "'," +
+                                "'" + Adj_SPLAmt.ToString() + "'," +
+                                "'" + Adj_BADaysPay.ToString() + "'," +
+                                "'" + Adj_BAAmt.ToString()  + "'," +
+                                "'" + CAL_SPLAmt.ToString() + "'," +
+                                "'" + CAL_BAAmt.ToString() + "'," +
+                                "'" + Tot_SPLAmt.ToString() +"'," +
+                                "'" + Tot_BAAmt.ToString() +"'," +
+                                "'" + dr["ContCode"].ToString() + "' " +
+                                ")";
 
                             cmd = new SqlCommand(sql, cn, tr);
                             cmd.ExecuteNonQuery();
@@ -583,7 +648,7 @@ namespace ContractPayroll.Forms
                     mode = "OLD";
                 }
 
-                sql = "select PayPeriod, ParaCode as DedCode, PValue as Amount,Convert(Bit,BCFlg) as BCFlg From Cont_ParaMast where  PayPeriod='" + txtPayPeriod.Text.Trim() + "' and BCFlg = 1 and AppFlg = 1";
+                sql = "select PayPeriod, ParaCode as DedCode, PValue as Amount,Convert(Bit,'FALSE') as BCFlg From Cont_ParaMast where  PayPeriod='" + txtPayPeriod.Text.Trim() + "' and BCFlg = 1 and AppFlg = 1";
 
                 optDed = Utils.Helper.GetData(sql, Utils.Helper.constr);
                 grd_view.DataSource = optDed;

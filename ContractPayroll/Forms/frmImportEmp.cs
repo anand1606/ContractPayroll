@@ -273,6 +273,7 @@ namespace ContractPayroll.Forms
                             " DeathFlg = '" + DeathFlg + "', " +
                             " LWFFlg = '" + LWFFlg + "', " +                             
                             " ESIFlg = '" + ESIFlg + "', " +
+                            " CostCode = '" + dr["CostCode"].ToString() + "'," +
                             " BankAcNo ='" + dr["BankAcNo"].ToString() + "'," +
                             " BankName ='" + dr["BankName"].ToString() + "'," +
                             " BankIFSCCode ='" + dr["BankIFSCCode"].ToString() + "'," +
@@ -309,7 +310,7 @@ namespace ContractPayroll.Forms
                         sql = "Insert into Cont_MastEmp (PayPeriod,EmpUnqID,EmpName,FatherName,BirthDt,JoinDt,Gender,UnitCode," +
                         " UnitDesc,DeptCode,DeptDesc,Statcode,StatDesc,CatCode,CatDesc,DesgCode,DesgDesc," +
                         " GradeCode,GradeDesc,ContCode,ContDesc,ESINo,cBasic,SPLALL,BAALL,PFNo,PFFlg,PTaxFlg,DeathFlg," +
-                        " LWFFlg,ESIFlg,Active,AddDt,AddID ,BankAcNo,BankName,BankIFSCCode) values ('" + txtPayPeriod.Text.Trim() + "'," +
+                        " LWFFlg,ESIFlg,Active,AddDt,AddID ,BankAcNo,BankName,BankIFSCCode,CostCode) values ('" + txtPayPeriod.Text.Trim() + "'," +
                         " '" + dr["EmpUnqID"].ToString() + "'," +
                         " '" + dr["EmpName"].ToString() + "'," +
                         " '" + dr["FatherName"].ToString() + "'," +
@@ -346,6 +347,7 @@ namespace ContractPayroll.Forms
                         " '" + dr["BankAcNo"].ToString() + "'," +
                         " '" + dr["BankName"].ToString() + "'," +
                         " '" + dr["BankIFSCCode"].ToString() + "'" + 
+                        " '" + dr["CostCode"].ToString() + "'" +                         
                         " )";
                         try
                         {
@@ -373,7 +375,7 @@ namespace ContractPayroll.Forms
                             SqlCommand cmd3 = new SqlCommand(sql, cn, tr);
                             cmd3.ExecuteNonQuery();
 
-                            sql = "Insert into Cont_MastBAAll (PayPeriod,EmpUnqID,SrNo,FromDt,ToDt,cBAALL,AddDt,AddID) values (" +
+                            sql = "Insert into Cont_MastBAAll (PayPeriod,EmpUnqID,SrNo,FromDt,ToDt,cBAAmt,AddDt,AddID) values (" +
                                 " '" + txtPayPeriod.Text.Trim() + "','" + dr["EmpUnqID"].ToString() + "',1," +
                                 " '" + pFromDt.ToString("yyyy-MM-dd") + "'," +
                                 " '" + pToDt.ToString("yyyy-MM-dd") + "'," +
@@ -386,7 +388,7 @@ namespace ContractPayroll.Forms
                             SqlCommand cmd5 = new SqlCommand(sql, cn, tr);
                             cmd5.ExecuteNonQuery();
 
-                            sql = "Insert into Cont_MastSPLAll (PayPeriod,EmpUnqID,SrNo,FromDt,ToDt,cSPLALL,AddDt,AddID) values (" +
+                            sql = "Insert into Cont_MastSPLAll (PayPeriod,EmpUnqID,SrNo,FromDt,ToDt,cSPLAmt,AddDt,AddID) values (" +
                                 " '" + txtPayPeriod.Text.Trim() + "','" + dr["EmpUnqID"].ToString() + "',1," +
                                 " '" + pFromDt.ToString("yyyy-MM-dd") + "'," +
                                 " '" + pToDt.ToString("yyyy-MM-dd") + "'," +

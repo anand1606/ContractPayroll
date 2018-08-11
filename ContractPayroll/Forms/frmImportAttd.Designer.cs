@@ -35,9 +35,16 @@
             this.pBar = new System.Windows.Forms.ProgressBar();
             this.label1 = new System.Windows.Forms.Label();
             this.txtEmpUnqID = new DevExpress.XtraEditors.TextEdit();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtContName = new DevExpress.XtraEditors.TextEdit();
+            this.txtEmpName = new DevExpress.XtraEditors.TextEdit();
+            this.txtContCode = new DevExpress.XtraEditors.TextEdit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPayPeriod.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPayDesc.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtEmpUnqID.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtContName.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtEmpName.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtContCode.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // label3
@@ -73,21 +80,22 @@
             this.txtPayDesc.Properties.ReadOnly = true;
             this.txtPayDesc.Size = new System.Drawing.Size(377, 22);
             this.txtPayDesc.TabIndex = 1;
+            this.txtPayDesc.TabStop = false;
             // 
             // btnImport
             // 
             this.btnImport.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnImport.Location = new System.Drawing.Point(182, 86);
+            this.btnImport.Location = new System.Drawing.Point(176, 102);
             this.btnImport.Name = "btnImport";
             this.btnImport.Size = new System.Drawing.Size(238, 42);
-            this.btnImport.TabIndex = 2;
+            this.btnImport.TabIndex = 6;
             this.btnImport.Text = "Import";
             this.btnImport.UseVisualStyleBackColor = true;
             this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
             // 
             // pBar
             // 
-            this.pBar.Location = new System.Drawing.Point(12, 134);
+            this.pBar.Location = new System.Drawing.Point(6, 150);
             this.pBar.Name = "pBar";
             this.pBar.Size = new System.Drawing.Size(591, 35);
             this.pBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
@@ -110,13 +118,70 @@
             this.txtEmpUnqID.Properties.Appearance.Options.UseFont = true;
             this.txtEmpUnqID.Properties.MaxLength = 10;
             this.txtEmpUnqID.Size = new System.Drawing.Size(88, 22);
-            this.txtEmpUnqID.TabIndex = 62;
+            this.txtEmpUnqID.TabIndex = 2;
+            this.txtEmpUnqID.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtEmpUnqID_KeyDown);
+            this.txtEmpUnqID.Validated += new System.EventHandler(this.txtEmpUnqID_Validated);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(10, 73);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(67, 15);
+            this.label2.TabIndex = 73;
+            this.label2.Text = "ContCode :";
+            // 
+            // txtContName
+            // 
+            this.txtContName.Location = new System.Drawing.Point(177, 70);
+            this.txtContName.Name = "txtContName";
+            this.txtContName.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtContName.Properties.Appearance.Options.UseFont = true;
+            this.txtContName.Properties.Mask.EditMask = "[A-Za-z 0-9]+";
+            this.txtContName.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
+            this.txtContName.Properties.MaxLength = 100;
+            this.txtContName.Properties.ReadOnly = true;
+            this.txtContName.Size = new System.Drawing.Size(377, 22);
+            this.txtContName.TabIndex = 5;
+            this.txtContName.TabStop = false;
+            // 
+            // txtEmpName
+            // 
+            this.txtEmpName.Location = new System.Drawing.Point(177, 42);
+            this.txtEmpName.Name = "txtEmpName";
+            this.txtEmpName.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtEmpName.Properties.Appearance.Options.UseFont = true;
+            this.txtEmpName.Properties.Mask.EditMask = "[A-Za-z 0-9]+";
+            this.txtEmpName.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
+            this.txtEmpName.Properties.MaxLength = 100;
+            this.txtEmpName.Properties.ReadOnly = true;
+            this.txtEmpName.Size = new System.Drawing.Size(377, 22);
+            this.txtEmpName.TabIndex = 3;
+            this.txtEmpName.TabStop = false;
+            // 
+            // txtContCode
+            // 
+            this.txtContCode.Location = new System.Drawing.Point(83, 70);
+            this.txtContCode.Name = "txtContCode";
+            this.txtContCode.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtContCode.Properties.Appearance.Options.UseFont = true;
+            this.txtContCode.Properties.Mask.EditMask = "[A-Z]+";
+            this.txtContCode.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
+            this.txtContCode.Properties.MaxLength = 10;
+            this.txtContCode.Size = new System.Drawing.Size(88, 22);
+            this.txtContCode.TabIndex = 4;
+            this.txtContCode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtContCode_KeyDown);
+            this.txtContCode.Validated += new System.EventHandler(this.txtContCode_Validated);
             // 
             // frmImportAttd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(624, 181);
+            this.ClientSize = new System.Drawing.Size(606, 196);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.txtContName);
+            this.Controls.Add(this.txtEmpName);
+            this.Controls.Add(this.txtContCode);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtEmpUnqID);
             this.Controls.Add(this.pBar);
@@ -127,10 +192,13 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "frmImportAttd";
             this.Text = "Import Attendance to Pay Cycle";
-            this.Load += new System.EventHandler(this.frmImportEmp_Load);
+            this.Load += new System.EventHandler(this.frmImportAttd_Load);
             ((System.ComponentModel.ISupportInitialize)(this.txtPayPeriod.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPayDesc.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtEmpUnqID.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtContName.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtEmpName.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtContCode.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -145,5 +213,9 @@
         private System.Windows.Forms.ProgressBar pBar;
         private System.Windows.Forms.Label label1;
         private DevExpress.XtraEditors.TextEdit txtEmpUnqID;
+        private System.Windows.Forms.Label label2;
+        private DevExpress.XtraEditors.TextEdit txtContName;
+        private DevExpress.XtraEditors.TextEdit txtEmpName;
+        private DevExpress.XtraEditors.TextEdit txtContCode;
     }
 }

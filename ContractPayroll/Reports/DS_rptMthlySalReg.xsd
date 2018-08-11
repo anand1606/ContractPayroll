@@ -9,7 +9,7 @@
         <Tables>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="sp_Cont_MthlySalTPARegisterTableAdapter" GeneratorDataComponentClassName="sp_Cont_MthlySalTPARegisterTableAdapter" Name="sp_Cont_MthlySalTPARegister" UserDataComponentName="sp_Cont_MthlySalTPARegisterTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="ReportConStr (Settings)" DbObjectName="ATTENDANCE.dbo.sp_Cont_MthlySalTPARegister" DbObjectType="StoredProcedure" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="ReportConStr (Settings)" DbObjectName="ATTENDANCE.dbo.sp_Cont_MthlySalTPARegister" DbObjectType="StoredProcedure" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
                     <CommandText>dbo.sp_Cont_MthlySalTPARegister</CommandText>
@@ -84,6 +84,8 @@
               <Mapping SourceColumn="FromDt" DataSetColumn="FromDt" />
               <Mapping SourceColumn="ToDt" DataSetColumn="ToDt" />
               <Mapping SourceColumn="PayDesc" DataSetColumn="PayDesc" />
+              <Mapping SourceColumn="Tot_BAAmt" DataSetColumn="Tot_BAAmt" />
+              <Mapping SourceColumn="Tot_SPLAmt" DataSetColumn="Tot_SPLAmt" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -92,7 +94,7 @@
       </DataSource>
     </xs:appinfo>
   </xs:annotation>
-  <xs:element name="DS_rptMthlySalReg" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DS_rptMthlySalReg" msprop:Generator_UserDSName="DS_rptMthlySalReg">
+  <xs:element name="DS_rptMthlySalReg" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msdata:EnforceConstraints="False" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DS_rptMthlySalReg" msprop:Generator_UserDSName="DS_rptMthlySalReg">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element name="sp_Cont_MthlySalTPARegister" msprop:Generator_TableClassName="sp_Cont_MthlySalTPARegisterDataTable" msprop:Generator_TableVarName="tablesp_Cont_MthlySalTPARegister" msprop:Generator_TablePropName="sp_Cont_MthlySalTPARegister" msprop:Generator_RowDeletingName="sp_Cont_MthlySalTPARegisterRowDeleting" msprop:Generator_RowChangingName="sp_Cont_MthlySalTPARegisterRowChanging" msprop:Generator_RowEvHandlerName="sp_Cont_MthlySalTPARegisterRowChangeEventHandler" msprop:Generator_RowDeletedName="sp_Cont_MthlySalTPARegisterRowDeleted" msprop:Generator_UserTableName="sp_Cont_MthlySalTPARegister" msprop:Generator_RowChangedName="sp_Cont_MthlySalTPARegisterRowChanged" msprop:Generator_RowEvArgName="sp_Cont_MthlySalTPARegisterRowChangeEvent" msprop:Generator_RowClassName="sp_Cont_MthlySalTPARegisterRow">
@@ -267,6 +269,8 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
+              <xs:element name="Tot_BAAmt" msprop:Generator_ColumnVarNameInTable="columnTot_BAAmt" msprop:Generator_ColumnPropNameInRow="Tot_BAAmt" msprop:Generator_ColumnPropNameInTable="Tot_BAAmtColumn" msprop:Generator_UserColumnName="Tot_BAAmt" type="xs:double" />
+              <xs:element name="Tot_SPLAmt" msprop:Generator_ColumnVarNameInTable="columnTot_SPLAmt" msprop:Generator_ColumnPropNameInRow="Tot_SPLAmt" msprop:Generator_ColumnPropNameInTable="Tot_SPLAmtColumn" msprop:Generator_UserColumnName="Tot_SPLAmt" type="xs:double" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

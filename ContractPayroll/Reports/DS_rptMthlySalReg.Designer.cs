@@ -202,7 +202,7 @@ namespace ContractPayroll.Reports {
             this.DataSetName = "DS_rptMthlySalReg";
             this.Prefix = "";
             this.Namespace = "http://tempuri.org/DS_rptMthlySalReg.xsd";
-            this.EnforceConstraints = true;
+            this.EnforceConstraints = false;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
             this.tablesp_Cont_MthlySalTPARegister = new sp_Cont_MthlySalTPARegisterDataTable();
             base.Tables.Add(this.tablesp_Cont_MthlySalTPARegister);
@@ -400,6 +400,10 @@ namespace ContractPayroll.Reports {
             private global::System.Data.DataColumn columnToDt;
             
             private global::System.Data.DataColumn columnPayDesc;
+            
+            private global::System.Data.DataColumn columnTot_BAAmt;
+            
+            private global::System.Data.DataColumn columnTot_SPLAmt;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -924,6 +928,22 @@ namespace ContractPayroll.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn Tot_BAAmtColumn {
+                get {
+                    return this.columnTot_BAAmt;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn Tot_SPLAmtColumn {
+                get {
+                    return this.columnTot_SPLAmt;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1020,7 +1040,9 @@ namespace ContractPayroll.Reports {
                         System.DateTime BirthDt, 
                         System.DateTime FromDt, 
                         System.DateTime ToDt, 
-                        string PayDesc) {
+                        string PayDesc, 
+                        double Tot_BAAmt, 
+                        double Tot_SPLAmt) {
                 sp_Cont_MthlySalTPARegisterRow rowsp_Cont_MthlySalTPARegisterRow = ((sp_Cont_MthlySalTPARegisterRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         PayPeriod,
@@ -1083,7 +1105,9 @@ namespace ContractPayroll.Reports {
                         BirthDt,
                         FromDt,
                         ToDt,
-                        PayDesc};
+                        PayDesc,
+                        Tot_BAAmt,
+                        Tot_SPLAmt};
                 rowsp_Cont_MthlySalTPARegisterRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowsp_Cont_MthlySalTPARegisterRow);
                 return rowsp_Cont_MthlySalTPARegisterRow;
@@ -1175,6 +1199,8 @@ namespace ContractPayroll.Reports {
                 this.columnFromDt = base.Columns["FromDt"];
                 this.columnToDt = base.Columns["ToDt"];
                 this.columnPayDesc = base.Columns["PayDesc"];
+                this.columnTot_BAAmt = base.Columns["Tot_BAAmt"];
+                this.columnTot_SPLAmt = base.Columns["Tot_SPLAmt"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1302,6 +1328,10 @@ namespace ContractPayroll.Reports {
                 base.Columns.Add(this.columnToDt);
                 this.columnPayDesc = new global::System.Data.DataColumn("PayDesc", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnPayDesc);
+                this.columnTot_BAAmt = new global::System.Data.DataColumn("Tot_BAAmt", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTot_BAAmt);
+                this.columnTot_SPLAmt = new global::System.Data.DataColumn("Tot_SPLAmt", typeof(double), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnTot_SPLAmt);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnPayPeriod,
                                 this.columnEmpUnqID}, true));
@@ -1366,6 +1396,8 @@ namespace ContractPayroll.Reports {
                 this.columnToDt.AllowDBNull = false;
                 this.columnPayDesc.AllowDBNull = false;
                 this.columnPayDesc.MaxLength = 100;
+                this.columnTot_BAAmt.AllowDBNull = false;
+                this.columnTot_SPLAmt.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2282,6 +2314,28 @@ namespace ContractPayroll.Reports {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double Tot_BAAmt {
+                get {
+                    return ((double)(this[this.tablesp_Cont_MthlySalTPARegister.Tot_BAAmtColumn]));
+                }
+                set {
+                    this[this.tablesp_Cont_MthlySalTPARegister.Tot_BAAmtColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public double Tot_SPLAmt {
+                get {
+                    return ((double)(this[this.tablesp_Cont_MthlySalTPARegister.Tot_SPLAmtColumn]));
+                }
+                set {
+                    this[this.tablesp_Cont_MthlySalTPARegister.Tot_SPLAmtColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsContCodeNull() {
                 return this.IsNull(this.tablesp_Cont_MthlySalTPARegister.ContCodeColumn);
             }
@@ -2717,6 +2771,8 @@ namespace ContractPayroll.Reports.DS_rptMthlySalRegTableAdapters {
             tableMapping.ColumnMappings.Add("FromDt", "FromDt");
             tableMapping.ColumnMappings.Add("ToDt", "ToDt");
             tableMapping.ColumnMappings.Add("PayDesc", "PayDesc");
+            tableMapping.ColumnMappings.Add("Tot_BAAmt", "Tot_BAAmt");
+            tableMapping.ColumnMappings.Add("Tot_SPLAmt", "Tot_SPLAmt");
             this._adapter.TableMappings.Add(tableMapping);
         }
         

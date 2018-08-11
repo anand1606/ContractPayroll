@@ -6,9 +6,9 @@ using DevExpress.XtraReports.UI;
 
 namespace ContractPayroll.Reports
 {
-    public partial class rptMthlySalRegDt : DevExpress.XtraReports.UI.XtraReport
+    public partial class rptMthlySalDetail : DevExpress.XtraReports.UI.XtraReport
     {
-        public rptMthlySalRegDt()
+        public rptMthlySalDetail()
         {
             InitializeComponent();
         }

@@ -37,8 +37,17 @@ namespace ContractPayroll.Forms
 
             txtPayPeriod.Text = "";
             txtPayDesc.Text = "";
+
+            txtEmpUnqID.Enabled = true;
+            txtContCode.Enabled = true;
+            txtContCode.Text = "";
+            txtContName.Text = "";
+            txtEmpUnqID.Text = "";
+            txtEmpName.Text = "";
+
             pBar.Minimum = 0;
             pBar.Value = 0;
+
             IsLocked = false;
             mode = "NEW";
             pFromDt = DateTime.MinValue;
@@ -98,6 +107,18 @@ namespace ContractPayroll.Forms
             {
                 err = err + "Invalid Pay Period.." + Environment.NewLine;
                 return err;
+            }
+
+            if (txtEmpUnqID.Text.Trim().ToString() != "")
+            {
+                txtContCode.Text = "";
+                txtContName.Text = "";
+            }
+
+            if (txtContCode.Text.Trim().ToString() != "")
+            {
+                txtEmpUnqID.Text = "";
+                txtEmpName.Text = "";
             }
 
             return err;
@@ -526,6 +547,9 @@ namespace ContractPayroll.Forms
             txtPayPeriod.Enabled = false;
             txtPayDesc.Enabled = false;
             btnImport.Enabled = false;
+            txtEmpUnqID.Enabled = false;
+            txtContCode.Enabled = false;
+
         }
 
         private void unLockCtrl()
@@ -533,6 +557,8 @@ namespace ContractPayroll.Forms
             txtPayPeriod.Enabled = true;
             txtPayDesc.Enabled = true;
             btnImport.Enabled = true;
+            txtEmpUnqID.Enabled = true;
+            txtContCode.Enabled = true;
         }
 
         private void txtPayPeriod_KeyDown(object sender, KeyEventArgs e)
@@ -613,10 +639,154 @@ namespace ContractPayroll.Forms
             SetRights();
         }
 
-        private void frmImportEmp_Load(object sender, EventArgs e)
+        private void frmImportAttd_Load(object sender, EventArgs e)
         {
             ResetCtrl();
         }
 
+        private void txtEmpUnqID_Validated(object sender, EventArgs e)
+        {
+            DataSet ds = new DataSet();
+            string sql = "select EmpName From Cont_MastEmp where  PayPeriod = '" + txtPayPeriod.Text.Trim().ToString() + "' and EmpUnqID = '" + txtEmpUnqID.Text.Trim() + "'";
+
+            ds = Utils.Helper.GetData(sql, Utils.Helper.constr);
+            bool hasRows = ds.Tables.Cast<DataTable>().Any(table => table.Rows.Count != 0);
+
+            if (hasRows)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    txtEmpName.Text = dr["EmpName"].ToString();
+                    txtContCode.Text = "";
+                    txtContName.Text = "";
+                    
+                }
+            }
+            else
+            {
+                txtEmpName.Text = "";
+                txtEmpUnqID.Text = "";
+            }
+
+            SetRights();
+        }
+
+        private void txtContCode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F1 || e.KeyCode == Keys.F2)
+            {
+                List<string> obj = new List<string>();
+
+                Help_F1F2.ClsHelp hlp = new Help_F1F2.ClsHelp();
+                string sql = "";
+
+
+                sql = "Select ContCode,ContName from MastCont Where CompCode = '01' and WrkGrp = 'Cont' ";
+
+
+                if (e.KeyCode == Keys.F1)
+                {
+                    obj = (List<string>)hlp.Show(sql, "ContCode", "ContCode", typeof(string), Utils.Helper.constr, "System.Data.SqlClient",
+                   100, 300, 400, 600, 100, 100);
+                }
+
+                if (obj.Count == 0)
+                {
+                    txtContCode.Text = "";
+                    txtContName.Text = "";
+                    return;
+                }
+                else if (obj.ElementAt(0).ToString() == "0")
+                {
+                    txtContCode.Text = "";
+                    txtContName.Text = "";
+                    return;
+                }
+                else if (obj.ElementAt(0).ToString() == "")
+                {
+                    txtContCode.Text = "";
+                    txtContName.Text = "";
+                    return;
+                }
+                else
+                {
+                    txtContCode.Text = obj.ElementAt(0).ToString();
+                    txtContName.Text = obj.ElementAt(1).ToString();
+
+                }
+            }
+        }
+
+        private void txtContCode_Validated(object sender, EventArgs e)
+        {
+            DataSet ds = new DataSet();
+            string sql = "select Distinct ContCode,ContDesc From Cont_MastEmp Where PayPeriod = '" + txtPayPeriod.Text.Trim().ToString() + "' and ContCode = '" + txtContCode.Text.Trim() + "'";
+
+            ds = Utils.Helper.GetData(sql, Utils.Helper.constr);
+            bool hasRows = ds.Tables.Cast<DataTable>().Any(table => table.Rows.Count != 0);
+
+            if (hasRows)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    txtEmpUnqID.Text = "";
+                    txtEmpName.Text = "";
+                    txtContName.Text = dr["ContDesc"].ToString();
+                    
+                }
+            }
+            else
+            {
+                txtContName.Text = "";
+                txtContCode.Text = "";
+            }
+
+            SetRights();
+        }
+
+        private void txtEmpUnqID_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F1 || e.KeyCode == Keys.F2)
+            {
+                List<string> obj = new List<string>();
+
+                Help_F1F2.ClsHelp hlp = new Help_F1F2.ClsHelp();
+                string sql = "";
+
+
+                sql = "Select EmpUnqID,EmpName,ContCode from Cont_MastEmp Where PayPeriod = '" + txtPayPeriod.Text.Trim().ToString() + "'";
+
+
+                if (e.KeyCode == Keys.F1)
+                {
+                    obj = (List<string>)hlp.Show(sql, "EmpUnqID", "EmpUnqID", typeof(string), Utils.Helper.constr, "System.Data.SqlClient",
+                   100, 300, 400, 600, 100, 100);
+                }
+
+                if (obj.Count == 0)
+                {
+                    txtEmpUnqID.Text = "";
+                    txtEmpName.Text = "";
+                    return;
+                }
+                else if (obj.ElementAt(0).ToString() == "0")
+                {
+                    txtEmpUnqID.Text = "";
+                    txtEmpName.Text = "";
+                    return;
+                }
+                else if (obj.ElementAt(0).ToString() == "")
+                {
+                    txtEmpUnqID.Text = "";
+                    txtEmpName.Text = "";
+                    return;
+                }
+                else
+                {
+                    txtEmpUnqID.Text = obj.ElementAt(0).ToString();
+                    txtEmpName.Text = obj.ElementAt(1).ToString();
+                }
+            }
+        }
     }
 }

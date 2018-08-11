@@ -322,9 +322,9 @@
             // btnUpdate
             // 
             this.btnUpdate.BackColor = System.Drawing.Color.Cornsilk;
-            this.btnUpdate.Location = new System.Drawing.Point(661, 130);
+            this.btnUpdate.Location = new System.Drawing.Point(652, 137);
             this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(75, 32);
+            this.btnUpdate.Size = new System.Drawing.Size(103, 32);
             this.btnUpdate.TabIndex = 9;
             this.btnUpdate.Text = "&Update";
             this.btnUpdate.UseVisualStyleBackColor = false;
@@ -353,7 +353,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(30, 143);
+            this.label8.Location = new System.Drawing.Point(39, 146);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(86, 15);
             this.label8.TabIndex = 73;
@@ -361,7 +361,7 @@
             // 
             // txtRemarks
             // 
-            this.txtRemarks.Location = new System.Drawing.Point(131, 140);
+            this.txtRemarks.Location = new System.Drawing.Point(131, 143);
             this.txtRemarks.Name = "txtRemarks";
             this.txtRemarks.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtRemarks.Properties.Appearance.Options.UseFont = true;
@@ -374,12 +374,11 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(596, 13);
+            this.label7.Location = new System.Drawing.Point(460, 146);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(78, 15);
             this.label7.TabIndex = 71;
             this.label7.Text = "Adj. Amount :";
-            this.label7.Visible = false;
             // 
             // label6
             // 
@@ -470,7 +469,7 @@
             // 
             // txtAdjAmt
             // 
-            this.txtAdjAmt.Location = new System.Drawing.Point(678, 10);
+            this.txtAdjAmt.Location = new System.Drawing.Point(544, 143);
             this.txtAdjAmt.Name = "txtAdjAmt";
             this.txtAdjAmt.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtAdjAmt.Properties.Appearance.Options.UseFont = true;
@@ -479,9 +478,7 @@
             this.txtAdjAmt.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.None;
             this.txtAdjAmt.Properties.MaxLength = 10;
             this.txtAdjAmt.Size = new System.Drawing.Size(88, 22);
-            this.txtAdjAmt.TabIndex = 8;
-            this.txtAdjAmt.TabStop = false;
-            this.txtAdjAmt.Visible = false;
+            this.txtAdjAmt.TabIndex = 9;
             // 
             // txtAdjDays
             // 

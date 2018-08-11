@@ -44,8 +44,8 @@ namespace ContractPayroll.Forms
                     }
                 }
 
-                string tContCode = " ";
-                if(txtContCode.Text.Trim() != "")
+                string tContCode = txtContCode.Text.ToString().Trim();
+                if(txtContCode.Text.ToString().Trim() != "")
                 {
                     tContCode = txtContCode.Text.Trim();
                 }
@@ -58,6 +58,8 @@ namespace ContractPayroll.Forms
                 var HeaderTBL = new Reports.DS_rptMthlySalReg.sp_Cont_MthlySalTPARegisterDataTable();
                 var HeaderTa = new Reports.DS_rptMthlySalRegTableAdapters.sp_Cont_MthlySalTPARegisterTableAdapter();
                 HeaderTa.Connection.ConnectionString = Utils.Helper.constr;
+                HeaderTa.ClearBeforeFill = true;
+                HeaderTBL.Constraints.Clear();
                 HeaderTBL = HeaderTa.GetData(tPay,tContCode);
 
 
@@ -67,7 +69,7 @@ namespace ContractPayroll.Forms
                 bool hasRows = Ds.Tables.Cast<DataTable>().Any(table => table.Rows.Count != 0);
                 if (hasRows)
                 {
-                    DevExpress.XtraReports.UI.XtraReport report = new Reports.rptMthlySalReg();
+                    DevExpress.XtraReports.UI.XtraReport report = new Reports.rptMthlySalRegDt();
                     report.DataSource = Ds;
                     report.ShowPreviewDialog();
                 }

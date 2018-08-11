@@ -32,9 +32,19 @@ namespace ContractPayroll.Forms
 
             txtPayPeriod.Properties.ReadOnly = true;
             GRights = ContractPayroll.Classes.Globals.GetFormRights(this.Name);
-            txtEmpUnqID.Text = "";
+           
             txtPayPeriod.Text = "";
             txtPayDesc.Text = "";
+
+
+            txtEmpUnqID.Enabled = true;
+            txtContCode.Enabled = true;
+            txtContCode.Text = "";
+            txtContName.Text = "";
+            txtEmpUnqID.Text = "";
+            txtEmpName.Text = "";
+
+
             pBar.Minimum = 0;
             pBar.Value = 0;
             IsLocked = false;
@@ -101,6 +111,18 @@ namespace ContractPayroll.Forms
                 return err;
             }
 
+            if (txtEmpUnqID.Text.Trim().ToString() != "")
+            {
+                txtContCode.Text = "";
+                txtContName.Text = "";
+            }
+
+            if (txtContCode.Text.Trim().ToString() != "")
+            {
+                txtEmpUnqID.Text = "";
+                txtEmpName.Text = "";
+            }
+
             return err;
         }
         
@@ -149,13 +171,18 @@ namespace ContractPayroll.Forms
             }
             string sql = string.Empty;
 
-            if(string.IsNullOrEmpty(txtEmpUnqID.Text.Trim()))
+            if(string.IsNullOrEmpty(txtEmpUnqID.Text.Trim()) && string.IsNullOrEmpty(txtContCode.Text.Trim()))
             {
                 sql = "Select * From v_EmpMast where Active = 1 and CompCode = '01' and WrkGrp = 'Cont' and Basic > 0 ";
-            }else{
-                sql = "Select * from v_EmpMast Where EmpUnqID ='" + txtEmpUnqID.Text.Trim() + "' and WrkGrp = 'Cont' and CompCode = '01'";
-            }
 
+            }else if (string.IsNullOrEmpty(txtContCode.Text.Trim()) && !string.IsNullOrEmpty(txtEmpUnqID.Text.Trim()))
+            {
+                sql = "Select * from v_EmpMast Where EmpUnqID ='" + txtEmpUnqID.Text.Trim() + "' and WrkGrp = 'Cont' and CompCode = '01'";
+
+            }else if (!string.IsNullOrEmpty(txtContCode.Text.Trim()) && string.IsNullOrEmpty(txtEmpUnqID.Text.Trim()))
+            {
+                sql = "Select * from v_EmpMast Where CompCode = '01' and WrkGrp = 'Cont' and Active = 1 and Basic > 0 ";
+            }
             
 
             DataSet emplistds = Utils.Helper.GetData(sql, Utils.Helper.constr);
@@ -443,6 +470,7 @@ namespace ContractPayroll.Forms
             txtPayDesc.Enabled = false;
             btnImport.Enabled = false;
             txtEmpUnqID.Enabled = false;
+            txtContCode.Enabled = false;
         }
 
         private void unLockCtrl()
@@ -451,6 +479,7 @@ namespace ContractPayroll.Forms
             txtPayDesc.Enabled = true;
             btnImport.Enabled = true;
             txtEmpUnqID.Enabled = true;
+            txtContCode.Enabled = true;
         }
 
         private void txtPayPeriod_KeyDown(object sender, KeyEventArgs e)
@@ -531,6 +560,158 @@ namespace ContractPayroll.Forms
         private void frmImportEmp_Load(object sender, EventArgs e)
         {
             ResetCtrl();
+        }
+
+        private void txtEmpUnqID_Validated(object sender, EventArgs e)
+        {
+            DataSet ds = new DataSet();
+            string sql = "select EmpName From MastEmp where  CompCode = '01' and WrkGrp = 'CONT' and EmpUnqID = '" + txtEmpUnqID.Text.Trim() +  "'";
+
+            ds = Utils.Helper.GetData(sql, Utils.Helper.constr);
+            bool hasRows = ds.Tables.Cast<DataTable>().Any(table => table.Rows.Count != 0);
+
+            if (hasRows)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    txtContCode.Text = "";
+                    txtContName.Text = "";
+                    txtEmpName.Text = dr["EmpName"].ToString();
+                    IsLocked = ((Convert.ToBoolean(dr["IsLocked"])) ? true : false);
+                    btnImport.Enabled = true;
+                    mode = "OLD";
+                }
+            }
+            else
+            {
+                txtEmpUnqID.Text = "";
+                txtEmpName.Text = "";
+                btnImport.Enabled = false;
+                mode = "NEW";
+
+            }
+
+            SetRights();
+        }
+
+        private void txtContCode_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F1 || e.KeyCode == Keys.F2)
+            {
+                List<string> obj = new List<string>();
+
+                Help_F1F2.ClsHelp hlp = new Help_F1F2.ClsHelp();
+                string sql = "";
+
+
+                sql = "Select ContCode,ContName from MastCont Where CompCode = '01' and WrkGrp = 'Cont' ";
+
+
+                if (e.KeyCode == Keys.F1)
+                {
+                    obj = (List<string>)hlp.Show(sql, "ContCode", "ContCode", typeof(string), Utils.Helper.constr, "System.Data.SqlClient",
+                   100, 300, 400, 600, 100, 100);
+                }
+
+                if (obj.Count == 0)
+                {
+                    txtContCode.Text = "";
+                    txtContName.Text = "";
+                    return;
+                }
+                else if (obj.ElementAt(0).ToString() == "0")
+                {
+                    txtContCode.Text = "";
+                    txtContName.Text = "";
+                    return;
+                }
+                else if (obj.ElementAt(0).ToString() == "")
+                {
+                    txtContCode.Text = "";
+                    txtContName.Text = "";
+                    return;
+                }
+                else
+                {
+                    txtContCode.Text = obj.ElementAt(0).ToString();
+                    txtContName.Text = obj.ElementAt(1).ToString();
+
+                }
+            }
+        }
+
+        private void txtContCode_Validated(object sender, EventArgs e)
+        {
+            DataSet ds = new DataSet();
+            string sql = "select ContName From MastCont Where CompCode = '01' and WrkGrp = 'Cont'  and ContCode = '" + txtContCode.Text.Trim() + "'";
+
+            ds = Utils.Helper.GetData(sql, Utils.Helper.constr);
+            bool hasRows = ds.Tables.Cast<DataTable>().Any(table => table.Rows.Count != 0);
+
+            if (hasRows)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    txtEmpUnqID.Text = "";
+                    txtEmpName.Text = "";
+                    txtContName.Text = dr["ContName"].ToString();
+                  
+                }
+            }
+            else
+            {
+                txtContName.Text = "";
+                txtContCode.Text = "";
+               
+
+            }
+
+            SetRights();
+        }
+
+        private void txtEmpUnqID_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F1 || e.KeyCode == Keys.F2)
+            {
+                List<string> obj = new List<string>();
+
+                Help_F1F2.ClsHelp hlp = new Help_F1F2.ClsHelp();
+                string sql = "";
+
+
+                sql = "Select EmpUnqID,EmpName,ContCode from MastEmp Where CompCode = '01' and WrkGrp = 'Cont' and Active = 1";
+
+
+                if (e.KeyCode == Keys.F1)
+                {
+                    obj = (List<string>)hlp.Show(sql, "EmpUnqID", "EmpUnqID", typeof(string), Utils.Helper.constr, "System.Data.SqlClient",
+                   100, 300, 400, 600, 100, 100);
+                }
+
+                if (obj.Count == 0)
+                {
+                    txtEmpUnqID.Text = "";
+                    txtEmpName.Text = "";
+                    return;
+                }
+                else if (obj.ElementAt(0).ToString() == "0")
+                {
+                    txtEmpUnqID.Text = "";
+                    txtEmpName.Text = "";
+                    return;
+                }
+                else if (obj.ElementAt(0).ToString() == "")
+                {
+                    txtEmpUnqID.Text = "";
+                    txtEmpName.Text = "";
+                    return;
+                }
+                else
+                {
+                    txtEmpUnqID.Text = obj.ElementAt(0).ToString();
+                    txtEmpName.Text = obj.ElementAt(1).ToString();
+                }
+            }
         }
 
     }

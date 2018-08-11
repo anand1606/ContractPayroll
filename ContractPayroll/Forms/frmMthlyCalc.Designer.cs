@@ -42,6 +42,10 @@
             this.OptionalDed = new DevExpress.XtraGrid.Columns.GridColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.txtEmpUnqID = new DevExpress.XtraEditors.TextEdit();
+            this.txtContName = new DevExpress.XtraEditors.TextEdit();
+            this.txtEmpName = new DevExpress.XtraEditors.TextEdit();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtContCode = new DevExpress.XtraEditors.TextEdit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPayPeriod.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPayDesc.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
@@ -49,12 +53,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.grd_view)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grd_view1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtEmpUnqID.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtContName.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtEmpName.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtContCode.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(10, 15);
+            this.label3.Location = new System.Drawing.Point(13, 15);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(69, 15);
             this.label3.TabIndex = 54;
@@ -62,7 +69,7 @@
             // 
             // txtPayPeriod
             // 
-            this.txtPayPeriod.Location = new System.Drawing.Point(80, 12);
+            this.txtPayPeriod.Location = new System.Drawing.Point(88, 12);
             this.txtPayPeriod.Name = "txtPayPeriod";
             this.txtPayPeriod.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPayPeriod.Properties.Appearance.Options.UseFont = true;
@@ -82,23 +89,24 @@
             this.txtPayDesc.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
             this.txtPayDesc.Properties.MaxLength = 100;
             this.txtPayDesc.Properties.ReadOnly = true;
-            this.txtPayDesc.Size = new System.Drawing.Size(421, 22);
+            this.txtPayDesc.Size = new System.Drawing.Size(377, 22);
             this.txtPayDesc.TabIndex = 1;
+            this.txtPayDesc.TabStop = false;
             // 
             // btnProcess
             // 
             this.btnProcess.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnProcess.Location = new System.Drawing.Point(188, 237);
+            this.btnProcess.Location = new System.Drawing.Point(188, 279);
             this.btnProcess.Name = "btnProcess";
             this.btnProcess.Size = new System.Drawing.Size(238, 42);
-            this.btnProcess.TabIndex = 2;
+            this.btnProcess.TabIndex = 7;
             this.btnProcess.Text = "Process";
             this.btnProcess.UseVisualStyleBackColor = true;
             this.btnProcess.Click += new System.EventHandler(this.btnImport_Click);
             // 
             // pBar
             // 
-            this.pBar.Location = new System.Drawing.Point(12, 285);
+            this.pBar.Location = new System.Drawing.Point(12, 327);
             this.pBar.Name = "pBar";
             this.pBar.Size = new System.Drawing.Size(591, 35);
             this.pBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
@@ -109,7 +117,7 @@
             this.groupControl2.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupControl2.Appearance.Options.UseFont = true;
             this.groupControl2.Controls.Add(this.grd_view);
-            this.groupControl2.Location = new System.Drawing.Point(8, 74);
+            this.groupControl2.Location = new System.Drawing.Point(8, 106);
             this.groupControl2.Name = "groupControl2";
             this.groupControl2.Size = new System.Drawing.Size(595, 157);
             this.groupControl2.TabIndex = 57;
@@ -122,7 +130,7 @@
             this.grd_view.MainView = this.grd_view1;
             this.grd_view.Name = "grd_view";
             this.grd_view.Size = new System.Drawing.Size(591, 134);
-            this.grd_view.TabIndex = 2;
+            this.grd_view.TabIndex = 6;
             this.grd_view.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.grd_view1});
             this.grd_view.Click += new System.EventHandler(this.grd_view_Click);
@@ -203,7 +211,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(5, 43);
+            this.label1.Location = new System.Drawing.Point(8, 43);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(74, 15);
             this.label1.TabIndex = 67;
@@ -211,19 +219,78 @@
             // 
             // txtEmpUnqID
             // 
-            this.txtEmpUnqID.Location = new System.Drawing.Point(80, 40);
+            this.txtEmpUnqID.Location = new System.Drawing.Point(88, 38);
             this.txtEmpUnqID.Name = "txtEmpUnqID";
             this.txtEmpUnqID.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtEmpUnqID.Properties.Appearance.Options.UseFont = true;
+            this.txtEmpUnqID.Properties.Mask.EditMask = "[0-9]+";
+            this.txtEmpUnqID.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
             this.txtEmpUnqID.Properties.MaxLength = 10;
             this.txtEmpUnqID.Size = new System.Drawing.Size(88, 22);
-            this.txtEmpUnqID.TabIndex = 66;
+            this.txtEmpUnqID.TabIndex = 2;
+            this.txtEmpUnqID.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtEmpUnqID_KeyDown);
+            this.txtEmpUnqID.Validated += new System.EventHandler(this.txtEmpUnqID_Validated);
+            // 
+            // txtContName
+            // 
+            this.txtContName.Location = new System.Drawing.Point(182, 66);
+            this.txtContName.Name = "txtContName";
+            this.txtContName.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtContName.Properties.Appearance.Options.UseFont = true;
+            this.txtContName.Properties.Mask.EditMask = "[A-Za-z 0-9]+";
+            this.txtContName.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
+            this.txtContName.Properties.MaxLength = 100;
+            this.txtContName.Properties.ReadOnly = true;
+            this.txtContName.Size = new System.Drawing.Size(377, 22);
+            this.txtContName.TabIndex = 5;
+            this.txtContName.TabStop = false;
+            // 
+            // txtEmpName
+            // 
+            this.txtEmpName.Location = new System.Drawing.Point(182, 38);
+            this.txtEmpName.Name = "txtEmpName";
+            this.txtEmpName.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtEmpName.Properties.Appearance.Options.UseFont = true;
+            this.txtEmpName.Properties.Mask.EditMask = "[A-Za-z 0-9]+";
+            this.txtEmpName.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
+            this.txtEmpName.Properties.MaxLength = 100;
+            this.txtEmpName.Properties.ReadOnly = true;
+            this.txtEmpName.Size = new System.Drawing.Size(377, 22);
+            this.txtEmpName.TabIndex = 3;
+            this.txtEmpName.TabStop = false;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(15, 69);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(67, 15);
+            this.label2.TabIndex = 69;
+            this.label2.Text = "ContCode :";
+            // 
+            // txtContCode
+            // 
+            this.txtContCode.Location = new System.Drawing.Point(88, 66);
+            this.txtContCode.Name = "txtContCode";
+            this.txtContCode.Properties.Appearance.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtContCode.Properties.Appearance.Options.UseFont = true;
+            this.txtContCode.Properties.Mask.EditMask = "[A-Z]+";
+            this.txtContCode.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.RegEx;
+            this.txtContCode.Properties.MaxLength = 10;
+            this.txtContCode.Size = new System.Drawing.Size(88, 22);
+            this.txtContCode.TabIndex = 4;
+            this.txtContCode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtContCode_KeyDown);
+            this.txtContCode.Validated += new System.EventHandler(this.txtContCode_Validated);
             // 
             // frmMthlyCalc
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(624, 389);
+            this.ClientSize = new System.Drawing.Size(624, 381);
+            this.Controls.Add(this.txtContName);
+            this.Controls.Add(this.txtEmpName);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.txtContCode);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtEmpUnqID);
             this.Controls.Add(this.groupControl2);
@@ -243,6 +310,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.grd_view)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.grd_view1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtEmpUnqID.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtContName.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtEmpName.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtContCode.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -264,5 +334,9 @@
         private DevExpress.XtraGrid.Columns.GridColumn OptionalDed;
         private System.Windows.Forms.Label label1;
         private DevExpress.XtraEditors.TextEdit txtEmpUnqID;
+        private DevExpress.XtraEditors.TextEdit txtContName;
+        private DevExpress.XtraEditors.TextEdit txtEmpName;
+        private System.Windows.Forms.Label label2;
+        private DevExpress.XtraEditors.TextEdit txtContCode;
     }
 }

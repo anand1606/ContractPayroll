@@ -39,6 +39,7 @@
             this.txtFromDt = new DevExpress.XtraEditors.DateEdit();
             this.label2 = new System.Windows.Forms.Label();
             this.txtContCode = new DevExpress.XtraEditors.TextEdit();
+            this.chkBreak = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.txtPayPeriod.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPayDesc.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtToDt.Properties.CalendarTimeProperties)).BeginInit();
@@ -188,11 +189,22 @@
             this.txtContCode.TabIndex = 4;
             this.txtContCode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtContCode_KeyDown);
             // 
+            // chkBreak
+            // 
+            this.chkBreak.AutoSize = true;
+            this.chkBreak.Location = new System.Drawing.Point(111, 135);
+            this.chkBreak.Name = "chkBreak";
+            this.chkBreak.Size = new System.Drawing.Size(160, 21);
+            this.chkBreak.TabIndex = 68;
+            this.chkBreak.Text = "With Wages Breakup";
+            this.chkBreak.UseVisualStyleBackColor = true;
+            // 
             // frmReportsTemp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(510, 246);
+            this.Controls.Add(this.chkBreak);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtContCode);
             this.Controls.Add(this.label17);
@@ -234,5 +246,6 @@
         private DevExpress.XtraEditors.DateEdit txtFromDt;
         private System.Windows.Forms.Label label2;
         private DevExpress.XtraEditors.TextEdit txtContCode;
+        private System.Windows.Forms.CheckBox chkBreak;
     }
 }

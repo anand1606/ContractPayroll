@@ -247,6 +247,10 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Reports\DS_rptMthlySalDT.cs">
+      <DependentUpon>DS_rptMthlySalDT.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\DS_rptMthlySalDT.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -262,12 +266,6 @@
     </Compile>
     <Compile Include="Reports\rptMthlySAL.Designer.cs">
       <DependentUpon>rptMthlySAL.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Reports\rptMthlySalDetail.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Reports\rptMthlySalDetail.Designer.cs">
-      <DependentUpon>rptMthlySalDetail.cs</DependentUpon>
     </Compile>
     <Compile Include="Reports\rptMthlyTPAReg.cs">
       <SubType>Component</SubType>
@@ -351,9 +349,6 @@
     </Compile>
     <EmbeddedResource Include="Reports\rptMthlySAL.resx">
       <DependentUpon>rptMthlySAL.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\rptMthlySalDetail.resx">
-      <DependentUpon>rptMthlySalDetail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\rptMthlyTPAReg.resx">
       <DependentUpon>rptMthlyTPAReg.cs</DependentUpon>

@@ -49,29 +49,63 @@ namespace ContractPayroll.Forms
                 {
                     tContCode = txtContCode.Text.Trim();
                 }
-
-                //var HeaderTBL = new Reports.DS_rptMthlySalReg.DtMthlySalDataTable();
-                //var HeaderTa = new Reports.DS_rptMthlySalRegTableAdapters.DtMthlySalTableAdapter();
-                //HeaderTa.Connection.ConnectionString = Utils.Helper.constr;
-                //HeaderTBL = HeaderTa.GetData(tPay);
-
-                var HeaderTBL = new Reports.DS_rptMthlySalReg.sp_Cont_MthlySalTPARegisterDataTable();
-                var HeaderTa = new Reports.DS_rptMthlySalRegTableAdapters.sp_Cont_MthlySalTPARegisterTableAdapter();
-                HeaderTa.Connection.ConnectionString = Utils.Helper.constr;
-                HeaderTa.ClearBeforeFill = true;
-                HeaderTBL.Constraints.Clear();
-                HeaderTBL = HeaderTa.GetData(tPay,tContCode);
-
-
                 DataSet Ds = new DataSet();
-                Ds.Tables.Add(HeaderTBL);
-                
+
+                if (chkBreak.Checked == true)
+                {
+                    var HeaderTBL = new Reports.DS_rptMthlySalDT.sp_Cont_MthlySalTPARegisterDataTable();
+                    var DetailTBL = new Reports.DS_rptMthlySalDT.sp_Cont_MthlySalDTDataTable();
+
+                    var HeaderTa = new Reports.DS_rptMthlySalDTTableAdapters.sp_Cont_MthlySalTPARegisterTableAdapter();
+                    var DetailTa = new Reports.DS_rptMthlySalDTTableAdapters.sp_Cont_MthlySalDTTableAdapter();
+
+                    HeaderTa.Connection.ConnectionString = Utils.Helper.constr;
+                    HeaderTa.ClearBeforeFill = true;
+                    DetailTa.Connection.ConnectionString = Utils.Helper.constr;
+                    DetailTa.ClearBeforeFill = true;
+                    //HeaderTBL.Constraints.Clear();
+                    HeaderTBL = HeaderTa.GetData(tPay, tContCode);
+                    DetailTBL = DetailTa.GetData(tPay, tContCode);
+
+
+
+                    Ds.Tables.Add(HeaderTBL);
+                    Ds.Tables.Add(DetailTBL);
+
+
+                    DataRelation newRelation = new DataRelation("sp_Cont_MthlySalTPARegister_sp_Cont_MthlySalDT",
+                        new DataColumn[] { HeaderTBL.Columns["PayPeriod"], HeaderTBL.Columns["EmpUnqID"] },
+                        new DataColumn[] { DetailTBL.Columns["PayPeriod"], DetailTBL.Columns["EmpUnqID"] }
+                    );
+
+                    Ds.Relations.Add(newRelation);
+                }
+                else
+                {
+                    var HeaderTBL = new Reports.DS_rptMthlySalReg.sp_Cont_MthlySalTPARegisterDataTable();
+                    var HeaderTa = new Reports.DS_rptMthlySalRegTableAdapters.sp_Cont_MthlySalTPARegisterTableAdapter();
+                    HeaderTa.Connection.ConnectionString = Utils.Helper.constr;
+                    HeaderTBL = HeaderTa.GetData(tPay, tContCode);
+                    Ds.Tables.Add(HeaderTBL);
+                }
+
+
                 bool hasRows = Ds.Tables.Cast<DataTable>().Any(table => table.Rows.Count != 0);
                 if (hasRows)
                 {
-                    DevExpress.XtraReports.UI.XtraReport report = new Reports.rptMthlySalRegDt();
-                    report.DataSource = Ds;
-                    report.ShowPreviewDialog();
+                    if (chkBreak.Checked == true)
+                    {
+                        DevExpress.XtraReports.UI.XtraReport report = new Reports.rptMthlySAL();
+                        report.DataSource = Ds;
+                        report.ShowPreviewDialog();
+                    }
+                    else
+                    {
+                        DevExpress.XtraReports.UI.XtraReport report = new Reports.rptMthlySalRegDt();
+                        report.DataSource = Ds;
+                        report.ShowPreviewDialog();
+                    }
+                    
                 }
             }
             else if  (RptType == "TPAREGDEF")
@@ -134,10 +168,14 @@ namespace ContractPayroll.Forms
             if (RptType == "SALREGDEF")
             {
                 GRights = ContractPayroll.Classes.Globals.GetFormRights("frmReportsSalReg");
+                chkBreak.Checked = false;
+                chkBreak.Visible = true;
             }
             else if (RptType == "TPAREGDEF")
             {
                 GRights = ContractPayroll.Classes.Globals.GetFormRights("frmReportsTpaReg");
+                chkBreak.Checked = false;
+                chkBreak.Visible = false;
             }
             mode = "NEW";
 

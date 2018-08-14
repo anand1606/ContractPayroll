@@ -261,11 +261,22 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DS_rptMthlySalReg.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Reports\DS_rptMthlyTPADT.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DS_rptMthlyTPADT.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Reports\rptMthlySAL.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\rptMthlySAL.Designer.cs">
       <DependentUpon>rptMthlySAL.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\rptMthlyTPADt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\rptMthlyTPADt.Designer.cs">
+      <DependentUpon>rptMthlyTPADt.cs</DependentUpon>
     </Compile>
     <Compile Include="Reports\rptMthlyTPAReg.cs">
       <SubType>Component</SubType>
@@ -350,6 +361,9 @@
     <EmbeddedResource Include="Reports\rptMthlySAL.resx">
       <DependentUpon>rptMthlySAL.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\rptMthlyTPADt.resx">
+      <DependentUpon>rptMthlyTPADt.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\rptMthlyTPAReg.resx">
       <DependentUpon>rptMthlyTPAReg.cs</DependentUpon>
     </EmbeddedResource>
@@ -384,6 +398,17 @@
     </None>
     <None Include="Reports\DS_rptMthlySalReg.xss">
       <DependentUpon>DS_rptMthlySalReg.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\DS_rptMthlyTPADT.xsc">
+      <DependentUpon>DS_rptMthlyTPADT.xsd</DependentUpon>
+    </None>
+    <None Include="Reports\DS_rptMthlyTPADT.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DS_rptMthlyTPADT.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Reports\DS_rptMthlyTPADT.xss">
+      <DependentUpon>DS_rptMthlyTPADT.xsd</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>

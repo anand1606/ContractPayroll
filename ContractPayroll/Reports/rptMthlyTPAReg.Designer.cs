@@ -46,7 +46,6 @@
             DevExpress.XtraReports.UI.XRSummary xrSummary16 = new DevExpress.XtraReports.UI.XRSummary();
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
             this.xrLabel21 = new DevExpress.XtraReports.UI.XRLabel();
-            this.xrLabel20 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel18 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel17 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel15 = new DevExpress.XtraReports.UI.XRLabel();
@@ -170,7 +169,6 @@
             // 
             this.Detail.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrLabel21,
-            this.xrLabel20,
             this.xrLabel18,
             this.xrLabel17,
             this.xrLabel15,
@@ -205,7 +203,7 @@
             this.xrLabel21.CanGrow = false;
             this.xrLabel21.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
             new DevExpress.XtraReports.UI.XRBinding("Text", null, "sp_Cont_MthlySalTPARegister.Tot_TpaAmt", "{0:n2}")});
-            this.xrLabel21.LocationFloat = new DevExpress.Utils.PointFloat(537.1094F, 37.85937F);
+            this.xrLabel21.LocationFloat = new DevExpress.Utils.PointFloat(537.1094F, 2.218743F);
             this.xrLabel21.Name = "xrLabel21";
             this.xrLabel21.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.xrLabel21.SizeF = new System.Drawing.SizeF(70.70313F, 16.55467F);
@@ -213,20 +211,6 @@
             this.xrLabel21.StylePriority.UseTextAlignment = false;
             this.xrLabel21.Text = "xrLabel21";
             this.xrLabel21.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
-            // 
-            // xrLabel20
-            // 
-            this.xrLabel20.CanGrow = false;
-            this.xrLabel20.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "sp_Cont_MthlySalTPARegister.Tot_TpaRoundoff", "{0:n2}")});
-            this.xrLabel20.LocationFloat = new DevExpress.Utils.PointFloat(537.1094F, 2.218743F);
-            this.xrLabel20.Name = "xrLabel20";
-            this.xrLabel20.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
-            this.xrLabel20.SizeF = new System.Drawing.SizeF(70.70313F, 16.55467F);
-            this.xrLabel20.StylePriority.UsePadding = false;
-            this.xrLabel20.StylePriority.UseTextAlignment = false;
-            this.xrLabel20.Text = "xrLabel20";
-            this.xrLabel20.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             // 
             // xrLabel18
             // 
@@ -467,6 +451,7 @@
             // dS_rptMthlySalReg1
             // 
             this.dS_rptMthlySalReg1.DataSetName = "DS_rptMthlySalReg";
+            this.dS_rptMthlySalReg1.EnforceConstraints = false;
             this.dS_rptMthlySalReg1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // dtMthlySalTableAdapter
@@ -652,7 +637,7 @@
             this.xrLabel29.SizeF = new System.Drawing.SizeF(70.70313F, 55.5F);
             this.xrLabel29.StylePriority.UseFont = false;
             this.xrLabel29.StylePriority.UseTextAlignment = false;
-            this.xrLabel29.Text = "R/off Amt.\r\n\r\nTotal Amt.\r\n";
+            this.xrLabel29.Text = "Total Amt.\r\n";
             this.xrLabel29.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight;
             // 
             // xrLabel26
@@ -884,7 +869,7 @@
             // 
             this.xrLabel28.CanGrow = false;
             this.xrLabel28.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "sp_Cont_MthlySalTPARegister.calTotExtHrs")});
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "sp_Cont_MthlySalTPARegister.Tot_TpaHrs")});
             this.xrLabel28.LocationFloat = new DevExpress.Utils.PointFloat(516.7917F, 116.2384F);
             this.xrLabel28.Name = "xrLabel28";
             this.xrLabel28.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
@@ -901,7 +886,7 @@
             // 
             this.xrLabel27.CanGrow = false;
             this.xrLabel27.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "sp_Cont_MthlySalTPARegister.calExtraHrs")});
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "sp_Cont_MthlySalTPARegister.Cal_TpaHrs")});
             this.xrLabel27.LocationFloat = new DevExpress.Utils.PointFloat(517.8333F, 29.11552F);
             this.xrLabel27.Name = "xrLabel27";
             this.xrLabel27.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
@@ -982,7 +967,7 @@
             // xrLabel83
             // 
             this.xrLabel83.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
-            this.xrLabel83.LocationFloat = new DevExpress.Utils.PointFloat(6.208038F, 0.4445712F);
+            this.xrLabel83.LocationFloat = new DevExpress.Utils.PointFloat(5.76287F, 0.4445712F);
             this.xrLabel83.Name = "xrLabel83";
             this.xrLabel83.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
             this.xrLabel83.SizeF = new System.Drawing.SizeF(148.4398F, 20.17797F);
@@ -1109,7 +1094,7 @@
             // 
             this.xrLabel25.CanGrow = false;
             this.xrLabel25.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "calAdjExtraHrs")});
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "sp_Cont_MthlySalTPARegister.Adj_TPAHrs")});
             this.xrLabel25.LocationFloat = new DevExpress.Utils.PointFloat(516.7917F, 50.99052F);
             this.xrLabel25.Name = "xrLabel25";
             this.xrLabel25.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
@@ -1185,7 +1170,6 @@
             this.xrLabel45,
             this.xrLabel46,
             this.xrLabel50});
-            this.ReportFooter.Expanded = false;
             this.ReportFooter.Font = new System.Drawing.Font("Tahoma", 8F);
             this.ReportFooter.HeightF = 168.8459F;
             this.ReportFooter.Name = "ReportFooter";
@@ -1250,7 +1234,7 @@
             // xrLabel111
             // 
             this.xrLabel111.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
-            this.xrLabel111.LocationFloat = new DevExpress.Utils.PointFloat(4.184023F, 27.54558F);
+            this.xrLabel111.LocationFloat = new DevExpress.Utils.PointFloat(5.76287F, 27.54558F);
             this.xrLabel111.Name = "xrLabel111";
             this.xrLabel111.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
             this.xrLabel111.SizeF = new System.Drawing.SizeF(148.4398F, 20.17797F);
@@ -1410,7 +1394,7 @@
             // 
             this.xrLabel43.CanGrow = false;
             this.xrLabel43.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "sp_Cont_MthlySalTPARegister.calExtraHrs")});
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "sp_Cont_MthlySalTPARegister.Cal_TpaHrs")});
             this.xrLabel43.LocationFloat = new DevExpress.Utils.PointFloat(517.8333F, 56.31017F);
             this.xrLabel43.Name = "xrLabel43";
             this.xrLabel43.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
@@ -1439,7 +1423,7 @@
             // 
             this.xrLabel45.CanGrow = false;
             this.xrLabel45.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "calAdjExtraHrs")});
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "sp_Cont_MthlySalTPARegister.Adj_TPAHrs")});
             this.xrLabel45.LocationFloat = new DevExpress.Utils.PointFloat(516.7917F, 77.63903F);
             this.xrLabel45.Name = "xrLabel45";
             this.xrLabel45.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
@@ -1468,7 +1452,7 @@
             // 
             this.xrLabel50.CanGrow = false;
             this.xrLabel50.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "sp_Cont_MthlySalTPARegister.calTotExtHrs")});
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "sp_Cont_MthlySalTPARegister.Tot_TpaHrs")});
             this.xrLabel50.LocationFloat = new DevExpress.Utils.PointFloat(516.7917F, 142.0018F);
             this.xrLabel50.Name = "xrLabel50";
             this.xrLabel50.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
@@ -1623,7 +1607,6 @@
         private DevExpress.XtraReports.UI.XRLine xrLine41;
         private DevExpress.XtraReports.UI.XRLine xrLine40;
         private DevExpress.XtraReports.UI.XRLabel xrLabel21;
-        private DevExpress.XtraReports.UI.XRLabel xrLabel20;
         private DevExpress.XtraReports.UI.XRLabel xrLabel18;
         private DevExpress.XtraReports.UI.XRLabel xrLabel17;
         private DevExpress.XtraReports.UI.XRLabel xrLabel15;

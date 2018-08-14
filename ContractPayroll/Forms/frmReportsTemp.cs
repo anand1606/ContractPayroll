@@ -28,6 +28,8 @@ namespace ContractPayroll.Forms
 
         private void btnRun_Click(object sender, EventArgs e)
         {
+            DataSet Ds = new DataSet();
+            
             if (RptType == "SALREGDEF")
             {
                 int tPay = 0;
@@ -43,13 +45,13 @@ namespace ContractPayroll.Forms
                         return;
                     }
                 }
-
+                this.Cursor = Cursors.WaitCursor;
                 string tContCode = txtContCode.Text.ToString().Trim();
                 if(txtContCode.Text.ToString().Trim() != "")
                 {
                     tContCode = txtContCode.Text.Trim();
                 }
-                DataSet Ds = new DataSet();
+                
 
                 if (chkBreak.Checked == true)
                 {
@@ -66,8 +68,6 @@ namespace ContractPayroll.Forms
                     //HeaderTBL.Constraints.Clear();
                     HeaderTBL = HeaderTa.GetData(tPay, tContCode);
                     DetailTBL = DetailTa.GetData(tPay, tContCode);
-
-
 
                     Ds.Tables.Add(HeaderTBL);
                     Ds.Tables.Add(DetailTBL);
@@ -97,12 +97,14 @@ namespace ContractPayroll.Forms
                     {
                         DevExpress.XtraReports.UI.XtraReport report = new Reports.rptMthlySAL();
                         report.DataSource = Ds;
+                        this.Cursor = Cursors.Default;
                         report.ShowPreviewDialog();
                     }
                     else
                     {
                         DevExpress.XtraReports.UI.XtraReport report = new Reports.rptMthlySalRegDt();
                         report.DataSource = Ds;
+                        this.Cursor = Cursors.Default;
                         report.ShowPreviewDialog();
                     }
                     
@@ -120,6 +122,7 @@ namespace ContractPayroll.Forms
                 {
                     if (tPay <= 0)
                     {
+                        this.Cursor = Cursors.Default;
                         return;
                     }
                 }
@@ -130,28 +133,65 @@ namespace ContractPayroll.Forms
                     tContCode = txtContCode.Text.Trim();
                 }
 
-                //var HeaderTBL = new Reports.DS_rptMthlySalReg.DS_rptMthlySalRegTableAdapters.DtMthlySalTableAdapter();
-                //var HeaderTa = new Reports.DS_rptMthlySalRegTableAdapters.DtMthlySalTableAdapter();
-                //HeaderTa.Connection.ConnectionString = Utils.Helper.constr;
-                //HeaderTBL = HeaderTa.GetData(tPay);
+                if (chkBreak.Checked == true)
+                {
+                    var HeaderTBL = new Reports.DS_rptMthlyTPADT.sp_Cont_MthlySalTPARegisterDataTable();
+                    var DetailTBL = new Reports.DS_rptMthlyTPADT.sp_Cont_MthlyTPADTDataTable();
 
-                var HeaderTBL = new Reports.DS_rptMthlySalReg.sp_Cont_MthlySalTPARegisterDataTable();
-                var HeaderTa = new Reports.DS_rptMthlySalRegTableAdapters.sp_Cont_MthlySalTPARegisterTableAdapter();
-                HeaderTa.Connection.ConnectionString = Utils.Helper.constr;
-                HeaderTBL = HeaderTa.GetData(tPay, tContCode);
+                    var HeaderTa = new Reports.DS_rptMthlyTPADTTableAdapters.sp_Cont_MthlySalTPARegisterTableAdapter();
+                    var DetailTa = new Reports.DS_rptMthlyTPADTTableAdapters.sp_Cont_MthlyTPADTTableAdapter();
+
+                    HeaderTa.Connection.ConnectionString = Utils.Helper.constr;
+                    HeaderTa.ClearBeforeFill = true;
+                    DetailTa.Connection.ConnectionString = Utils.Helper.constr;
+                    DetailTa.ClearBeforeFill = true;
+                    //HeaderTBL.Constraints.Clear();
+                    HeaderTBL = HeaderTa.GetData(tPay, tContCode);
+                    DetailTBL = DetailTa.GetData(tPay, tContCode);
+
+                    Ds.Tables.Add(HeaderTBL);
+                    Ds.Tables.Add(DetailTBL);
 
 
-                DataSet Ds = new DataSet();
-                Ds.Tables.Add(HeaderTBL);
+                    DataRelation newRelation = new DataRelation("sp_Cont_MthlySalTPARegister_sp_Cont_MthlyTPADT",
+                        new DataColumn[] { HeaderTBL.Columns["PayPeriod"], HeaderTBL.Columns["EmpUnqID"] },
+                        new DataColumn[] { DetailTBL.Columns["PayPeriod"], DetailTBL.Columns["EmpUnqID"] }
+                    );
+
+                    Ds.Relations.Add(newRelation);
+                }
+                else
+                {
+                    var HeaderTBL = new Reports.DS_rptMthlySalReg.sp_Cont_MthlySalTPARegisterDataTable();
+                    var HeaderTa = new Reports.DS_rptMthlySalRegTableAdapters.sp_Cont_MthlySalTPARegisterTableAdapter();
+                    HeaderTa.Connection.ConnectionString = Utils.Helper.constr;
+                    HeaderTBL = HeaderTa.GetData(tPay, tContCode);
+                    Ds.Tables.Add(HeaderTBL);
+                }
+                
 
                 bool hasRows = Ds.Tables.Cast<DataTable>().Any(table => table.Rows.Count != 0);
                 if (hasRows)
                 {
-                    DevExpress.XtraReports.UI.XtraReport report = new Reports.rptMthlyTPAReg();
-                    report.DataSource = Ds;
-                    report.ShowPreviewDialog();
+                    if (chkBreak.Checked == true)
+                    {
+                        DevExpress.XtraReports.UI.XtraReport report = new Reports.rptMthlyTPADt();
+                        report.DataSource = Ds;
+                        this.Cursor = Cursors.Default;
+                        report.ShowPreviewDialog();
+                    }
+                    else
+                    {
+                        DevExpress.XtraReports.UI.XtraReport report = new Reports.rptMthlyTPAReg();
+                        report.DataSource = Ds;
+                        this.Cursor = Cursors.Default;
+                        report.ShowPreviewDialog();
+                    }
+                    
                 }
             }
+
+            this.Cursor = Cursors.Default;
             
         }
 
@@ -168,17 +208,15 @@ namespace ContractPayroll.Forms
             if (RptType == "SALREGDEF")
             {
                 GRights = ContractPayroll.Classes.Globals.GetFormRights("frmReportsSalReg");
-                chkBreak.Checked = false;
-                chkBreak.Visible = true;
+                
             }
             else if (RptType == "TPAREGDEF")
             {
                 GRights = ContractPayroll.Classes.Globals.GetFormRights("frmReportsTpaReg");
-                chkBreak.Checked = false;
-                chkBreak.Visible = false;
+                
             }
             mode = "NEW";
-
+            chkBreak.Checked = false;
             txtPayPeriod.Text = "";
             txtPayDesc.Text = "";
             txtFromDt.EditValue = null;

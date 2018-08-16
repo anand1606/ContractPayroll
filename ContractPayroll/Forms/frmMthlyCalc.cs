@@ -716,7 +716,7 @@ namespace ContractPayroll.Forms
         private void txtEmpUnqID_Validated(object sender, EventArgs e)
         {
             DataSet ds = new DataSet();
-            string sql = "select EmpName From Cont_MastEmp where  PayPeriod = '" + txtPayPeriod.Text.Trim().ToString() + " and EmpUnqID = '" + txtEmpUnqID.Text.Trim() + "'";
+            string sql = "select EmpName From Cont_MastEmp where  PayPeriod = '" + txtPayPeriod.Text.Trim().ToString() + "' and EmpUnqID = '" + txtEmpUnqID.Text.Trim() + "'";
 
             ds = Utils.Helper.GetData(sql, Utils.Helper.constr);
             bool hasRows = ds.Tables.Cast<DataTable>().Any(table => table.Rows.Count != 0);

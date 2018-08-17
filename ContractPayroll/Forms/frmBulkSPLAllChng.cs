@@ -205,6 +205,8 @@ namespace ContractPayroll.Forms
                 {
                     try
                     {
+                        if (con.State == ConnectionState.Open)
+                            con.Close();
                         con.Open();
                     }
                     catch (Exception ex)

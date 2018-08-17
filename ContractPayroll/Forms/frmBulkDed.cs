@@ -166,6 +166,9 @@ namespace ContractPayroll.Forms
                 {
                     DateTime tdt;
 
+                    if (con.State == ConnectionState.Open)
+                        con.Close();
+
                     con.Open();
                     foreach (DataRow dr in sortedDT.Rows)
                     {

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.mnuAdmin = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuDBConn = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,6 +44,8 @@
             this.mnuImportEmp = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuMastEmp = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuBulkBasicChng = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuBulkSPLChng = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuBulkBAChng = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuTranS = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuImportAttd = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuMthlyAdj = new System.Windows.Forms.ToolStripMenuItem();
@@ -61,8 +64,6 @@
             this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
             this.stsUserDesc = new System.Windows.Forms.ToolStripStatusLabel();
             this.stsExtra = new System.Windows.Forms.ToolStripStatusLabel();
-            this.mnuBulkSPLChng = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuBulkBAChng = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -192,6 +193,20 @@
             this.mnuBulkBasicChng.Size = new System.Drawing.Size(232, 22);
             this.mnuBulkBasicChng.Text = "Bulk Wages Change";
             this.mnuBulkBasicChng.Click += new System.EventHandler(this.mnuBulkBasicChng_Click);
+            // 
+            // mnuBulkSPLChng
+            // 
+            this.mnuBulkSPLChng.Name = "mnuBulkSPLChng";
+            this.mnuBulkSPLChng.Size = new System.Drawing.Size(232, 22);
+            this.mnuBulkSPLChng.Text = "Bulk Special All Change";
+            this.mnuBulkSPLChng.Click += new System.EventHandler(this.mnuBulkSPLChng_Click);
+            // 
+            // mnuBulkBAChng
+            // 
+            this.mnuBulkBAChng.Name = "mnuBulkBAChng";
+            this.mnuBulkBAChng.Size = new System.Drawing.Size(232, 22);
+            this.mnuBulkBAChng.Text = "Bulk BA All Change";
+            this.mnuBulkBAChng.Click += new System.EventHandler(this.mnuBulkBAChng_Click);
             // 
             // mnuTranS
             // 
@@ -329,20 +344,6 @@
             this.stsExtra.Name = "stsExtra";
             this.stsExtra.Size = new System.Drawing.Size(0, 17);
             // 
-            // mnuBulkSPLChng
-            // 
-            this.mnuBulkSPLChng.Name = "mnuBulkSPLChng";
-            this.mnuBulkSPLChng.Size = new System.Drawing.Size(232, 22);
-            this.mnuBulkSPLChng.Text = "Bulk Special All Change";
-            this.mnuBulkSPLChng.Click += new System.EventHandler(this.mnuBulkSPLChng_Click);
-            // 
-            // mnuBulkBAChng
-            // 
-            this.mnuBulkBAChng.Name = "mnuBulkBAChng";
-            this.mnuBulkBAChng.Size = new System.Drawing.Size(232, 22);
-            this.mnuBulkBAChng.Text = "Bulk BA All Change";
-            this.mnuBulkBAChng.Click += new System.EventHandler(this.mnuBulkBAChng_Click);
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -350,6 +351,7 @@
             this.ClientSize = new System.Drawing.Size(1100, 700);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmMain";

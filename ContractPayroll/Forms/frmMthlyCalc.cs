@@ -139,6 +139,7 @@ namespace ContractPayroll.Forms
             }
             DateTime pFromDt ;
             DateTime pToDt;
+            int pTotDays;
 
             DataSet payds = Utils.Helper.GetData("Select * from Cont_MastPayPeriod where PayPeriod ='" + txtPayPeriod.Text.Trim() + "' ",Utils.Helper.constr);
             bool hasRows = payds.Tables.Cast<DataTable>().Any(table => table.Rows.Count != 0);
@@ -154,6 +155,7 @@ namespace ContractPayroll.Forms
             {
                 pFromDt = Convert.ToDateTime(payds.Tables[0].Rows[0]["FromDt"]);
                 pToDt = Convert.ToDateTime(payds.Tables[0].Rows[0]["ToDt"]);
+                pTotDays = (pToDt - pFromDt).Days;
 
                 if(pFromDt == DateTime.MinValue)
                 {
@@ -167,6 +169,9 @@ namespace ContractPayroll.Forms
                     return;
                 }
 
+
+
+
             }catch(Exception ex){
                 MessageBox.Show(ex.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -176,19 +181,19 @@ namespace ContractPayroll.Forms
 
             if (string.IsNullOrEmpty(txtEmpUnqID.Text.Trim()) && string.IsNullOrEmpty(txtContCode.Text.Trim()))
             {
-                sql = "Select a.*,b.LWFFlg,b.DeathFlg,b.PTaxFlg,b.ESIFlg,b.Active From Cont_MthlyAtn a,Cont_MastEmp b where a.PayPeriod = b.PayPeriod and a.EmpUnqID = b.EmpUnqID and a.PayPeriod ='" + txtPayPeriod.Text.Trim() + "'";
+                sql = "Select a.*,b.LWFFlg,b.DeathFlg,b.PTaxFlg,b.ESIFlg,b.Active,b.ContCode From Cont_MthlyAtn a,Cont_MastEmp b where a.PayPeriod = b.PayPeriod and a.EmpUnqID = b.EmpUnqID and a.PayPeriod ='" + txtPayPeriod.Text.Trim() + "'";
 
             }
             else if(string.IsNullOrEmpty(txtContCode.Text.Trim()) && 
                 !string.IsNullOrEmpty(txtEmpUnqID.Text.Trim()))
             {
-                 sql = "Select a.*,b.LWFFlg,b.DeathFlg,b.PTaxFlg,b.ESIFlg,b.Active From Cont_MthlyAtn a,Cont_MastEmp b where a.PayPeriod = b.PayPeriod and a.EmpUnqID = b.EmpUnqID and a.PayPeriod ='" + txtPayPeriod.Text.Trim() + "' and a.EmpUnqID = '" + txtEmpUnqID.Text.Trim() + "'";
+                 sql = "Select a.*,b.LWFFlg,b.DeathFlg,b.PTaxFlg,b.ESIFlg,b.Active,b.ContCode From Cont_MthlyAtn a,Cont_MastEmp b where a.PayPeriod = b.PayPeriod and a.EmpUnqID = b.EmpUnqID and a.PayPeriod ='" + txtPayPeriod.Text.Trim() + "' and a.EmpUnqID = '" + txtEmpUnqID.Text.Trim() + "'";
 
             }
             else if(!string.IsNullOrEmpty(txtContCode.Text.Trim()) && 
                 string.IsNullOrEmpty(txtEmpUnqID.Text.Trim()))
             {
-                sql = "Select a.*,b.LWFFlg,b.DeathFlg,b.PTaxFlg,b.ESIFlg,b.Active From Cont_MthlyAtn a,Cont_MastEmp b where a.PayPeriod = b.PayPeriod and a.EmpUnqID = b.EmpUnqID and a.PayPeriod ='" + txtPayPeriod.Text.Trim() + "' and a.ContCode = '" + txtContCode.Text.Trim() + "'";
+                sql = "Select a.*,b.LWFFlg,b.DeathFlg,b.PTaxFlg,b.ESIFlg,b.Active,b.ContCode From Cont_MthlyAtn a,Cont_MastEmp b where a.PayPeriod = b.PayPeriod and a.EmpUnqID = b.EmpUnqID and a.PayPeriod ='" + txtPayPeriod.Text.Trim() + "' and b.ContCode = '" + txtContCode.Text.Trim() + "'";
 
             }
                 
@@ -551,6 +556,18 @@ namespace ContractPayroll.Forms
 
                             cmd = new SqlCommand(sql, cn, tr);
                             cmd.ExecuteNonQuery();
+
+                            //mark leftdt if no days pay found
+                            if (pTotDays >= 29)
+                            {                                
+                                if (Convert.ToInt32(mdr["Tot_DaysPay"]) <= 0)
+                                {
+                                    sql = "Update MastEmp Set Active = 0, LeftDt ='" + pFromDt.ToString("yyyy-MM-dd") + "' where CompCode = '01' and WrkGrp = 'Cont' and EmpUnqID ='" + dr["EmpUnqID"].ToString() + "' ";
+                                    cmd = new SqlCommand(sql, cn, tr);
+                                    cmd.ExecuteNonQuery();
+                                
+                                }
+                            }
                         }
 
                         try

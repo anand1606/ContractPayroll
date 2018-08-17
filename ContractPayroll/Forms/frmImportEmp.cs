@@ -173,15 +173,15 @@ namespace ContractPayroll.Forms
 
             if(string.IsNullOrEmpty(txtEmpUnqID.Text.Trim()) && string.IsNullOrEmpty(txtContCode.Text.Trim()))
             {
-                sql = "Select * From v_EmpMast where Active = 1 and CompCode = '01' and WrkGrp = 'Cont' and Basic > 0 ";
+                sql = "Select * From v_EmpMast where  CompCode = '01' and WrkGrp = 'Cont' and Basic > 0 and JoinDt <= '" + pToDt.ToString("yyyy-MM-dd") + "' and (LeftDt is null OR LeftDt >'" + pToDt.ToString("yyyy-MM-dd") + "' OR LeftDt between '" + pFromDt.ToString("yyyy-MM-dd") + "' and '" + pToDt.ToString("yyyy-MM-dd") + "')   ";
 
             }else if (string.IsNullOrEmpty(txtContCode.Text.Trim()) && !string.IsNullOrEmpty(txtEmpUnqID.Text.Trim()))
             {
-                sql = "Select * from v_EmpMast Where EmpUnqID ='" + txtEmpUnqID.Text.Trim() + "' and WrkGrp = 'Cont' and CompCode = '01'";
+                sql = "Select * from v_EmpMast Where CompCode = '01' and  WrkGrp = 'Cont' and EmpUnqID ='" + txtEmpUnqID.Text.Trim() + "' and JoinDt <= '" + pToDt.ToString("yyyy-MM-dd") + "' and (LeftDt is null OR LeftDt >'" + pToDt.ToString("yyyy-MM-dd") + "' OR   LeftDt between '" + pFromDt.ToString("yyyy-MM-dd") + "' and '" + pToDt.ToString("yyyy-MM-dd") + "')   ";
 
             }else if (!string.IsNullOrEmpty(txtContCode.Text.Trim()) && string.IsNullOrEmpty(txtEmpUnqID.Text.Trim()))
             {
-                sql = "Select * from v_EmpMast Where CompCode = '01' and WrkGrp = 'Cont' and Active = 1 and Basic > 0 ";
+                sql = "Select * from v_EmpMast Where CompCode = '01' and WrkGrp = 'Cont' and  Basic > 0 and JoinDt <= '" + pToDt.ToString("yyyy-MM-dd") + "' and (LeftDt is null OR LeftDt >'" + pToDt.ToString("yyyy-MM-dd") + "' OR LeftDt between '" + pFromDt.ToString("yyyy-MM-dd") + "' and '" + pToDt.ToString("yyyy-MM-dd") + "')   ";
             }
             
 
@@ -373,7 +373,7 @@ namespace ContractPayroll.Forms
                         " '" + Utils.User.GUserID + "'," +
                         " '" + dr["BankAcNo"].ToString() + "'," +
                         " '" + dr["BankName"].ToString() + "'," +
-                        " '" + dr["BankIFSCCode"].ToString() + "'" + 
+                        " '" + dr["BankIFSCCode"].ToString() + "'," + 
                         " '" + dr["CostCode"].ToString() + "'" +                         
                         " )";
                         try
@@ -577,17 +577,17 @@ namespace ContractPayroll.Forms
                     txtContCode.Text = "";
                     txtContName.Text = "";
                     txtEmpName.Text = dr["EmpName"].ToString();
-                    IsLocked = ((Convert.ToBoolean(dr["IsLocked"])) ? true : false);
+                    //IsLocked = ((Convert.ToBoolean(dr["IsLocked"])) ? true : false);
                     btnImport.Enabled = true;
-                    mode = "OLD";
+                    //mode = "OLD";
                 }
             }
             else
             {
                 txtEmpUnqID.Text = "";
                 txtEmpName.Text = "";
-                btnImport.Enabled = false;
-                mode = "NEW";
+                //btnImport.Enabled = false;
+                //mode = "NEW";
 
             }
 

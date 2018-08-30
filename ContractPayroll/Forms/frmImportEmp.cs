@@ -181,7 +181,11 @@ namespace ContractPayroll.Forms
 
             }else if (!string.IsNullOrEmpty(txtContCode.Text.Trim()) && string.IsNullOrEmpty(txtEmpUnqID.Text.Trim()))
             {
-                sql = "Select * from v_EmpMast Where CompCode = '01' and WrkGrp = 'Cont' and  Basic > 0 and JoinDt <= '" + pToDt.ToString("yyyy-MM-dd") + "' and (LeftDt is null OR LeftDt >'" + pToDt.ToString("yyyy-MM-dd") + "' OR LeftDt between '" + pFromDt.ToString("yyyy-MM-dd") + "' and '" + pToDt.ToString("yyyy-MM-dd") + "')   ";
+                sql = "Select * from v_EmpMast Where CompCode = '01' and WrkGrp = 'Cont' and ContCode ='" + txtContCode.Text.Trim() + "' and  Basic > 0 and JoinDt <= '" + pToDt.ToString("yyyy-MM-dd") + "' and (LeftDt is null OR LeftDt >'" + pToDt.ToString("yyyy-MM-dd") + "' OR LeftDt between '" + pFromDt.ToString("yyyy-MM-dd") + "' and '" + pToDt.ToString("yyyy-MM-dd") + "')   ";
+            }
+            else if (!string.IsNullOrEmpty(txtContCode.Text.Trim()) && !string.IsNullOrEmpty(txtEmpUnqID.Text.Trim()))
+            {
+                sql = "Select * from v_EmpMast Where CompCode = '01' and  WrkGrp = 'Cont' and EmpUnqID ='" + txtEmpUnqID.Text.Trim() + "' and JoinDt <= '" + pToDt.ToString("yyyy-MM-dd") + "' and (LeftDt is null OR LeftDt >'" + pToDt.ToString("yyyy-MM-dd") + "' OR   LeftDt between '" + pFromDt.ToString("yyyy-MM-dd") + "' and '" + pToDt.ToString("yyyy-MM-dd") + "')   ";
             }
             
 
@@ -272,46 +276,94 @@ namespace ContractPayroll.Forms
                     hasRows = empds.Tables.Cast<DataTable>().Any(table => table.Rows.Count != 0);
                     if (hasRows)
                     {
-                        sql = "Update Cont_MastEmp set EmpName ='" + dr["EmpName"] + "', FatherName='" + dr["FatherName"].ToString() + "'," +
-                            " BirthDt ='" + Convert.ToDateTime(dr["BirthDt"]).ToString("yyyy-MM-dd") + "'," +
-                            " JoinDt ='" + Convert.ToDateTime(dr["JoinDt"]).ToString("yyyy-MM-dd") + "'," +
-                            " Gender ='" + (Convert.ToBoolean(dr["Sex"])?"M":"F") + "'," +
-                            " UnitCode='" + dr["UnitCode"].ToString() + "'," +
-                            " UnitDesc='" + dr["UnitName"].ToString() + "'," +
-                            " DeptCode='" + dr["DeptCode"].ToString() + "'," +
-                            " DeptDesc='" + dr["DeptDesc"].ToString() + "'," +
-                            " StatCode='" + dr["Statcode"].ToString() + "'," +
-                            " StatDesc='" + dr["StatDesc"].ToString() + "'," +
-                            " CatCode ='" + dr["CatCode"].ToString() + "'," + 
-                            " CatDesc='" + dr["CatDesc"].ToString() + "'," +
-                            " DesgCode ='" + dr["DesgCode"].ToString() + "'," +
-                            " DesgDesc='" + dr["DesgDesc"].ToString() + "'," +
-                            " GradeCode='" + dr["GradCode"].ToString() + "'," +
-                            " GradeDesc='" + dr["GradeDesc"].ToString() + "'," +
-                            " ContCode='" + dr["ContCode"].ToString() + "'," + 
-                            " ContDesc='" + dr["ContName"].ToString() + "'," +
-                            " ESINo ='" + dr["ESINo"].ToString() + "'," +
-                            " cBasic='" + dr["Basic"].ToString() + "'," + 
-                            " SPLALL ='" + dr["SPLALL"].ToString() + "'," +
-                            " BAALL ='" + dr["BAALL"].ToString() + "'," + 
-                            " PFNo ='" + 0 + "'," +
-                            " PFFlg = '" + PFFlg + "'," +
-                            " PTaxFlg = '" + PTaxFlg + "'," + 
-                            " DeathFlg = '" + DeathFlg + "', " +
-                            " LWFFlg = '" + LWFFlg + "', " +                             
-                            " ESIFlg = '" + ESIFlg + "', " +
-                            " CostCode = '" + dr["CostCode"].ToString() + "'," +
-                            " BankAcNo ='" + dr["BankAcNo"].ToString() + "'," +
-                            " BankName ='" + dr["BankName"].ToString() + "'," +
-                            " BankIFSCCode ='" + dr["BankIFSCCode"].ToString() + "'," +
-                            " UpdDt=GetDate() ," +
-                            " UpdID ='" + Utils.User.GUserID + "' Where EmpUnqID ='" + dr["EmpUnqID"].ToString() + "' " +
-                            " and PayPeriod ='" + txtPayPeriod.Text.Trim() + "'";
+                       
 
                         try
                         {
+
+                            sql = "Update Cont_MastEmp set EmpName ='" + dr["EmpName"] + "', FatherName='" + dr["FatherName"].ToString() + "'," +
+                           " BirthDt ='" + Convert.ToDateTime(dr["BirthDt"]).ToString("yyyy-MM-dd") + "'," +
+                           " JoinDt ='" + Convert.ToDateTime(dr["JoinDt"]).ToString("yyyy-MM-dd") + "'," +
+                           " Gender ='" + (Convert.ToBoolean(dr["Sex"]) ? "M" : "F") + "'," +
+                           " UnitCode='" + dr["UnitCode"].ToString() + "'," +
+                           " UnitDesc='" + dr["UnitName"].ToString() + "'," +
+                           " DeptCode='" + dr["DeptCode"].ToString() + "'," +
+                           " DeptDesc='" + dr["DeptDesc"].ToString() + "'," +
+                           " StatCode='" + dr["Statcode"].ToString() + "'," +
+                           " StatDesc='" + dr["StatDesc"].ToString() + "'," +
+                           " CatCode ='" + dr["CatCode"].ToString() + "'," +
+                           " CatDesc='" + dr["CatDesc"].ToString() + "'," +
+                           " DesgCode ='" + dr["DesgCode"].ToString() + "'," +
+                           " DesgDesc='" + dr["DesgDesc"].ToString() + "'," +
+                           " GradeCode='" + dr["GradCode"].ToString() + "'," +
+                           " GradeDesc='" + dr["GradeDesc"].ToString() + "'," +
+                           " ContCode='" + dr["ContCode"].ToString() + "'," +
+                           " ContDesc='" + dr["ContName"].ToString() + "'," +
+                           " ESINo ='" + dr["ESINo"].ToString() + "'," +
+                           " cBasic='" + dr["Basic"].ToString() + "'," +
+                           " SPLALL ='" + dr["SPLALL"].ToString() + "'," +
+                           " BAALL ='" + dr["BAALL"].ToString() + "'," +
+                           " PFNo ='" + 0 + "'," +
+                           " PFFlg = '" + PFFlg + "'," +
+                           " PTaxFlg = '" + PTaxFlg + "'," +
+                           " DeathFlg = '" + DeathFlg + "', " +
+                           " LWFFlg = '" + LWFFlg + "', " +
+                           " ESIFlg = '" + ESIFlg + "', " +
+                           " CostCode = '" + dr["CostCode"].ToString() + "'," +
+                           " BankAcNo ='" + dr["BankAcNo"].ToString() + "'," +
+                           " BankName ='" + dr["BankName"].ToString() + "'," +
+                           " BankIFSCCode ='" + dr["BankIFSCCode"].ToString() + "'," +
+                           " UpdDt=GetDate() ," +
+                           " UpdID ='" + Utils.User.GUserID + "' Where EmpUnqID ='" + dr["EmpUnqID"].ToString() + "' " +
+                           " and PayPeriod ='" + txtPayPeriod.Text.Trim() + "'";
+                            
                             SqlCommand cmd = new SqlCommand(sql, cn, tr);
                             cmd.ExecuteNonQuery();
+
+                            //insert into Cont_MastBasic
+                            sql = "Delete From Cont_MastBasic where PayPeriod='" + txtPayPeriod.Text.Trim() + "' And EmpUnqID = '" + dr["EmpUnqID"].ToString() + "' ";
+                            SqlCommand cmd1 = new SqlCommand(sql, cn, tr);
+                            cmd1.ExecuteNonQuery();
+
+                            sql = "Insert into Cont_MastBasic (PayPeriod,EmpUnqID,SrNo,FromDt,ToDt,cBasic,AddDt,AddID) values (" +
+                                " '" + txtPayPeriod.Text.Trim() + "','" + dr["EmpUnqID"].ToString() + "',1," +
+                                " '" + pFromDt.ToString("yyyy-MM-dd") + "'," +
+                                " '" + pToDt.ToString("yyyy-MM-dd") + "'," +
+                                " '" + dr["Basic"].ToString() + "',GetDate(), '" + Utils.User.GUserID + "')";
+
+                            SqlCommand cmd2 = new SqlCommand(sql, cn, tr);
+                            cmd2.ExecuteNonQuery();
+
+                            #region Special_And_BA_All
+
+                            //insert into Cont_MastBasic
+                            sql = "Delete From Cont_MastBAAll where PayPeriod='" + txtPayPeriod.Text.Trim() + "' And EmpUnqID = '" + dr["EmpUnqID"].ToString() + "' ";
+                            SqlCommand cmd3 = new SqlCommand(sql, cn, tr);
+                            cmd3.ExecuteNonQuery();
+
+                            sql = "Insert into Cont_MastBAAll (PayPeriod,EmpUnqID,SrNo,FromDt,ToDt,cBAAmt,AddDt,AddID) values (" +
+                                " '" + txtPayPeriod.Text.Trim() + "','" + dr["EmpUnqID"].ToString() + "',1," +
+                                " '" + pFromDt.ToString("yyyy-MM-dd") + "'," +
+                                " '" + pToDt.ToString("yyyy-MM-dd") + "'," +
+                                " '" + dr["BAALL"].ToString() + "',GetDate(), '" + Utils.User.GUserID + "')";
+
+                            SqlCommand cmd4 = new SqlCommand(sql, cn, tr);
+                            cmd4.ExecuteNonQuery();
+
+                            sql = "Delete From Cont_MastSPLAll where PayPeriod='" + txtPayPeriod.Text.Trim() + "' And EmpUnqID = '" + dr["EmpUnqID"].ToString() + "' ";
+                            SqlCommand cmd5 = new SqlCommand(sql, cn, tr);
+                            cmd5.ExecuteNonQuery();
+
+                            sql = "Insert into Cont_MastSPLAll (PayPeriod,EmpUnqID,SrNo,FromDt,ToDt,cSPLAmt,AddDt,AddID) values (" +
+                                " '" + txtPayPeriod.Text.Trim() + "','" + dr["EmpUnqID"].ToString() + "',1," +
+                                " '" + pFromDt.ToString("yyyy-MM-dd") + "'," +
+                                " '" + pToDt.ToString("yyyy-MM-dd") + "'," +
+                                " '" + dr["SPLALL"].ToString() + "',GetDate(), '" + Utils.User.GUserID + "')";
+
+                            SqlCommand cmd6 = new SqlCommand(sql, cn, tr);
+                            cmd6.ExecuteNonQuery();
+
+                            #endregion
 
                             try
                             {

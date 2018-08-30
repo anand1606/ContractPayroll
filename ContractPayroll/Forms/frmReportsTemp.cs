@@ -12,6 +12,7 @@ using DevExpress.XtraPrinting.Native;
 using DevExpress.Utils;
 using System.Data.SqlClient;
 using DevExpress.XtraReports.UI;
+using ContractPayroll.Reports.DS_rptMthlySalDTTableAdapters;
 
 namespace ContractPayroll.Forms
 {
@@ -59,13 +60,15 @@ namespace ContractPayroll.Forms
                     var DetailTBL = new Reports.DS_rptMthlySalDT.sp_Cont_MthlySalDTDataTable();
 
                     var HeaderTa = new Reports.DS_rptMthlySalDTTableAdapters.sp_Cont_MthlySalTPARegisterTableAdapter();
-                    var DetailTa = new Reports.DS_rptMthlySalDTTableAdapters.sp_Cont_MthlySalDTTableAdapter();
+                    sp_Cont_MthlySalDTTableAdapter DetailTa = new Reports.DS_rptMthlySalDTTableAdapters.sp_Cont_MthlySalDTTableAdapter();
 
                     HeaderTa.Connection.ConnectionString = Utils.Helper.constr;
                     HeaderTa.ClearBeforeFill = true;
                     DetailTa.Connection.ConnectionString = Utils.Helper.constr;
                     DetailTa.ClearBeforeFill = true;
+                    DetailTa.SelectCommandTimeout = 0;
                     //HeaderTBL.Constraints.Clear();
+                    
                     HeaderTBL = HeaderTa.GetData(tPay, tContCode);
                     DetailTBL = DetailTa.GetData(tPay, tContCode);
 
@@ -145,6 +148,7 @@ namespace ContractPayroll.Forms
                     HeaderTa.ClearBeforeFill = true;
                     DetailTa.Connection.ConnectionString = Utils.Helper.constr;
                     DetailTa.ClearBeforeFill = true;
+                    DetailTa.SelectCommandTimeout = 0;
                     //HeaderTBL.Constraints.Clear();
                     HeaderTBL = HeaderTa.GetData(tPay, tContCode);
                     DetailTBL = DetailTa.GetData(tPay, tContCode);

@@ -67,6 +67,8 @@
             DevExpress.XtraReports.UI.XRSummary xrSummary37 = new DevExpress.XtraReports.UI.XRSummary();
             DevExpress.XtraReports.UI.XRSummary xrSummary38 = new DevExpress.XtraReports.UI.XRSummary();
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
+            this.xrLabel145 = new DevExpress.XtraReports.UI.XRLabel();
+            this.xrLabel144 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel140 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel139 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel31 = new DevExpress.XtraReports.UI.XRLabel();
@@ -122,6 +124,9 @@
             this.xrPageInfo1 = new DevExpress.XtraReports.UI.XRPageInfo();
             this.ReportHeader = new DevExpress.XtraReports.UI.ReportHeaderBand();
             this.GroupHeader1 = new DevExpress.XtraReports.UI.GroupHeaderBand();
+            this.xrLabel146 = new DevExpress.XtraReports.UI.XRLabel();
+            this.xrLabel33 = new DevExpress.XtraReports.UI.XRLabel();
+            this.xrLabel25 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel27 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel6 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel1 = new DevExpress.XtraReports.UI.XRLabel();
@@ -236,19 +241,14 @@
             this.xrLabel136 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel135 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel49 = new DevExpress.XtraReports.UI.XRLabel();
-            this.CalGrpHeader = new DevExpress.XtraReports.UI.CalculatedField();
-            this.PageFooter = new DevExpress.XtraReports.UI.PageFooterBand();
-            this.xrLabel25 = new DevExpress.XtraReports.UI.XRLabel();
-            this.xrLabel33 = new DevExpress.XtraReports.UI.XRLabel();
-            this.xrLabel144 = new DevExpress.XtraReports.UI.XRLabel();
-            this.xrLabel145 = new DevExpress.XtraReports.UI.XRLabel();
             this.GroupFooter2 = new DevExpress.XtraReports.UI.GroupFooterBand();
             this.xrLine7 = new DevExpress.XtraReports.UI.XRLine();
+            this.CalGrpHeader = new DevExpress.XtraReports.UI.CalculatedField();
+            this.PageFooter = new DevExpress.XtraReports.UI.PageFooterBand();
             this.xrCrossBandBox1 = new DevExpress.XtraReports.UI.XRCrossBandBox();
             this.xrCrossBandLine1 = new DevExpress.XtraReports.UI.XRCrossBandLine();
             this.xrCrossBandLine2 = new DevExpress.XtraReports.UI.XRCrossBandLine();
             this.xrCrossBandLine3 = new DevExpress.XtraReports.UI.XRCrossBandLine();
-            this.xrLabel146 = new DevExpress.XtraReports.UI.XRLabel();
             ((System.ComponentModel.ISupportInitialize)(this.dS_rptMthlySalDT1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
@@ -299,6 +299,32 @@
             this.Detail.Name = "Detail";
             this.Detail.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.Detail.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
+            // 
+            // xrLabel145
+            // 
+            this.xrLabel145.CanGrow = false;
+            this.xrLabel145.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "sp_Cont_MthlySalTPARegister.DesgDesc")});
+            this.xrLabel145.Font = new System.Drawing.Font("Tahoma", 7F);
+            this.xrLabel145.LocationFloat = new DevExpress.Utils.PointFloat(397.0612F, 3.083324F);
+            this.xrLabel145.Name = "xrLabel145";
+            this.xrLabel145.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrLabel145.SizeF = new System.Drawing.SizeF(129.7527F, 12.00001F);
+            this.xrLabel145.StylePriority.UseFont = false;
+            this.xrLabel145.Text = "xrLabel145";
+            // 
+            // xrLabel144
+            // 
+            this.xrLabel144.CanGrow = false;
+            this.xrLabel144.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
+            new DevExpress.XtraReports.UI.XRBinding("Text", null, "sp_Cont_MthlySalTPARegister.FatherName")});
+            this.xrLabel144.Font = new System.Drawing.Font("Tahoma", 7F);
+            this.xrLabel144.LocationFloat = new DevExpress.Utils.PointFloat(250.1862F, 3.083324F);
+            this.xrLabel144.Name = "xrLabel144";
+            this.xrLabel144.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrLabel144.SizeF = new System.Drawing.SizeF(139.1277F, 12.00001F);
+            this.xrLabel144.StylePriority.UseFont = false;
+            this.xrLabel144.Text = "xrLabel144";
             // 
             // xrLabel140
             // 
@@ -1025,6 +1051,42 @@
             this.GroupHeader1.Name = "GroupHeader1";
             this.GroupHeader1.RepeatEveryPage = true;
             // 
+            // xrLabel146
+            // 
+            this.xrLabel146.Font = new System.Drawing.Font("Tahoma", 7F);
+            this.xrLabel146.LocationFloat = new DevExpress.Utils.PointFloat(676.7897F, 63.68503F);
+            this.xrLabel146.Name = "xrLabel146";
+            this.xrLabel146.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrLabel146.SizeF = new System.Drawing.SizeF(69.66138F, 12F);
+            this.xrLabel146.StylePriority.UseFont = false;
+            this.xrLabel146.StylePriority.UseTextAlignment = false;
+            this.xrLabel146.Text = "Signature";
+            this.xrLabel146.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            // 
+            // xrLabel33
+            // 
+            this.xrLabel33.Font = new System.Drawing.Font("Tahoma", 7F);
+            this.xrLabel33.LocationFloat = new DevExpress.Utils.PointFloat(397.0612F, 49.75907F);
+            this.xrLabel33.Name = "xrLabel33";
+            this.xrLabel33.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrLabel33.SizeF = new System.Drawing.SizeF(129.7527F, 13.3125F);
+            this.xrLabel33.StylePriority.UseFont = false;
+            this.xrLabel33.StylePriority.UseTextAlignment = false;
+            this.xrLabel33.Text = "Designation";
+            this.xrLabel33.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            // 
+            // xrLabel25
+            // 
+            this.xrLabel25.Font = new System.Drawing.Font("Tahoma", 7F);
+            this.xrLabel25.LocationFloat = new DevExpress.Utils.PointFloat(250.1862F, 49.75907F);
+            this.xrLabel25.Name = "xrLabel25";
+            this.xrLabel25.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrLabel25.SizeF = new System.Drawing.SizeF(139.1277F, 13.3125F);
+            this.xrLabel25.StylePriority.UseFont = false;
+            this.xrLabel25.StylePriority.UseTextAlignment = false;
+            this.xrLabel25.Text = "Father Name";
+            this.xrLabel25.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            // 
             // xrLabel27
             // 
             this.xrLabel27.Font = new System.Drawing.Font("Tahoma", 7F);
@@ -1438,7 +1500,7 @@
             this.xrLabel115.StylePriority.UsePadding = false;
             this.xrLabel115.StylePriority.UseTextAlignment = false;
             xrSummary3.FormatString = "{0:n2}";
-            xrSummary3.Running = DevExpress.XtraReports.UI.SummaryRunning.Report;
+            xrSummary3.Running = DevExpress.XtraReports.UI.SummaryRunning.Group;
             this.xrLabel115.Summary = xrSummary3;
             this.xrLabel115.Text = "xrLabel115";
             this.xrLabel115.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
@@ -1455,7 +1517,7 @@
             this.xrLabel116.StylePriority.UsePadding = false;
             this.xrLabel116.StylePriority.UseTextAlignment = false;
             xrSummary4.FormatString = "{0:n2}";
-            xrSummary4.Running = DevExpress.XtraReports.UI.SummaryRunning.Report;
+            xrSummary4.Running = DevExpress.XtraReports.UI.SummaryRunning.Group;
             this.xrLabel116.Summary = xrSummary4;
             this.xrLabel116.Text = "xrLabel116";
             this.xrLabel116.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
@@ -2614,67 +2676,6 @@
             this.xrLabel49.Text = "xrLabel49";
             this.xrLabel49.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
             // 
-            // CalGrpHeader
-            // 
-            this.CalGrpHeader.DataMember = "sp_Cont_MthlySalTPARegister";
-            this.CalGrpHeader.Expression = "\'Wages Register of \' + [ContCode] + \' For the Month of  \' + [PayDesc]";
-            this.CalGrpHeader.Name = "CalGrpHeader";
-            // 
-            // PageFooter
-            // 
-            this.PageFooter.HeightF = 2F;
-            this.PageFooter.Name = "PageFooter";
-            // 
-            // xrLabel25
-            // 
-            this.xrLabel25.Font = new System.Drawing.Font("Tahoma", 7F);
-            this.xrLabel25.LocationFloat = new DevExpress.Utils.PointFloat(250.1862F, 49.75907F);
-            this.xrLabel25.Name = "xrLabel25";
-            this.xrLabel25.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel25.SizeF = new System.Drawing.SizeF(139.1277F, 13.3125F);
-            this.xrLabel25.StylePriority.UseFont = false;
-            this.xrLabel25.StylePriority.UseTextAlignment = false;
-            this.xrLabel25.Text = "Father Name";
-            this.xrLabel25.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            // 
-            // xrLabel33
-            // 
-            this.xrLabel33.Font = new System.Drawing.Font("Tahoma", 7F);
-            this.xrLabel33.LocationFloat = new DevExpress.Utils.PointFloat(397.0612F, 49.75907F);
-            this.xrLabel33.Name = "xrLabel33";
-            this.xrLabel33.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel33.SizeF = new System.Drawing.SizeF(129.7527F, 13.3125F);
-            this.xrLabel33.StylePriority.UseFont = false;
-            this.xrLabel33.StylePriority.UseTextAlignment = false;
-            this.xrLabel33.Text = "Designation";
-            this.xrLabel33.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            // 
-            // xrLabel144
-            // 
-            this.xrLabel144.CanGrow = false;
-            this.xrLabel144.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "sp_Cont_MthlySalTPARegister.FatherName")});
-            this.xrLabel144.Font = new System.Drawing.Font("Tahoma", 7F);
-            this.xrLabel144.LocationFloat = new DevExpress.Utils.PointFloat(250.1862F, 3.083324F);
-            this.xrLabel144.Name = "xrLabel144";
-            this.xrLabel144.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel144.SizeF = new System.Drawing.SizeF(139.1277F, 12.00001F);
-            this.xrLabel144.StylePriority.UseFont = false;
-            this.xrLabel144.Text = "xrLabel144";
-            // 
-            // xrLabel145
-            // 
-            this.xrLabel145.CanGrow = false;
-            this.xrLabel145.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
-            new DevExpress.XtraReports.UI.XRBinding("Text", null, "sp_Cont_MthlySalTPARegister.DesgDesc")});
-            this.xrLabel145.Font = new System.Drawing.Font("Tahoma", 7F);
-            this.xrLabel145.LocationFloat = new DevExpress.Utils.PointFloat(397.0612F, 3.083324F);
-            this.xrLabel145.Name = "xrLabel145";
-            this.xrLabel145.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel145.SizeF = new System.Drawing.SizeF(129.7527F, 12.00001F);
-            this.xrLabel145.StylePriority.UseFont = false;
-            this.xrLabel145.Text = "xrLabel145";
-            // 
             // GroupFooter2
             // 
             this.GroupFooter2.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
@@ -2687,6 +2688,17 @@
             this.xrLine7.LocationFloat = new DevExpress.Utils.PointFloat(1.94931F, 0F);
             this.xrLine7.Name = "xrLine7";
             this.xrLine7.SizeF = new System.Drawing.SizeF(748.1014F, 2.166671F);
+            // 
+            // CalGrpHeader
+            // 
+            this.CalGrpHeader.DataMember = "sp_Cont_MthlySalTPARegister";
+            this.CalGrpHeader.Expression = "\'Wages Register of \' + [ContCode] + \' For the Month of  \' + [PayDesc]";
+            this.CalGrpHeader.Name = "CalGrpHeader";
+            // 
+            // PageFooter
+            // 
+            this.PageFooter.HeightF = 2F;
+            this.PageFooter.Name = "PageFooter";
             // 
             // xrCrossBandBox1
             // 
@@ -2727,18 +2739,6 @@
             this.xrCrossBandLine3.StartBand = this.GroupHeader1;
             this.xrCrossBandLine3.StartPointFloat = new DevExpress.Utils.PointFloat(102.6667F, 44.66666F);
             this.xrCrossBandLine3.WidthF = 1.15741F;
-            // 
-            // xrLabel146
-            // 
-            this.xrLabel146.Font = new System.Drawing.Font("Tahoma", 7F);
-            this.xrLabel146.LocationFloat = new DevExpress.Utils.PointFloat(676.7897F, 63.68503F);
-            this.xrLabel146.Name = "xrLabel146";
-            this.xrLabel146.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel146.SizeF = new System.Drawing.SizeF(69.66138F, 12F);
-            this.xrLabel146.StylePriority.UseFont = false;
-            this.xrLabel146.StylePriority.UseTextAlignment = false;
-            this.xrLabel146.Text = "Signature";
-            this.xrLabel146.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             // 
             // rptMthlySAL
             // 

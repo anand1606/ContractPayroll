@@ -169,11 +169,16 @@ namespace ContractPayroll.Forms
 
             string sql = string.Empty;
 
-            if (string.IsNullOrEmpty(txtEmpUnqID.Text.Trim()))
+            if (string.IsNullOrEmpty(txtEmpUnqID.Text.Trim()) && string.IsNullOrEmpty(txtContCode.Text.Trim()))
             {
                 sql = "Select * From Cont_MastEmp where Active = 1 and PayPeriod ='" + txtPayPeriod.Text.Trim() + "'";
             }
-            else
+            else if(!string.IsNullOrEmpty(txtContCode.Text.Trim()) && string.IsNullOrEmpty(txtEmpUnqID.Text.Trim()))
+            {
+                sql = "Select * From Cont_MastEmp where Active = 1 and ContCode = '" + txtContCode.Text.Trim() + "'  and PayPeriod ='" + txtPayPeriod.Text.Trim() + "' ";
+               
+            }
+            else if (!string.IsNullOrEmpty(txtEmpUnqID.Text.Trim()) )
             {
                 sql = "Select * From Cont_MastEmp where Active = 1 and PayPeriod ='" + txtPayPeriod.Text.Trim() + "' and EmpUnqID = '" + txtEmpUnqID.Text.Trim() + "'";
                

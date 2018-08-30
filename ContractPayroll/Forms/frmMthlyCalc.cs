@@ -184,19 +184,21 @@ namespace ContractPayroll.Forms
                 sql = "Select a.*,b.LWFFlg,b.DeathFlg,b.PTaxFlg,b.ESIFlg,b.Active,b.ContCode From Cont_MthlyAtn a,Cont_MastEmp b where a.PayPeriod = b.PayPeriod and a.EmpUnqID = b.EmpUnqID and a.PayPeriod ='" + txtPayPeriod.Text.Trim() + "'";
 
             }
-            else if(string.IsNullOrEmpty(txtContCode.Text.Trim()) && 
-                !string.IsNullOrEmpty(txtEmpUnqID.Text.Trim()))
+            else if(string.IsNullOrEmpty(txtContCode.Text.Trim()) && !string.IsNullOrEmpty(txtEmpUnqID.Text.Trim()))
             {
                  sql = "Select a.*,b.LWFFlg,b.DeathFlg,b.PTaxFlg,b.ESIFlg,b.Active,b.ContCode From Cont_MthlyAtn a,Cont_MastEmp b where a.PayPeriod = b.PayPeriod and a.EmpUnqID = b.EmpUnqID and a.PayPeriod ='" + txtPayPeriod.Text.Trim() + "' and a.EmpUnqID = '" + txtEmpUnqID.Text.Trim() + "'";
 
             }
-            else if(!string.IsNullOrEmpty(txtContCode.Text.Trim()) && 
-                string.IsNullOrEmpty(txtEmpUnqID.Text.Trim()))
+            else if(!string.IsNullOrEmpty(txtContCode.Text.Trim()) && string.IsNullOrEmpty(txtEmpUnqID.Text.Trim()))
             {
                 sql = "Select a.*,b.LWFFlg,b.DeathFlg,b.PTaxFlg,b.ESIFlg,b.Active,b.ContCode From Cont_MthlyAtn a,Cont_MastEmp b where a.PayPeriod = b.PayPeriod and a.EmpUnqID = b.EmpUnqID and a.PayPeriod ='" + txtPayPeriod.Text.Trim() + "' and b.ContCode = '" + txtContCode.Text.Trim() + "'";
 
             }
-                
+            else if (!string.IsNullOrEmpty(txtContCode.Text.Trim()) && !string.IsNullOrEmpty(txtEmpUnqID.Text.Trim()))
+            {
+                sql = "Select a.*,b.LWFFlg,b.DeathFlg,b.PTaxFlg,b.ESIFlg,b.Active,b.ContCode From Cont_MthlyAtn a,Cont_MastEmp b where a.PayPeriod = b.PayPeriod and a.EmpUnqID = b.EmpUnqID and a.PayPeriod ='" + txtPayPeriod.Text.Trim() + "' and a.EmpUnqID = '" + txtEmpUnqID.Text.Trim() + "'";
+
+            }
                
             DataSet emplistds = Utils.Helper.GetData(sql, Utils.Helper.constr);
             hasRows = emplistds.Tables.Cast<DataTable>().Any(table => table.Rows.Count != 0);
@@ -558,16 +560,16 @@ namespace ContractPayroll.Forms
                             cmd.ExecuteNonQuery();
 
                             //mark leftdt if no days pay found
-                            if (pTotDays >= 29)
-                            {                                
-                                if (Convert.ToInt32(mdr["Tot_DaysPay"]) <= 0)
-                                {
-                                    sql = "Update MastEmp Set Active = 0, LeftDt ='" + pFromDt.ToString("yyyy-MM-dd") + "' where CompCode = '01' and WrkGrp = 'Cont' and EmpUnqID ='" + dr["EmpUnqID"].ToString() + "' ";
-                                    cmd = new SqlCommand(sql, cn, tr);
-                                    cmd.ExecuteNonQuery();
+                            //if (pTotDays >= 29)
+                            //{                                
+                            //    if (Convert.ToInt32(mdr["Tot_DaysPay"]) <= 0)
+                            //    {
+                            //        sql = "Update MastEmp Set Active = 0, LeftDt ='" + pFromDt.ToString("yyyy-MM-dd") + "',UpdDt = GetDate(),UpdID ='Payroll' where CompCode = '01' and WrkGrp = 'Cont' and EmpUnqID ='" + dr["EmpUnqID"].ToString() + "' ";
+                            //        cmd = new SqlCommand(sql, cn, tr);
+                            //        cmd.ExecuteNonQuery();
                                 
-                                }
-                            }
+                            //    }
+                            //}
                         }
 
                         try

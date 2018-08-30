@@ -183,11 +183,17 @@ namespace ContractPayroll.Forms
                         " where a.PayPeriod = b.PayPeriod and a.EmpUnqID = b.EmpUnqID " +
                         " And a.PayPeriod ='" + txtPayPeriod.Text.Trim() + "' and a.EmpUnqID ='" + txtEmpUnqID.Text.Trim() + "'";
             }
-            else if (!string.IsNullOrEmpty(txtContCode.Text.Trim()))
+            else if (!string.IsNullOrEmpty(txtContCode.Text.Trim()) && string.IsNullOrEmpty(txtEmpUnqID.Text.Trim()))
             {
                 sql = "Select *,b.PFFlg , b.active,b.ContCode From Cont_MthlyAtn a, Cont_MastEmp b " +
                         " where a.PayPeriod = b.PayPeriod and a.EmpUnqID = b.EmpUnqID " +
                         " And a.PayPeriod ='" + txtPayPeriod.Text.Trim() + "' and b.ContCode ='" + txtContCode.Text.Trim() + "'";
+            }
+            else if (!string.IsNullOrEmpty(txtContCode.Text.Trim()) && string.IsNullOrEmpty(txtEmpUnqID.Text.Trim()))
+            {
+                sql = "Select *,b.PFFlg , b.active,b.ContCode From Cont_MthlyAtn a, Cont_MastEmp b " +
+                       " where a.PayPeriod = b.PayPeriod and a.EmpUnqID = b.EmpUnqID " +
+                       " And a.PayPeriod ='" + txtPayPeriod.Text.Trim() + "' and b.EmpUnqID ='" + txtEmpUnqID.Text.Trim() + "'";
             }
 
             DataSet emplistds = Utils.Helper.GetData(sql, Utils.Helper.constr);

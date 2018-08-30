@@ -127,6 +127,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\ClassGlobals.cs" />
+    <Compile Include="Classes\Cls_SALDT_TimeoutExten.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Classes\Helper.cs" />
     <Compile Include="Classes\UNCAccessWithCredentials.cs" />
     <Compile Include="Forms\frmBulkBAAllChng.cs">

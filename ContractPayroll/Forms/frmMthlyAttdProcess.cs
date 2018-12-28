@@ -636,6 +636,13 @@ namespace ContractPayroll.Forms
 
         private void txtContCode_Validated(object sender, EventArgs e)
         {
+
+            if (string.IsNullOrEmpty(txtContCode.Text.Trim()))
+            {
+                return;
+            }
+            
+            
             DataSet ds = new DataSet();
             string sql = "select Distinct ContCode,ContDesc From Cont_MastEmp Where PayPeriod = '" + txtPayPeriod.Text.Trim().ToString() + "' and ContCode = '" + txtContCode.Text.Trim() + "'";
 

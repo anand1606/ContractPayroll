@@ -347,6 +347,8 @@ namespace ContractPayroll.Forms
                         {
 
                             #region Cal_Ded
+                            double tLwf = LWF;
+                            double tDeath = Death;
 
                             double ESI = 0;
                             double OtherDed = 0;
@@ -444,19 +446,19 @@ namespace ContractPayroll.Forms
                             }
                             else
                             {
-                                LWF = 0;
-                                Death = 0;
+                                tLwf = 0;
+                                tDeath = 0;
                             }
 
 
                             if (!Convert.ToBoolean(dr["LWFFlg"]))
                             {
-                                LWF = 0;
+                                tLwf = 0;
                             }
 
                             if (!Convert.ToBoolean(dr["DeathFlg"]))
                             {
-                                Death = 0;
+                                tDeath = 0;
                             }
 
                             if (!Convert.ToBoolean(dr["PTaxFlg"]))
@@ -479,7 +481,7 @@ namespace ContractPayroll.Forms
                                 " EmpUnqID = '" + dr["EmpUnqID"].ToString() + "' and PayPeriod = '" + dr["PayPeriod"].ToString() + "' and DedCode = 'MISC'";
                             OtherDed = Convert.ToDouble(Utils.Helper.GetDescription(sql, Utils.Helper.constr));
 
-                            Tot_Ded = PF + LWF + PTax + Death + OtherDed + MessDed + ESI;
+                            Tot_Ded = PF + tLwf + PTax + tDeath + OtherDed + MessDed + ESI;
                             
                             actNetPay = (Tot_EarnedBasic + Tot_SPLAmt + Tot_BAAmt) - Tot_Ded;
                             NetPay = Math.Round(actNetPay, MidpointRounding.AwayFromZero);
@@ -527,8 +529,8 @@ namespace ContractPayroll.Forms
                                 "'" + mdr["Cal_EPF"].ToString() + "'," +
                                 "'" + mdr["Cal_EPS"].ToString() + "'," +
                                 "'" + ESI.ToString() + "'," +
-                                "'" + LWF.ToString() + "'," +
-                                "'" + Death.ToString() + "'," +
+                                "'" + tLwf.ToString() + "'," +
+                                "'" + tDeath.ToString() + "'," +
                                 "'" + OtherDed.ToString() + "'," +
                                 "'" + MessDed.ToString() + "'," +
                                 "'" + PTax.ToString() + "'," +

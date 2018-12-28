@@ -1177,7 +1177,7 @@ namespace ContractPayroll.Forms
                     cmd.ExecuteNonQuery();
                 }
 
-                sql = "Insert into Cont_MastSPLALL (PayPeriod,EmpUnqID,Srno,FromDt,ToDt,cSPLALL,AddDt,Addid) values (" +
+                sql = "Insert into Cont_MastSPLALL (PayPeriod,EmpUnqID,Srno,FromDt,ToDt,cSPLAmt,AddDt,Addid) values (" +
                     " '" + txtPayPeriod.Text.Trim() + "','" + txtEmpUnqID.Text.Trim() + "','" + txtSPLSrNo.Text.Trim() + "'," +
                     " '" + txtSPLFromDt.DateTime.Date.ToString("yyyy-MM-dd") + "','" + txtSPLToDt.DateTime.Date.ToString("yyyy-MM-dd") + "'," +
                     " '" + txtSPLAmount.Text.Trim() + "',GetDate(),'" + Utils.User.GUserID + "')";
@@ -1235,7 +1235,7 @@ namespace ContractPayroll.Forms
                     cmd.ExecuteNonQuery();
                 }
 
-                sql = "Insert into Cont_MastBAALL (PayPeriod,EmpUnqID,Srno,FromDt,ToDt,cBAALL,AddDt,Addid) values (" +
+                sql = "Insert into Cont_MastBAALL (PayPeriod,EmpUnqID,Srno,FromDt,ToDt,cBAAmt,AddDt,Addid) values (" +
                     " '" + txtPayPeriod.Text.Trim() + "','" + txtEmpUnqID.Text.Trim() + "','" + txtBASrNo.Text.Trim() + "'," +
                     " '" + txtBAFromDt.DateTime.Date.ToString("yyyy-MM-dd") + "','" + txtBAToDt.DateTime.Date.ToString("yyyy-MM-dd") + "'," +
                     " '" + txtBAAmount.Text.Trim() + "',GetDate(),'" + Utils.User.GUserID + "')";

@@ -694,6 +694,12 @@ namespace ContractPayroll.Forms
 
         private void txtContCode_Validated(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(txtContCode.Text.Trim()))
+            {
+                return;
+            }
+            
+            
             DataSet ds = new DataSet();
             string sql = "select ContName From MastCont Where CompCode = '01' and WrkGrp = 'Cont'  and ContCode = '" + txtContCode.Text.Trim() + "'";
 

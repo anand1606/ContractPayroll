@@ -55,9 +55,9 @@ namespace ContractPayroll.Classes
                 tset = true;
                 foreach (DataRow dr in ds.Tables[0].Rows)
                 {
-                    
 
-                    G_UpdateChkPath = dr["UpdateChkPath"].ToString();
+
+                    G_UpdateChkPath = dr["UpDateChkPathContract"].ToString();
                     G_NetworkDomain = dr["NetworkDomain"].ToString();
                     G_NetworkUser = dr["NetworkUser"].ToString();
                     G_NetworkPass = dr["NetworkPass"].ToString();

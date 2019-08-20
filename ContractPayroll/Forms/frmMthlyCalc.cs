@@ -364,7 +364,9 @@ namespace ContractPayroll.Forms
                             double CAL_SPLAmt = Convert.ToDouble(mdr["Cal_SPLAmt"]);
                             double CAL_BAAmt = Convert.ToDouble(mdr["Cal_BAAmt"]);
                             double Tot_SPLAmt = Math.Round(Convert.ToDouble(mdr["Tot_SPLAmt"]),2);
+                            double act_tot_splAmt = Convert.ToDouble(mdr["Tot_SPLAmt"]);
                             double Tot_BAAmt = Math.Round(Convert.ToDouble(mdr["Tot_BAAmt"]),2);
+                            double act_tot_baAmt = Convert.ToDouble(mdr["Tot_BAAmt"]);
                             
 
                             double Tot_EarnedBasic = 0;
@@ -400,8 +402,13 @@ namespace ContractPayroll.Forms
 
                             actTot_EarnedBasic =  Convert.ToDouble(mdr["Tot_EarnBasic"]);
                             Tot_EarnedBasic = Math.Round(actTot_EarnedBasic, 2);
+                            
+                            //old
                             //RoundoffTot_EarnedBasic = Tot_EarnedBasic - actTot_EarnedBasic ;
-                            double Tot_CoCommPF =  Math.Round((Tot_EarnedBasic * CoPFRate / 100),MidpointRounding.AwayFromZero);
+                            //double Tot_CoCommPF =  Math.Round((Tot_EarnedBasic * CoPFRate / 100),MidpointRounding.AwayFromZero);
+
+                            //new_calc as Per Suprime Court Order- Mail Received on 27/05/2019 from HR Dept
+                            double Tot_CoCommPF = ((actTot_EarnedBasic + act_tot_splAmt) * CoPFRate / 100);
 
                             actOTAmt = Convert.ToDouble(mdr["Tot_TpaAmt"]);
                             OTAmt = Math.Round(actOTAmt, MidpointRounding.AwayFromZero);
@@ -415,7 +422,7 @@ namespace ContractPayroll.Forms
                             
                             
                             //Tot_Earnning = Convert.ToDouble(mdr["Tot_Earnings"]);
-                            actTot_Earnings = Tot_EarnedBasic +  Tot_SPLAmt + Tot_BAAmt ;
+                            actTot_Earnings = Tot_EarnedBasic +  Tot_SPLAmt + Tot_BAAmt + Adj_Amt;
                             //Tot_Earnning = Math.Round(actTot_Earnings, MidpointRounding.AwayFromZero);
                             //RoundoffTot_Earnings = Tot_Earnning - actTot_Earnings;
                             Tot_Earnning = actTot_Earnings;
@@ -423,7 +430,7 @@ namespace ContractPayroll.Forms
                             if (Tot_Earnning > 0)
                             {
                                 sql = "select isnull(Max(PValue),0) FROM [Cont_ParaMast] " +
-                                     " where '" + Tot_Earnning + "' between FSlab and TSlab " +
+                                     " where '" + Tot_Earnning.ToString() + "' between FSlab and TSlab " +
                                      " and ParaCode = 'PTAX'" +
                                      " and PayPeriod = '" + dr["PayPeriod"].ToString() + "'" +
                                      " and AppFlg = 1";
@@ -483,12 +490,10 @@ namespace ContractPayroll.Forms
 
                             Tot_Ded = PF + tLwf + PTax + tDeath + OtherDed + MessDed + ESI;
                             
-                            actNetPay = (Tot_EarnedBasic + Tot_SPLAmt + Tot_BAAmt) - Tot_Ded;
+                            actNetPay = (Tot_EarnedBasic + Tot_SPLAmt + Tot_BAAmt + Adj_Amt) - Tot_Ded ;
                             NetPay = Math.Round(actNetPay, MidpointRounding.AwayFromZero);
-                            roundoffNetPay = Math.Round((Tot_EarnedBasic + Tot_SPLAmt + Tot_BAAmt) - (Tot_Ded + NetPay),2);
-
-
-
+                            roundoffNetPay = Math.Round((Tot_EarnedBasic + Tot_SPLAmt + Tot_BAAmt + Adj_Amt) - (Tot_Ded + NetPay),2);
+                            
 
                             #endregion
 

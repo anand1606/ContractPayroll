@@ -177,15 +177,15 @@ namespace ContractPayroll.Forms
 
             }else if (string.IsNullOrEmpty(txtContCode.Text.Trim()) && !string.IsNullOrEmpty(txtEmpUnqID.Text.Trim()))
             {
-                sql = "Select * from v_EmpMast Where CompCode = '01' and  WrkGrp = 'Cont' and EmpUnqID ='" + txtEmpUnqID.Text.Trim() + "' and JoinDt <= '" + pToDt.ToString("yyyy-MM-dd") + "' and (LeftDt is null OR LeftDt >'" + pToDt.ToString("yyyy-MM-dd") + "' OR   LeftDt between '" + pFromDt.ToString("yyyy-MM-dd") + "' and '" + pToDt.ToString("yyyy-MM-dd") + "')   ";
+                sql = "Select * from v_EmpMast Where CompCode = '01' and  WrkGrp = 'Cont' and RTrim(ContCode) <> '' And RTrim(CostCode) <> '' and EmpUnqID ='" + txtEmpUnqID.Text.Trim() + "' and JoinDt <= '" + pToDt.ToString("yyyy-MM-dd") + "' and (LeftDt is null OR LeftDt >'" + pToDt.ToString("yyyy-MM-dd") + "' OR   LeftDt between '" + pFromDt.ToString("yyyy-MM-dd") + "' and '" + pToDt.ToString("yyyy-MM-dd") + "')   ";
 
             }else if (!string.IsNullOrEmpty(txtContCode.Text.Trim()) && string.IsNullOrEmpty(txtEmpUnqID.Text.Trim()))
             {
-                sql = "Select * from v_EmpMast Where CompCode = '01' and WrkGrp = 'Cont' and ContCode ='" + txtContCode.Text.Trim() + "' and  Basic > 0 and JoinDt <= '" + pToDt.ToString("yyyy-MM-dd") + "' and (LeftDt is null OR LeftDt >'" + pToDt.ToString("yyyy-MM-dd") + "' OR LeftDt between '" + pFromDt.ToString("yyyy-MM-dd") + "' and '" + pToDt.ToString("yyyy-MM-dd") + "')   ";
+                sql = "Select * from v_EmpMast Where CompCode = '01' and WrkGrp = 'Cont' and RTrim(ContCode) <> '' And RTrim(CostCode) <> '' and ContCode ='" + txtContCode.Text.Trim() + "' and  Basic > 0 and JoinDt <= '" + pToDt.ToString("yyyy-MM-dd") + "' and (LeftDt is null OR LeftDt >'" + pToDt.ToString("yyyy-MM-dd") + "' OR LeftDt between '" + pFromDt.ToString("yyyy-MM-dd") + "' and '" + pToDt.ToString("yyyy-MM-dd") + "')   ";
             }
             else if (!string.IsNullOrEmpty(txtContCode.Text.Trim()) && !string.IsNullOrEmpty(txtEmpUnqID.Text.Trim()))
             {
-                sql = "Select * from v_EmpMast Where CompCode = '01' and  WrkGrp = 'Cont' and EmpUnqID ='" + txtEmpUnqID.Text.Trim() + "' and JoinDt <= '" + pToDt.ToString("yyyy-MM-dd") + "' and (LeftDt is null OR LeftDt >'" + pToDt.ToString("yyyy-MM-dd") + "' OR   LeftDt between '" + pFromDt.ToString("yyyy-MM-dd") + "' and '" + pToDt.ToString("yyyy-MM-dd") + "')   ";
+                sql = "Select * from v_EmpMast Where CompCode = '01' and  WrkGrp = 'Cont' and RTrim(ContCode) <> '' And RTrim(CostCode) <> '' and EmpUnqID ='" + txtEmpUnqID.Text.Trim() + "' and JoinDt <= '" + pToDt.ToString("yyyy-MM-dd") + "' and (LeftDt is null OR LeftDt >'" + pToDt.ToString("yyyy-MM-dd") + "' OR   LeftDt between '" + pFromDt.ToString("yyyy-MM-dd") + "' and '" + pToDt.ToString("yyyy-MM-dd") + "')   ";
             }
             
 

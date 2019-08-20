@@ -471,10 +471,10 @@ namespace ContractPayroll.Forms
                                         " ,Cal_WODays = 0 " +
                                         " ,Cal_TpaHrs = 0 " +
                                         " ,Cal_TpaAmt = 0 " +
-                                        " ,Adj_SPLRate = 0 " +
-                                        " ,Adj_SPLDaysPay = 0 " +
-                                        " ,Adj_BARate = 0 " +
-                                        " ,Adj_BADaysPay = 0 " +
+                                        //" ,Adj_SPLRate = 0 " +
+                                        //" ,Adj_SPLDaysPay = 0 " +
+                                        //" ,Adj_BARate = 0 " +
+                                        //" ,Adj_BADaysPay = 0 " +
                                         " ,Cal_SPLAmt = 0 " +
                                         " ,Cal_BAAmt = 0 " +
                                         " ,Tot_SPLAmt = 0 " +
@@ -499,7 +499,7 @@ namespace ContractPayroll.Forms
                                         " ,Cal_CoCommPFAmt = 0 " +
                                         " ,Cal_CoServTaxAmt = 0 " +
                                         " ,Cal_CoEduTaxAmt = 0 " + 
-                                        " Where PayPeriod ='" + pPay.ToString() + "' and EmpUnqID = '" + adr["EmpUnqID"].ToString() + "' and SrNo = '" + BasicSr.ToString() + "'";
+                                        " Where PayPeriod ='" + pPay.ToString() + "' and EmpUnqID = '" + adr["EmpUnqID"].ToString() + "' ";
                                     
                                     cmd = new SqlCommand(sql, cn, tr);
                                     cmd.ExecuteNonQuery();

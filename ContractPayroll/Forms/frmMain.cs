@@ -125,7 +125,7 @@ namespace ContractPayroll
                 this.Close();
             }
 
-
+            bool tchk = Globals.GetGlobalVars();
            
             //check for update version.
             DateTime servermodified = new DateTime();
@@ -155,7 +155,7 @@ namespace ContractPayroll
                 localmodified = File.GetLastWriteTime(localfile);
                 if (servermodified > localmodified)
                 {
-                    MessageBox.Show("New Upgrade is available, please update", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("New Upgrade is available, please update from" + Globals.G_UpdateChkPath + " ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close();
                         
                 }

@@ -475,10 +475,10 @@
             this.xrLabel42.CanGrow = false;
             this.xrLabel42.DataBindings.AddRange(new DevExpress.XtraReports.UI.XRBinding[] {
             new DevExpress.XtraReports.UI.XRBinding("Text", null, "sp_Cont_MthlySalTPARegister.Ded_DeathFund", "{0:n2}")});
-            this.xrLabel42.LocationFloat = new DevExpress.Utils.PointFloat(467.7083F, 2.218743F);
+            this.xrLabel42.LocationFloat = new DevExpress.Utils.PointFloat(471.7083F, 2.218743F);
             this.xrLabel42.Name = "xrLabel42";
             this.xrLabel42.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
-            this.xrLabel42.SizeF = new System.Drawing.SizeF(61.91406F, 15.38281F);
+            this.xrLabel42.SizeF = new System.Drawing.SizeF(58.91406F, 15.38281F);
             this.xrLabel42.StylePriority.UsePadding = false;
             this.xrLabel42.StylePriority.UseTextAlignment = false;
             this.xrLabel42.Text = "xrLabel42";
@@ -807,7 +807,7 @@
             this.xrLabel126.SizeF = new System.Drawing.SizeF(57.16861F, 18F);
             this.xrLabel126.StylePriority.UseFont = false;
             this.xrLabel126.StylePriority.UseTextAlignment = false;
-            this.xrLabel126.Text = "Adj. Amt";
+            this.xrLabel126.Text = "Allowance";
             this.xrLabel126.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             // 
             // xrLabel25
@@ -1357,7 +1357,7 @@
             this.xrLabel128.SizeF = new System.Drawing.SizeF(64.58334F, 18F);
             this.xrLabel128.StylePriority.UseFont = false;
             this.xrLabel128.StylePriority.UseTextAlignment = false;
-            this.xrLabel128.Text = "Adj. Amt.";
+            this.xrLabel128.Text = "Allowance";
             this.xrLabel128.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             // 
             // xrLabel116
@@ -2013,7 +2013,7 @@
             this.xrLabel130.SizeF = new System.Drawing.SizeF(64.58334F, 18F);
             this.xrLabel130.StylePriority.UseFont = false;
             this.xrLabel130.StylePriority.UseTextAlignment = false;
-            this.xrLabel130.Text = "Adj. Amt.";
+            this.xrLabel130.Text = "Allowance";
             this.xrLabel130.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             // 
             // xrLabel117

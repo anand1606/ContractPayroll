@@ -790,7 +790,8 @@ namespace ContractPayroll.Forms
                 {
                     sql = "Update Cont_MthlyDed Set Amount ='" + txtDedAmt.Text.Trim() + "',UpdDt = GetDate(),UpdID ='" + Utils.User.GUserID + "' Where " +
                         " PayPeriod = '" + txtPayPeriod.Text.Trim() + "' " +
-                        " and EmpUnqID = '" + txtEmpUnqID.Text.Trim() + "'";                        
+                        " And EmpUnqID = '" + txtEmpUnqID.Text.Trim() + "' " +
+                        " And DedCode = '" + txtDedCode.Text.Trim().ToString() + "'";                                 
                 }
 
                 try

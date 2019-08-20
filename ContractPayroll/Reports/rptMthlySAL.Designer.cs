@@ -931,7 +931,7 @@
             this.xrLabel126.SizeF = new System.Drawing.SizeF(61.91406F, 15.38281F);
             this.xrLabel126.StylePriority.UseFont = false;
             this.xrLabel126.StylePriority.UseTextAlignment = false;
-            this.xrLabel126.Text = "Adj. Amt";
+            this.xrLabel126.Text = "Allowance";
             this.xrLabel126.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             // 
             // xrLabel19
@@ -1543,7 +1543,7 @@
             this.xrLabel128.SizeF = new System.Drawing.SizeF(64.58334F, 18F);
             this.xrLabel128.StylePriority.UseFont = false;
             this.xrLabel128.StylePriority.UseTextAlignment = false;
-            this.xrLabel128.Text = "Adj. Amt.";
+            this.xrLabel128.Text = "Allowance";
             this.xrLabel128.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             // 
             // xrLabel119
@@ -2388,7 +2388,7 @@
             this.xrLabel130.SizeF = new System.Drawing.SizeF(64.58334F, 18F);
             this.xrLabel130.StylePriority.UseFont = false;
             this.xrLabel130.StylePriority.UseTextAlignment = false;
-            this.xrLabel130.Text = "Adj. Amt.";
+            this.xrLabel130.Text = "Allowance";
             this.xrLabel130.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             // 
             // xrLabel106

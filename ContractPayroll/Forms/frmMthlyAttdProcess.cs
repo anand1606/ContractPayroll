@@ -368,7 +368,19 @@ namespace ContractPayroll.Forms
                                 //check for emp pf flg
                                 if (Convert.ToBoolean(dr["PFFlg"]))
                                 {
-                                    Cal_PF = Math.Round((Cal_Basic * PFRate / 100), MidpointRounding.AwayFromZero) + Math.Round((Adj_AdjDayAmt * PFRate / 100), MidpointRounding.AwayFromZero);
+                                    //old_calc
+                                    //Cal_PF = Math.Round((Cal_Basic * PFRate / 100), MidpointRounding.AwayFromZero) + Math.Round((Adj_AdjDayAmt * PFRate / 100), MidpointRounding.AwayFromZero);
+
+                                   
+                                    //new_calc as Per Suprime Court Order- Mail Received on 27/05/2019 from HR Dept
+                                    Cal_PF = Math.Round((Cal_Basic * PFRate / 100), MidpointRounding.AwayFromZero)
+                                        + Math.Round((Adj_AdjDayAmt * PFRate / 100), MidpointRounding.AwayFromZero)
+                                        + Math.Round((Cal_SPLAmt * PFRate / 100), MidpointRounding.AwayFromZero)
+                                        + Math.Round((Adj_SPLAmt * PFRate / 100), MidpointRounding.AwayFromZero)
+                                        + Math.Round((Adj_Amt * PFRate / 100), MidpointRounding.AwayFromZero)
+                                        
+                                        ;
+                                      
 
                                     Cal_EPF = ((Cal_PF) * EPFRate / 100);
                                     Cal_EPS = ((Cal_PF) * EPSRate / 100);
@@ -423,15 +435,13 @@ namespace ContractPayroll.Forms
                                     " ,Cal_CoEduTax25Amt = '" + Cal_CoEduAddTaxAmt.ToString() + "'" +
                                     " ,UpdDT = GetDate() " +
                                     " ,UpdID = '" + Utils.User.GUserID + "' " +
-                                    " Where PayPeriod ='" + dr["PayPeriod"].ToString() + "' " +
-                                    " And EmpUnqID ='" + dr["EmpUnqID"].ToString() + "' " +
-                                    " And SrNo = '" + dr["SrNo"].ToString() + "'";                                
+                                    " Where PayPeriod ='" + adr["PayPeriod"].ToString() + "' " +
+                                    " And EmpUnqID ='" + adr["EmpUnqID"].ToString() + "' " +
+                                    " And SrNo = '" + adr["SrNo"].ToString() + "'";                                
 
                                 SqlCommand cmd = new SqlCommand(sql, cn);
                                 cmd.ExecuteNonQuery();
-
-                               
-
+                                
                             }
                             catch (Exception ex)
                             {

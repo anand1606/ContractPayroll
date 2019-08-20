@@ -342,7 +342,7 @@ namespace ContractPayroll.Forms
                         cmd.ExecuteNonQuery();
 
 
-                        sql = "Delete From Cont_MastBassic where PayPeriod = '" + txtPayPeriod.Text.Trim() + "' and EmpUnqID ='" + txtEmpUnqID.Text.Trim() + "'";
+                        sql = "Delete From Cont_MastBasic where PayPeriod = '" + txtPayPeriod.Text.Trim() + "' and EmpUnqID ='" + txtEmpUnqID.Text.Trim() + "'";
                         cmd = new SqlCommand(sql, cn, tr);
                         cmd.ExecuteNonQuery();
 
@@ -357,6 +357,20 @@ namespace ContractPayroll.Forms
                         sql = "Delete From Cont_MthlyPay where PayPeriod = '" + txtPayPeriod.Text.Trim() + "' and EmpUnqID ='" + txtEmpUnqID.Text.Trim() + "'";
                         cmd = new SqlCommand(sql,cn,tr);
                         cmd.ExecuteNonQuery();
+
+                        sql = "Delete From Cont_MastSPLAll where PayPeriod = '" + txtPayPeriod.Text.Trim() + "' and EmpUnqID ='" + txtEmpUnqID.Text.Trim() + "'";
+                        cmd = new SqlCommand(sql, cn, tr);
+                        cmd.ExecuteNonQuery();
+
+                        sql = "Delete From Cont_MastBAAll where PayPeriod = '" + txtPayPeriod.Text.Trim() + "' and EmpUnqID ='" + txtEmpUnqID.Text.Trim() + "'";
+                        cmd = new SqlCommand(sql, cn, tr);
+                        cmd.ExecuteNonQuery();
+
+                        sql = "Delete From Cont_MthlyDED where PayPeriod = '" + txtPayPeriod.Text.Trim() + "' and EmpUnqID ='" + txtEmpUnqID.Text.Trim() + "'";
+                        cmd = new SqlCommand(sql, cn, tr);
+                        cmd.ExecuteNonQuery();
+
+
 
                         try
                         {

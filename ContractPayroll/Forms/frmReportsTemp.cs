@@ -100,6 +100,7 @@ namespace ContractPayroll.Forms
                     {
                         DevExpress.XtraReports.UI.XtraReport report = new Reports.rptMthlySAL();
                         report.DataSource = Ds;
+                       
                         this.Cursor = Cursors.Default;
                         report.ShowPreviewDialog();
                     }

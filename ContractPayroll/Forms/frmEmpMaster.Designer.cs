@@ -1235,7 +1235,7 @@
             this.tbBAAll.Controls.Add(this.groupBox6);
             this.tbBAAll.Name = "tbBAAll";
             this.tbBAAll.Size = new System.Drawing.Size(808, 471);
-            this.tbBAAll.Text = "BA. All. Info";
+            this.tbBAAll.Text = "HRA";
             // 
             // groupBox5
             // 
@@ -1308,9 +1308,9 @@
             this.label25.AutoSize = true;
             this.label25.Location = new System.Drawing.Point(502, 35);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(73, 15);
+            this.label25.Size = new System.Drawing.Size(38, 15);
             this.label25.TabIndex = 64;
-            this.label25.Text = "BA Amount :";
+            this.label25.Text = "HRA :";
             // 
             // label26
             // 

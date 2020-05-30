@@ -311,6 +311,12 @@ namespace ContractPayroll.Forms
                                 DaysPay = 1;
                                 WoDays = 0;                               
                             }
+                            else if (LeaveTyp.Contains("LD"))
+                            {
+                                ABPR = "P";
+                                DaysPay = 1;
+                                WoDays = 0;
+                            }
                             else if (LeaveTyp.Contains("AL"))
                             {
                                 ABPR = "P";

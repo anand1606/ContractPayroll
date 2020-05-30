@@ -111,7 +111,7 @@
             this.GroupHeader2 = new DevExpress.XtraReports.UI.GroupHeaderBand();
             this.xrLabel126 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel25 = new DevExpress.XtraReports.UI.XRLabel();
-            this.xrLabel17 = new DevExpress.XtraReports.UI.XRLabel();
+            this.xrlblHRA = new DevExpress.XtraReports.UI.XRLabel();
             this.xrPageInfo2 = new DevExpress.XtraReports.UI.XRPageInfo();
             this.xrLabel124 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel123 = new DevExpress.XtraReports.UI.XRLabel();
@@ -161,7 +161,7 @@
             this.xrLabel116 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel115 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel74 = new DevExpress.XtraReports.UI.XRLabel();
-            this.xrLabel113 = new DevExpress.XtraReports.UI.XRLabel();
+            this.xrlblHRA1 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLine32 = new DevExpress.XtraReports.UI.XRLine();
             this.xrLine31 = new DevExpress.XtraReports.UI.XRLine();
             this.xrLine30 = new DevExpress.XtraReports.UI.XRLine();
@@ -209,7 +209,7 @@
             this.xrLabel117 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel118 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel71 = new DevExpress.XtraReports.UI.XRLabel();
-            this.xrLabel96 = new DevExpress.XtraReports.UI.XRLabel();
+            this.xrlblHRA2 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel125 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLine41 = new DevExpress.XtraReports.UI.XRLine();
             this.xrLine40 = new DevExpress.XtraReports.UI.XRLine();
@@ -746,7 +746,7 @@
             this.GroupHeader2.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrLabel126,
             this.xrLabel25,
-            this.xrLabel17,
+            this.xrlblHRA,
             this.xrPageInfo2,
             this.xrLabel124,
             this.xrLabel123,
@@ -822,17 +822,17 @@
             this.xrLabel25.Text = "Arr. Days";
             this.xrLabel25.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             // 
-            // xrLabel17
+            // xrlblHRA
             // 
-            this.xrLabel17.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.xrLabel17.LocationFloat = new DevExpress.Utils.PointFloat(290.2083F, 91.55521F);
-            this.xrLabel17.Name = "xrLabel17";
-            this.xrLabel17.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel17.SizeF = new System.Drawing.SizeF(53.41858F, 18F);
-            this.xrLabel17.StylePriority.UseFont = false;
-            this.xrLabel17.StylePriority.UseTextAlignment = false;
-            this.xrLabel17.Text = "BA26";
-            this.xrLabel17.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.xrlblHRA.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.xrlblHRA.LocationFloat = new DevExpress.Utils.PointFloat(290.2083F, 91.55521F);
+            this.xrlblHRA.Name = "xrlblHRA";
+            this.xrlblHRA.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrlblHRA.SizeF = new System.Drawing.SizeF(53.41858F, 18F);
+            this.xrlblHRA.StylePriority.UseFont = false;
+            this.xrlblHRA.StylePriority.UseTextAlignment = false;
+            this.xrlblHRA.Text = "HRA";
+            this.xrlblHRA.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             // 
             // xrPageInfo2
             // 
@@ -1286,7 +1286,7 @@
             this.xrLabel116,
             this.xrLabel115,
             this.xrLabel74,
-            this.xrLabel113,
+            this.xrlblHRA1,
             this.xrLine32,
             this.xrLine31,
             this.xrLine30,
@@ -1406,17 +1406,17 @@
             this.xrLabel74.Text = "SPL26";
             this.xrLabel74.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             // 
-            // xrLabel113
+            // xrlblHRA1
             // 
-            this.xrLabel113.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.xrLabel113.LocationFloat = new DevExpress.Utils.PointFloat(61.41243F, 93.4884F);
-            this.xrLabel113.Name = "xrLabel113";
-            this.xrLabel113.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel113.SizeF = new System.Drawing.SizeF(59.37694F, 18F);
-            this.xrLabel113.StylePriority.UseFont = false;
-            this.xrLabel113.StylePriority.UseTextAlignment = false;
-            this.xrLabel113.Text = "BA26";
-            this.xrLabel113.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.xrlblHRA1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.xrlblHRA1.LocationFloat = new DevExpress.Utils.PointFloat(61.41243F, 93.4884F);
+            this.xrlblHRA1.Name = "xrlblHRA1";
+            this.xrlblHRA1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrlblHRA1.SizeF = new System.Drawing.SizeF(59.37694F, 18F);
+            this.xrlblHRA1.StylePriority.UseFont = false;
+            this.xrlblHRA1.StylePriority.UseTextAlignment = false;
+            this.xrlblHRA1.Text = "HRA";
+            this.xrlblHRA1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             // 
             // xrLine32
             // 
@@ -1940,7 +1940,7 @@
             this.xrLabel117,
             this.xrLabel118,
             this.xrLabel71,
-            this.xrLabel96,
+            this.xrlblHRA2,
             this.xrLabel125,
             this.xrLine41,
             this.xrLine40,
@@ -2066,17 +2066,17 @@
             this.xrLabel71.Text = "SPL26";
             this.xrLabel71.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             // 
-            // xrLabel96
+            // xrlblHRA2
             // 
-            this.xrLabel96.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.xrLabel96.LocationFloat = new DevExpress.Utils.PointFloat(61.41243F, 118.6476F);
-            this.xrLabel96.Name = "xrLabel96";
-            this.xrLabel96.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel96.SizeF = new System.Drawing.SizeF(59.37694F, 18F);
-            this.xrLabel96.StylePriority.UseFont = false;
-            this.xrLabel96.StylePriority.UseTextAlignment = false;
-            this.xrLabel96.Text = "BA26";
-            this.xrLabel96.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.xrlblHRA2.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.xrlblHRA2.LocationFloat = new DevExpress.Utils.PointFloat(61.41243F, 118.6476F);
+            this.xrlblHRA2.Name = "xrlblHRA2";
+            this.xrlblHRA2.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrlblHRA2.SizeF = new System.Drawing.SizeF(59.37694F, 18F);
+            this.xrlblHRA2.StylePriority.UseFont = false;
+            this.xrlblHRA2.StylePriority.UseTextAlignment = false;
+            this.xrlblHRA2.Text = "HRA";
+            this.xrlblHRA2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
             // 
             // xrLabel125
             // 
@@ -2823,22 +2823,22 @@
         private DevExpress.XtraReports.UI.XRLine xrLine40;
         private DevExpress.XtraReports.UI.XRPageInfo xrPageInfo2;
         private DevExpress.XtraReports.UI.XRLabel xrLabel25;
-        private DevExpress.XtraReports.UI.XRLabel xrLabel17;
         private DevExpress.XtraReports.UI.XRLabel xrLabel55;
         private DevExpress.XtraReports.UI.XRLabel xrLabel35;
         private DevExpress.XtraReports.UI.XRLabel xrLabel116;
         private DevExpress.XtraReports.UI.XRLabel xrLabel115;
         private DevExpress.XtraReports.UI.XRLabel xrLabel74;
-        private DevExpress.XtraReports.UI.XRLabel xrLabel113;
         private DevExpress.XtraReports.UI.XRLabel xrLabel117;
         private DevExpress.XtraReports.UI.XRLabel xrLabel118;
         private DevExpress.XtraReports.UI.XRLabel xrLabel71;
-        private DevExpress.XtraReports.UI.XRLabel xrLabel96;
         private DevExpress.XtraReports.UI.XRLabel xrLabel127;
         private DevExpress.XtraReports.UI.XRLabel xrLabel126;
         private DevExpress.XtraReports.UI.XRLabel xrLabel129;
         private DevExpress.XtraReports.UI.XRLabel xrLabel128;
         private DevExpress.XtraReports.UI.XRLabel xrLabel131;
         private DevExpress.XtraReports.UI.XRLabel xrLabel130;
+        public DevExpress.XtraReports.UI.XRLabel xrlblHRA;
+        public DevExpress.XtraReports.UI.XRLabel xrlblHRA1;
+        public DevExpress.XtraReports.UI.XRLabel xrlblHRA2;
     }
 }
